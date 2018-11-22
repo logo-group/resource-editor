@@ -20,29 +20,28 @@ import com.vaadin.spring.annotation.EnableVaadinNavigation;
 @EnableJpaAuditing
 public class ContextConfiguration {
 
-	private static DataSource dataSource; 
-	
+	private static DataSource dataSource;
+
 	@Bean
 	@Scope(WebApplicationContext.SCOPE_SESSION)
-	public static  UISessionState getUISessionState() {
+	public static UISessionState getUISessionState() {
 		return new UISessionState();
 	}
 
 	@Bean
 	@Primary
-	@ConfigurationProperties(prefix="spring.datasource")
+	@ConfigurationProperties(prefix = "spring.datasource")
 	public DataSource primaryDataSource() {
 		dataSource = DataSourceBuilder.create().build();
 		return dataSource;
 	}
 
 	@Bean
-    public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-	
-	public static DataSource getDataSource()
-	{
-		return dataSource;		
+	public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+
+	public static DataSource getDataSource() {
+		return dataSource;
 	}
 }
