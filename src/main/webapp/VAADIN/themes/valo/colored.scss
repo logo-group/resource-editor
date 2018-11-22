@@ -1,0 +1,384 @@
+     @import "../valo/valo.scss";
+     @mixin colored {
+     @include valo;
+	.in-slide-fade {
+	  @include animation(valo-animate-in-fade 1s 0s backwards);
+	}
+
+	.in-slide-right {
+	  @include animation(valo-animate-in-slide-right 300ms 0s backwards);
+	}
+
+	.in-slide-down {
+	  @include animation(valo-animate-in-slide-down 300ms 0s backwards);
+	}
+	
+	.backgroundimagemain {
+		background: linear-gradient(145deg, #484962 30%, #d06b41 100%);
+		background: transparent url("background.jpg");
+		background-size: cover;
+		background-repeat: repeat-x;                      
+		background-position: center center;		
+	}
+	.backgroundimage1 {
+		background: transparent url("back1.jpg");
+		background-size:     cover;                      
+    	background-repeat:   no-repeat;
+		background-position: center center;		
+	}
+	.backColorPage{
+        background-color:#ececec;
+	    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+	    transition: box-shadow 0.25s;
+	    border-style: none;
+	    border-color: #ececec;
+	    border-width: 2px;
+	    padding: 4px;
+      }
+
+	.backColorPage2{
+        background-color:white;
+		box-shadow: 0px 10px 0px -9px #BDBDBD;	    
+		transition: box-shadow 0.15s;
+      }
+
+	.backColorPage3{
+        background-color:#006940;
+      }
+	.backColorFaceBook{
+        background-color:#3B5999;
+     }
+	.backColorVaadinBlue{
+        background-color:#0072C5;
+     }
+	.valo-menu-item.selected .v-icon {
+		color: #d4722a;
+	}
+	.valo-menu-item.unselected .v-icon {
+		color: #3f98d9;
+	}
+
+	.valo-menu .valo-menu-badge, .notifications.unread .v-button-caption {
+		
+		-webkit-transition: background-color 300ms;
+		-moz-transition: background-color 300ms;
+		transition: background-color 300ms;
+		line-height: 1;
+		padding: 4px 6px;
+		min-width: 11px;
+		text-align: left;
+		top: 6px;
+		background-color: red;
+		border-radius: 6px;
+		background-image: -webkit-linear-gradient(top, red 2%, red 98%);
+		background-image: linear-gradient(to bottom,red 2%, red 98%);
+		color: #c8dbed;
+		position: absolute;
+		right: 16px;
+		font-size: 16px;
+		font-weight: bold;
+		pointer-events: none;
+	}
+
+	/*
+	.valo-menu .valo-menu-badge,
+	.notifications.unread .v-button-caption {
+	    @include valo-badge-style;
+	    position: absolute;
+	    background-color: red;
+	    right: round($v-unit-size/2);
+	    font-size: round($v-font-size * 0.9);
+	    pointer-events: none;
+	  }
+	  */
+	  .notifications.unread .v-button-caption {
+	    color:white;
+		background-color:red;
+		display: block;
+	    top: round($v-unit-size / -4);
+	    right: round($v-unit-size / -4);
+	    z-index: 1;
+	  }
+	  	  	
+	.v-textfield_c {
+		border: 1px solid #4455aa;
+		border-radius: 10px;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		background: transparent url("back1.jpg");
+		padding-left: 22px;
+	}	
+	.v-Notification.mystyle {
+	    background: #FFFF00;
+	    border: 10px solid #C00000;
+	    color: black;
+	}
+	.green {
+		color: red;
+    	background: #0c86ff;
+	}		
+	.blue {
+		color: black;
+    	background: #cdd8da;
+	}
+	
+	.v-button-mystyle {
+	    background-color: lightblue;	
+	    font-size: 12pt;
+	    font-weight: bold;
+	    color: red;
+	    border-color: black;
+	    border-radius: 8px;
+	    border-width: 4px;
+	    background-image: none;	    	
+	}
+
+	.material .v-button.floating-action .v-icon{
+		line-height:41.25 px;
+		text-align:center;
+	}
+
+	.material .v-button {
+		transition: box-shadow 0.3s ease-out, background 0.3s;
+	}
+	
+	.csstag {
+	    border-style: solid;
+	    border-color: #FFC107;
+	    border-width: 3px;
+	    border-top-left-radius: 25px;
+	    border-top-right-radius: 25px;
+	    border-bottom-left-radius: 25px;
+	    border-bottom-right-radius: 25px;
+	    padding: 5px;
+	    background: transparent url("back1.jpg");
+	}	
+	.csstag_1 {
+		background-color:white;
+	    border-bottom-style: groove;
+	    border-bottom-color: #BDBDBD;
+	    border-bottom-width: 0.1px;
+	}	
+	.csstag_2 {
+		background-color:#F5F5F5;
+		border-bottom-style: groove;
+	    border-bottom-color: #BDBDBD;
+	    border-bottom-width: 0.1px;
+	}	
+
+	.csstag2 {
+		background-color:#F5F5F5;
+	    border-bottom-style: groove;
+	    border-bottom-color: #BDBDBD;
+	    border-bottom-width: 0.1px;
+	}	
+	.csstag3 {
+	    border-style: solid;
+	    border-color: #FFC107;
+	    border-width: 3px;
+	    border-top-left-radius: 25px;
+	    border-top-right-radius: 25px;
+	    border-bottom-left-radius: 25px;
+	    border-bottom-right-radius: 25px;
+	    padding: 5px;
+	    background: transparent;
+	}	
+
+	.h1{
+	    border-top-style: groove;
+	    border-top-color: #FFC107;
+	    border-right-style: groove;
+	    border-right-color: #FFC107;
+	    border-top-width: 7px;
+	}
+	.red {
+		 padding:10px;
+         background-color: red;
+         color: red;
+         font-weight:bold;
+	}
+	.v-horizontallayout-marginexample1
+	        .v-horizontallayout-margin {
+		padding-left:   200px;
+		padding-right:  200px;
+		padding-top:    300px;
+		padding-bottom: 25px;
+	}	
+	.v-tabsheet-tabitemcell-red{
+	     .v-captiontext {
+	       font-weight: bold;
+	       color: red;
+	     }
+	   }	
+	.v-tabsheet-tabitemcell-green{
+	     .v-captiontext {
+	       font-weight: bold;
+	       color: green;
+	     }
+	   }		
+    }
+    
+	.v-textarea2 {
+	    font-family: $v-font-family;
+	    background-color:white !important;
+	    color: red;  
+	    cursor: pointer;
+	    text-decoration: underline;
+	    text-shadow: 0.10px 0.10px #0000ff;
+		-webkit-box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);
+		box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);	    
+	}  
+
+	.v-textareaForm {
+	    font-family: $v-font-family;
+	    background-color:white !important;
+	    color: red;  
+	    cursor: text;
+	    text-shadow: 0.10px 0.10px #0000ff;
+		-webkit-box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);
+		box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);	    
+	}  
+
+	.menucolor {
+	    font-family: $v-font-family;
+	    background-color:#A9D8E8 !important;
+	    color: light green;  
+		-webkit-box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);
+		box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);	    
+	}  
+	
+	.v-textarea2:selection {
+	    font-family: $v-font-family;
+	    background-color:white;
+	    color: light green;  
+	}
+
+	.v-textfieldSearch{
+	    border: 1px solid white;
+	    font-family: $v-font-family;
+	    background-color:#455A64 !important;
+	    border:thin dashed;
+	    border-radius: 4px;
+	    border-color: yellow;
+		-webkit-box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);
+		box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);
+	}  
+	
+	.v-app input.v-textfieldSearch { 
+		background-color:white;
+		color: white;
+		-webkit-box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);
+		box-shadow: inset 10px 10px 5px 0px rgba(0,0,0,0.75);	    
+	}	
+
+	.v-textfieldForm{
+	    border: 1px solid white;
+	    font-family: $v-font-family;
+	    background-color:#ededed !important;
+	    border:thin dashed;
+	    border-radius: 4px;
+	    border-color: #94c7ea;
+		-webkit-box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,0.15);
+		-moz-box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,0.15);
+		box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,0.15);
+	}  
+	
+	.v-app input.v-textfieldForm { 
+		background-color:white;
+		color: black;
+		-webkit-box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,0.15);
+		-moz-box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,0.15);
+		box-shadow: inset 1px 1px 1px 0px rgba(0,0,0,0.15);	    
+	}	
+	.v-panel-customStyle {
+		background: lighten( #525252, 9%) !important;
+		color: #474747;
+		border-radius: 4px;
+		border: 0px;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		overflow: visible !important;
+	}
+	.v-panel-customStyle > div{
+	    background: transparent;
+		-webkit-box-shadow:none;
+		box-shadow:none;
+		border-top: 2px solid #FFC107;
+	}
+
+	.enclosingLayout {
+	   .myLine {
+	      .v-widget .v-caption.v-caption-horizontal {
+	         vertical-align: middle !important;
+	         display: inline-block !important;
+	         margin-right: 5px !important;
+	         padding-bottom: 0px;
+	      }
+	   }
+	}
+	.example h1 {
+	  background-color: #fab331;
+	  margin-top: 4px;
+	  margin-bottom: 4px;
+	}
+	
+	.example h2 {
+	  background-color: #fab331;
+	  margin-top: 2px;
+	  margin-bottom: 2px;
+	}
+	.example .horizontal-separator, .example .vertical-separator {
+	  background:#fab331;
+	}
+	.example .horizontal-separator2, .example .vertical-separator2 {
+	  background:#252839;
+	}
+	.example .horizontal-separator3, .example .vertical-separator3 {
+	  background:$mat-default-primary-color;
+	}
+	.example .horizontal-separator4, .example .vertical-separator4 {
+	  background:#fab331;
+	  border: 1px solid #4455aa;
+	}
+
+	.v-tabsheet-xxxxx{
+        .v-tabsheet-tabitemcell{
+            .v-caption {
+                background-color: #fab331;
+				margin-left: 1px;
+				padding: 0 4px;
+            }
+            .v-captiontext {
+       			font-weight: bold;
+       			color: red;
+       			text-align: left;
+       			text-transform: capitalize;  
+       			text-overflow: ellipsis; 
+     		}
+        }
+    }
+    .v-tabsheet-xxxxx-tabitemcell .v-tabsheet-tabitem-selected .v-caption.v-caption {
+		border-bottom-color: white;
+		color: white;
+	}	
+	.v-tabsheet-xxxxx  > .v-tabsheet-tabcontainer .v-tabsheet-tabitem-selected .v-caption {
+		background: white;
+		border-color: #dfdfdf;
+		border-bottom: none;
+		padding-bottom: 1px;
+	}
+	.v-gridlayout-captioncell > .v-caption {
+	  display: inline-block;
+	}
+	.v-grid-row.dead {
+	    color: red;
+	}
+	.vLayoutScroll > div{
+		overflow: auto !important;
+	}	
+    @include colored;

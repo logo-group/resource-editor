@@ -1,0 +1,15 @@
+$mat-background-color: #fafafa;
+$v-unit-size: 40px ! default;
+
+@import "../material/material.scss";
+@import "../valo/styles.scss";
+.demo {
+	@include material;
+	@include valo;
+	.v-menubar-no-indicator .v-menubar-submenu-indicator + .v-menubar-menuitem-caption:after {
+          content: none;
+    }
+    .v-menubar-no-indicator > .v-menubar-menuitem .v-icon {
+         margin: 0 0 0 0;
+    }	
+}

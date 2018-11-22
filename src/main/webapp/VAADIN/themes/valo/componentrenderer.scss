@@ -1,0 +1,22 @@
+
+@mixin componentrenderer {
+    .v-grid-cell > .cr-component-cell {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
+    }
+
+    .v-grid-editor-cells .cr-editor-field {
+        padding-left: 18px;
+        padding-right: 18px;
+        height: 100%;
+        width: 100%;
+    }
+
+    .v-grid-editor-cells .cr-editor-field .v-checkbox{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}

@@ -1,0 +1,66 @@
+$v-focus-color: #0072C6 !default;
+$v-focus-color2	: #FFC107 !default;
+$v-focus-color3	: white !default;
+$v-focus-color4	: #ff9807 !default;
+$mat-background-color: #fafafa !default;
+$mat-background-color2: #339999 !default;
+$mat-background-colorBlue: #4B6FDF !default;
+$mat-background-colorGreen: #008081 !default;
+$mat-background-colorBlack: #525252 !default;
+$mat-background-colorOrange: #FFC107 !default;
+
+$mat-darkBlue-primary-color: #252839 !default;
+$mat-dark-primary-color: #455A64 !default;
+$mat-default-primary-color: #607D8B !default;
+$mat-light-primary-color: #CFD8DC !default;
+$mat-text-primary-color: #FFFFFF !default;
+$mat-accent-color: #FFC107 !default;
+$mat-primary-text-color: #212121 !default;
+$mat-secondary-text-color: #757575 !default;
+$mat-divider-color: #BDBDBD !default;
+
+$mat-card-color: lighten( $mat-background-color, 9%) !default;
+$mat-card-color2: lighten( $mat-background-color2, 9%) !default;
+$mat-card-colorBlue: lighten( $mat-background-colorBlue, 1%) !default;
+$mat-card-colorGreen: $mat-background-colorGreen !default;
+$mat-card-colorBlack: lighten( $mat-background-colorBlack, 9%) !default;
+$mat-card-colorOrange: $mat-background-colorOrange !default;
+$mat-card-font-color: valo-font-color($mat-card-color, 1.0);
+
+$v-font-family: "Source Sans Pro", sans-serif !default;
+$v-font-weight: 400 !default;
+$mat-custom-color: $v-focus-color2 !default;
+$mat-custom-color3: $v-focus-color3 !default;
+$mat-custom-color4: $v-focus-color4 !default;
+$v-app-background-color: $mat-background-color !default;
+$v-background-color: $mat-card-color !default;
+$v-unit-size: 45px !default;
+$v-focus-color: #0072C6 !default;
+$v-focus-style: none;
+$valo-menu-background-color: $v-selection-color;
+$v-border: 0 solid v-shade;
+$v-border-radius: 2px;
+$v-bevel: false;
+$v-gradient: false;
+$v-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+0 1px 5px 0 rgba(0, 0, 0, 0.12),
+0 3px 1px -2px rgba(0, 0, 0, 0.2);
+$v-textfield-bevel: false;
+$v-textfield-shadow: false;
+$v-textfield-border: 0 solid v-shade;
+$v-link-text-decoration: none;
+$v-overlay-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+0 3px 14px 2px rgba(0, 0, 0, 0.12),
+0 5px 5px -3px rgba(0, 0, 0, 0.3);
+$v-overlay-border-width: 0px; // For IE8
+$v-window-shadow: $v-overlay-shadow;
+$v-selection-overlay-background-color: #fff;
+$v-selection-overlay-padding-vertical: 6px;
+$v-selection-overlay-padding-horizontal: 0;
+$v-selection-item-height: $v-unit-size;
+$v-selection-item-border-radius: 0px;
+$v-panel-border: 0px;
+$v-layout-margin-top: 10px;
+$v-layout-margin-left: 10px;
+$v-layout-margin-right: 10px;
+$v-layout-margin-bottom: 10px;

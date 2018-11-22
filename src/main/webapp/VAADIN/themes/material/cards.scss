@@ -1,0 +1,196 @@
+body:not(.v-touch) .card-hoverable:hover,
+body.v-touch .card-hoverable:active {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+}
+
+body:not(.v-touch) .card-hoverableGreen:hover,
+body.v-touch .card-hoverableGreen:active {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+}
+
+body:not(.v-touch) .card-hoverableBlue:hover,
+body.v-touch .card-hoverableBlue:active {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+}
+
+body:not(.v-touch) .card-hoverableOrange:hover,
+body.v-touch .card-hoverableOrange:active {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+    background: darken( $mat-background-colorOrange, 25%);
+    cursor: pointer;
+    color:white;
+}
+
+body:not(.v-touch) .card-hoverable-material-dark-primary-color:hover,
+body.v-touch .card-hoverable-material-dark-primary-color:active {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+    background: darken( $mat-default-primary-color, 10%);
+    color:$mat-default-primary-color;
+}
+
+body:not(.v-touch) .card-hoverable-material-light-primary-color-pointer:hover,
+body.v-touch .card-hoverable-material-light-primary-color-pointer:active {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+    background: darken( $mat-light-primary-color, 10%);
+    cursor: pointer;
+    color:#FFFFFF;
+}
+
+body:not(.v-touch) .card-hoverable-material-light-primary-color:hover,
+body.v-touch .card-hoverable-material-light-primary-color:active {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+    background: darken( $mat-light-primary-color, 10%);
+    color:#FFFFFF;
+}
+
+body:not(.v-touch) .card-hoverable-material-darkBlue-primary-color:hover,
+body.v-touch .card-hoverable-material-darkBlue-primary-color:active {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+    background: lighten( $mat-darkBlue-primary-color, 10%);
+    cursor: pointer;
+    color:$mat-accent-color;
+}
+
+body:not(.v-touch) .card-hoverable-material-default-primary-color:hover,
+body.v-touch .card-hoverable-material-default-primary-color:active {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+    background: darken( $mat-default-primary-color, 10%);
+    color:$mat-accent-color;
+}
+
+@mixin cards {
+    .material-dark-primary-color {
+    	@extend .z-depth-1;
+        padding: 20px;
+        border-radius: 2px;
+        color:white;
+        background: $mat-dark-primary-color;
+    }
+    .material-darkBlue-primary-color {
+    	@extend .z-depth-1;
+        padding: 20px;
+        border-radius: 2px;
+        color:white;
+        background: $mat-darkBlue-primary-color;
+    }
+    .material-default-primary-color {
+        @extend .z-depth-1;
+        padding: 20px;
+        border-radius: 2px;
+        color:white;
+        background: $mat-default-primary-color;
+    }
+    .material-light-primary-color {
+    	@extend .z-depth-1;
+        border-radius: 2px;
+        color:black;
+        background: $mat-light-primary-color;
+    }
+    .material-light-primary-color-pointer {
+        @extend .z-depth-1;
+        padding: 20px;
+        border-radius: 2px;
+        color:black;
+        background: $mat-light-primary-color;
+    }
+    .material-cardOrange {
+        @extend .z-depth-1;
+        padding: 20px;
+        border-radius: 2px;
+        color:black;
+        background: $mat-card-colorOrange;
+    }
+    .material-cardBlue {
+        @extend .z-depth-1;
+        padding: 20px;
+        border-radius: 2px;
+        color:white;
+        background: $mat-card-colorBlue;
+    }
+    .material-cardGreen {
+        @extend .z-depth-1;
+        padding: 20px;
+        border-radius: 2px;
+        color:white;
+        background: $mat-card-colorGreen;
+    }
+    .material-cardBlack {
+        padding: 0;
+        border-radius: 4px;
+        color:white;
+        background: $mat-card-colorBlack;
+    }
+    .material-card2 {
+        padding: 20px;
+        border-radius: 2px;
+        color:white;
+        background: $mat-card-color2;
+    }
+    .material-card {
+        padding: 20px;
+        border-radius: 2px;
+        background: $mat-card-color;
+    }
+    .card-0 {
+        @extend .z-depth-0;
+        @extend .material-card;
+    }
+	.card-1 {
+        @extend .z-depth-1;
+        @extend .material-card;
+    }
+    .card-2 {
+        @extend .z-depth-2;
+        @extend .material-card;
+    }
+    .card-3 {
+        @extend .z-depth-3;
+        @extend .material-card;
+    }
+    .card-4 {
+        @extend .z-depth-4;
+        @extend .material-card;
+    }
+    .card-5 {
+        @extend .z-depth-5;
+        @extend .material-card;
+    }
+    .card-hoverable {
+        @extend .hoverable;
+        @extend .material-card;
+    }
+    .card-hoverable2 {
+        @extend .hoverable;
+        @extend .material-card2;
+    }
+    .card-hoverableBlue {
+        @extend .hoverableBlue;
+        @extend .material-cardBlue;
+    }
+    .card-hoverableOrange {
+        @extend .hoverableOrange;
+        @extend .material-cardOrange;
+    }
+    .card-hoverableGreen {
+    	@extend .hoverableGreen;
+        @extend .material-cardGreen;
+     }
+    .card-hoverableBlack {
+        @extend .material-cardBlack;
+    }    
+    .card-hoverable-material-dark-primary-color {
+     	@extend .material-dark-primary-color;
+    }
+    .card-hoverable-material-darkBlue-primary-color {
+     	@extend .material-darkBlue-primary-color;
+    }     
+    .card-hoverable-material-default-primary-color {
+     	@extend .material-default-primary-color;
+    }
+    .card-hoverable-material-light-primary-color {
+     	@extend .material-light-primary-color;
+    }
+    .card-hoverable-material-light-primary-color-pointer {
+     	@extend .material-light-primary-color-pointer;
+    }
+}

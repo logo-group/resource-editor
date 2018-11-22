@@ -1,0 +1,45 @@
+    @import "../valo/valo.scss";
+    @mixin colored {
+     @include valo;
+	.v-panel-caption, .v-panel-caption-light {
+		font-size: 18px;
+		line-height: normal;
+		font-weight: normal;
+		letter-spacing: -0.03em;
+		color: white;
+		background: no-repeat right top;
+		background-color: #6992e2;
+		text-overflow: ellipsis;
+	}
+
+	.backgroundimage {
+		background: transparent url("starwars.jpg");
+		background-size:     cover;                      
+    	background-repeat:   no-repeat;
+		background-position: center center;		
+	}
+
+	.v-label {
+		color: #fff;
+		background-color: #4455aa;
+		font: 16px Verdana, Arial;
+		padding: 5px;
+		margin-bottom: 5px;
+	}
+	.valo-menu-item.selected .v-icon {
+		color: #d4722a;
+	}
+	.valo-menu-item.unselected .v-icon {
+		color: #3f98d9;
+	}
+	
+	.v-textfield_c {
+		border: 1px solid #4455aa;
+		border-radius: 10px;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		background: #FFFFFF transparent url("search.png") no-repeat 5px 2px;
+		padding-left: 22px;
+	}	
+    }
+    @include colored;
