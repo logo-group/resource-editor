@@ -44,7 +44,7 @@ public class ReHelpDocs implements Serializable {
 	@Column(name = "DOCTYPE", nullable = false)
 	private DocType doctype;
 
-	@Column(name = "DOCBODY", columnDefinition = "nvarchar(8000)", nullable = false)
+	@Column(name = "DOCBODY", columnDefinition = "varchar(8000)", nullable = false)
 	private String docbody;
 
 	@Column(name = "CREATEDBY")
