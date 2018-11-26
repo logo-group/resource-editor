@@ -1,7 +1,6 @@
 package com.logo.data.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -35,7 +34,7 @@ public class ReResourceitemBase implements Serializable {
 
 	public static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
 	@Id
-	@Column(name = "id", nullable = false, updatable = false)
+	@Column(name = "ID", nullable = false, updatable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
@@ -91,7 +90,7 @@ public class ReResourceitemBase implements Serializable {
 	@Convert(converter = ResourceCaseConverter.class)
 	@Column(name = "RESOURCECASE")
 	private ResourceCase resourcecase;
-	
+
 	@Column(name = "RESOURCECATEGORY")
 	private Integer resourcecategory;
 
@@ -293,8 +292,8 @@ public class ReResourceitemBase implements Serializable {
 		/* */
 	}
 
-	@ManyToOne  
-	@JoinColumn(name="resourceref", referencedColumnName="id",nullable =false,insertable=false, updatable=false)
+	@ManyToOne
+	@JoinColumn(name = "resourceref", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
 	public ReResource reResource;
 
 	@PrePersist
@@ -303,13 +302,12 @@ public class ReResourceitemBase implements Serializable {
 		automodifiedon = LocalDateTime.now();
 		modifiedon = LocalDateTime.now();
 	}
-	
+
 	/**
-	@PostRemove
-	protected void afterDelete() {
-		ReTurkishtrRep reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
-		List<ReTurkishtr> reTurkishtrs = reTurkishtrRep.findByresourceitemrefEqualsForDelete(getId());
-		reTurkishtrs.forEach(item -> reTurkishtrRep.delete(item));
-	}
-	**/
+	 * @PostRemove protected void afterDelete() { ReTurkishtrRep reTurkishtrRep =
+	 *             LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
+	 *             List<ReTurkishtr> reTurkishtrs =
+	 *             reTurkishtrRep.findByresourceitemrefEqualsForDelete(getId());
+	 *             reTurkishtrs.forEach(item -> reTurkishtrRep.delete(item)); }
+	 **/
 }

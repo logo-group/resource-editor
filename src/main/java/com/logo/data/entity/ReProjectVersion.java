@@ -11,19 +11,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Table(name = "re_projectversion")
+@Table(name = "RE_PROJECTVERSION")
 @Entity
 public class ReProjectVersion implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id", nullable = false, updatable = false)
+	@Column(name = "ID", nullable = false, updatable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	
-	@Column(name = "versionnr", nullable = false, unique = true)
+
+	@Column(name = "VERSIONNR", nullable = false, unique = true)
 	@Size(min = 2, max = 50)
 	@NotNull
 	private String versionnr;
@@ -39,11 +38,11 @@ public class ReProjectVersion implements Serializable {
 	public String getVersionnr() {
 		return versionnr;
 	}
-	
+
 	public void setVersionnr(String versionnr) {
 		this.versionnr = versionnr;
 	}
-	
+
 	public boolean isPersisted() {
 		return id != null;
 	}

@@ -33,7 +33,7 @@ public class ReMessage implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id", nullable = false, updatable = false, unique = true)
+	@Column(name = "ID", nullable = false, updatable = false, unique = true)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 

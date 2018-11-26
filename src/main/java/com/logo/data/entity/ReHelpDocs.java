@@ -19,19 +19,18 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.logo.util.converter.DocTypeConverter;
-import com.logo.util.converter.ResourceTypeConverter;
 import com.logo.util.enums.DocType;
 
-
 @Entity
-@Table(name = "RE_HELPDOCS", indexes = { @Index(name = "I_HELPDOCS_01", columnList = "DOCNAME,DOCTITLE,DOCTYPE", unique = true) })
+@Table(name = "RE_HELPDOCS", indexes = {
+		@Index(name = "I_HELPDOCS_01", columnList = "DOCNAME,DOCTITLE,DOCTYPE", unique = true) })
 @EntityListeners(AuditingEntityListener.class)
 public class ReHelpDocs implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id", nullable = false, updatable = false, unique = true)
+	@Column(name = "ID", nullable = false, updatable = false, unique = true)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
@@ -67,7 +66,6 @@ public class ReHelpDocs implements Serializable {
 
 	@Column(name = "VERSION")
 	private int version;
-
 
 	public int getId() {
 		return this.id;
@@ -148,7 +146,6 @@ public class ReHelpDocs implements Serializable {
 	public final void setModifiedon(LocalDateTime modifiedon) {
 		this.modifiedon = modifiedon;
 	}
-
 
 	public final boolean isPersisted() {
 		return id != null;

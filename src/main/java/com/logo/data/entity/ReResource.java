@@ -44,16 +44,16 @@ import com.logo.util.enums.ResourceState;
 import com.logo.util.enums.ResourceType;
 
 @Entity
-@Table(name = "RE_RESOURCES", 
-	indexes = {@Index(name = "I_RESOURCES_DESC", columnList = "DESCRIPTION,ID", unique = true),
-			   @Index(name = "I_RESOURCES_GRP", columnList = "resourcenr,resourcegroup", unique = true)})
+@Table(name = "RE_RESOURCES", indexes = {
+		@Index(name = "I_RESOURCES_DESC", columnList = "DESCRIPTION,ID", unique = true),
+		@Index(name = "I_RESOURCES_GRP", columnList = "RESOURCENR,RESOURCEGROUP", unique = true) })
 @EntityListeners(AuditingEntityListener.class)
 public class ReResource implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id", nullable = false, updatable = false, unique=true)
+	@Column(name = "ID", nullable = false, updatable = false, unique = true)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
@@ -262,20 +262,19 @@ public class ReResource implements Serializable {
 		/* */
 	}
 
-	@OneToMany(orphanRemoval = true,fetch=FetchType.LAZY,cascade=CascadeType.DETACH)
-	@JoinColumn(name="resourceref", referencedColumnName="id")
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+	@JoinColumn(name = "resourceref", referencedColumnName = "id")
 	private List<ReResourceitem> reResourceitems = new ArrayList<>();
 
-	public List<ReResourceitem> getReResourceitem()
-	{
+	public List<ReResourceitem> getReResourceitem() {
 		return reResourceitems;
 	}
-	
+
 	public void setReResourceitems(List<ReResourceitem> reResourceitems) {
 		this.reResourceitems = reResourceitems;
 	}
-	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL})
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	@JoinTable(name = "re_versionasgs", joinColumns = {
 			@JoinColumn(name = "resourceid", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "versionid", nullable = false, updatable = true, insertable = true) })
@@ -287,8 +286,8 @@ public class ReResource implements Serializable {
 
 	public void setReProjectVersion(Set<ReProjectVersion> reProjectVersion) {
 		this.reProjectVersion = reProjectVersion;
-	}	
-	
+	}
+
 	@PrePersist
 	@PreUpdate
 	protected void beforeInsertOrUpdate() {

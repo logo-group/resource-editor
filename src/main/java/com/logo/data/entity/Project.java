@@ -18,20 +18,20 @@ public class Project implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id", nullable = false, updatable = false)
+	@Column(name = "ID", nullable = false, updatable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	@Column(name = "projectnr", unique = true)
+
+	@Column(name = "PROJECTNR", unique = true)
 	@NotNull
 	private Integer projectNr;
-	
-	@Column(name = "projectname", nullable = false, unique = true)
+
+	@Column(name = "PROJECTNAME", nullable = false, unique = true)
 	@Size(min = 2, max = 50)
 	@NotNull
 	private String projectName;
 
-	@Column(name = "projectdef", nullable = false, unique = false)
+	@Column(name = "PROJECTDEF", nullable = false, unique = false)
 	@Size(min = 2, max = 100)
 	@NotNull
 	private String projectDef;
@@ -39,7 +39,7 @@ public class Project implements Serializable {
 	public Integer getProjectnr() {
 		return projectNr;
 	}
-	
+
 	public void setProjectnr(Integer projectNr) {
 		this.projectNr = projectNr;
 	}
@@ -47,19 +47,19 @@ public class Project implements Serializable {
 	public String getProjectname() {
 		return projectName;
 	}
-	
+
 	public void setProjectname(String projectName) {
 		this.projectName = projectName;
 	}
-	
+
 	public String getProjectdef() {
 		return projectDef;
 	}
-	
+
 	public void setProjectdef(String projectDef) {
 		this.projectDef = projectDef;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}

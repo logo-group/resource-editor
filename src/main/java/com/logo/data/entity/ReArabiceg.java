@@ -15,8 +15,8 @@ public class ReArabiceg extends ReLanguageTable implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne  
-	@JoinColumn(name="resourceitemref", referencedColumnName="id",insertable=false, updatable=false)
+	@ManyToOne
+	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID", insertable = false, updatable = false)
 	public ReResourceitem reResourceitem;
 
 	public ReArabiceg() {
