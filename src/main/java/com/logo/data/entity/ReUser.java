@@ -30,7 +30,7 @@ import com.logo.util.enums.UserLayoutType;
 import com.logo.util.enums.UserType;
 
 @Entity
-@Table(name="RE_USERS",indexes = { @Index(name = "I_USERS_02", columnList = "USERNAME", unique = true) })
+@Table(name = "RE_USERS", indexes = { @Index(name = "I_USERS_02", columnList = "USERNAME", unique = true) })
 @EntityListeners(AuditingEntityListener.class)
 public class ReUser implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -40,151 +40,151 @@ public class ReUser implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	@Column(name="ABBRACCESSRIGHTS")
+	@Column(name = "ABBRACCESSRIGHTS")
 	private Integer abbraccessrights = 0;
 
-	@Column(name="ALTEMAIL", columnDefinition = "nvarchar(100)")
+	@Column(name = "ALTEMAIL", columnDefinition = "nvarchar(100)")
 	private String altemail = "";
 
-	@Column(name="ARAEACCESSRIGHTS")
+	@Column(name = "ARAEACCESSRIGHTS")
 	private Integer araeaccessrights = 0;
 
-	@Column(name="AREGACCESSRIGHTS")
+	@Column(name = "AREGACCESSRIGHTS")
 	private Integer aregaccessrights = 0;
 
-	@Column(name="ARJOACCESSRIGHTS")
+	@Column(name = "ARJOACCESSRIGHTS")
 	private Integer arjoaccessrights = 0;
 
-	@Column(name="ARSAACCESSRIGHTS")
+	@Column(name = "ARSAACCESSRIGHTS")
 	private Integer arsaaccessrights = 0;
 
-	@Column(name="AZAZACCESSRIGHTS")
+	@Column(name = "AZAZACCESSRIGHTS")
 	private Integer azazaccessrights = 0;
 
-	@Column(name="BGBGACCESSRIGHTS")
+	@Column(name = "BGBGACCESSRIGHTS")
 	private Integer bgbgaccessrights = 0;
 
 	@CreatedBy
-	@Column(name="CREATEDBY")
+	@Column(name = "CREATEDBY")
 	private Integer createdby;
 
 	@CreatedDate
 	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "CREATEDON", columnDefinition = "datetime")
 	@DateTimeFormat
-	private transient LocalDateTime createdon;
+	private LocalDateTime createdon;
 
-	@Column(name="DEDEACCESSRIGHTS")
+	@Column(name = "DEDEACCESSRIGHTS")
 	private Integer dedeaccessrights = 0;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name="DEFAULTLANGUAGE", columnDefinition = "nvarchar(8)")
+	@Column(name = "DEFAULTLANGUAGE", columnDefinition = "nvarchar(8)")
 	private UserLanguage defaultlanguage = UserLanguage.TRTR;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name="DEFAULTORIENTATION", columnDefinition = "nvarchar(8)")
+	@Column(name = "DEFAULTORIENTATION", columnDefinition = "nvarchar(8)")
 	private UserLayoutType defaultorientation = UserLayoutType.V;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name="DEFAULTRESOURCEGROUP", columnDefinition = "nvarchar(8)")
+	@Column(name = "DEFAULTRESOURCEGROUP", columnDefinition = "nvarchar(8)")
 	private ResourceGroup defaultresourcegroup = ResourceGroup.UN;
 
-	@Column(name="DEPARTMENT", columnDefinition = "nvarchar(60)")
+	@Column(name = "DEPARTMENT", columnDefinition = "nvarchar(60)")
 	private String department = "";
 
-	@Column(name="DISPLAYED")
+	@Column(name = "DISPLAYED")
 	private Integer displayed = 0;
 
-	@Column(name="EMAIL", columnDefinition = "nvarchar(100)")
+	@Column(name = "EMAIL", columnDefinition = "nvarchar(100)")
 	private String email = "";
 
-	@Column(name="ENABLED")
+	@Column(name = "ENABLED")
 	private Integer enabled = 0;
 
-	@Column(name="ENUSACCESSRIGHTS")
+	@Column(name = "ENUSACCESSRIGHTS")
 	private Integer enusaccessrights = 0;
 
-	@Column(name="FAIRACCESSRIGHTS")
+	@Column(name = "FAIRACCESSRIGHTS")
 	private Integer fairaccessrights = 0;
 
-	@Column(name="FRFRACCESSRIGHTS")
+	@Column(name = "FRFRACCESSRIGHTS")
 	private Integer frfraccessrights = 0;
 
 	@Convert(converter = UserTypeConverter.class)
-	@Column(name="GENERALACCESSRIGHTS")
+	@Column(name = "GENERALACCESSRIGHTS")
 	private UserType generalaccessrights = UserType.PROGRAMMER;
 
-	@Column(name="INVALIDLOGINCOUNT")
+	@Column(name = "INVALIDLOGINCOUNT")
 	private Integer invalidlogincount = 0;
 
-	@Column(name="KAGEACCESSRIGHTS")
+	@Column(name = "KAGEACCESSRIGHTS")
 	private Integer kageaccessrights = 0;
 
 	@LastModifiedBy
-	@Column(name="MODIFIEDBY")
+	@Column(name = "MODIFIEDBY")
 	private Integer modifiedby;
 
 	@LastModifiedDate
 	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "MODIFIEDON", columnDefinition = "datetime")
 	@DateTimeFormat
-	private transient LocalDateTime modifiedon;
-	
-	@Column(name="NAME", columnDefinition = "nvarchar(40)")
+	private LocalDateTime modifiedon;
+
+	@Column(name = "NAME", columnDefinition = "nvarchar(40)")
 	private String name = "";
 
-	@Column(name="PASSWORD", columnDefinition = "nvarchar(80)")
+	@Column(name = "PASSWORD", columnDefinition = "nvarchar(80)")
 	private String password;
 
-	@Column(name="PASSWORDREQUEST")
+	@Column(name = "PASSWORDREQUEST")
 	private Integer passwordrequest = 0;
 
-	@Column(name="REORDERACCESSRIGHTS")
+	@Column(name = "REORDERACCESSRIGHTS")
 	private Integer reorderaccessrights = 0;
 
-	@Column(name="ROROACCESSRIGHTS")
+	@Column(name = "ROROACCESSRIGHTS")
 	private Integer roroaccessrights = 0;
 
-	@Column(name="RURUACCESSRIGHTS")
+	@Column(name = "RURUACCESSRIGHTS")
 	private Integer ruruaccessrights = 0;
 
-	@Column(name="SELECTED")
+	@Column(name = "SELECTED")
 	private Integer selected = 0;
 
-	@Column(name="SQKVACCESSRIGHTS")
+	@Column(name = "SQKVACCESSRIGHTS")
 	private Integer sqkvaccessrights = 0;
 
-	@Column(name="SRRSACCESSRIGHTS")
+	@Column(name = "SRRSACCESSRIGHTS")
 	private Integer srrsaccessrights = 0;
 
-	@Column(name="STDACCESSRIGHTS")
+	@Column(name = "STDACCESSRIGHTS")
 	private Integer stdaccessrights = 0;
 
-	@Column(name="SURNAME", columnDefinition = "nvarchar(60)")
+	@Column(name = "SURNAME", columnDefinition = "nvarchar(60)")
 	private String surname = "";
 
-	@Column(name="TEMPPASSWORD")
+	@Column(name = "TEMPPASSWORD")
 	private Integer temppassword = 0;
 
-	@Column(name="THTHACCESSRIGHTS")
+	@Column(name = "THTHACCESSRIGHTS")
 	private Integer ththaccessrights = 0;
 
-	@Column(name="TKTMACCESSRIGHTS")
+	@Column(name = "TKTMACCESSRIGHTS")
 	private Integer tktmaccessrights = 0;
 
-	@Column(name="TRTRACCESSRIGHTS")
+	@Column(name = "TRTRACCESSRIGHTS")
 	private Integer trtraccessrights = 0;
 
-	@Column(name="UKUAACCESSRIGHTS")
+	@Column(name = "UKUAACCESSRIGHTS")
 	private Integer ukuaaccessrights = 0;
 
-	@Column(name="USERNAME", columnDefinition = "nvarchar(40)")
+	@Column(name = "USERNAME", columnDefinition = "nvarchar(40)")
 	private String username = "";
 
-	@Column(name="[VERSION]")
+	@Column(name = "[VERSION]")
 	private Integer version = 0;
 
-	@Column(name="ZHCNACCESSRIGHTS")
+	@Column(name = "ZHCNACCESSRIGHTS")
 	private Integer zhcnaccessrights = 0;
 
 	public ReUser() {
