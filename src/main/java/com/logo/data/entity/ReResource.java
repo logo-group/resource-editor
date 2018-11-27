@@ -275,9 +275,9 @@ public class ReResource implements Serializable {
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-	@JoinTable(name = "re_versionasgs", joinColumns = {
-			@JoinColumn(name = "resourceid", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "versionid", nullable = false, updatable = true, insertable = true) })
+	@JoinTable(name = "RE_VERSIONASGS", joinColumns = {
+			@JoinColumn(name = "RESOURCEID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "VERSIONID", nullable = false, updatable = true, insertable = true) })
 	private Set<ReProjectVersion> reProjectVersion = new HashSet<>(0);
 
 	public Set<ReProjectVersion> getReProjectVersion() {

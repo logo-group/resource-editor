@@ -1,4 +1,4 @@
-ALTER FUNCTION RE_RESOURCESFUNC(@rid         INT
+CREATE FUNCTION RE_RESOURCESFUNC(@rid         INT
                                 , @ref        INT
                                 , @resNr1     INT = -999999
                                 , @resNr2     INT = 999999
@@ -11,125 +11,125 @@ ALTER FUNCTION RE_RESOURCESFUNC(@rid         INT
 RETURNS TABLE
 AS
 RETURN
-  SELECT id
-  FROM   re_resourceitems rr
-  WHERE  id = @rid
-         AND resourceref = @ref
-         AND resourceref IN
-             (SELECT id
-              FROM   re_resources
+  SELECT ID
+  FROM   RE_RESOURCEITEMS rr
+  WHERE  ID = @rid
+         AND RESOURCEREF = @ref
+         AND RESOURCEREF IN
+             (SELECT ID
+              FROM   RE_RESOURCES
               WHERE  ( ( 1 = @descflag
-                         AND description IS NULL )
+                         AND DESCRIPTION IS NULL )
                         OR ( 2 = @descflag
-                             AND description IS NOT NULL )
+                             AND DESCRIPTION IS NOT NULL )
                         OR ( 3 = @descflag
-                             AND ( description IS NOT NULL
-                                    OR description = '-' ) ) )
-                     AND ( resourcenr BETWEEN @resNr1 AND @resNr2 )
+                             AND ( DESCRIPTION IS NOT NULL
+                                    OR DESCRIPTION = '-' ) ) )
+                     AND ( RESOURCENR BETWEEN @resNr1 AND @resNr2 )
                      AND ( ( -1 = @resgrpFlag
-                             AND resourcegroup IN( 'UN', 'HR', 'UNRP', 'HRRP',
+                             AND RESOURCEGROUP IN( 'UN', 'HR', 'UNRP', 'HRRP',
                                                                     'SS', 'HELP', 'MISC' ) )
                             OR ( 1 = @resgrpFlag
-                                 AND resourcegroup = 'UN' )
+                                 AND RESOURCEGROUP = 'UN' )
                             OR ( 2 = @resgrpFlag
-                                 AND resourcegroup = 'HR' )
+                                 AND RESOURCEGROUP = 'HR' )
                             OR ( 3 = @resgrpFlag
-                                 AND resourcegroup = 'UNRP' )
+                                 AND RESOURCEGROUP = 'UNRP' )
                             OR ( 4 = @resgrpFlag
-                                 AND resourcegroup = 'HRRP' )
+                                 AND RESOURCEGROUP = 'HRRP' )
                             OR ( 5 = @resgrpFlag
-                                 AND resourcegroup = 'SS' )
+                                 AND RESOURCEGROUP = 'SS' )
                             OR ( 6 = @resgrpFlag
-                                 AND resourcegroup = 'HELP' )
+                                 AND RESOURCEGROUP = 'HELP' )
                             OR ( 7 = @resgrpFlag
-                                 AND resourcegroup = 'MISC' ) )
+                                 AND RESOURCEGROUP = 'MISC' ) )
                      AND ( ( -1 = @restypflag
-                             AND resourcetype IN( 1, 2 ) )
+                             AND RESOURCETYPE IN( 1, 2 ) )
                             OR ( 1 = @restypflag
-                                 AND resourcetype = 1 )
+                                 AND RESOURCETYPE = 1 )
                             OR ( 2 = @restypflag
-                                 AND resourcetype = 2 ) )
+                                 AND RESOURCETYPE = 2 ) )
                      AND ( ( -1 = @rescaseflag
-                             AND resourcecase IN( 1, 2, 3, 4, 5 ) )
+                             AND RESOURCECASE IN( 1, 2, 3, 4, 5 ) )
                             OR ( 1 = @rescaseflag
-                                 AND resourcecase = 1 )
+                                 AND RESOURCECASE = 1 )
                             OR ( 2 = @rescaseflag
-                                 AND resourcecase = 2 )
+                                 AND RESOURCECASE = 2 )
                             OR ( 3 = @rescaseflag
-                                 AND resourcecase = 3 )
+                                 AND RESOURCECASE = 3 )
                             OR ( 4 = @rescaseflag
-                                 AND resourcecase = 4 )
+                                 AND RESOURCECASE = 4 )
                             OR ( 5 = @rescaseflag
-                                 AND resourcecase = 5 ) )
+                                 AND RESOURCECASE = 5 ) )
                      AND ( ( -1 = @resstateflag
-                             AND active IN( 0, 1 ) )
+                             AND ACTIVE IN( 0, 1 ) )
                             OR ( 0 = @resstateflag
-                                 AND active = 0 )
+                                 AND ACTIVE = 0 )
                             OR ( 1 = @resstateflag
-                                 AND active = 1 ) )
+                                 AND ACTIVE = 1 ) )
               UNION
-              SELECT id
-              FROM   re_resources
+              SELECT ID
+              FROM   RE_RESOURCES
               WHERE  ( ( 4 = @descflag
-                         AND description LIKE '%' + @word + '%' )
+                         AND DESCRIPTION LIKE '%' + @word + '%' )
                         OR ( 5 = @descflag
-                             AND description NOT LIKE '%' + @word + '%' )
+                             AND DESCRIPTION NOT LIKE '%' + @word + '%' )
                         OR ( 6 = @descflag
-                             AND description LIKE @word + '%' )
+                             AND DESCRIPTION LIKE @word + '%' )
                         OR ( 7 = @descflag
-                             AND description NOT LIKE @word + '%' )
+                             AND DESCRIPTION NOT LIKE @word + '%' )
                         OR ( 8 = @descflag
-                             AND description LIKE '%' + @word )
+                             AND DESCRIPTION LIKE '%' + @word )
                         OR ( 9 = @descflag
-                             AND description NOT LIKE '%' + @word )
+                             AND DESCRIPTION NOT LIKE '%' + @word )
                         OR ( 10 = @descflag
-                             AND description = @word )
+                             AND DESCRIPTION = @word )
                         OR ( 11 = @descflag
-                             AND description <> @word ) )
-                     AND ( resourcenr BETWEEN @resNr1 AND @resNr2 )
+                             AND DESCRIPTION <> @word ) )
+                     AND ( RESOURCENR BETWEEN @resNr1 AND @resNr2 )
                      AND ( ( -1 = @resgrpFlag
-                             AND resourcegroup IN( 'UN', 'HR', 'UNRP', 'HRRP',
+                             AND RESOURCEGROUP IN( 'UN', 'HR', 'UNRP', 'HRRP',
                                                        'SS', 'HELP', 'MISC' ) )
                             OR ( 1 = @resgrpFlag
-                                 AND resourcegroup = 'UN' )
+                                 AND RESOURCEGROUP = 'UN' )
                             OR ( 2 = @resgrpFlag
-                                 AND resourcegroup = 'HR' )
+                                 AND RESOURCEGROUP = 'HR' )
                             OR ( 3 = @resgrpFlag
-                                 AND resourcegroup = 'UNRP' )
+                                 AND RESOURCEGROUP = 'UNRP' )
                             OR ( 4 = @resgrpFlag
-                                 AND resourcegroup = 'HRRP' )
+                                 AND RESOURCEGROUP = 'HRRP' )
                             OR ( 5 = @resgrpFlag
-                                 AND resourcegroup = 'SS' )
+                                 AND RESOURCEGROUP = 'SS' )
                             OR ( 6 = @resgrpFlag
-                                 AND resourcegroup = 'HELP' )
+                                 AND RESOURCEGROUP = 'HELP' )
                             OR ( 7 = @resgrpFlag
-                                 AND resourcegroup = 'MISC' ) )
+                                 AND RESOURCEGROUP = 'MISC' ) )
                      AND ( ( -1 = @restypflag
-                             AND resourcetype IN( 1, 2 ) )
+                             AND RESOURCETYPE IN( 1, 2 ) )
                             OR ( 1 = @restypflag
-                                 AND resourcetype = 1 )
+                                 AND RESOURCETYPE = 1 )
                             OR ( 2 = @restypflag
-                                 AND resourcetype = 2 ) )
+                                 AND RESOURCETYPE = 2 ) )
                      AND ( ( -1 = @rescaseflag
-                             AND resourcecase IN( 1, 2, 3, 4, 5 ) )
+                             AND RESOURCECASE IN( 1, 2, 3, 4, 5 ) )
                             OR ( 1 = @rescaseflag
-                                 AND resourcecase = 1 )
+                                 AND RESOURCECASE = 1 )
                             OR ( 2 = @rescaseflag
-                                 AND resourcecase = 2 )
+                                 AND RESOURCECASE = 2 )
                             OR ( 3 = @rescaseflag
-                                 AND resourcecase = 3 )
+                                 AND RESOURCECASE = 3 )
                             OR ( 4 = @rescaseflag
-                                 AND resourcecase = 4 )
+                                 AND RESOURCECASE = 4 )
                             OR ( 5 = @rescaseflag
-                                 AND resourcecase = 5 ) )
+                                 AND RESOURCECASE = 5 ) )
                      AND ( ( -1 = @resstateflag
-                             AND active IN( 0, 1 ) )
+                             AND ACTIVE IN( 0, 1 ) )
                             OR ( 0 = @resstateflag
-                                 AND active = 0 )
+                                 AND ACTIVE = 0 )
                             OR ( 1 = @resstateflag
-                                 AND active = 1 ) )); 
+                                 AND ACTIVE = 1 ) )); 
 
-ALTER FUNCTION RE_RESOURCEITEMFUNC(@rid             INT,
+CREATE FUNCTION RE_RESOURCEITEMFUNC(@rid             INT,
 							       @ordernr1        INT          = -999999,
 							       @ordernr2        INT          = 999999,
 							       @tagnr1          INT          = -2147483647,
@@ -144,88 +144,88 @@ ALTER FUNCTION RE_RESOURCEITEMFUNC(@rid             INT,
 RETURNS TABLE
 AS
 RETURN
-  SELECT id
-  FROM   re_resourceitems
-  WHERE  id = @rid
+  SELECT ID
+  FROM   RE_RESOURCEITEMS
+  WHERE  ID = @rid
          AND ( ( 1 = @prefixflag
-                 AND prefixstr IS NULL )
+                 AND PREFIXSTR IS NULL )
                 OR ( 2 = @prefixflag
-                     AND prefixstr IS NOT NULL )
+                     AND PREFIXSTR IS NOT NULL )
                 OR ( 3 = @prefixflag
-                     AND ( prefixstr IS NOT NULL
-                            OR prefixstr = '-' ) ) )
+                     AND ( PREFIXSTR IS NOT NULL
+                            OR PREFIXSTR = '-' ) ) )
          AND ( ( 1 = @infoflag
-                 AND info IS NULL )
+                 AND INFO IS NULL )
                 OR ( 2 = @infoflag
-                     AND info IS NOT NULL )
+                     AND INFO IS NOT NULL )
                 OR ( 3 = @infoflag
-                     AND ( info IS NOT NULL
-                            OR info = '-' ) ) )
+                     AND ( INFO IS NOT NULL
+                            OR INFO = '-' ) ) )
          AND ( ( -1 = @resitemcaseflag
-                 AND resourcecase IN( 0, 1, 2, 3,
+                 AND RESOURCECASE IN( 0, 1, 2, 3,
                                       4, 5 ) )
                 OR ( 1 = @resitemcaseflag
-                     AND resourcecase = 1 )
+                     AND RESOURCECASE = 1 )
                 OR ( 2 = @resitemcaseflag
-                     AND resourcecase = 2 )
+                     AND RESOURCECASE = 2 )
                 OR ( 3 = @resitemcaseflag
-                     AND resourcecase = 3 )
+                     AND RESOURCECASE = 3 )
                 OR ( 4 = @resitemcaseflag
-                     AND resourcecase = 4 )
+                     AND RESOURCECASE = 4 )
                 OR ( 5 = @resitemcaseflag
-                     AND resourcecase = 5 ) )
-         AND ( ordernr BETWEEN @ordernr1 AND @ordernr2 )
-         AND ( tagnr BETWEEN @tagnr1 AND @tagnr2 )
-         AND ( levelnr BETWEEN @levelnr1 AND @levelnr2 )
+                     AND RESOURCECASE = 5 ) )
+         AND ( ORDERNR BETWEEN @ordernr1 AND @ordernr2 )
+         AND ( TAGNR BETWEEN @tagnr1 AND @tagnr2 )
+         AND ( LEVELNR BETWEEN @levelnr1 AND @levelnr2 )
   UNION
-  SELECT id
-  FROM   re_resourceitems
-  WHERE  id = @rid
+  SELECT ID
+  FROM   RE_RESOURCEITEMS
+  WHERE  ID = @rid
          AND ( ( 4 = @prefixflag
-                 AND prefixstr LIKE '%' + @prefixComboText + '%' )
+                 AND PREFIXSTR LIKE '%' + @prefixComboText + '%' )
                 OR ( 5 = @prefixflag
-                     AND prefixstr NOT LIKE '%' + @prefixComboText + '%' )
+                     AND PREFIXSTR NOT LIKE '%' + @prefixComboText + '%' )
                 OR ( 6 = @prefixflag
-                     AND prefixstr LIKE @prefixComboText + '%' )
+                     AND PREFIXSTR LIKE @prefixComboText + '%' )
                 OR ( 7 = @prefixflag
-                     AND prefixstr NOT LIKE @prefixComboText + '%' )
+                     AND PREFIXSTR NOT LIKE @prefixComboText + '%' )
                 OR ( 8 = @prefixflag
-                     AND prefixstr LIKE '%' + @prefixComboText )
+                     AND PREFIXSTR LIKE '%' + @prefixComboText )
                 OR ( 9 = @prefixflag
-                     AND prefixstr NOT LIKE '%' + @prefixComboText )
+                     AND PREFIXSTR NOT LIKE '%' + @prefixComboText )
                 OR ( 10 = @prefixflag
-                     AND prefixstr = @prefixComboText )
+                     AND PREFIXSTR = @prefixComboText )
                 OR ( 11 = @prefixflag
-                     AND prefixstr <> @prefixComboText ) )
+                     AND PREFIXSTR <> @prefixComboText ) )
          AND ( ( 4 = @infoflag
-                 AND info LIKE '%' + @infoComboText + '%' )
+                 AND INFO LIKE '%' + @infoComboText + '%' )
                 OR ( 5 = @infoflag
-                     AND info NOT LIKE '%' + @infoComboText + '%' )
+                     AND INFO NOT LIKE '%' + @infoComboText + '%' )
                 OR ( 6 = @infoflag
-                     AND info LIKE @infoComboText + '%' )
+                     AND INFO LIKE @infoComboText + '%' )
                 OR ( 7 = @infoflag
-                     AND info NOT LIKE @infoComboText + '%' )
+                     AND INFO NOT LIKE @infoComboText + '%' )
                 OR ( 8 = @infoflag
-                     AND info LIKE '%' + @infoComboText )
+                     AND INFO LIKE '%' + @infoComboText )
                 OR ( 9 = @infoflag
-                     AND info NOT LIKE '%' + @infoComboText )
+                     AND INFO NOT LIKE '%' + @infoComboText )
                 OR ( 10 = @infoflag
-                     AND info = @infoComboText )
+                     AND INFO = @infoComboText )
                 OR ( 11 = @infoflag
-                     AND info <> @infoComboText ) )
+                     AND INFO <> @infoComboText ) )
          AND ( ( -1 = @resitemcaseflag
-                 AND resourcecase IN( 0, 1, 2, 3,
+                 AND RESOURCECASE IN( 0, 1, 2, 3,
                                       4, 5 ) )
                 OR ( 1 = @resitemcaseflag
-                     AND resourcecase = 1 )
+                     AND RESOURCECASE = 1 )
                 OR ( 2 = @resitemcaseflag
-                     AND resourcecase = 2 )
+                     AND RESOURCECASE = 2 )
                 OR ( 3 = @resitemcaseflag
-                     AND resourcecase = 3 )
+                     AND RESOURCECASE = 3 )
                 OR ( 4 = @resitemcaseflag
-                     AND resourcecase = 4 )
+                     AND RESOURCECASE = 4 )
                 OR ( 5 = @resitemcaseflag
-                     AND resourcecase = 5 ) )
-         AND ( ordernr BETWEEN @ordernr1 AND @ordernr2 )
-         AND ( tagnr BETWEEN @tagnr1 AND @tagnr2 )
-         AND ( levelnr BETWEEN @levelnr1 AND @levelnr2 ); 
+                     AND RESOURCECASE = 5 ) )
+         AND ( ORDERNR BETWEEN @ordernr1 AND @ordernr2 )
+         AND ( TAGNR BETWEEN @tagnr1 AND @tagnr2 )
+         AND ( LEVELNR BETWEEN @levelnr1 AND @levelnr2 ); 

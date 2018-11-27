@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 import com.logo.data.entity.ReEnglishus;
 
 @Component
-public interface ReEnglishusRep extends JpaRepository<ReEnglishus, Long>{
+public interface ReEnglishusRep extends JpaRepository<ReEnglishus, Long> {
 
 	List<ReEnglishus> findAllBy(Pageable pageable);
 
 	List<ReEnglishus> findByresourceitemrefEquals(Integer resourceitemref);
-	
-	@Query(value="SELECT * FROM re_englishus WHERE resourceitemref = ?1", nativeQuery = true)
+
+	@Query(value = "SELECT * FROM RE_ENGLISHUS WHERE RESOURCEITEMREF = ?1", nativeQuery = true)
 	ReEnglishus getresourceitemrefEquals(Integer resourceitemref);
 
 }

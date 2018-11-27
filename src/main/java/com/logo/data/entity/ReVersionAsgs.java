@@ -9,8 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "RE_VERSIONASGS")
 @Entity
+@Table(name = "RE_VERSIONASGS")
 public class ReVersionAsgs implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,10 +21,10 @@ public class ReVersionAsgs implements Serializable {
 	private Integer id;
 
 	@Column(name = "VERSIONID")
-	private int versionid = 0;
+	private int versionId = 0;
 
 	@Column(name = "RESOURCEID")
-	private int resourceid = 0;
+	private int resourceId = 0;
 
 	public Integer getId() {
 		return id;
@@ -34,20 +34,20 @@ public class ReVersionAsgs implements Serializable {
 		this.id = id;
 	}
 
-	public int getVersionid() {
-		return versionid;
+	public int getVersionId() {
+		return versionId;
 	}
 
-	public void setVersionid(int versionid) {
-		this.versionid = versionid;
+	public void setVersionId(int versionId) {
+		this.versionId = versionId;
 	}
 
-	public int getResourceid() {
-		return resourceid;
+	public int getResourceId() {
+		return resourceId;
 	}
 
-	public void setResourceid(int resourceid) {
-		this.resourceid = resourceid;
+	public void setResourceId(int resourceId) {
+		this.resourceId = resourceId;
 	}
 
 	public boolean isPersisted() {
