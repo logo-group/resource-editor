@@ -54,6 +54,7 @@ public class LogoResConstants {
 	public static final String SAVEANDNEWSTR = "button.saveandnew";
 	public static final String DELETESTR = "button.delete";
 	public static final String EDITSTR = "button.edit";
+	public static final String COPYSTR = "button.copy";
 	public static final String ADDSTR = "button.add";
 	public static final String ADDNEWUSERSTR = "button.addnewuser";
 	public static final String ADDNEWSTR = "button.new";
@@ -99,6 +100,8 @@ public class LogoResConstants {
 	public static final String RESVERSIONSTR = "caption.resversion";
 	public static final String ORDERNRSTR = "caption.ordernr";
 	public static final String TAGNRSTR = "caption.tagnr";
+	public static final String TAGNRSTART = "caption.tagnrstart";
+	public static final String TAGNREND = "caption.tagnrend";
 	public static final String LEVELNRSTR = "caption.levelnr";
 	public static final String PREFIXSTR = "caption.prefix";
 	public static final String INFOSTR = "caption.info";
@@ -163,6 +166,8 @@ public class LogoResConstants {
 	public static final String STYLE_TEXTFIEL_FORM = "v-textfieldForm";
 	public static final String STYLE_TEXTFIEL_SEARCH = "v-textfieldSearch";
 	
+	public static final String TAGALL = "Tüm Etiketleri Kopyala";
+
 	private LogoResConstants() {
 	}
 }

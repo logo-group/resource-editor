@@ -1,7 +1,5 @@
 package com.logo.ui.components;
 
-import java.util.List;
-
 import com.github.appreciated.material.MaterialTheme;
 import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReAlbaniankv;
@@ -28,7 +26,6 @@ import com.logo.ui.view.ResourceViewNew;
 import com.logo.util.LogoResConstants;
 import com.logo.util.enums.ResourceType;
 import com.vaadin.icons.VaadinIcons;
-import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
@@ -50,62 +47,48 @@ public class RowLayout extends VerticalLayout {
 	private boolean focus = false;
 
 	private boolean isSingleForm = false;
-	
+
 	private transient ReResource reResource;
 
 	private transient ReResourceRep reResourceRep;
-	
+
 	private transient ReResourceitem reResourceitem;
 
 	private transient ReResourceitemRep reResourceitemRep;
 
 	ReEnglishus reEnglishus = null;
-	private transient List<ReEnglishus> reEnglishuses = null;
-	
+
 	ReGermande reGermande = null;
-	private transient List<ReGermande> reGermandes = null;
-	
+
 	RePersianir rePersianir = null;
-	private transient List<RePersianir> rePersianirs = null;
-	
+
 	ReAzerbaijaniaz reAzerbaijaniaz = null;
-	private transient List<ReAzerbaijaniaz> reAzerbaijaniazs = null;
 
 	ReBulgarianbg reBulgarianbg = null;
-	private transient List<ReBulgarianbg> reBulgarianbgs = null;
 
 	ReRussianru reRussianru = null;
-	private transient List<ReRussianru> reRussianrus = null;
 
 	ReRomanianro reRomanianro = null;
-	private transient List<ReRomanianro> reRomanianros = null;
 
 	ReGeorgiange reGeorgiange = null;
-	private transient List<ReGeorgiange> reGeorgianges = null;
 
 	ReArabicjo reArabicjo = null;
-	private transient List<ReArabicjo> reArabicjos = null;
 
 	ReFrenchfr reFrenchfr = null;
-	private transient List<ReFrenchfr> reFrenchfrs = null;
-	
+
 	ReAlbaniankv reAlbaniankv = null;
-	private transient List<ReAlbaniankv> reAlbaniankvs = null;
-	
+
 	ReTurkmentm reTurkmentm = null;
-	private transient List<ReTurkmentm> reTurkmentms = null;
 
 	ReArabiceg reArabiceg = null;
-	private transient List<ReArabiceg> reArabicegs = null;
 
 	ReArabicsa reArabicsa = null;
-	private transient List<ReArabicsa> reArabicsas = null;
 
 	CustomHorizontalLayout layoutENUS;
 	CustomHorizontalLayout layoutFAIR;
-	CustomHorizontalLayout layoutDEDE; 
-	CustomHorizontalLayout layoutAZAZ; 
-	CustomHorizontalLayout layoutBGBG; 
+	CustomHorizontalLayout layoutDEDE;
+	CustomHorizontalLayout layoutAZAZ;
+	CustomHorizontalLayout layoutBGBG;
 	CustomHorizontalLayout layoutRURU;
 	CustomHorizontalLayout layoutRORO;
 	CustomHorizontalLayout layoutKAGE;
@@ -115,7 +98,7 @@ public class RowLayout extends VerticalLayout {
 	CustomHorizontalLayout layoutTKTM;
 	CustomHorizontalLayout layoutAREG;
 	CustomHorizontalLayout layoutARSA;
-	
+
 	String valTR = "";
 	String valEN = "";
 	String valGE = "";
@@ -131,12 +114,12 @@ public class RowLayout extends VerticalLayout {
 	String valTK = "";
 	String valEG = "";
 	String valSA = "";
-	
+
 	private ResourceViewNew resView;
 	private ReUser reUser;
-	
-	public RowLayout(ReResource reResource, ReResourceitem reResourceitem, boolean focus, boolean vertical, ResourceViewNew resView, boolean isSingleForm,
-			ReUser user) {
+
+	public RowLayout(ReResource reResource, ReResourceitem reResourceitem, boolean focus, boolean vertical,
+			ResourceViewNew resView, boolean isSingleForm, ReUser user) {
 		this.reResource = reResource;
 		this.reResourceitem = reResourceitem;
 		this.reResourceitemRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
@@ -146,7 +129,7 @@ public class RowLayout extends VerticalLayout {
 		this.isSingleForm = isSingleForm;
 		this.reUser = user;
 
-		if(reResource == null)
+		if (reResource == null)
 			this.reResource = reResourceRep.findByid(reResourceitem.getResourceref());
 
 		addStyleName("backColorPage2");
@@ -159,17 +142,14 @@ public class RowLayout extends VerticalLayout {
 
 		VaadinIcons iconUp;
 		VaadinIcons iconDown;
-		if(isVertical)
-		{
+		if (isVertical) {
 			iconUp = VaadinIcons.ANGLE_UP;
 			iconDown = VaadinIcons.ANGLE_DOWN;
-		}
-		else
-		{
+		} else {
 			iconUp = VaadinIcons.ANGLE_LEFT;
 			iconDown = VaadinIcons.ANGLE_RIGHT;
 		}
-			
+
 		HorizontalLayout resDetCard = new HorizontalLayout();
 		resDetCard.setSizeFull();
 		resDetCard.setSpacing(false);
@@ -177,120 +157,91 @@ public class RowLayout extends VerticalLayout {
 
 		Layout tabSheet = getTabSheet(isVertical);
 		tabSheet.setSizeFull();
-		
-		List<ReTurkishtr> reTurkishtrs = reResourceitem.getReTurkishtr();
-		
+
+		ReTurkishtr reTurkishtr = reResourceitem.getReTurkishtr();
+
 		ReTurkishtr dummyTurkish = new ReTurkishtr();
-		if ((reTurkishtrs != null) && !reTurkishtrs.isEmpty())
-		{
-			dummyTurkish = reTurkishtrs.get(0);
-			valTR = reTurkishtrs.get(0).getResourcestr();
+		if (reTurkishtr != null) {
+			dummyTurkish = reTurkishtr;
+			valTR = reTurkishtr.getResourcestr();
 		}
-			
-		if (reResource.getResourcetype().equals(ResourceType.LOCALIZABLE))
-		{
-			reEnglishuses = reResourceitem.getReEnglishus();
-			reGermandes = reResourceitem.getReGermande();
-			rePersianirs = reResourceitem.getRePersianir();
-			reAzerbaijaniazs = reResourceitem.getReAzerbaijaniaz();
-			reBulgarianbgs = reResourceitem.getReBulgarianbg();
-			reRussianrus = reResourceitem.getReRussianru();
-			reRomanianros = reResourceitem.getReRomanianro();
-			reGeorgianges = reResourceitem.getReGeorgiange();
-			reArabicjos = reResourceitem.getReArabicjo();
-			reFrenchfrs = reResourceitem.getReFrenchfr();
-			reAlbaniankvs = reResourceitem.getReAlbaniankv();
-			reTurkmentms = reResourceitem.getReTurkmentm();
-			reArabicegs = reResourceitem.getReArabiceg();
-			reArabicsas = reResourceitem.getReArabicsa();
+
+		if (reResource.getResourcetype().equals(ResourceType.LOCALIZABLE)) {
+			reEnglishus = reResourceitem.getReEnglishus();
+			reGermande = reResourceitem.getReGermande();
+			rePersianir = reResourceitem.getRePersianir();
+			reAzerbaijaniaz = reResourceitem.getReAzerbaijaniaz();
+			reBulgarianbg = reResourceitem.getReBulgarianbg();
+			reRussianru = reResourceitem.getReRussianru();
+			reRomanianro = reResourceitem.getReRomanianro();
+			reGeorgiange = reResourceitem.getReGeorgiange();
+			reArabicjo = reResourceitem.getReArabicjo();
+			reFrenchfr = reResourceitem.getReFrenchfr();
+			reAlbaniankv = reResourceitem.getReAlbaniankv();
+			reTurkmentm = reResourceitem.getReTurkmentm();
+			reArabiceg = reResourceitem.getReArabiceg();
+			reArabicsa = reResourceitem.getReArabicsa();
 		}
-		
-		if ((reEnglishuses != null) && !reEnglishuses.isEmpty())
-		{
-			reEnglishus = reEnglishuses.get(0);
+
+		if (reEnglishus != null) {
 			valEN = reEnglishus.getResourcestr();
 		}
 
-		if ((reGermandes != null) && !reGermandes.isEmpty())
-		{
-			reGermande = reGermandes.get(0);
+		if (reGermande != null) {
 			valGE = reGermande.getResourcestr();
-		}			
-		
-		if ((rePersianirs != null) && !rePersianirs.isEmpty())
-		{
-			rePersianir = rePersianirs.get(0);
-			valIR = rePersianir.getResourcestr();
-		}		
+		}
 
-		if ((reAzerbaijaniazs != null) && !reAzerbaijaniazs.isEmpty())
-		{
-			reAzerbaijaniaz = reAzerbaijaniazs.get(0);
+		if (rePersianir != null) {
+			valIR = rePersianir.getResourcestr();
+		}
+
+		if (reAzerbaijaniaz != null) {
 			valAZ = reAzerbaijaniaz.getResourcestr();
 		}
 
-		if ((reBulgarianbgs != null) && !reBulgarianbgs.isEmpty())
-		{
-			reBulgarianbg = reBulgarianbgs.get(0);
+		if (reBulgarianbg != null) {
 			valBG = reBulgarianbg.getResourcestr();
 		}
 
-		if ((reRussianrus != null) && !reRussianrus.isEmpty())
-		{
-			reRussianru = reRussianrus.get(0);
+		if (reRussianru != null) {
 			valRU = reRussianru.getResourcestr();
 		}
 
-		if ((reRomanianros != null) && !reRomanianros.isEmpty())
-		{
-			reRomanianro = reRomanianros.get(0);
+		if (reRomanianro != null) {
 			valRO = reRomanianro.getResourcestr();
 		}
 
-		if ((reGeorgianges != null) && !reGeorgianges.isEmpty())
-		{
-			reGeorgiange = reGeorgianges.get(0);
+		if (reGeorgiange != null) {
 			valKA = reGeorgiange.getResourcestr();
 		}
 
-		if ((reArabicjos != null) && !reArabicjos.isEmpty())
-		{
-			reArabicjo  = reArabicjos.get(0);
+		if (reArabicjo != null) {
 			valJO = reArabicjo.getResourcestr();
 		}
 
-		if ((reFrenchfrs != null) && !reFrenchfrs.isEmpty())
-		{
-			reFrenchfr  = reFrenchfrs.get(0);
+		if (reFrenchfr != null) {
 			valFR = reFrenchfr.getResourcestr();
 		}
 
-		if ((reAlbaniankvs != null) && !reAlbaniankvs.isEmpty())
-		{
-			reAlbaniankv  = reAlbaniankvs.get(0);
+		if (reAlbaniankv != null) {
 			valSQ = reAlbaniankv.getResourcestr();
 		}
 
-		if ((reTurkmentms != null) && !reTurkmentms.isEmpty())
-		{
-			reTurkmentm  = reTurkmentms.get(0);
+		if (reTurkmentm != null) {
 			valTK = reTurkmentm.getResourcestr();
 		}
-		
-		if ((reArabicegs != null) && !reArabicegs.isEmpty())
-		{
-			reArabiceg  = reArabicegs.get(0);
-			valEG = reArabiceg.getResourcestr();
-		}		
 
-		if ((reArabicsas != null) && !reArabicsas.isEmpty())
-		{
-			reArabicsa  = reArabicsas.get(0);
+		if (reArabiceg != null) {
+			valEG = reArabiceg.getResourcestr();
+		}
+
+		if (reArabicsa != null) {
 			valSA = reArabicsa.getResourcestr();
 		}
-		
-		CustomHorizontalLayout layoutTRTR = new CustomHorizontalLayout(reResourceitem.getId(),dummyTurkish, valTR, valTR, LogoResConstants.RE_TURKISHTR_NAME,false);
-	
+
+		CustomHorizontalLayout layoutTRTR = new CustomHorizontalLayout(reResourceitem.getId(), dummyTurkish, valTR,
+				valTR, LogoResConstants.RE_TURKISHTR_NAME, false);
+
 		tabSheet.addComponent(layoutTRTR);
 
 		Panel tabPanel = new Panel();
@@ -299,27 +250,24 @@ public class RowLayout extends VerticalLayout {
 		tabPanel.setWidth("200%");
 
 		tabPanel.setContent(tabSheet);
-		
+
 		VerticalLayout resourceDetailForm = createResourceDetailForm();
 		resourceDetailForm.setWidth("100%");
 		tabPanel.setWidth("100%");
-		
+
 		resDetCard.addComponent(resourceDetailForm);
-		if(isVertical)
+		if (isVertical)
 			resDetCard.addComponent(tabSheet);
 		else
 			resDetCard.addComponent(tabPanel);
-		
+
 		resDetCard.setExpandRatio(resourceDetailForm, 1.30f);
 		resDetCard.setComponentAlignment(resourceDetailForm, Alignment.MIDDLE_LEFT);
-		
-		if(isVertical)
-		{
+
+		if (isVertical) {
 			resDetCard.setExpandRatio(tabSheet, 5.0f);
 			resDetCard.setComponentAlignment(tabSheet, Alignment.MIDDLE_LEFT);
-		}
-		else
-		{
+		} else {
 			resDetCard.setExpandRatio(tabPanel, 5.0f);
 			resDetCard.setComponentAlignment(tabPanel, Alignment.MIDDLE_LEFT);
 		}
@@ -336,43 +284,57 @@ public class RowLayout extends VerticalLayout {
 		close.setIcon(iconUp);
 		close.addStyleName(ValoTheme.BUTTON_BORDERLESS);
 		close.setDescription("Tüm dilleri gizle");
-		
-		layoutENUS = new CustomHorizontalLayout(reResourceitem.getId(),reEnglishus,valTR, valEN, LogoResConstants.RE_ENGLISHUS_NAME, true);
+
+		layoutENUS = new CustomHorizontalLayout(reResourceitem.getId(), reEnglishus, valTR, valEN,
+				LogoResConstants.RE_ENGLISHUS_NAME, true);
 		tabSheet.addComponent(layoutENUS);
 
 		layoutTRTR.addStyleName("csstag_1");
 		layoutENUS.addStyleName("csstag_2");
 
 		open.addClickListener(e -> {
-			
-			layoutFAIR = new CustomHorizontalLayout(reResourceitem.getId(), null,valTR, valIR, LogoResConstants.RE_PERSIANIR_NAME, false);
-			layoutDEDE = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valGE, LogoResConstants.RE_GERMANDE_NAME, true);
-			layoutAZAZ = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valAZ, LogoResConstants.RE_AZERBAIJANIAZ_NAME, true);
-			layoutBGBG = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valBG, LogoResConstants.RE_BULGARIANBG_NAME, true);
-			layoutRURU = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valRU, LogoResConstants.RE_RUSSIANRU_NAME, true);
-			layoutRORO = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valRO, LogoResConstants.RE_ROMANIANRO_NAME, true);
-			layoutKAGE = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valKA, LogoResConstants.RE_GEORGIANGE_NAME, true);
-			layoutARJO = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valJO, LogoResConstants.RE_ARABICJO_NAME, true);
-			layoutFRFR = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valFR, LogoResConstants.RE_FRENCHFR_NAME, true);
-			layoutSQKV = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valSQ, LogoResConstants.RE_ALBANIANKV_NAME, true);
-			layoutTKTM = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valTK, LogoResConstants.RE_TURKMENTM_NAME, true);
-			layoutAREG = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valEG, LogoResConstants.RE_ARABICEG_NAME, true);
-			layoutARSA = new CustomHorizontalLayout(reResourceitem.getId(),null,valTR, valSA, LogoResConstants.RE_ARABICSA_NAME, true);
-			
-			addLangLayout(tabSheet,layoutFAIR,LogoResConstants.RE_PERSIANIR_NAME);
-			addLangLayout(tabSheet,layoutDEDE,LogoResConstants.RE_GERMANDE_NAME);
-			addLangLayout(tabSheet,layoutAZAZ,LogoResConstants.RE_AZERBAIJANIAZ_NAME);
-			addLangLayout(tabSheet,layoutBGBG,LogoResConstants.RE_BULGARIANBG_NAME);
-			addLangLayout(tabSheet,layoutRURU,LogoResConstants.RE_RUSSIANRU_NAME);
-			addLangLayout(tabSheet,layoutRORO,LogoResConstants.RE_ROMANIANRO_NAME);
-			addLangLayout(tabSheet,layoutKAGE,LogoResConstants.RE_GEORGIANGE_NAME);
-			addLangLayout(tabSheet,layoutARJO,LogoResConstants.RE_ARABICJO_NAME);
-			addLangLayout(tabSheet,layoutFRFR,LogoResConstants.RE_FRENCHFR_NAME);
-			addLangLayout(tabSheet,layoutSQKV,LogoResConstants.RE_ALBANIANKV_NAME);
-			addLangLayout(tabSheet,layoutTKTM,LogoResConstants.RE_TURKMENTM_NAME);
-			addLangLayout(tabSheet,layoutAREG,LogoResConstants.RE_ARABICEG_NAME);
-			addLangLayout(tabSheet,layoutARSA,LogoResConstants.RE_ARABICSA_NAME);
-			
+
+			layoutFAIR = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valIR,
+					LogoResConstants.RE_PERSIANIR_NAME, false);
+			layoutDEDE = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valGE,
+					LogoResConstants.RE_GERMANDE_NAME, true);
+			layoutAZAZ = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valAZ,
+					LogoResConstants.RE_AZERBAIJANIAZ_NAME, true);
+			layoutBGBG = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valBG,
+					LogoResConstants.RE_BULGARIANBG_NAME, true);
+			layoutRURU = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valRU,
+					LogoResConstants.RE_RUSSIANRU_NAME, true);
+			layoutRORO = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valRO,
+					LogoResConstants.RE_ROMANIANRO_NAME, true);
+			layoutKAGE = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valKA,
+					LogoResConstants.RE_GEORGIANGE_NAME, true);
+			layoutARJO = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valJO,
+					LogoResConstants.RE_ARABICJO_NAME, true);
+			layoutFRFR = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valFR,
+					LogoResConstants.RE_FRENCHFR_NAME, true);
+			layoutSQKV = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valSQ,
+					LogoResConstants.RE_ALBANIANKV_NAME, true);
+			layoutTKTM = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valTK,
+					LogoResConstants.RE_TURKMENTM_NAME, true);
+			layoutAREG = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valEG,
+					LogoResConstants.RE_ARABICEG_NAME, true);
+			layoutARSA = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valSA,
+					LogoResConstants.RE_ARABICSA_NAME, true);
+
+			addLangLayout(tabSheet, layoutFAIR, LogoResConstants.RE_PERSIANIR_NAME);
+			addLangLayout(tabSheet, layoutDEDE, LogoResConstants.RE_GERMANDE_NAME);
+			addLangLayout(tabSheet, layoutAZAZ, LogoResConstants.RE_AZERBAIJANIAZ_NAME);
+			addLangLayout(tabSheet, layoutBGBG, LogoResConstants.RE_BULGARIANBG_NAME);
+			addLangLayout(tabSheet, layoutRURU, LogoResConstants.RE_RUSSIANRU_NAME);
+			addLangLayout(tabSheet, layoutRORO, LogoResConstants.RE_ROMANIANRO_NAME);
+			addLangLayout(tabSheet, layoutKAGE, LogoResConstants.RE_GEORGIANGE_NAME);
+			addLangLayout(tabSheet, layoutARJO, LogoResConstants.RE_ARABICJO_NAME);
+			addLangLayout(tabSheet, layoutFRFR, LogoResConstants.RE_FRENCHFR_NAME);
+			addLangLayout(tabSheet, layoutSQKV, LogoResConstants.RE_ALBANIANKV_NAME);
+			addLangLayout(tabSheet, layoutTKTM, LogoResConstants.RE_TURKMENTM_NAME);
+			addLangLayout(tabSheet, layoutAREG, LogoResConstants.RE_ARABICEG_NAME);
+			addLangLayout(tabSheet, layoutARSA, LogoResConstants.RE_ARABICSA_NAME);
+
 			layoutFAIR.addStyleName("csstag_1");
 			layoutDEDE.addStyleName("csstag_2");
 			layoutAZAZ.addStyleName("csstag_1");
@@ -386,7 +348,7 @@ public class RowLayout extends VerticalLayout {
 			layoutTKTM.addStyleName("csstag_1");
 			layoutAREG.addStyleName("csstag_2");
 			layoutARSA.addStyleName("csstag_1");
-			
+
 			resDetCard.removeComponent(open);
 			resDetCard.addComponent(close);
 			if (!isVertical)
@@ -407,7 +369,7 @@ public class RowLayout extends VerticalLayout {
 			tabSheet.removeComponent(layoutTKTM);
 			tabSheet.removeComponent(layoutAREG);
 			tabSheet.removeComponent(layoutARSA);
-			
+
 			layoutFAIR.removeStyleName("csstag_1");
 			layoutDEDE.removeStyleName("csstag_2");
 			layoutAZAZ.removeStyleName("csstag_1");
@@ -421,7 +383,7 @@ public class RowLayout extends VerticalLayout {
 			layoutTKTM.removeStyleName("csstag_1");
 			layoutAREG.removeStyleName("csstag_2");
 			layoutARSA.removeStyleName("csstag_1");
-			
+
 			resDetCard.removeComponent(close);
 			resDetCard.addComponent(open);
 			if (!isVertical)
@@ -429,7 +391,7 @@ public class RowLayout extends VerticalLayout {
 		});
 		if (focus)
 			open.focus();
-		
+
 		return resDetCard;
 	}
 
@@ -453,39 +415,39 @@ public class RowLayout extends VerticalLayout {
 				addLayout = true;
 			break;
 		case LogoResConstants.RE_RUSSIANRU_NAME:
-			if (reUser.getRuruaccessrights()> 0)
+			if (reUser.getRuruaccessrights() > 0)
 				addLayout = true;
 			break;
 		case LogoResConstants.RE_ROMANIANRO_NAME:
-			if (reUser.getRoroaccessrights()> 0)
+			if (reUser.getRoroaccessrights() > 0)
 				addLayout = true;
 			break;
 		case LogoResConstants.RE_GEORGIANGE_NAME:
-			if (reUser.getKageaccessrights()> 0)
+			if (reUser.getKageaccessrights() > 0)
 				addLayout = true;
 			break;
 		case LogoResConstants.RE_ARABICJO_NAME:
-			if (reUser.getArjoaccessrights()> 0)
+			if (reUser.getArjoaccessrights() > 0)
 				addLayout = true;
 			break;
 		case LogoResConstants.RE_FRENCHFR_NAME:
-			if (reUser.getFrfraccessrights()> 0)
+			if (reUser.getFrfraccessrights() > 0)
 				addLayout = true;
 			break;
 		case LogoResConstants.RE_ALBANIANKV_NAME:
-			if (reUser.getSqkvaccessrights()> 0)
+			if (reUser.getSqkvaccessrights() > 0)
 				addLayout = true;
 			break;
 		case LogoResConstants.RE_TURKMENTM_NAME:
-			if (reUser.getTktmaccessrights()> 0)
+			if (reUser.getTktmaccessrights() > 0)
 				addLayout = true;
 			break;
 		case LogoResConstants.RE_ARABICEG_NAME:
-			if (reUser.getAregaccessrights()> 0)
+			if (reUser.getAregaccessrights() > 0)
 				addLayout = true;
 			break;
 		case LogoResConstants.RE_ARABICSA_NAME:
-			if (reUser.getArsaaccessrights()> 0)
+			if (reUser.getArsaaccessrights() > 0)
 				addLayout = true;
 			break;
 		default:
@@ -494,99 +456,86 @@ public class RowLayout extends VerticalLayout {
 		if (addLayout)
 			tabSheet.addComponent(customHorizontalLayout);
 	}
-	
-	private Layout getTabSheet(boolean isVertical)
-	{
+
+	private Layout getTabSheet(boolean isVertical) {
 		FormLayout tabSheetForm = new FormLayout();
 		tabSheetForm.setSizeFull();
 		tabSheetForm.setSpacing(false);
 		tabSheetForm.setMargin(false);
-		
+
 		HorizontalLayout tabSheet = new HorizontalLayout();
 		tabSheet.setSizeFull();
 		tabSheet.setSpacing(false);
 		tabSheet.setMargin(false);
-		if(isVertical)
+		if (isVertical)
 			return tabSheetForm;
 		else
 			return tabSheet;
 	}
-	
+
 	private VerticalLayout createResourceDetailForm() {
 		VerticalLayout mainLayout = new VerticalLayout();
 		HorizontalLayout resDetFormLayout = new HorizontalLayout();
 		mainLayout.setSizeFull();
-		
+
 		resDetFormLayout.setSizeFull();
 		resDetFormLayout.setWidth("100%");
-	
-		
+
 		PopupTextFieldContent mypopContent = new PopupTextFieldContent(reResourceitem, reResourceitemRep);
-	       
-        final PopupView pop = new PopupView(mypopContent);       
-        pop.setHideOnMouseOut(false);
+
+		final PopupView pop = new PopupView(mypopContent);
+		pop.setHideOnMouseOut(false);
 		mypopContent.getBtSave().addClickListener(event -> {
 			pop.setPopupVisible(false);
 			mypopContent.save();
 		});
 
 		mypopContent.getBtCancel().addClickListener(event -> pop.setPopupVisible(false));
-		
-		Button resourceLink = new Button();
-		
-		resourceLink.setSizeUndefined();
-		
-		resourceLink.setCaption("<b style=text-align:left;color:#252839;>"+reResource.getResourcenr()+"</b>");
-		resourceLink.setCaptionAsHtml(true);
-		resourceLink.addStyleName(MaterialTheme.BUTTON_BORDER+ " "+ MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
 
-		
+		Button resourceLink = new Button();
+
+		resourceLink.setSizeUndefined();
+
+		resourceLink.setCaption("<b style=text-align:left;color:#252839;>" + reResource.getResourcenr() + "</b>");
+		resourceLink.setCaptionAsHtml(true);
+		resourceLink.addStyleName(
+				MaterialTheme.BUTTON_BORDER + " " + MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
+
 		resourceLink.addClickListener(event -> {
 			String filter = reResource.getResourcegroup().name() + "->" + Integer.toString(reResource.getResourcenr());
 			resView.createResoucePage(filter, true);
 		});
-		
+
 		Label lbl = new Label();
-		if(isSingleForm)
-		{
-			if (reResource.getResourcetype().equals(ResourceType.LOCALIZABLE))
-			{
-				if ((reEnglishuses != null) && !reEnglishuses.isEmpty())
-				{
+		if (isSingleForm) {
+			if (reResource.getResourcetype().equals(ResourceType.LOCALIZABLE)) {
+				if (reEnglishus != null) {
 					lbl.setIcon(VaadinIcons.CHECK);
 					lbl.setDescription("Çevrim yapılmış");
-				}
-				else
-				{
+				} else {
 					lbl.setIcon(VaadinIcons.MINUS);
 					lbl.setDescription("Çevrim yapılmamış");
 				}
 			}
 
 			resDetFormLayout.addComponents(pop);
-			//resDetFormLayout.setComponentAlignment(lbl, Alignment.MIDDLE_LEFT);
+			// resDetFormLayout.setComponentAlignment(lbl, Alignment.MIDDLE_LEFT);
 			resDetFormLayout.setComponentAlignment(pop, Alignment.MIDDLE_CENTER);
-			//resDetFormLayout.setExpandRatio(lbl, 1.0f);
+			// resDetFormLayout.setExpandRatio(lbl, 1.0f);
 			resDetFormLayout.setExpandRatio(pop, 1.0f);
-		}
-		else
-		{
-			if (reResource.getResourcetype().equals(ResourceType.LOCALIZABLE))
-			{
-				if ((reEnglishuses != null) && !reEnglishuses.isEmpty())
-				{
+		} else {
+			if (reResource.getResourcetype().equals(ResourceType.LOCALIZABLE)) {
+				if (reEnglishus != null) {
 					lbl.setIcon(VaadinIcons.CHECK);
 					lbl.setDescription("Çevrim yapılmış");
-				}
-				else
-				{
+				} else {
 					lbl.setIcon(VaadinIcons.MINUS);
 					lbl.setDescription("Çevrim yapılmamış");
 				}
 			}
 
 			resDetFormLayout.addComponentsAndExpand(resourceLink, pop);
-			//resDetFormLayout.setExpandRatio(lbl, 1.0f);
+			// resDetFormLayout.setExpandRatio(lbl, 1.0f);
 			resDetFormLayout.setExpandRatio(resourceLink, 2.0f);
 			resDetFormLayout.setExpandRatio(pop, 1.0f);
 		}

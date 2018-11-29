@@ -1,7 +1,5 @@
 package com.logo.ui.window;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -304,9 +302,7 @@ public class ResourceItemWindow extends Window {
 			reTurkishtr.setResourcestr(getDesc().getValue());
 			
 			reTurkishtrRep.save(reTurkishtr);
-			List<ReTurkishtr> reTurkishtrLst = new ArrayList<>();
-			reTurkishtrLst.add(reTurkishtr);
-			resourceItem.setReTurkishtr(reTurkishtrLst);
+			resourceItem.setReTurkishtr(reTurkishtr);
 		} 
 		catch (Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e.getMessage());

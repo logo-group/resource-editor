@@ -3,9 +3,10 @@ package com.logo.data.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +16,7 @@ public class ReGermande extends ReLanguageTable implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID", insertable = false, updatable = false)
 	public ReResourceitem reResourceitem;
 

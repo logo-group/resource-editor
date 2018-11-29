@@ -1,19 +1,14 @@
 package com.logo.data.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -32,204 +27,171 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable {
 		/* */
 	}
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReTurkishtr> reTurkishtr = new ArrayList<>();
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReTurkishtr reTurkishtr;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReEnglishus> reEnglishus;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReEnglishus reEnglishus;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReGermande> reGermande;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReGermande reGermande;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<RePersianir> rePersianir;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private RePersianir rePersianir;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReAzerbaijaniaz> reAzerbaijaniaz;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReAzerbaijaniaz reAzerbaijaniaz;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReBulgarianbg> reBulgarianbg;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReBulgarianbg reBulgarianbg;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReRussianru> reRussianru;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReRussianru reRussianru;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReRomanianro> reRomanianro;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReRomanianro reRomanianro;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReGeorgiange> reGeorgiange;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReGeorgiange reGeorgiange;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReArabicjo> reArabicjo;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReArabicjo reArabicjo;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReFrenchfr> reFrenchfr;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReFrenchfr reFrenchfr;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReAlbaniankv> reAlbaniankv;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReAlbaniankv reAlbaniankv;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReTurkmentm> reTurkmentm;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReTurkmentm reTurkmentm;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReArabiceg> reArabiceg;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReArabiceg reArabiceg;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID")
-	private List<ReArabicsa> reArabicsa;
+	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	private ReArabicsa reArabicsa;
 
-	public List<ReTurkishtr> getReTurkishtr() {
+	public ReTurkishtr getReTurkishtr() {
 		return reTurkishtr;
 	}
 
-	public void setReTurkishtr(List<ReTurkishtr> reTurkishtr) {
+	public void setReTurkishtr(ReTurkishtr reTurkishtr) {
 		this.reTurkishtr = reTurkishtr;
 	}
 
-	public List<ReEnglishus> getReEnglishus() {
+	public ReEnglishus getReEnglishus() {
 		return reEnglishus;
 	}
 
-	public void setReEnglishus(List<ReEnglishus> reEnglishus) {
+	public void setReEnglishus(ReEnglishus reEnglishus) {
 		this.reEnglishus = reEnglishus;
 	}
 
-	public List<ReGermande> getReGermande() {
+	public ReGermande getReGermande() {
 		return reGermande;
 	}
 
-	public void setReGermande(List<ReGermande> reGermande) {
+	public void setReGermande(ReGermande reGermande) {
 		this.reGermande = reGermande;
 	}
 
-	public List<RePersianir> getRePersianir() {
+	public RePersianir getRePersianir() {
 		return rePersianir;
 	}
 
-	public void setRePersianir(List<RePersianir> rePersianir) {
+	public void setRePersianir(RePersianir rePersianir) {
 		this.rePersianir = rePersianir;
 	}
 
-	public List<ReAzerbaijaniaz> getReAzerbaijaniaz() {
+	public ReAzerbaijaniaz getReAzerbaijaniaz() {
 		return reAzerbaijaniaz;
 	}
 
-	public void setReAzerbaijaniaz(List<ReAzerbaijaniaz> reAzerbaijaniaz) {
+	public void setReAzerbaijaniaz(ReAzerbaijaniaz reAzerbaijaniaz) {
 		this.reAzerbaijaniaz = reAzerbaijaniaz;
 	}
 
-	public List<ReBulgarianbg> getReBulgarianbg() {
+	public ReBulgarianbg getReBulgarianbg() {
 		return reBulgarianbg;
 	}
 
-	public void setReBulgarianbg(List<ReBulgarianbg> reBulgarianbg) {
+	public void setReBulgarianbg(ReBulgarianbg reBulgarianbg) {
 		this.reBulgarianbg = reBulgarianbg;
 	}
 
-	public List<ReRussianru> getReRussianru() {
+	public ReRussianru getReRussianru() {
 		return reRussianru;
 	}
 
-	public void setReRussianru(List<ReRussianru> reRussianru) {
+	public void setReRussianru(ReRussianru reRussianru) {
 		this.reRussianru = reRussianru;
 	}
 
-	public List<ReRomanianro> getReRomanianro() {
+	public ReRomanianro getReRomanianro() {
 		return reRomanianro;
 	}
 
-	public void setReRomanianro(List<ReRomanianro> reRomanianro) {
+	public void setReRomanianro(ReRomanianro reRomanianro) {
 		this.reRomanianro = reRomanianro;
 	}
 
-	public List<ReGeorgiange> getReGeorgiange() {
+	public ReGeorgiange getReGeorgiange() {
 		return reGeorgiange;
 	}
 
-	public void setReGeorgiange(List<ReGeorgiange> reGeorgiange) {
+	public void setReGeorgiange(ReGeorgiange reGeorgiange) {
 		this.reGeorgiange = reGeorgiange;
 	}
 
-	public List<ReArabicjo> getReArabicjo() {
+	public ReArabicjo getReArabicjo() {
 		return reArabicjo;
 	}
 
-	public void setReArabicjo(List<ReArabicjo> reArabicjo) {
+	public void setReArabicjo(ReArabicjo reArabicjo) {
 		this.reArabicjo = reArabicjo;
 	}
 
-	public List<ReFrenchfr> getReFrenchfr() {
+	public ReFrenchfr getReFrenchfr() {
 		return reFrenchfr;
 	}
 
-	public void setReFrenchfr(List<ReFrenchfr> reFrenchfr) {
+	public void setReFrenchfr(ReFrenchfr reFrenchfr) {
 		this.reFrenchfr = reFrenchfr;
 	}
 
-	public List<ReAlbaniankv> getReAlbaniankv() {
+	public ReAlbaniankv getReAlbaniankv() {
 		return reAlbaniankv;
 	}
 
-	public void setReAlbaniankv(List<ReAlbaniankv> reAlbaniankv) {
+	public void setReAlbaniankv(ReAlbaniankv reAlbaniankv) {
 		this.reAlbaniankv = reAlbaniankv;
 	}
 
-	public List<ReTurkmentm> getReTurkmentm() {
+	public ReTurkmentm getReTurkmentm() {
 		return reTurkmentm;
 	}
 
-	public void setReTurkmentm(List<ReTurkmentm> reTurkmentm) {
+	public void setReTurkmentm(ReTurkmentm reTurkmentm) {
 		this.reTurkmentm = reTurkmentm;
 	}
 
-	public List<ReArabiceg> getReArabiceg() {
+	public ReArabiceg getReArabiceg() {
 		return reArabiceg;
 	}
 
-	public void setReArabiceg(List<ReArabiceg> reArabiceg) {
+	public void setReArabiceg(ReArabiceg reArabiceg) {
 		this.reArabiceg = reArabiceg;
 	}
 
-	public List<ReArabicsa> getReArabicsa() {
+	public ReArabicsa getReArabicsa() {
 		return reArabicsa;
 	}
 
-	public void setReArabicsa(List<ReArabicsa> reArabicsa) {
+	public void setReArabicsa(ReArabicsa reArabicsa) {
 		this.reArabicsa = reArabicsa;
 	}
 
-	public ReResource getReResource() {
-		return reResource;
-	}
 	/**
 	 * @PostRemove protected void afterDelete() { ReTurkishtrRep reTurkishtrRep =
 	 *             LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
