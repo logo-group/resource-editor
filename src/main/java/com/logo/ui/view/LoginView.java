@@ -144,7 +144,7 @@ public class LoginView extends VerticalLayout implements View {
 		hlayout.addStyleName(MaterialTheme.CARD_HOVERABLE);
 		hlayout.addStyleName("csstag2");
 		hlayout.setWidth("750px");
-		hlayout.setHeight("350px");
+		hlayout.setHeight("405px");
 		hlayout.setContainerType(ContainerType.FLUID);
 
 		VerticalLayout left = new VerticalLayout();
