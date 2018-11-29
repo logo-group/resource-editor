@@ -6,7 +6,7 @@ public class LogoResConstants {
 	public static final int SEARCH_RESOURCENR = 1;
 	public static final int SEARCH_RESOURCEITEM = 2;
 	public static final int SEARCH_RESOURCEITEMALL = 3;
-	
+
 	public static final long LIMIT_SIZE = 10;
 
 	public static final String RE_TURKISHTR = "tr";
@@ -14,7 +14,7 @@ public class LogoResConstants {
 	public static final String RE_GERMANDE = "de";
 	public static final String RE_PERSIANIR = "fa";
 	public static final String RE_AZERBAIJANIAZ = "az";
-	public static final String RE_RUSSIANRU = "ru"; 
+	public static final String RE_RUSSIANRU = "ru";
 	public static final String RE_BULGARIANBG = "bg";
 	public static final String RE_ROMANIANRO = "ro";
 	public static final String RE_GEORGIANGE = "ka";
@@ -34,7 +34,7 @@ public class LogoResConstants {
 	public static final String RE_GERMANDE_NAME = "German (DE)";
 	public static final String RE_PERSIANIR_NAME = "Persian (IR)";
 	public static final String RE_AZERBAIJANIAZ_NAME = "Azerbaijani (AZ)";
-	public static final String RE_RUSSIANRU_NAME = "Russian (RU)"; 
+	public static final String RE_RUSSIANRU_NAME = "Russian (RU)";
 	public static final String RE_BULGARIANBG_NAME = "Bulgarian (BG)";
 	public static final String RE_ROMANIANRO_NAME = "Romanian (RO)";
 	public static final String RE_GEORGIANGE_NAME = "Georgian (GE)";
@@ -62,14 +62,14 @@ public class LogoResConstants {
 	public static final String CLOSELSTR = "button.close";
 	public static final String ADDNEWRESOURCESTR = "button.newresource";
 	public static final String ADDNEWRESOURCEITMSTR = "button.newresourceitem";
-	public static final String ADVANCESEARCHSTR ="button.advancesearch";
-	public static final String SEARCHSTR ="button.search";
-	public static final String ALLRESOURCESSTR ="button.allresources";
-	public static final String HOMESTR ="button.home";
-	public static final String USERSSTR ="button.users";
-	public static final String EXPORTIMPORTSTR ="button.exportimport";
-	public static final String TOOLSSTR ="button.tools";
-	public static final String LOGINSTR ="button.login";
+	public static final String ADVANCESEARCHSTR = "button.advancesearch";
+	public static final String SEARCHSTR = "button.search";
+	public static final String ALLRESOURCESSTR = "button.allresources";
+	public static final String HOMESTR = "button.home";
+	public static final String USERSSTR = "button.users";
+	public static final String EXPORTIMPORTSTR = "button.exportimport";
+	public static final String TOOLSSTR = "button.tools";
+	public static final String LOGINSTR = "button.login";
 	public static final String SEARCHBYRESNRSTR = "button.searchbyresnr";
 	public static final String SEARCHBYALLSTR = "button.searchbyall";
 	public static final String SEARCHBYMODSTR = "button.searchbymod";
@@ -81,8 +81,8 @@ public class LogoResConstants {
 	public static final String SEARCHBYHELPTSTR = "button.searchbyhelp";
 	public static final String SEARCHBYMSGSTR = "button.searchbymsg";
 	public static final String SEARCHBYABBRSTR = "button.searchbyabbr";
-	public static final String BACKBUTTONSTR= "button.backbutton";
-	
+	public static final String BACKBUTTONSTR = "button.backbutton";
+
 	public static final String LOGORESOURCEEDITOR = "caption.logoresedit";
 	public static final String DESCSTR = "caption.description";
 	public static final String RESNRSTR = "caption.resourcenr";
@@ -96,6 +96,7 @@ public class LogoResConstants {
 	public static final String PASS_WORDSTR = "caption.password";
 	public static final String FORGATPASS_WORDSTR = "caption.forgatpassword";
 	public static final String SELECTLANG = "caption.selectlanguage";
+	public static final String SELECTDB = "caption.selectdb";
 	public static final String VERSIONSTR = "caption.version";
 	public static final String RESVERSIONSTR = "caption.resversion";
 	public static final String ORDERNRSTR = "caption.ordernr";
@@ -114,7 +115,7 @@ public class LogoResConstants {
 	public static final String GENERALINFOSTR = "caption.generalinfo";
 	public static final String SETTINGSSTR = "caption.settings";
 	public static final String LANGAUTHSSTR = "caption.langauth";
-	
+
 	public static final String RESNRNOTEMTYSTR = "caption.resnrnotempty";
 	public static final String ORDERNRNOTEMTYSTR = "caption.ordenrnotempty";
 	public static final String TAGNRNOTEMTYSTR = "caption.tagnrnotempty";
@@ -122,7 +123,7 @@ public class LogoResConstants {
 	public static final String USERNAMENOTEMTYSTR = "caption.usernamenotempty";
 	public static final String NAMENOTEMTYSTR = "caption.namenotempty";
 	public static final String SURNAMENOTEMTYSTR = "caption.surnamenotempty";
-	
+
 	public static final String LOGORESCOUNTSTR = "caption.logorescount";
 	public static final String LOGOLANGCOUNTSTR = "caption.logolangcount";
 	public static final String INVALIDLOGINCOUNTSTR = "caption.invalidlogincnt";
@@ -137,8 +138,7 @@ public class LogoResConstants {
 	public static final String MODBYMEDURINGSTR = "caption.modifiedbymeduringlast";
 	public static final String CREATEDBYDURINGSTR = "caption.createdbyduringlast";
 	public static final String MODBYDURINGSTR = "caption.modifiedbyduringlast";
-	
-	
+
 	public static final String SPELLCHECK = "spellcheck";
 	public static final String FALSESTR = "false";
 
@@ -165,7 +165,7 @@ public class LogoResConstants {
 	public static final String STYLE_IN_SLIDE_DOWN = "in-slide-down";
 	public static final String STYLE_TEXTFIEL_FORM = "v-textfieldForm";
 	public static final String STYLE_TEXTFIEL_SEARCH = "v-textfieldSearch";
-	
+
 	public static final String TAGALL = "Tüm Etiketleri Kopyala";
 
 	private LogoResConstants() {
