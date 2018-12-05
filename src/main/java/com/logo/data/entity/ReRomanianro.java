@@ -24,4 +24,9 @@ public class ReRomanianro extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReRomanianro cloneRomanianro(ReResourceitem item) {
+		ReRomanianro romanianro = new ReRomanianro();
+		romanianro = cloneLanguage(item, romanianro);
+		return romanianro;
+	}
 }

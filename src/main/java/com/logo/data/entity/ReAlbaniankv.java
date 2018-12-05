@@ -24,4 +24,9 @@ public class ReAlbaniankv extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReAlbaniankv cloneAlbaniankv(ReResourceitem item) {
+		ReAlbaniankv albaniankv = new ReAlbaniankv();
+		albaniankv = cloneLanguage(item, albaniankv);
+		return albaniankv;
+	}
 }

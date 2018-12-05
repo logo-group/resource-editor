@@ -24,4 +24,10 @@ public class ReTurkmentm extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReTurkmentm cloneTurkmentm(ReResourceitem item) {
+		ReTurkmentm turkmentm = new ReTurkmentm();
+		turkmentm = cloneLanguage(item, turkmentm);
+		return turkmentm;
+	}
+
 }

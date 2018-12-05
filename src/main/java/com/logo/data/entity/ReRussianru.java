@@ -24,4 +24,10 @@ public class ReRussianru extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReRussianru cloneRussianru(ReResourceitem item) {
+		ReRussianru russianru = new ReRussianru();
+		russianru = cloneLanguage(item, russianru);
+		return russianru;
+	}
+
 }

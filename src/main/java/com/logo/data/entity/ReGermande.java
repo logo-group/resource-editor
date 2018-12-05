@@ -24,4 +24,10 @@ public class ReGermande extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReGermande cloneGermande(ReResourceitem item) {
+		ReGermande germande = new ReGermande();
+		germande = cloneLanguage(item, germande);
+		return germande;
+	}
+
 }

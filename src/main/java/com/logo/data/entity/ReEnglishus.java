@@ -24,4 +24,10 @@ public class ReEnglishus extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReEnglishus cloneEnglishus(ReResourceitem item) {
+		ReEnglishus englishus = new ReEnglishus();
+		englishus = cloneLanguage(item, englishus);
+		return englishus;
+	}
+
 }

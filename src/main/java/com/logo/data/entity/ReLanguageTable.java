@@ -144,4 +144,14 @@ public class ReLanguageTable {
 	public ReLanguageTable() {
 		/* */
 	}
+
+	public <T extends ReLanguageTable> T cloneLanguage(ReResourceitem item, T language) {
+		language.setInfo(info);
+		language.setResourcestr(resourcestr);
+		language.setTrkey(trkey);
+		language.setVersion(version);
+		language.setResourceitemref(item.getId());
+		return language;
+	}
+
 }

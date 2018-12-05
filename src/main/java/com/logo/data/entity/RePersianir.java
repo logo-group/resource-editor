@@ -24,4 +24,9 @@ public class RePersianir extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public RePersianir clonePersianir(ReResourceitem item) {
+		RePersianir persianir = new RePersianir();
+		persianir = cloneLanguage(item, persianir);
+		return persianir;
+	}
 }

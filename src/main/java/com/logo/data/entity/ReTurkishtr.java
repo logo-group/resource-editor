@@ -24,4 +24,10 @@ public class ReTurkishtr extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReTurkishtr cloneTurkish(ReResourceitem item) {
+		ReTurkishtr turkish = new ReTurkishtr();
+		turkish = cloneLanguage(item, turkish);
+		return turkish;
+	}
+
 }

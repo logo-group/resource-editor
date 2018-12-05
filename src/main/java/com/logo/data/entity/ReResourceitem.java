@@ -192,6 +192,42 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable {
 		this.reArabicsa = reArabicsa;
 	}
 
+	public ReResourceitem copyResourceItem(ReResource resource) {
+		ReResourceitem copiedResourceItem = new ReResourceitem();
+		copiedResourceItem.setActive(getActive());
+		copiedResourceItem.setInfo(getInfo());
+		copiedResourceItem.setLevelnr(getLevelnr());
+		copiedResourceItem.setLocalizationaffected(getLocalizationaffected());
+		copiedResourceItem.setOrdernr(getOrdernr());
+		copiedResourceItem.setOwnerproduct(getOwnerproduct());
+		copiedResourceItem.setPrefixstr(getPrefixstr());
+		copiedResourceItem.setRequested(getRequested());
+		copiedResourceItem.setResourcecase(resource.getResourcecase());
+		copiedResourceItem.setResourcecategory(resource.getResourcecategory());
+		copiedResourceItem.setResourceref(resource.getId());
+		copiedResourceItem.setResourcetype(resource.getResourcetype().getTyp());
+		copiedResourceItem.setRightlevelnr(getRightlevelnr());
+		copiedResourceItem.setRightparentid(getRightparentid());
+		copiedResourceItem.setTagnr(getTagnr());
+		copiedResourceItem.setVersion(getVersion());
+		copiedResourceItem.setReTurkishtr(getReTurkishtr());
+		copiedResourceItem.setReEnglishus(getReEnglishus());
+		copiedResourceItem.setReGermande(getReGermande());
+		copiedResourceItem.setRePersianir(getRePersianir());
+		copiedResourceItem.setReAzerbaijaniaz(getReAzerbaijaniaz());
+		copiedResourceItem.setReBulgarianbg(getReBulgarianbg());
+		copiedResourceItem.setReRussianru(getReRussianru());
+		copiedResourceItem.setReRomanianro(getReRomanianro());
+		copiedResourceItem.setReGeorgiange(getReGeorgiange());
+		copiedResourceItem.setReArabicjo(getReArabicjo());
+		copiedResourceItem.setReFrenchfr(getReFrenchfr());
+		copiedResourceItem.setReAlbaniankv(getReAlbaniankv());
+		copiedResourceItem.setReTurkmentm(getReTurkmentm());
+		copiedResourceItem.setReArabiceg(getReArabiceg());
+		copiedResourceItem.setReArabicsa(getReArabicsa());
+		return copiedResourceItem;
+	}
+
 	/**
 	 * @PostRemove protected void afterDelete() { ReTurkishtrRep reTurkishtrRep =
 	 *             LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();

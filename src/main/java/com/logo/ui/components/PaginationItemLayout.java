@@ -30,6 +30,7 @@ import com.logo.data.repository.ReProjectVerisonRep;
 import com.logo.data.repository.ReResourceRep;
 import com.logo.data.repository.ReResourceitemRep;
 import com.logo.ui.view.ResourceViewNew;
+import com.logo.ui.window.ResourceCopyWindow;
 import com.logo.ui.window.ResourceItemWindow;
 import com.logo.ui.window.ResourceWindow;
 import com.logo.util.LangHelper;
@@ -68,8 +69,8 @@ import com.vaadin.ui.Window;
 
 import eu.michaelvogt.vaadin.attribute.Attribute;
 
-@Viewport("width=device-width, initial-scale=1") 
-public class PaginationItemLayout extends ResponsiveLayout{
+@Viewport("width=device-width, initial-scale=1")
+public class PaginationItemLayout extends ResponsiveLayout {
 
 	/**
 	 * 
@@ -96,8 +97,9 @@ public class PaginationItemLayout extends ResponsiveLayout{
 	private boolean add;
 	private List<ReProjectVersion> versionList;
 	private List<String> versionStringList;
-	
-	public PaginationItemLayout(int searchBy, SearchParam sParam, String searchFilter, ResourceViewNew view, boolean add) {
+
+	public PaginationItemLayout(int searchBy, SearchParam sParam, String searchFilter, ResourceViewNew view,
+			boolean add) {
 		this.resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
 		this.searchBy = searchBy;
 		this.searchFilter = searchFilter;
@@ -108,12 +110,12 @@ public class PaginationItemLayout extends ResponsiveLayout{
 		this.add = add;
 		this.sParam = sParam;
 		setWidth("100%");
-		//setHeight("95%");
-		
+		// setHeight("95%");
+
 		setScrollable(true);
-		//withSpacing();
+		// withSpacing();
 		withFullSize();
-		
+
 		content = generatePanelLayout();
 		versionList = reProjectVerisonRep.findAll();
 		versionStringList = versionList.stream().map(elem -> elem.getVersionnr()).collect(Collectors.toList());
@@ -123,7 +125,7 @@ public class PaginationItemLayout extends ResponsiveLayout{
 		}
 
 		addComponent(content);
-		//setExpandRatio(content, 12.0f);
+		// setExpandRatio(content, 12.0f);
 		getUI();
 		UI.getCurrent().addClickListener(e -> {
 			if ((!(e.getRelativeX() >= x && e.getRelativeX() < (x + width) && e.getRelativeY() >= y
@@ -133,17 +135,14 @@ public class PaginationItemLayout extends ResponsiveLayout{
 		});
 
 		/**
-		 * DataSource ds =
-		 * LogoresMainUI.getMrepositorycontainer().getDataSource(); try { String
-		 * query = "select createdon,resourcenr  from re_resources "; Connection
+		 * DataSource ds = LogoresMainUI.getMrepositorycontainer().getDataSource(); try
+		 * { String query = "select createdon,resourcenr from re_resources "; Connection
 		 * con = ds.getConnection(); ResultSet rs =
-		 * con.createStatement().executeQuery(query); while (rs.next()) { int
-		 * coffeeName = rs.getInt("resourcenr"); Date createdon =
-		 * rs.getDate("createdon"); System.out.println(coffeeName + "\t" +
-		 * createdon); }
+		 * con.createStatement().executeQuery(query); while (rs.next()) { int coffeeName
+		 * = rs.getInt("resourcenr"); Date createdon = rs.getDate("createdon");
+		 * System.out.println(coffeeName + "\t" + createdon); }
 		 * 
-		 * } catch (SQLException e1) { 
-		 * e1.printStackTrace(); }
+		 * } catch (SQLException e1) { e1.printStackTrace(); }
 		 **/
 	}
 
@@ -205,30 +204,25 @@ public class PaginationItemLayout extends ResponsiveLayout{
 	private Page<com.logo.data.entity.ReResourceitem> preareCondition(int page, int size) {
 		String nameilter = "";
 		Page<com.logo.data.entity.ReResourceitem> resourceItems = null;
-		if(searchBy == LogoResConstants.SEARCH_ALL)
-		{
+		if (searchBy == LogoResConstants.SEARCH_ALL) {
 			nameilter = "%";
 			resourceItems = getAllResItems(page, size, nameilter);
 		}
-		if(searchBy == LogoResConstants.SEARCH_RESOURCENR)
-		{
+		if (searchBy == LogoResConstants.SEARCH_RESOURCENR) {
 			nameilter = searchFilter;
-			resourceItems = searchByresourceNr(page, size, getPartValue(nameilter,1), getPartValue(nameilter,0));
+			resourceItems = searchByresourceNr(page, size, getPartValue(nameilter, 1), getPartValue(nameilter, 0));
 		}
-		if(searchBy == LogoResConstants.SEARCH_RESOURCEITEM)
-		{
+		if (searchBy == LogoResConstants.SEARCH_RESOURCEITEM) {
 			resourceItems = searchByresourceParam(page, size, sParam);
 		}
-		if(searchBy == LogoResConstants.SEARCH_RESOURCEITEMALL)
-		{
+		if (searchBy == LogoResConstants.SEARCH_RESOURCEITEMALL) {
 			resourceItems = searchByresourceParamAll(page, size, sParam);
 		}
 
 		return resourceItems;
 	}
 
-	private String getPartValue(String value, int part)
-	{
+	private String getPartValue(String value, int part) {
 		String resStr = "";
 		String[] parts = value.split("->");
 		if (parts.length > 0) {
@@ -284,8 +278,7 @@ public class PaginationItemLayout extends ResponsiveLayout{
 			header.withMargin(true).setHorizontalSpacing(true);
 			header.setStyleName("card-hoverable-material-light-primary-color");
 			header.setWidth("100%");
-			
-			
+
 			Button addNewResource = new Button(LangHelper.getLocalizableMessage(LogoResConstants.ADDNEWRESOURCESTR));
 			addNewResource.setIcon(VaadinIcons.PLUS);
 			addNewResource.addStyleName(MaterialTheme.BUTTON_CUSTOM);
@@ -295,6 +288,9 @@ public class PaginationItemLayout extends ResponsiveLayout{
 
 			Button edit = new ButtonGenerator(LogoResConstants.EDITSTR);
 			Button delete = new ButtonGenerator(LogoResConstants.DELETESTR);
+			Button copy = new ButtonGenerator(LogoResConstants.COPYSTR);
+			copy.setIcon(VaadinIcons.COPY);
+			copy.addStyleName(MaterialTheme.BUTTON_LINK);
 			Button addNewResourceItem = new ButtonGenerator(LogoResConstants.ADDSTR);
 			addNewResourceItem.setDescription(LangHelper.getLocalizableMessage(LogoResConstants.ADDNEWRESOURCEITMSTR));
 
@@ -306,38 +302,44 @@ public class PaginationItemLayout extends ResponsiveLayout{
 			addItem.addItem("Export resource", null);
 			addItem.addItem("Import resource", null);
 			addItem.addSeparator();
-			addItem.addItem("Copy resource", null);
 
 			edit.addClickListener(e -> {
-				final  ResourceWindow window = new ResourceWindow(reResource,resView,false);
-			        this.getUI().getCurrent().addWindow(window);
+				final ResourceWindow window = new ResourceWindow(reResource, resView, false);
+				this.getUI().getCurrent().addWindow(window);
 			});
-			
+
+			copy.addClickListener(e -> {
+				final ResourceCopyWindow window = new ResourceCopyWindow(reResource, resView);
+				this.getUI().getCurrent().addWindow(window);
+			});
+
 			addNewResourceItem.addClickListener(e -> {
 				final ResourceItemWindow window2 = new ResourceItemWindow(reResource, resView);
 				this.getUI().getCurrent().addWindow(window2);
 			});
-			
+
 			delete.addClickListener(e -> delete(reResource));
 
 			HorizontalLayout buttonLayout = new HorizontalLayout();
 			HorizontalLayout textLayout = new HorizontalLayout();
 
-			
 			int[] countArr = getCountForChart(reResource.getResourcenr(), reResource.getResourcegroup().name());
 			LocChart chart = new LocChart(countArr[0], countArr[1]);
-			
-			buttonLayout.addComponents(edit, delete, addNewResourceItem, headerMenuButton);
+
+			buttonLayout.addComponents(edit, delete, addNewResourceItem, copy, headerMenuButton);
 			textLayout.addComponents(text1, text2, chart);
-			
-			header.addColumn().withDisplayRules(12, 10, 6, 6).withComponent(textLayout).setAlignment(ColumnComponentAlignment.LEFT);;
-			header.addColumn().withDisplayRules(12, 10, 6, 6).withComponent(buttonLayout).setAlignment(ColumnComponentAlignment.RIGHT);;
-			
-			//header.setDefaultComponentAlignment(Alignment.TOP_LEFT);
+
+			header.addColumn().withDisplayRules(12, 10, 6, 6).withComponent(textLayout)
+					.setAlignment(ColumnComponentAlignment.LEFT);
+			;
+			header.addColumn().withDisplayRules(12, 10, 6, 6).withComponent(buttonLayout)
+					.setAlignment(ColumnComponentAlignment.RIGHT);
+			;
+
+			// header.setDefaultComponentAlignment(Alignment.TOP_LEFT);
 		}
 	}
 
-	
 	private void createResourceForm(HorizontalLayout header, ReResource resource) {
 		Binder<ReResource> binder = new Binder<>(ReResource.class);
 		binder.setBean(resource);
@@ -348,7 +350,7 @@ public class PaginationItemLayout extends ResponsiveLayout{
 		innerForm.setWidth("100%");
 		innerForm.setSpacing(false);
 		innerForm.setMargin(false);
-		
+
 		HorizontalLayout resHedLayout = new HorizontalLayout();
 		resHedLayout.setWidth("100%");
 		resHedLayout.setHeight("70px");
@@ -360,16 +362,15 @@ public class PaginationItemLayout extends ResponsiveLayout{
 		resHedLayout.addComponents(resHedlabel);
 		resHedLayout.setComponentAlignment(resHedlabel, Alignment.MIDDLE_CENTER);
 
-		
 		Panel form = new Panel();
 		form.addStyleName(LogoResConstants.STYLE_IN_SLIDE_FADE);
 		form.setHeight(100.0f, Unit.PERCENTAGE);
 		form.setWidth(100.0f, Unit.PERCENTAGE);
-		
+
 		TextField resourcenr = new TextField(LangHelper.getLocalizableMessage(LogoResConstants.RESNRSTR));
 		resourcenr.setWidth("200%");
 		resourcenr.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
-		
+
 		TextField description = new TextField(LangHelper.getLocalizableMessage(LogoResConstants.DESCSTR));
 		description.setWidth("500%");
 		description.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
@@ -385,10 +386,14 @@ public class PaginationItemLayout extends ResponsiveLayout{
 
 		binder.forField(description).bind(ReResource::getDescription, ReResource::setDescription);
 
-		SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
-		SpellChecComboBox<ResourceType> resourceTypeCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.RESTYPESTR));
-		SpellChecComboBox<ResourceCase> resourceCaseCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.RESCASESTR));
-		SpellChecComboBox<OwnerProduct> ownerProductCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.OWNERPRODUCT));
+		SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(
+				LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
+		SpellChecComboBox<ResourceType> resourceTypeCombo = new SpellChecComboBox<>(
+				LangHelper.getLocalizableMessage(LogoResConstants.RESTYPESTR));
+		SpellChecComboBox<ResourceCase> resourceCaseCombo = new SpellChecComboBox<>(
+				LangHelper.getLocalizableMessage(LogoResConstants.RESCASESTR));
+		SpellChecComboBox<OwnerProduct> ownerProductCombo = new SpellChecComboBox<>(
+				LangHelper.getLocalizableMessage(LogoResConstants.OWNERPRODUCT));
 
 		resourceGroupCombo.setWidth("300%");
 		resourceTypeCombo.setWidth("300%");
@@ -398,7 +403,7 @@ public class PaginationItemLayout extends ResponsiveLayout{
 		resourceTypeCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		resourceCaseCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		ownerProductCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
-		
+
 		resourceGroupCombo.setItems(ResourceGroup.UN, ResourceGroup.HR, ResourceGroup.UNRP, ResourceGroup.HRRP,
 				ResourceGroup.SS, ResourceGroup.HELP, ResourceGroup.MISC);
 		resourceTypeCombo.setItems(ResourceType.LOCALIZABLE, ResourceType.NONLOCALIZABLE);
@@ -428,16 +433,16 @@ public class PaginationItemLayout extends ResponsiveLayout{
 
 		TwinColSelect<String> twinColl = new TwinColSelect<>();
 
-		twinColl.setItems(versionStringList); 
-		
-		List<String> selectedStringList = resource.getReProjectVersion().stream().map(elem -> elem.getVersionnr()).collect(Collectors.toList());
-		Set<String> selectedSet = null; 
-		if(selectedStringList.size() >0 )
-		{
+		twinColl.setItems(versionStringList);
+
+		List<String> selectedStringList = resource.getReProjectVersion().stream().map(elem -> elem.getVersionnr())
+				.collect(Collectors.toList());
+		Set<String> selectedSet = null;
+		if (selectedStringList.size() > 0) {
 			selectedSet = new HashSet<>(selectedStringList.subList(0, selectedStringList.size()));
 			twinColl.setValue(selectedSet);
 		}
-		
+
 		save.setClickShortcut(KeyCode.ENTER);
 		twinColl.setLeftColumnCaption("Version");
 		twinColl.setRightColumnCaption("Selected Version");
@@ -456,7 +461,7 @@ public class PaginationItemLayout extends ResponsiveLayout{
 		col01.addComponent(resourceCaseCombo);
 		col01.addComponent(resourceTypeCombo);
 		col01.addComponent(ownerProductCombo);
-		
+
 		innerForm.addComponent(resHedLayout, 0, 0, 3, 0);
 		innerForm.addComponent(col01, 0, 1, 0, 4);
 		innerForm.addComponent(twinColl, 3, 2, 3, 4);
@@ -478,7 +483,7 @@ public class PaginationItemLayout extends ResponsiveLayout{
 		header.setExpandRatio(form, 1.0f);
 
 		resHedLayout.addLayoutClickListener(e -> close.click());
-		
+
 		close.addClickListener(event -> {
 			Label label1 = (Label) components.get(0);
 			Label label2 = (Label) components.get(1);
@@ -496,18 +501,18 @@ public class PaginationItemLayout extends ResponsiveLayout{
 		save.addClickListener(event -> {
 			resource.setReResourceitems(items);
 			Set<ReProjectVersion> reProjectVersions = resource.getReProjectVersion();
-			
+
 			Set<String> selectedSetVal = twinColl.getValue();
 			Iterator<String> it = selectedSetVal.iterator();
 
 			while (it.hasNext()) {
 				String versNr = it.next();
 				ReProjectVersion version = findByVersNr(versNr);
-				
-				if (!inList(reProjectVersions,version))
+
+				if (!inList(reProjectVersions, version))
 					reProjectVersions.add(version);
 			}
-			
+
 			resource.setReProjectVersion(reProjectVersions);
 			resRepo.save(resource);
 			Label label1 = (Label) components.get(0);
@@ -564,7 +569,6 @@ public class PaginationItemLayout extends ResponsiveLayout{
 
 	}
 
-	
 	public void delete(ReResource reResource) {
 		resRepo.delete(reResource);
 		resView.createResoucePageForAll();
@@ -573,14 +577,13 @@ public class PaginationItemLayout extends ResponsiveLayout{
 	public ReResource findByResNr(String resNr) {
 		String rNr = getPartValue(resNr, 1);
 		String rGroup = getPartValue(resNr, 0);
-		return resRepo.findByresourceNr(Integer.parseInt(rNr),rGroup);
+		return resRepo.findByresourceNr(Integer.parseInt(rNr), rGroup);
 	}
 
-	public ReProjectVersion findByVersNr(String versNr)
-	{
+	public ReProjectVersion findByVersNr(String versNr) {
 		return versionList.stream().filter(x -> x.getVersionnr().equalsIgnoreCase(versNr)).findFirst().orElse(null);
 	}
-	
+
 	private void createRow(VerticalLayout gridLayout, ReResourceitem reResourceitem) {
 		boolean isVertical = reUser.getDefaultorientation() == UserLayoutType.V;
 		if (add)
@@ -605,9 +608,10 @@ public class PaginationItemLayout extends ResponsiveLayout{
 		return reResourceitemRep.searchByParamAll(pageable, sParam);
 	}
 
-	public Page<com.logo.data.entity.ReResourceitem> searchByresourceNr(int page, int size, String nameFilter, String resourcegroup) {
+	public Page<com.logo.data.entity.ReResourceitem> searchByresourceNr(int page, int size, String nameFilter,
+			String resourcegroup) {
 		Pageable pageable = new PageRequest(page, size, null);
-		return reResourceitemRep.searchByresourceNr(pageable,nameFilter,resourcegroup);
+		return reResourceitemRep.searchByresourceNr(pageable, nameFilter, resourcegroup);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -626,7 +630,7 @@ public class PaginationItemLayout extends ResponsiveLayout{
 		}
 		return countArr;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);

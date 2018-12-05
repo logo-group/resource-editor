@@ -24,4 +24,9 @@ public class ReBulgarianbg extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReBulgarianbg cloneBulgarianbg(ReResourceitem item) {
+		ReBulgarianbg bulgarianbg = new ReBulgarianbg();
+		bulgarianbg = cloneLanguage(item, bulgarianbg);
+		return bulgarianbg;
+	}
 }

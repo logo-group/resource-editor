@@ -167,6 +167,11 @@ public class LogoResConstants {
 	public static final String STYLE_TEXTFIEL_SEARCH = "v-textfieldSearch";
 
 	public static final String TAGALL = "Tüm Etiketleri Kopyala";
+	public static final String EMPTY_TAGFIELDS_NOTIFICIATION = "Lütfen etiket alanlarını doldurunuz!";
+	public static final String INCONSISTENT_TAGFIELDS_NOTIFICIATION = "Bitiş numarası başlangıç numarasında büyük olmalı!";
+	public static final String EMPTY_RESOURCENUMBER_NOTIFICIATION = "Lütfen kaynak numarasını doldurunuz!";
+	public static final String NUMERIC_FIELD_NOTIFICATION = "Lütfen numerik değer giriniz!";
+	public static final String UNIQUE_FIELD_NOTIFICATION = "Girdiğiniz kaynak numarası zaten kayıtlı!";
 
 	private LogoResConstants() {
 	}

@@ -24,4 +24,9 @@ public class ReGeorgiange extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReGeorgiange cloneGeorgiange(ReResourceitem item) {
+		ReGeorgiange georgiange = new ReGeorgiange();
+		georgiange = cloneLanguage(item, georgiange);
+		return georgiange;
+	}
 }

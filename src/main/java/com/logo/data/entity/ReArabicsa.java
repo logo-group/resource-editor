@@ -24,4 +24,10 @@ public class ReArabicsa extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReArabicsa cloneArabicsa(ReResourceitem item) {
+		ReArabicsa arabicsa = new ReArabicsa();
+		arabicsa = cloneLanguage(item, arabicsa);
+		return arabicsa;
+	}
+
 }

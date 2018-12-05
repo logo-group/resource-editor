@@ -25,4 +25,9 @@ public class ReAzerbaijaniaz extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReAzerbaijaniaz cloneAzerbaijaniaz(ReResourceitem item) {
+		ReAzerbaijaniaz azerbaijaniaz = new ReAzerbaijaniaz();
+		azerbaijaniaz = cloneLanguage(item, azerbaijaniaz);
+		return azerbaijaniaz;
+	}
 }

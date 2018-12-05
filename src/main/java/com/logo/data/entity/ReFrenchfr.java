@@ -24,4 +24,10 @@ public class ReFrenchfr extends ReLanguageTable implements Serializable {
 		/* */
 	}
 
+	public ReFrenchfr cloneFrench(ReResourceitem item) {
+		ReFrenchfr french = new ReFrenchfr();
+		french = cloneLanguage(item, french);
+		return french;
+	}
+
 }

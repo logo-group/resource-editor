@@ -262,7 +262,7 @@ public class ReResource implements Serializable {
 		/* */
 	}
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "resourceref", referencedColumnName = "id")
 	private List<ReResourceitem> reResourceitems = new ArrayList<>();
 
@@ -293,5 +293,22 @@ public class ReResource implements Serializable {
 	protected void beforeInsertOrUpdate() {
 		automodifiedon = LocalDateTime.now();
 		modifiedon = LocalDateTime.now();
+	}
+
+	public ReResource copyResource() {
+		ReResource copiedResource = new ReResource();
+		copiedResource.setDescription(description);
+		copiedResource.setResourcetype(resourcetype);
+		copiedResource.setResourcecase(resourcecase);
+		copiedResource.setSlist(slist);
+		copiedResource.setVersion(version);
+		copiedResource.setRequested(requested);
+		copiedResource.setActive(active);
+		copiedResource.setOwnerproduct(ownerproduct);
+		copiedResource.setResourcecategory(resourcecategory);
+		for (ReProjectVersion version : getReProjectVersion()) {
+			copiedResource.getReProjectVersion().add(version);
+		}
+		return copiedResource;
 	}
 }
