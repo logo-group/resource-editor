@@ -17,7 +17,6 @@ import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReResourceitem;
 import com.logo.data.entity.ReRomanianro;
 import com.logo.data.entity.ReRussianru;
-import com.logo.data.entity.ReStandard;
 import com.logo.data.entity.ReTurkishtr;
 import com.logo.data.entity.ReTurkmentm;
 import com.logo.data.entity.ReUser;
@@ -395,45 +394,37 @@ public class RowLayout extends VerticalLayout {
 			if (focus)
 				open.focus();
 		} else {
-			ReStandard reStandard = reResourceitem.getReStandard();
-			ReStandard dummyStandard = new ReStandard();
-			if (reStandard != null) {
-				dummyStandard = reStandard;
-				valStandard = dummyStandard.getResourceStr();
-			}
-
-			CustomHorizontalLayout layoutTRTR = new CustomHorizontalStandardLayout(reResourceitem.getId(), valStandard,
-					valStandard, valStandard, LogoResConstants.RE_TURKISHTR_NAME, false);
-
-			tabSheet.addComponent(layoutTRTR);
-
-			Panel tabPanel = new Panel();
-			tabPanel.setSizeFull();
-			tabPanel.addStyleName(MaterialTheme.PANEL_BORDERLESS);
-			tabPanel.setWidth("200%");
-
-			tabPanel.setContent(tabSheet);
-
-			VerticalLayout resourceDetailForm = createResourceDetailForm();
-			resourceDetailForm.setWidth("100%");
-			tabPanel.setWidth("100%");
-
-			resDetCard.addComponent(resourceDetailForm);
-			if (isVertical)
-				resDetCard.addComponent(tabSheet);
-			else
-				resDetCard.addComponent(tabPanel);
-
-			resDetCard.setExpandRatio(resourceDetailForm, 1.30f);
-			resDetCard.setComponentAlignment(resourceDetailForm, Alignment.MIDDLE_LEFT);
-
-			if (isVertical) {
-				resDetCard.setExpandRatio(tabSheet, 5.0f);
-				resDetCard.setComponentAlignment(tabSheet, Alignment.MIDDLE_LEFT);
-			} else {
-				resDetCard.setExpandRatio(tabPanel, 5.0f);
-				resDetCard.setComponentAlignment(tabPanel, Alignment.MIDDLE_LEFT);
-			}
+			/*
+			 * ReStandard reStandard = reResourceitem.getReStandard(); ReStandard
+			 * dummyStandard = new ReStandard(); if (reStandard != null) { dummyStandard =
+			 * reStandard; valStandard = dummyStandard.getResourceStr(); }
+			 * 
+			 * CustomHorizontalLayout layoutTRTR = new
+			 * CustomHorizontalStandardLayout(reResourceitem.getId(), valStandard,
+			 * valStandard, valStandard, LogoResConstants.RE_TURKISHTR_NAME, false);
+			 * 
+			 * tabSheet.addComponent(layoutTRTR);
+			 * 
+			 * Panel tabPanel = new Panel(); tabPanel.setSizeFull();
+			 * tabPanel.addStyleName(MaterialTheme.PANEL_BORDERLESS);
+			 * tabPanel.setWidth("200%");
+			 * 
+			 * tabPanel.setContent(tabSheet);
+			 * 
+			 * VerticalLayout resourceDetailForm = createResourceDetailForm();
+			 * resourceDetailForm.setWidth("100%"); tabPanel.setWidth("100%");
+			 * 
+			 * resDetCard.addComponent(resourceDetailForm); if (isVertical)
+			 * resDetCard.addComponent(tabSheet); else resDetCard.addComponent(tabPanel);
+			 * 
+			 * resDetCard.setExpandRatio(resourceDetailForm, 1.30f);
+			 * resDetCard.setComponentAlignment(resourceDetailForm, Alignment.MIDDLE_LEFT);
+			 * 
+			 * if (isVertical) { resDetCard.setExpandRatio(tabSheet, 5.0f);
+			 * resDetCard.setComponentAlignment(tabSheet, Alignment.MIDDLE_LEFT); } else {
+			 * resDetCard.setExpandRatio(tabPanel, 5.0f);
+			 * resDetCard.setComponentAlignment(tabPanel, Alignment.MIDDLE_LEFT); }
+			 */
 		}
 
 		return resDetCard;

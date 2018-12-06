@@ -72,7 +72,7 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable {
 	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
 	private ReArabicsa reArabicsa;
 
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "resourceitemref", orphanRemoval = true, fetch = FetchType.LAZY)
 	private ReStandard reStandard;
 
 	public ReTurkishtr getReTurkishtr() {
