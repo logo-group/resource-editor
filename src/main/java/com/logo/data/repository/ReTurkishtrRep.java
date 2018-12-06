@@ -16,9 +16,9 @@ public interface ReTurkishtrRep extends JpaRepository<ReTurkishtr, Long> {
 
 	List<ReTurkishtr> findByresourceitemrefEquals(Integer resourceitemref);
 
-	@Query(value = "SELECT * FROM RE_TURKISHTR WHERE RESOURCEITEMREF = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM RE_TURKISHTR WHERE RESOURCEITEMREF = :resourceitemref", nativeQuery = true)
 	List<ReTurkishtr> findByresourceitemrefEqualsForDelete(Integer resourceitemref);
 
-	@Query(value = "SELECT * FROM RE_TURKISHTR WHERE RESOURCEITEMREF = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM RE_TURKISHTR WHERE RESOURCEITEMREF = :resourceitemref", nativeQuery = true)
 	ReTurkishtr getresourceitemrefEquals(Integer resourceitemref);
 }

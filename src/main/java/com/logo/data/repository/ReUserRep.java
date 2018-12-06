@@ -19,7 +19,7 @@ public interface ReUserRep extends JpaRepository<ReUser, Long> {
 
 	ReUser findByid(Integer id);
 
-	@Query(value = "select * from RE_USERS where ID = ?1", nativeQuery = true)
+	@Query(value = "select * from RE_USERS where ID = :id", nativeQuery = true)
 	List<ReUser> findByidList(Integer id);
 
 	// For lazy loading and filtering

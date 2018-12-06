@@ -16,7 +16,7 @@ public interface ReEnglishusRep extends JpaRepository<ReEnglishus, Long> {
 
 	List<ReEnglishus> findByresourceitemrefEquals(Integer resourceitemref);
 
-	@Query(value = "SELECT * FROM RE_ENGLISHUS WHERE RESOURCEITEMREF = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM RE_ENGLISHUS WHERE RESOURCEITEMREF = :resourceitemref", nativeQuery = true)
 	ReEnglishus getresourceitemrefEquals(Integer resourceitemref);
 
 }
