@@ -1,6 +1,5 @@
 package com.logo;
 
-
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,7 @@ import com.logo.data.repository.ReResourceitemRep;
 import com.logo.data.repository.ReResourceitemShortRep;
 import com.logo.data.repository.ReRomanianroRep;
 import com.logo.data.repository.ReRussianruRep;
+import com.logo.data.repository.ReStandardRep;
 import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.data.repository.ReTurkmentmRep;
 import com.logo.data.repository.ReUserRep;
@@ -60,7 +60,7 @@ import com.vaadin.ui.Window;
 public class LogoresMainUI extends UI {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Autowired
 	private SpringViewProvider viewProvider;
 
@@ -69,15 +69,15 @@ public class LogoresMainUI extends UI {
 
 	@Autowired
 	private transient ReUserRep reUserRep;
-	
-	@Autowired
-	private transient ReResourceRep resRepo;
-	
-	@Autowired
-	private transient ReResourceitemRep reResourceitemRep;	
 
 	@Autowired
-	private transient ReResourceitemShortRep reResourceitemShortRep;	
+	private transient ReResourceRep resRepo;
+
+	@Autowired
+	private transient ReResourceitemRep reResourceitemRep;
+
+	@Autowired
+	private transient ReResourceitemShortRep reResourceitemShortRep;
 
 	@Autowired
 	private transient ReTurkishtrRep reTurkishtrRep;
@@ -105,7 +105,7 @@ public class LogoresMainUI extends UI {
 
 	@Autowired
 	private transient ReRomanianroRep reRomanianroRep;
-	
+
 	@Autowired
 	private transient ReGeorgiangeRep reGeorgiangeRep;
 
@@ -122,16 +122,19 @@ public class LogoresMainUI extends UI {
 	private transient ReTurkmentmRep reTurkmentmRep;
 
 	@Autowired
-	private transient ReArabicegRep  reArabicegRep;
+	private transient ReArabicegRep reArabicegRep;
 
 	@Autowired
-	private transient ReArabicsaRep  reArabicsaRep;
+	private transient ReArabicsaRep reArabicsaRep;
+
+	@Autowired
+	private transient ReStandardRep reStandardRep;
 
 	@Autowired
 	private transient ReProjectVerisonRep reProjectVerisonRep;
-	
+
 	private static final RepositoryContainer mRepositoryContainer = new RepositoryContainer();
-	
+
 	@Override
 	protected void refresh(VaadinRequest request) {
 		for (Window w : getWindows()) {
@@ -144,7 +147,7 @@ public class LogoresMainUI extends UI {
 	@Override
 	protected void init(VaadinRequest request) {
 		Locale locale = VaadinService.getCurrentRequest().getLocale();
-		VaadinSession.getCurrent().setAttribute("appLocale",  locale);
+		VaadinSession.getCurrent().setAttribute("appLocale", locale);
 		if (sessionState == null) {
 			// This initialises the Spring Context from
 			// ContextConfiguration.java
@@ -178,7 +181,7 @@ public class LogoresMainUI extends UI {
 		getNavigator().addProvider(viewProvider);
 		initialize();
 		router("");
-		 new Responsive(this);
+		new Responsive(this);
 	}
 
 	private void router(String route) {
@@ -188,7 +191,7 @@ public class LogoresMainUI extends UI {
 			getNavigator().addView(UserView.VIEW_NAME, UserView.class);
 			getNavigator().addView(ReMessageView.VIEW_NAME, ReMessageView.class);
 			getNavigator().addView(ReHelpDocsView.VIEW_NAME, ReHelpDocsView.class);
-			getNavigator().addView(TransferView.VIEW_NAME,TransferView.class);
+			getNavigator().addView(TransferView.VIEW_NAME, TransferView.class);
 			if (route.equals("ResourceViewNew")) {
 				getNavigator().navigateTo(ResourceViewNew.VIEW_NAME);
 			} else {
@@ -198,9 +201,8 @@ public class LogoresMainUI extends UI {
 			getNavigator().navigateTo(LoginView.VIEW_NAME);
 		}
 	}
-	
-	private void initialize()
-	{
+
+	private void initialize() {
 		mRepositoryContainer.setResRepo(resRepo);
 		mRepositoryContainer.setReUserRep(reUserRep);
 		mRepositoryContainer.setReResourceitemRep(reResourceitemRep);
@@ -218,15 +220,16 @@ public class LogoresMainUI extends UI {
 		mRepositoryContainer.setReTurkmentmRep(reTurkmentmRep);
 		mRepositoryContainer.setReArabicegRep(reArabicegRep);
 		mRepositoryContainer.setReArabicsaRep(reArabicsaRep);
-		
+
 		mRepositoryContainer.setReResourceitemShortRep(reResourceitemShortRep);
-		
+
 		mRepositoryContainer.setReMessageRep(reMessageRep);
 		mRepositoryContainer.setReHelpDocsRep(reHelpDocsRep);
 		mRepositoryContainer.setMessageProvider(ApplicationContextLocator.messageProvider());
 		mRepositoryContainer.setReProjectVerisonRep(reProjectVerisonRep);
+		mRepositoryContainer.setReStandardRep(reStandardRep);
 	}
-	
+
 	public static RepositoryContainer getMrepositorycontainer() {
 		return mRepositoryContainer;
 	}
@@ -235,7 +238,7 @@ public class LogoresMainUI extends UI {
 	public boolean equals(Object obj) {
 		return super.equals(obj);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();

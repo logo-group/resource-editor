@@ -6,14 +6,12 @@ import java.util.logging.Logger;
 import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReResourceitem;
-import com.logo.data.entity.ReTurkishtr;
 import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReResourceRep;
 import com.logo.data.repository.ReResourceitemRep;
 import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.ui.components.ButtonGenerator;
 import com.logo.ui.components.SpellChecComboBox;
-import com.logo.ui.components.SpellChecTextArea;
 import com.logo.ui.components.SpellChecTextField;
 import com.logo.ui.form.NewResourceForm;
 import com.logo.ui.view.ResourceViewNew;
@@ -33,7 +31,6 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
-import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TwinColSelect;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -54,7 +51,6 @@ public class ResourceItemWindow extends Window {
 	private final SpellChecTextField levelnr = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRSTR));
 	private final SpellChecTextField prefix = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.PREFIXSTR));
 	private final SpellChecTextField info = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.INFOSTR));
-	private final SpellChecTextArea description = new SpellChecTextArea(LogoResConstants.RE_TURKISHTR_NAME);
 
 	private final Button save = new ButtonGenerator(LogoResConstants.SAVESTR);
 	private final Button cancel = new ButtonGenerator(LogoResConstants.CANCELSTR);
@@ -123,7 +119,7 @@ public class ResourceItemWindow extends Window {
 		setClosable(false);
 		setModal(true);
 		setWidth(50.0f, Unit.PERCENTAGE);
-		setHeight(60.0f, Unit.PERCENTAGE);
+		setHeight(70.0f, Unit.PERCENTAGE);
 		setResizable(false);
 		setResponsive(true);
 
@@ -176,12 +172,7 @@ public class ResourceItemWindow extends Window {
 		info.setWidth("100%");
 		info.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 
-		description.setWidth("100%");
-		description.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
-		description.setWordWrap(true);
-
 		Attribute spellcheckAttr1 = new Attribute(LogoResConstants.SPELLCHECK, LogoResConstants.FALSESTR);
-		spellcheckAttr1.extend(description);
 
 		binder.forField(ordernr).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.ORDERNRNOTEMTYSTR))
 				.withConverter(new StrToIntegerConverter(LogoResConstants.MUSTNUMBER))
@@ -237,7 +228,6 @@ public class ResourceItemWindow extends Window {
 		col01.addComponent(levelnr);
 		col01.addComponent(prefix);
 		col01.addComponent(info);
-		col01.addComponent(description);
 		col01.addComponent(resourceItemCaseCombo);
 		col01.addComponent(ownerProductCombo);
 
@@ -284,31 +274,16 @@ public class ResourceItemWindow extends Window {
 	public void setOrdernr(Integer value) {
 		ordernr.setValue(Integer.toString(value));
 	}
-
-	public TextArea getDesc() {
-		return description;
-	}
-
-	public void persist()
-	{
-		try 
-		{
-			resourceItem.setReTurkishtr(null);
+	
+	public void persist() {
+		try {
 			resourceItem.setResourceref(resource.getId());
-			reResourceitemRep.save(resourceItem);	
-			
-			ReTurkishtr reTurkishtr = new ReTurkishtr();
-			reTurkishtr.setResourceitemref(resourceItem.getId());
-			reTurkishtr.setResourcestr(getDesc().getValue());
-			
-			reTurkishtrRep.save(reTurkishtr);
-			resourceItem.setReTurkishtr(reTurkishtr);
-		} 
-		catch (Exception e) {
+			reResourceitemRep.save(resourceItem);
+		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e.getMessage());
 		}
 	}
-	
+
 	Label createSeperator() {
 		Label hSep = new Label();
 		hSep.addStyleName("horizontal-separator3");

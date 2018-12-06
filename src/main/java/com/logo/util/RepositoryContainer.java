@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Locale;
 
 import javax.sql.DataSource;
+
 import org.springframework.stereotype.Component;
 import org.vaadin.spring.i18n.MessageProvider;
 
@@ -27,6 +28,7 @@ import com.logo.data.repository.ReResourceitemRep;
 import com.logo.data.repository.ReResourceitemShortRep;
 import com.logo.data.repository.ReRomanianroRep;
 import com.logo.data.repository.ReRussianruRep;
+import com.logo.data.repository.ReStandardRep;
 import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.data.repository.ReTurkmentmRep;
 import com.logo.data.repository.ReUserRep;
@@ -56,6 +58,7 @@ public class RepositoryContainer implements Serializable {
 	private transient ReArabicegRep reArabicegRep;
 	private transient ReArabicsaRep reArabicsaRep;
 	private transient MessageProvider messageProvider;
+	private transient ReStandardRep reStandardRep;
 	private transient Locale appLocale;
 	
 	private transient ReResourceitemShortRep reResourceitemShortRep;
@@ -269,4 +272,13 @@ public class RepositoryContainer implements Serializable {
 	public ReProjectVerisonRep getReProjectVerisonRep() {
 		return reProjectVerisonRep;
 	}
+
+	public ReStandardRep getReStandardRep() {
+		return reStandardRep;
+	}
+
+	public void setReStandardRep(ReStandardRep reStandardRep) {
+		this.reStandardRep = reStandardRep;
+	}
+
 }
