@@ -22,7 +22,7 @@ public interface ReResourceitemRep extends JpaRepository<ReResourceitem, Long> {
 
 	List<ReResourceitem> findByresourcerefEqualsOrderByOrdernrAsc(Integer resourceref);
 
-	@Query(value = "select ri from ReResourceitem ri where resourceref = ?1")
+	@Query(value = "select ri from ReResourceitem ri where resourceref = ?1 and tagnr > -1000000")
 	List<ReResourceitem> findByresourcerefEquals(Integer resourceref);
 
 	@Query(value = "select max(TAGNR) from RE_RESOURCEITEMS with(nolock) where RESOURCEREF = ?1", nativeQuery = true)

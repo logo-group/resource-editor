@@ -204,7 +204,6 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable {
 		copiedResourceItem.setRequested(getRequested());
 		copiedResourceItem.setResourcecase(resource.getResourcecase());
 		copiedResourceItem.setResourcecategory(resource.getResourcecategory());
-		copiedResourceItem.setResourceref(resource.getId());
 		copiedResourceItem.setResourcetype(resource.getResourcetype().getTyp());
 		copiedResourceItem.setRightlevelnr(getRightlevelnr());
 		copiedResourceItem.setRightparentid(getRightparentid());
