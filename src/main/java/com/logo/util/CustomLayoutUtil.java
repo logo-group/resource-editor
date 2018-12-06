@@ -16,6 +16,7 @@ import com.logo.data.entity.ReLanguageTable;
 import com.logo.data.entity.RePersianir;
 import com.logo.data.entity.ReRomanianro;
 import com.logo.data.entity.ReRussianru;
+import com.logo.data.entity.ReStandard;
 import com.logo.data.entity.ReTurkishtr;
 import com.logo.data.entity.ReTurkmentm;
 import com.logo.data.repository.ReAlbaniankvRep;
@@ -30,6 +31,7 @@ import com.logo.data.repository.ReGermandeRep;
 import com.logo.data.repository.RePersianirRep;
 import com.logo.data.repository.ReRomanianroRep;
 import com.logo.data.repository.ReRussianruRep;
+import com.logo.data.repository.ReStandardRep;
 import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.data.repository.ReTurkmentmRep;
 
@@ -56,7 +58,8 @@ public class CustomLayoutUtil implements Serializable {
 	private static final ReTurkmentmRep reTurkmentmRep;
 	private static final ReArabicegRep reArabicegRep;
 	private static final ReArabicsaRep reArabicsaRep;
-	
+	private static final ReStandardRep reStandardRep;
+
 	static {
 		reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
 		reEnglishusRep = LogoresMainUI.getMrepositorycontainer().getReEnglishusRep();
@@ -72,6 +75,7 @@ public class CustomLayoutUtil implements Serializable {
 		reTurkmentmRep = LogoresMainUI.getMrepositorycontainer().getReTurkmentmRep();
 		reArabicegRep = LogoresMainUI.getMrepositorycontainer().getReArabicegRep();
 		reArabicsaRep = LogoresMainUI.getMrepositorycontainer().getReArabicsaRep();
+		reStandardRep = LogoresMainUI.getMrepositorycontainer().getReStandardRep();
 	}
 
 	public CustomLayoutUtil(Integer itemId, String name) {
@@ -110,35 +114,43 @@ public class CustomLayoutUtil implements Serializable {
 		if (table instanceof ReRussianru) {
 			ReRussianru reRussianru = (ReRussianru) table;
 			reRussianruRep.save(reRussianru);
-		}		
+		}
 		if (table instanceof ReRomanianro) {
 			ReRomanianro reRomanianro = (ReRomanianro) table;
 			reRomanianroRep.save(reRomanianro);
-		}		
+		}
 		if (table instanceof ReArabicjo) {
 			ReArabicjo reArabicjo = (ReArabicjo) table;
 			reArabicjoRep.save(reArabicjo);
-		}		
+		}
 		if (table instanceof ReFrenchfr) {
 			ReFrenchfr reFrenchfr = (ReFrenchfr) table;
 			reFrenchfrRep.save(reFrenchfr);
-		}		
+		}
 		if (table instanceof ReAlbaniankv) {
 			ReAlbaniankv reAlbaniankv = (ReAlbaniankv) table;
 			reAlbaniankvRep.save(reAlbaniankv);
-		}		
+		}
 		if (table instanceof ReTurkmentm) {
 			ReTurkmentm reTurkmentm = (ReTurkmentm) table;
 			reTurkmentmRep.save(reTurkmentm);
-		}			
+		}
 		if (table instanceof ReArabiceg) {
 			ReArabiceg reArabiceg = (ReArabiceg) table;
 			reArabicegRep.save(reArabiceg);
-		}		
+		}
 		if (table instanceof ReArabicsa) {
 			ReArabicsa reArabicsa = (ReArabicsa) table;
 			reArabicsaRep.save(reArabicsa);
-		}				
+		}
+	}
+
+	public void persistStandard(ReStandard reStandard) {
+		if (reStandard == null) {
+			return;
+		}
+		ReStandard standard = reStandard;
+		reStandardRep.save(standard);
 	}
 
 	public void setLangTo() {
@@ -172,7 +184,7 @@ public class CustomLayoutUtil implements Serializable {
 			break;
 		case LogoResConstants.RE_ALBANIANKV_NAME:
 			langTo = LogoResConstants.RE_ALBANIANKV;
-			break;			
+			break;
 		case LogoResConstants.RE_TURKMENTM_NAME:
 			langTo = LogoResConstants.RE_TURKMENTM;
 			break;
@@ -181,7 +193,7 @@ public class CustomLayoutUtil implements Serializable {
 			break;
 		case LogoResConstants.RE_ARABICSA_NAME:
 			langTo = LogoResConstants.RE_ARABICSA;
-			break;			
+			break;
 		default:
 			langTo = LogoResConstants.RE_ENGLISHUS;
 			break;
@@ -217,10 +229,10 @@ public class CustomLayoutUtil implements Serializable {
 			break;
 		case LogoResConstants.RE_ARABICJO_NAME:
 			langTable = new ReArabicjo();
-			break;			
+			break;
 		case LogoResConstants.RE_FRENCHFR_NAME:
 			langTable = new ReFrenchfr();
-			break;			
+			break;
 		case LogoResConstants.RE_ALBANIANKV_NAME:
 			langTable = new ReAlbaniankv();
 			break;
@@ -232,7 +244,7 @@ public class CustomLayoutUtil implements Serializable {
 			break;
 		case LogoResConstants.RE_ARABICSA_NAME:
 			langTable = new ReArabicsa();
-			break;			
+			break;
 		default:
 			break;
 		}
@@ -246,9 +258,8 @@ public class CustomLayoutUtil implements Serializable {
 	public String getLangTo() {
 		return langTo;
 	}
-	
+
 	public String getLang() {
 		return lang;
 	}
 }
-	
