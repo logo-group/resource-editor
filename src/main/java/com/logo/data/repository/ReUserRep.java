@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import com.logo.data.entity.ReUser;
@@ -20,7 +21,7 @@ public interface ReUserRep extends JpaRepository<ReUser, Long> {
 	ReUser findByid(Integer id);
 
 	@Query(value = "select * from RE_USERS where ID = :id", nativeQuery = true)
-	List<ReUser> findByidList(Integer id);
+	List<ReUser> findByidList(@Param("id") Integer id);
 
 	// For lazy loading and filtering
 	List<ReUser> findByusernameLikeIgnoreCase(String nameFilter, Pageable pageable);

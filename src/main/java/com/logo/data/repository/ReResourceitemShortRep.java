@@ -23,22 +23,23 @@ public interface ReResourceitemShortRep extends JpaRepository<ReResourceitemShor
 	List<ReResourceitemShort> findByresourcerefEqualsOrderByOrdernrAsc(Integer resourceref);
 
 	@Query(value = "select * from RE_RESOURCEITEMS with(nolock) where RESOURCEREF = :resourceref", nativeQuery = true)
-	List<ReResourceitemShort> findByresourcerefEquals(Integer resourceref);
+	List<ReResourceitemShort> findByresourcerefEquals(@Param("resourceref") Integer resourceref);
 
 	@Query(value = "select max(TAGNR) from RE_RESOURCEITEMS with(nolock) where RESOURCEREF = :resourceref", nativeQuery = true)
-	Integer getMaxTagNr(Integer resourceref);
+	Integer getMaxTagNr(@Param("resourceref") Integer resourceref);
 
 	@Query(value = "select max(ORDERNR) from RE_RESOURCEITEMS with(nolock) where RESOURCEREF = :resourceref", nativeQuery = true)
-	Integer getMaxOrderNr(Integer resourceref);
+	Integer getMaxOrderNr(@Param("resourceref") Integer resourceref);
 
 	@Query(value = "select * from RE_RESOURCEITEMS where ID in(select RESOURCEITEMREF from RE_TURKISHTR where RESOURCESTR LIKE CONCAT('%',:searchTerm,'%')) ORDER BY RESOURCEREF ASC, ORDERNR ASC \n-- #pageable\n", countQuery = "select count(*) from RE_RESOURCEITEMS where ID in(select RESOURCEITEMREF from RE_TURKISHTR where RESOURCESTR LIKE CONCAT('%',:searchTerm,'%'))", nativeQuery = true)
-	Page<ReResourceitemShort> searchByresourcereTR(String searchTerm, Pageable pageable);
+	Page<ReResourceitemShort> searchByresourcereTR(@Param("searchTerm") String searchTerm, Pageable pageable);
 
 	@Query(value = "select * from RE_RESOURCEITEMS where ID in(select RESOURCEITEMREF from RE_TURKISHTR where RESOURCESTR LIKE CONCAT('%',:searchTerm,'%')) ORDER BY CREATEDON DESC, RESOURCEREF ASC, ORDERNR ASC \n-- #pageable\n", countQuery = "select count(*) from RE_RESOURCEITEMS where ID in(select RESOURCEITEMREF from RE_TURKISHTR where RESOURCESTR LIKE CONCAT('%',:searchTerm,'%'))", nativeQuery = true)
-	Page<ReResourceitemShort> getAllResItems(String searchTerm, Pageable pageable);
+	Page<ReResourceitemShort> getAllResItems(@Param("searchTerm") String searchTerm, Pageable pageable);
 
 	@Query(value = "select * from RE_RESOURCEITEMS where RESOURCEREF in (select ID from RE_RESOURCES where RESOURCENR = :resNr AND RESOURCEGROUP = :resGrp) ORDER BY RESOURCEREF ASC, ORDERNR ASC \n-- #pageable\n", countQuery = "select count(*) from RE_RESOURCEITEMS where RESOURCEREF in (select ID from RE_RESOURCES where RESOURCENR = :resNr AND RESOURCEGROUP = :resGrp)", nativeQuery = true)
-	Page<ReResourceitemShort> searchByresourceNr(Pageable pageable, String resNr, String resGrp);
+	Page<ReResourceitemShort> searchByresourceNr(Pageable pageable, @Param("resNr") String resNr,
+			@Param("resGrp") String resGrp);
 
 //	@Query(value = QueryConstants.SEARCHQUERY1, countQuery = QueryConstants.SEARCHCOUNT1, nativeQuery = true)
 //	Page<ReResourceitemShort> search1(Pageable pageable, String resourcenr1, String resourcenr2,

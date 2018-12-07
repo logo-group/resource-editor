@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import com.logo.data.entity.ReEnglishus;
@@ -17,6 +18,6 @@ public interface ReEnglishusRep extends JpaRepository<ReEnglishus, Long> {
 	List<ReEnglishus> findByresourceitemrefEquals(Integer resourceitemref);
 
 	@Query(value = "SELECT * FROM RE_ENGLISHUS WHERE RESOURCEITEMREF = :resourceitemref", nativeQuery = true)
-	ReEnglishus getresourceitemrefEquals(Integer resourceitemref);
+	ReEnglishus getresourceitemrefEquals(@Param("resourceitemref") Integer resourceitemref);
 
 }
