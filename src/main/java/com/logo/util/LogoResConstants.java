@@ -48,6 +48,7 @@ public class LogoResConstants {
 	public static final String RE_ARABICEG_NAME = "Arabic (EG)";
 	public static final String RE_ARABICSA_NAME = "Arabic (SA)";
 	public static final String RE_ARABICAE_NAME = "Arabic (AE)";
+	public static final String RE_STANDARD_NAME = "İçerik";
 
 	public static final String CANCELSTR = "button.cancel";
 	public static final String SAVESTR = "button.save";

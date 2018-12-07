@@ -15,9 +15,6 @@ public class CustomLayoutStandardObjects {
 	Button saveButtonForEdit = new ButtonGenerator(LogoResConstants.SAVESTR);
 	Button cancelButtonForEdit = new ButtonGenerator(LogoResConstants.CANCELSTR);
 
-	Button saveButtonForAdd = new ButtonGenerator(LogoResConstants.SAVESTR);
-	Button cancelButtonForAdd = new ButtonGenerator(LogoResConstants.CANCELSTR);
-
 	TextArea txtArea = new TextArea();
 	Binder<ReStandard> binder = new Binder<>(ReStandard.class);
 	Attribute spellcheckAttr = new Attribute("spellcheck", "false");
@@ -34,8 +31,6 @@ public class CustomLayoutStandardObjects {
 
 		saveButtonForEdit.setWidth("80px");
 		cancelButtonForEdit.setWidth("80px");
-		saveButtonForAdd.setWidth("80px");
-		cancelButtonForAdd.setWidth("80px");
 	}
 
 }
