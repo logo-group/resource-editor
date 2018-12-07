@@ -1,7 +1,5 @@
 package com.logo.data.repository;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,43 +16,7 @@ import com.logo.util.search.SearchParam;
 @Transactional(readOnly = true)
 public interface ReResourceitemShortRep extends JpaRepository<ReResourceitemShort, Long> {
 
-	List<ReResourceitemShort> findAllBy(Pageable pageable);
-
-	List<ReResourceitemShort> findByresourcerefEqualsOrderByOrdernrAsc(Integer resourceref);
-
-	@Query(value = "select * from RE_RESOURCEITEMS with(nolock) where RESOURCEREF = :resourceref", nativeQuery = true)
-	List<ReResourceitemShort> findByresourcerefEquals(@Param("resourceref") Integer resourceref);
-
-	@Query(value = "select max(TAGNR) from RE_RESOURCEITEMS with(nolock) where RESOURCEREF = :resourceref", nativeQuery = true)
-	Integer getMaxTagNr(@Param("resourceref") Integer resourceref);
-
-	@Query(value = "select max(ORDERNR) from RE_RESOURCEITEMS with(nolock) where RESOURCEREF = :resourceref", nativeQuery = true)
-	Integer getMaxOrderNr(@Param("resourceref") Integer resourceref);
-
-	@Query(value = "select * from RE_RESOURCEITEMS where ID in(select RESOURCEITEMREF from RE_TURKISHTR where RESOURCESTR LIKE CONCAT('%',:searchTerm,'%')) ORDER BY RESOURCEREF ASC, ORDERNR ASC \n-- #pageable\n", countQuery = "select count(*) from RE_RESOURCEITEMS where ID in(select RESOURCEITEMREF from RE_TURKISHTR where RESOURCESTR LIKE CONCAT('%',:searchTerm,'%'))", nativeQuery = true)
-	Page<ReResourceitemShort> searchByresourcereTR(@Param("searchTerm") String searchTerm, Pageable pageable);
-
-	@Query(value = "select * from RE_RESOURCEITEMS where ID in(select RESOURCEITEMREF from RE_TURKISHTR where RESOURCESTR LIKE CONCAT('%',:searchTerm,'%')) ORDER BY CREATEDON DESC, RESOURCEREF ASC, ORDERNR ASC \n-- #pageable\n", countQuery = "select count(*) from RE_RESOURCEITEMS where ID in(select RESOURCEITEMREF from RE_TURKISHTR where RESOURCESTR LIKE CONCAT('%',:searchTerm,'%'))", nativeQuery = true)
-	Page<ReResourceitemShort> getAllResItems(@Param("searchTerm") String searchTerm, Pageable pageable);
-
-	@Query(value = "select * from RE_RESOURCEITEMS where RESOURCEREF in (select ID from RE_RESOURCES where RESOURCENR = :resNr AND RESOURCEGROUP = :resGrp) ORDER BY RESOURCEREF ASC, ORDERNR ASC \n-- #pageable\n", countQuery = "select count(*) from RE_RESOURCEITEMS where RESOURCEREF in (select ID from RE_RESOURCES where RESOURCENR = :resNr AND RESOURCEGROUP = :resGrp)", nativeQuery = true)
-	Page<ReResourceitemShort> searchByresourceNr(Pageable pageable, @Param("resNr") String resNr,
-			@Param("resGrp") String resGrp);
-
-//	@Query(value = QueryConstants.SEARCHQUERY1, countQuery = QueryConstants.SEARCHCOUNT1, nativeQuery = true)
-//	Page<ReResourceitemShort> search1(Pageable pageable, String resourcenr1, String resourcenr2,
-//			List<String> resourcegroup, List<Integer> resourcetype, List<Integer> resourcecase, List<Integer> active);
-
-//	@Query(value = QueryConstants.SEARCHQUERY2, countQuery = QueryConstants.SEARCHCOUNT2, nativeQuery = true)
-//	Page<ReResourceitemShort> search2(Pageable pageable, String resourcenr1, String resourcenr2);
-
-//	@Query(value = QueryConstants.SEARCHBYPARAM, countQuery = QueryConstants.SEARCHBYPARAMCOUNT, nativeQuery = true)
-//	Page<ReResourceitemShort> searchByParam(Pageable pageable, @Param("searchParam") SearchParam searchParam);
-
 	@Query(value = QueryConstants.SEARCHBYPARAMALL, countQuery = QueryConstants.SEARCHBYPARAMALLCOUNT, nativeQuery = true)
 	Page<ReResourceitemShort> searchByParamAll(Pageable pageable, @Param("searchParam") SearchParam searchParam);
-
-//	@Query(value = QueryConstants.LOCCHARTQUERY, nativeQuery = true)
-//	<T> List<T> getCountForChart(Integer resNr, String resGrp);
 
 }

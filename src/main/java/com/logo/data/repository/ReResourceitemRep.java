@@ -18,10 +18,6 @@ import com.logo.util.search.SearchParam;
 @Transactional(readOnly = true)
 public interface ReResourceitemRep extends JpaRepository<ReResourceitem, Long> {
 
-//	List<ReResourceitem> findAllBy(Pageable pageable);
-
-//	List<ReResourceitem> findByresourcerefEqualsOrderByOrdernrAsc(Integer resourceref);
-
 	@Query(value = "select ri from ReResourceitem ri where resourceref = :resourceref and tagnr > -1000000")
 	List<ReResourceitem> findByresourcerefEquals(@Param("resourceref") Integer resourceref);
 
@@ -40,13 +36,6 @@ public interface ReResourceitemRep extends JpaRepository<ReResourceitem, Long> {
 	@Query(value = "select * from RE_RESOURCEITEMS where RESOURCEREF in (select ID from RE_RESOURCES where RESOURCENR = :resNr AND RESOURCEGROUP = :resGrp) ORDER BY RESOURCEREF ASC, ORDERNR ASC \n-- #pageable\n", countQuery = "select count(*) from RE_RESOURCEITEMS where RESOURCEREF in (select ID from RE_RESOURCES where RESOURCENR = :resNr AND RESOURCEGROUP = :resGrp)", nativeQuery = true)
 	Page<ReResourceitem> searchByresourceNr(Pageable pageable, @Param("resNr") String resNr,
 			@Param("resGrp") String resGrp);
-
-//	@Query(value = QueryConstants.SEARCHQUERY1, countQuery = QueryConstants.SEARCHCOUNT1, nativeQuery = true)
-//	Page<ReResourceitem> search1(Pageable pageable, String resourcenr1, String resourcenr2, List<String> resourcegroup,
-//			List<Integer> resourcetype, List<Integer> resourcecase, List<Integer> active);
-
-//	@Query(value = QueryConstants.SEARCHQUERY2, countQuery = QueryConstants.SEARCHCOUNT2, nativeQuery = true)
-//	Page<ReResourceitem> search2(Pageable pageable, String resourcenr1, String resourcenr2);
 
 	@Query(value = QueryConstants.SEARCHBYPARAM, countQuery = QueryConstants.SEARCHBYPARAMCOUNT, nativeQuery = true)
 	Page<ReResourceitem> searchByParam(Pageable pageable, @Param("searchParam") SearchParam searchParam);

@@ -27,6 +27,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @EntityListeners(AuditingEntityListener.class)
 public class ReStandard implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
 
 	@Id
