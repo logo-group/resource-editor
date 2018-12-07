@@ -36,7 +36,6 @@ import com.logo.data.repository.ReGeorgiangeRep;
 import com.logo.data.repository.ReGermandeRep;
 import com.logo.data.repository.RePersianirRep;
 import com.logo.data.repository.ReResourceRep;
-import com.logo.data.repository.ReResourceitemRep;
 import com.logo.data.repository.ReRomanianroRep;
 import com.logo.data.repository.ReRussianruRep;
 import com.logo.data.repository.ReStandardRep;
@@ -91,8 +90,6 @@ public class ResourceCopyWindow extends Window {
 
 	private final transient ReResourceRep resRepo;
 
-	private final transient ReResourceitemRep resourceItempRep;
-
 	private final transient ReUser reUser;
 
 	private final transient ReTurkishtrRep turkishRep;
@@ -129,7 +126,6 @@ public class ResourceCopyWindow extends Window {
 
 	public ResourceCopyWindow(ReResource resource, ResourceViewNew resView) {
 		this.resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
-		this.resourceItempRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
 		this.turkishRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
 		this.englishRep = LogoresMainUI.getMrepositorycontainer().getReEnglishusRep();
@@ -249,7 +245,8 @@ public class ResourceCopyWindow extends Window {
 			copiedResource.setCreatedby(reUser.getId());
 			copiedResource.setModifiedby(reUser.getId());
 
-			List<ReResourceitem> resourceItemList = resourceItempRep.findByresourcerefEquals(resource.getId());
+			List<ReResourceitem> resourceItemList = resource.getReResourceitem();
+
 			for (ReResourceitem resourceItem : resourceItemList) {
 				ReResourceitem copiedResourceItem = resourceItem.copyResourceItem(copiedResource);
 				if (!tagAll.getValue()) {
