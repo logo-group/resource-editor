@@ -24,7 +24,6 @@ import com.logo.data.repository.ReUserRep;
 import com.logo.util.LangHelper;
 import com.logo.util.LogoResConstants;
 import com.vaadin.data.Binder;
-import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
@@ -86,7 +85,6 @@ public class ReportView extends Panel {
 
 		ChartJs resCountChart = createResCountChart();
 		ChartJs langCountChart = createLangCountChart();
-		ChartJs chart3 = createMiscCountChart();
 		langCountChart.setSizeFull();
 
 		leftL.addComponents(resCountChart, langCountChart);
@@ -101,29 +99,18 @@ public class ReportView extends Panel {
 		HorizontalLayout resForm2 = panelContentVer(reResource1);
 		HorizontalLayout resForm3 = panelContentVer(reResource2);
 
-		String panelCaption = "<p style=" + "background-color:white;font-style:bold;text-align:center;font-size:20px;"
-				+ "color:#a50000" + ">Son Eklenenler</p>";
-
-		Label lab = new Label(panelCaption, ContentMode.HTML);
 		rightL.addComponents(resForm1, resForm2, resForm3);
 		rightL.setComponentAlignment(resForm1, Alignment.TOP_CENTER);
 		rightL.setComponentAlignment(resForm2, Alignment.TOP_CENTER);
 		rightL.setComponentAlignment(resForm3, Alignment.TOP_CENTER);
-
-		/**
-		 * coot.addComponent(resCountChart, 1, 0, 2, 0);
-		 * coot.addComponent(langCountChart, 1, 1, 2, 1);
-		 * coot.addComponent(chart3, 1, 2, 2, 2); coot.addComponent(resForm1, 3,
-		 * 0, 4, 0); coot.addComponent(resForm2, 3, 1, 4, 1);
-		 * coot.addComponent(resForm3, 3, 2, 4, 2);
-		 **/
 
 	}
 
 	public ChartJs createResCountChart() {
 		PieChartConfig resCountConfig = new PieChartConfig();
 
-		resCountConfig.options().responsive(true).title().display(true).text(LangHelper.getLocalizableMessage(LogoResConstants.LOGORESCOUNTSTR)).fontSize(20)
+		resCountConfig.options().responsive(true).title().display(true)
+				.text(LangHelper.getLocalizableMessage(LogoResConstants.LOGORESCOUNTSTR)).fontSize(20)
 				.position(Position.TOP).fontColor("#a50000").and().animation().animateScale(true).animateRotate(true)
 				.and().legend().position(Position.LEFT).and();
 
@@ -134,9 +121,10 @@ public class ReportView extends Panel {
 
 	public ChartJs createLangCountChart() {
 		BarChartConfig barConfig = new BarChartConfig();
-		barConfig.options().responsive(true).title().display(true).text(LangHelper.getLocalizableMessage(LogoResConstants.LOGOLANGCOUNTSTR)).fontSize(20)
-				.position(Position.TOP).fontColor("#a50000").and().animation().and().legend().position(Position.TOP).display(false)
-				.and();
+		barConfig.options().responsive(true).title().display(true)
+				.text(LangHelper.getLocalizableMessage(LogoResConstants.LOGOLANGCOUNTSTR)).fontSize(20)
+				.position(Position.TOP).fontColor("#a50000").and().animation().and().legend().position(Position.TOP)
+				.display(false).and();
 
 		getCountForLangCountChart(barConfig);
 		ChartJs langCountChart = new ChartJs(barConfig);

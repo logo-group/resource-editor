@@ -1,9 +1,6 @@
 package com.logo.ui.window;
 
-import java.util.logging.Logger;
-
 import com.logo.data.entity.ReUser;
-import com.logo.ui.form.NewResourceForm;
 import com.logo.ui.form.UserForm;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Window;
@@ -12,7 +9,6 @@ public class UserWindow extends Window {
 
 	private static final long serialVersionUID = 1L;
 
-	private static Logger logger = Logger.getLogger(NewResourceForm.class.getName());
 	private final transient ReUser reUser;
 	private final transient UserForm userForm;
 
@@ -35,6 +31,5 @@ public class UserWindow extends Window {
 		userForm.getSaveButton().addClickListener(e -> close());
 		userForm.getCloseButton().addClickListener(e -> close());
 	}
-
 
 }

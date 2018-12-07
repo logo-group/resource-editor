@@ -28,7 +28,6 @@ import org.w3c.dom.Element;
 import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReResourceitemShort;
 import com.logo.data.entity.ReTurkishtr;
-import com.logo.data.repository.ReEnglishusRep;
 import com.logo.data.repository.ReResourceitemShortRep;
 import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.util.search.SearchParam;
@@ -45,25 +44,18 @@ public class ExportXml implements Serializable {
 
 	private final transient ReResourceitemShortRep reResourceitemShortRep;
 	private final transient ReTurkishtrRep reTurkishtrRep;
-	private final transient ReEnglishusRep reEnglishusRep;
 	private final transient String fileName;
-	private final transient boolean isTurkishWrite;
-	private final transient boolean isEnglishWrite;
 
 	private final transient SearchParam sParam;
 
 	private static int prevRef = 0;
 	private static Element firstTaggedList = null;
-	
-	
-	public ExportXml(SearchParam sParam, String fileName, boolean isTurkishWrite, boolean isEnglishWrite) {
+
+	public ExportXml(SearchParam sParam, String fileName) {
 		this.reResourceitemShortRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemShortRep();
 		this.reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
-		this.reEnglishusRep = LogoresMainUI.getMrepositorycontainer().getReEnglishusRep();
 		this.sParam = sParam;
 		this.fileName = fileName;
-		this.isTurkishWrite = isTurkishWrite;
-		this.isEnglishWrite = isEnglishWrite;
 	}
 
 	public void export() throws IOException, TransformerException, ParserConfigurationException {
@@ -75,7 +67,7 @@ public class ExportXml implements Serializable {
 		Document doc = docBuilder.newDocument();
 		Element taggedLists = doc.createElement("TaggedLists");
 		doc.appendChild(taggedLists);
-		
+
 		Page<com.logo.data.entity.ReResourceitemShort> resourceItems = searchByresourceParamAll(0, 1000, sParam);
 		ArrayDeque<ReResourceitemShort> newList1 = new ArrayDeque<>();
 		newList1.addAll(resourceItems.getContent());
@@ -101,28 +93,26 @@ public class ExportXml implements Serializable {
 		transformer.transform(source, result);
 
 		// Output to console for testing
-		//StreamResult consoleResult = new StreamResult(System.out);
-		//transformer.transform(source, consoleResult);
+		// StreamResult consoleResult = new StreamResult(System.out);
+		// transformer.transform(source, consoleResult);
 
 		logger.log(Level.WARNING, "xml done");
 	}
 
 	private void addNewItemToXML(Document doc, Element rootElement, ReResourceitemShort item, AtomicInteger counter) {
-		
-		if (prevRef != item.reResource.getId())
-		{
+
+		if (prevRef != item.reResource.getId()) {
 			Element taggedList = createNewTaggedList(doc, rootElement, item);
 			firstTaggedList = taggedList;
 		}
 		createNewItem(doc, item, firstTaggedList);
-		
+
 		prevRef = item.reResource.getId();
 	}
 
-	private Element createNewTaggedList(Document doc, Element rootElement, ReResourceitemShort item)
-	{
+	private Element createNewTaggedList(Document doc, Element rootElement, ReResourceitemShort item) {
 		Element taggedList = doc.createElement("TaggedList");
-		
+
 		Attr resourceGroup = doc.createAttribute("ResourceGroup");
 		resourceGroup.setValue(item.reResource.getResourcegroup().name());
 		taggedList.setAttributeNode(resourceGroup);
@@ -138,17 +128,16 @@ public class ExportXml implements Serializable {
 		Attr listName = doc.createAttribute("ListName");
 		listName.setValue(item.reResource.getDescription());
 		taggedList.setAttributeNode(listName);
-		
+
 		Attr prefix = doc.createAttribute("Prefix");
 		prefix.setValue(item.getPrefixstr());
 		taggedList.setAttributeNode(prefix);
 		rootElement.appendChild(taggedList);
-		
+
 		return taggedList;
 	}
-	
-	private void createNewItem(Document doc, ReResourceitemShort item, Element taggedList)
-	{
+
+	private void createNewItem(Document doc, ReResourceitemShort item, Element taggedList) {
 		ReTurkishtr reTurkishtr = reTurkishtrRep.getresourceitemrefEquals(item.getId());
 
 		Element listItem = doc.createElement("ListItem");
@@ -158,15 +147,16 @@ public class ExportXml implements Serializable {
 		listItem.setAttributeNode(tag);
 
 		Attr resItem = doc.createAttribute("Item");
-		if(reTurkishtr !=null)
-		resItem.setValue(reTurkishtr.getResourcestr());
+		if (reTurkishtr != null)
+			resItem.setValue(reTurkishtr.getResourcestr());
 		listItem.setAttributeNode(resItem);
 
 		taggedList.appendChild(listItem);
-		
+
 	}
-	
-	private Page<com.logo.data.entity.ReResourceitemShort> searchByresourceParamAll(int page, int size, SearchParam sParam) {
+
+	private Page<com.logo.data.entity.ReResourceitemShort> searchByresourceParamAll(int page, int size,
+			SearchParam sParam) {
 		Pageable pageable = new PageRequest(page, size, null);
 		return reResourceitemShortRep.searchByParamAll(pageable, sParam);
 	}

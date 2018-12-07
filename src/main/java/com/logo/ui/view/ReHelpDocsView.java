@@ -45,7 +45,7 @@ public class ReHelpDocsView extends VerticalLayout implements View {
 	private Grid<ReHelpDocs> helpdocsGrid = new Grid<>(ReHelpDocs.class);
 
 	private HelpDocForm helpDocForm = new HelpDocForm(this);
-	
+
 	public ReHelpDocsView() {
 		removeAllComponents();
 		init();
@@ -60,17 +60,17 @@ public class ReHelpDocsView extends VerticalLayout implements View {
 		setWidth("100%");
 		setHeight("100%");
 		addStyleName(MaterialTheme.LAYOUT_CARD);
-		
+
 		this.setDescription(LangHelper.getLocalizableMessage(LogoResConstants.CLICKTOEDITSTR));
 		helpDocForm.setVisible(false);
-		
+
 		helpdocsGrid.setColumns("docname", "doctitle", "doctype");
-		
+
 		HeaderRow row = helpdocsGrid.appendHeaderRow();
 		row.join("docname").setHtml("<b>docname</b>");
-		
+
 		HorizontalLayout header = new HorizontalLayout();
-		
+
 		HorizontalLayout grid = new HorizontalLayout();
 		grid.addStyleName(MaterialTheme.CARD_HOVERABLE);
 
@@ -78,34 +78,34 @@ public class ReHelpDocsView extends VerticalLayout implements View {
 		helpdocsGrid.setHeight("100%");
 		grid.setWidth("100%");
 		grid.setHeight("100%");
-		
+
 		Button backButton = new Button("Home");
 		backButton.setIcon(VaadinIcons.ARROW_BACKWARD);
-		backButton.addStyleName(MaterialTheme.BUTTON_BORDER+ " "+ MaterialTheme.BUTTON_ROUND+" "+ MaterialTheme.BUTTON_BORDERLESS_COLORED);
+		backButton.addStyleName(MaterialTheme.BUTTON_BORDER + " " + MaterialTheme.BUTTON_ROUND + " "
+				+ MaterialTheme.BUTTON_BORDERLESS_COLORED);
 
 		Button addNewMsg = new Button("Add New Helpdoc");
 		addNewMsg.setIcon(VaadinIcons.PLUS);
 		addNewMsg.addStyleName(MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
 
 		backButton.addClickListener(e -> getUI().getNavigator().navigateTo(ResourceViewNew.VIEW_NAME));
-		
+
 		header.addComponent(addNewMsg);
-		
 
 		addNewMsg.addClickListener(e -> {
 			helpDocForm.setVisible(true);
 			helpDocForm.setReHelpDoc(new ReHelpDocs());
 		});
 
-		
 		addComponent(header);
 		grid.addComponentsAndExpand(helpdocsGrid);
 		grid.addComponentsAndExpand(helpDocForm);
 		addComponentsAndExpand(grid);
 		addGridFilters();
 		updateHelpListForDocName("");
-		
-		//messageGrid.setStyleGenerator(item -> (item.getEnabled() == 1) ? null : "dead");
+
+		// messageGrid.setStyleGenerator(item -> (item.getEnabled() == 1) ? null :
+		// "dead");
 
 		helpdocsGrid.setSelectionMode(SelectionMode.SINGLE);
 
@@ -135,11 +135,11 @@ public class ReHelpDocsView extends VerticalLayout implements View {
 		List<ReHelpDocs> reHelpDocs = reHelpDocsRep.findByDoctitleLikeIgnoreCase(likeFilter);
 		helpdocsGrid.setItems(reHelpDocs);
 	}
-	
+
 	public void refreshGrid() {
-		helpdocsGrid.clearSortOrder();	
+		helpdocsGrid.clearSortOrder();
 	}
-	
+
 	private void addGridFilters() {
 		if (helpdocsGrid.getHeaderRowCount() > 1) {
 			HeaderRow filterRow1 = helpdocsGrid.getHeaderRow(1);
@@ -153,7 +153,7 @@ public class ReHelpDocsView extends VerticalLayout implements View {
 			} else if ("doctitle".equals(column.getId())) {
 				headerCell.setComponent(createFilterTextFieldForTitle());
 			} else if ("doctype".equals(column.getId())) {
-				//headerCell.setComponent(createFilterTextFieldForModule());
+				// headerCell.setComponent(createFilterTextFieldForModule());
 			}
 		}
 	}
@@ -180,21 +180,11 @@ public class ReHelpDocsView extends VerticalLayout implements View {
 		return searcField2;
 	}
 
-	private HorizontalLayout createFilterTextFieldForModule() {
-		TextFieldWithButton searcField2 = new TextFieldWithButton("", VaadinIcons.CLOSE);
-		searcField2.getButton().addClickListener(e -> searcField2.getTextField().clear());
-		searcField2.getTextField().addValueChangeListener(event -> {
-			Notification.show(event.getValue());
-			updateHelpListForDocName(event.getValue());
-		});
-		return searcField2;
-	}
-
 	@Override
 	public void enter(ViewChangeEvent event) {
 		this.reHelpDocsRep = LogoresMainUI.getMrepositorycontainer().getReHelpDocsRep();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);

@@ -3,7 +3,6 @@ package com.logo.util.search;
 import org.apache.commons.lang.StringUtils;
 
 import com.logo.ui.components.SpellChecComboBox;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.TextField;
 
 public class SearchByAll {
@@ -149,7 +148,7 @@ public class SearchByAll {
 	public SearchByResourceNr getSearchByResourceNr() {
 		return searchByResourceNr;
 	}
-	
+
 	public void generateSearchParam() {
 		searchByResourceNr.generateSearchParam();
 		if (StringUtils.isNotEmpty(orderNrBegin.getValue()))
@@ -165,20 +164,20 @@ public class SearchByAll {
 		if (StringUtils.isNotEmpty(levelNrEnd.getValue()))
 			searchByResourceNr.getScParam().setLevelNrEnd(Integer.parseInt(levelNrEnd.getValue()));
 
-		if(resourceItemCaseCombo != null)
+		if (resourceItemCaseCombo != null)
 			searchByResourceNr.getScParam().setResourceItemCaseFlag(resourceItemCaseCombo.getSelectedItem());
-		if(prefixCombo != null)
+		if (prefixCombo != null)
 			searchByResourceNr.getScParam().setPrefixFlag(prefixCombo.getSelectedItem());
-		if(infoCombo != null)
+		if (infoCombo != null)
 			searchByResourceNr.getScParam().setInfoFlag(infoCombo.getSelectedItem());
-		if(descComboTR != null)
+		if (descComboTR != null)
 			searchByResourceNr.getScParam().setDescComboTRFlag(descComboTR.getSelectedItem());
-		if(descComboEN != null)
+		if (descComboEN != null)
 			searchByResourceNr.getScParam().setDescComboENFlag(descComboEN.getSelectedItem());
 
 		if (prefixComboText != null && StringUtils.isNotEmpty(prefixComboText.getValue()))
 			searchByResourceNr.getScParam().setPrefixComboText(prefixComboText.getValue());
-		if (infoComboText != null &&StringUtils.isNotEmpty(infoComboText.getValue()))
+		if (infoComboText != null && StringUtils.isNotEmpty(infoComboText.getValue()))
 			searchByResourceNr.getScParam().setInfoComboText(infoComboText.getValue());
 		if (comboTextTR != null && StringUtils.isNotEmpty(comboTextTR.getValue()))
 			searchByResourceNr.getScParam().setComboTextTR(comboTextTR.getValue());

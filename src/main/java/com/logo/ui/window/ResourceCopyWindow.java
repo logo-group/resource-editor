@@ -1,7 +1,6 @@
 package com.logo.ui.window;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -65,8 +64,6 @@ import com.vaadin.ui.Window;
 public class ResourceCopyWindow extends Window {
 
 	private static final long serialVersionUID = 1L;
-
-	private static Logger logger = Logger.getLogger(ResourceCopyWindow.class.getName());
 
 	private final Binder<ReResource> binder = new Binder<>(ReResource.class);
 

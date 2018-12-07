@@ -37,6 +37,7 @@ public class HomeView extends HorizontalLayout implements View {
 	public transient ReResourceRep resRepo;
 
 	private Button addNewResource = new Button(LangHelper.getLocalizableMessage(LogoResConstants.ADDNEWRESOURCESTR));
+
 	public Button getAddNewResource() {
 		return addNewResource;
 	}
@@ -45,10 +46,10 @@ public class HomeView extends HorizontalLayout implements View {
 		resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
 		setSizeFull();
 		HorizontalLayout searchLayout = new HorizontalLayout();
-		
+
 		Panel resPanel = new Panel();
 		resPanel.setSizeUndefined();
-		
+
 		VerticalLayout resListLayout = new VerticalLayout();
 		resListLayout.setSizeUndefined();
 		resListLayout.setWidth("100%");
@@ -61,29 +62,30 @@ public class HomeView extends HorizontalLayout implements View {
 		searchField.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 		searchField.setIcon(VaadinIcons.SEARCH);
 		searchField.setWidth("100%");
-		
+
 		Button searchButton = new Button("");
 		searchButton.setIcon(VaadinIcons.SEARCH);
-		searchButton.addStyleName(MaterialTheme.BUTTON_BORDER+ " "+ MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
-		
+		searchButton.addStyleName(
+				MaterialTheme.BUTTON_BORDER + " " + MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
+
 		AutocompleteExtension<String> resNrExtension = new AutocompleteExtension<>(searchField);
 
 		resNrExtension.setSuggestionGenerator(this::suggestResource);
 
-		resNrExtension.addSuggestionSelectListener(event ->{
+		resNrExtension.addSuggestionSelectListener(event -> {
 			event.getSelectedItem().ifPresent(Notification::show);
 			searchField.setValue(event.getSelectedValue());
 			searchButton.click();
 		});
 
 		searchButton.addClickListener(event -> {
-			resView.createResoucePage(searchField.getValue(),true);
+			resView.createResoucePage(searchField.getValue(), true);
 			searchField.setValue("");
 		});
-		
+
 		addNewResource.setIcon(VaadinIcons.PLUS);
 		addNewResource.addStyleName(MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
-		
+
 		VerticalLayout chartLayout = new VerticalLayout();
 		chartLayout.setSizeFull();
 		chartLayout.setWidth("100%");
@@ -99,24 +101,14 @@ public class HomeView extends HorizontalLayout implements View {
 		setComponentAlignment(chartLayout, Alignment.TOP_RIGHT);
 	}
 
-	private String getSuggestValue(String value)
-	{
-		String resStr = "";
-		String[] parts = value.split("->");
-		if (parts.length > 0) {
-			resStr = parts[1];
-		}
-		return resStr;
-	}
-
 	private List<String> suggestResource(String query, int cap) {
-		if(query.length()>2 && StringUtils.isNumeric(query))
+		if (query.length() > 2 && StringUtils.isNumeric(query))
 			return getResources(query).stream().filter(p -> p.contains(query)).limit(cap).collect(Collectors.toList());
 		else
-			return Arrays.asList("","");
+			return Arrays.asList("", "");
 	}
 
-	public  List<String> getResources(String resNr) {
+	public List<String> getResources(String resNr) {
 		return findByResNrLike(resNr);
 	}
 
@@ -128,7 +120,7 @@ public class HomeView extends HorizontalLayout implements View {
 	public boolean equals(Object obj) {
 		return super.equals(obj);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();

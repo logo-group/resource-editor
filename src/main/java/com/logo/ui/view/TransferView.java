@@ -11,12 +11,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import com.logo.ui.components.TransferLayout;
+import com.logo.util.LogoResConstants;
 import com.logo.util.export.ExportExcel;
 import com.logo.util.export.ExportTxt;
 import com.logo.util.export.ExportXml;
 import com.logo.util.search.SearchByAll;
 import com.logo.util.search.SearchByResourceNr;
-import com.logo.util.LogoResConstants;
 import com.vaadin.annotations.Push;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -232,8 +232,7 @@ public class TransferView extends VerticalLayout implements View {
 					.setComboTextEN(null).build();
 			searchByAll.generateSearchParam();
 
-			ExportXml xmlWrite = new ExportXml(searchByResourceNr.getScParam(), fileName,
-					transferLayout.getTurkishTR().getValue(), transferLayout.getEnglishUS().getValue());
+			ExportXml xmlWrite = new ExportXml(searchByResourceNr.getScParam(), fileName);
 			xmlWrite.export();
 		}
 	}

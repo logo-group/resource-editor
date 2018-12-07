@@ -50,45 +50,46 @@ public class ResourceItemForm extends Panel {
 	private final TextField prefix = new TextField(LangHelper.getLocalizableMessage(LogoResConstants.PREFIXSTR));
 	private final TextField info = new TextField(LangHelper.getLocalizableMessage(LogoResConstants.INFOSTR));
 	private final TextArea description = new TextArea(LogoResConstants.RE_TURKISHTR_NAME);
-	
+
 	private final Button save = new ButtonGenerator(LogoResConstants.SAVESTR);
 	private final Button cancel = new ButtonGenerator(LogoResConstants.CANCELSTR);
 	private final Button add = new ButtonGenerator(LogoResConstants.ADDNEWSTR);
 	private final Button saveAndNew = new ButtonGenerator(LogoResConstants.SAVEANDNEWSTR);
-	
-	private final SpellChecComboBox<ResourceCase> resourceItemCaseCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.RESCASESTR));
-	private final SpellChecComboBox<OwnerProduct> ownerProductCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.OWNERPRODUCT));
+
+	private final SpellChecComboBox<ResourceCase> resourceItemCaseCombo = new SpellChecComboBox<>(
+			LangHelper.getLocalizableMessage(LogoResConstants.RESCASESTR));
+	private final SpellChecComboBox<OwnerProduct> ownerProductCombo = new SpellChecComboBox<>(
+			LangHelper.getLocalizableMessage(LogoResConstants.OWNERPRODUCT));
 	private final HorizontalLayout buttonLayout = new HorizontalLayout(saveAndNew, save, cancel, add);
 
 	private final transient ReResourceitemRep reResourceitemRep;
 	private final transient ReTurkishtrRep reTurkishtrRep;
-	
+
 	public ResourceItemForm(ReResource resource) {
 		this.reResourceitemRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
 		this.reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
 		this.resource = resource;
 		setWidth("100%");
 		setHeight("100%");
-		
-		
-		GridLayout gridLayout = new GridLayout(4,10);
+
+		GridLayout gridLayout = new GridLayout(4, 10);
 		gridLayout.addStyleName(LogoResConstants.STYLE_GRID);
 		gridLayout.setWidth("100%");
 		gridLayout.setSpacing(true);
 		gridLayout.setMargin(true);
-		
+
 		addStyleName(MaterialTheme.CARD_HOVERABLE);
-		
+
 		resourceItem.setOrdernr(0);
 		resourceItem.setTagnr(0);
 		resourceItem.setLevelnr(0);
 		resourceItem.setPrefixstr("");
 		resourceItem.setInfo("");
-		
+
 		binder.setBean(resourceItem);
 		ordernr.setWidth("100%");
 		ordernr.setHeight("30px");
-		
+
 		ordernr.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 
 		tagnr.setWidth("100%");
@@ -102,7 +103,7 @@ public class ResourceItemForm extends Panel {
 		prefix.setWidth("100%");
 		prefix.setHeight("30px");
 		prefix.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
-		
+
 		info.setWidth("100%");
 		info.setHeight("30px");
 		info.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
@@ -111,35 +112,38 @@ public class ResourceItemForm extends Panel {
 		description.setHeight("100px");
 		description.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		description.setWordWrap(true);
-		
+
 		Attribute spellcheckAttr1 = new Attribute(LogoResConstants.SPELLCHECK, LogoResConstants.FALSESTR);
 		spellcheckAttr1.extend(description);
-		
+
 		save.setWidth("80px");
 		cancel.setWidth("80px");
 		add.setWidth("80px");
 		saveAndNew.setWidth("80px");
-		
+
 		saveAndNew.setVisible(false);
 		save.setVisible(false);
 		cancel.setVisible(false);
-		
+
 		buttonLayout.setComponentAlignment(add, Alignment.BOTTOM_RIGHT);
-		
+
 		binder.forField(ordernr).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.ORDERNRNOTEMTYSTR))
 				.withConverter(new StrToIntegerConverter(LogoResConstants.MUSTNUMBER))
-				//.withValidator(number -> number <= 1, "Person must be born in the 20th century")
+				// .withValidator(number -> number <= 1, "Person must be born in the 20th
+				// century")
 				.bind(ReResourceitem::getOrdernr, ReResourceitem::setOrdernr);
 
 		binder.forField(tagnr).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.TAGNRNOTEMTYSTR))
-		.withConverter(new StrToIntegerConverter(LogoResConstants.MUSTNUMBER))
-		//.withValidator(number -> number <= 1, "Person must be born in the 20th century")
-		.bind(ReResourceitem::getTagnr, ReResourceitem::setTagnr);
+				.withConverter(new StrToIntegerConverter(LogoResConstants.MUSTNUMBER))
+				// .withValidator(number -> number <= 1, "Person must be born in the 20th
+				// century")
+				.bind(ReResourceitem::getTagnr, ReResourceitem::setTagnr);
 
 		binder.forField(levelnr).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRNOTEMTYSTR))
-		.withConverter(new StrToIntegerConverter(LogoResConstants.MUSTNUMBER))
-		//.withValidator(number -> number <= 1, "Person must be born in the 20th century")
-		.bind(ReResourceitem::getLevelnr, ReResourceitem::setLevelnr);
+				.withConverter(new StrToIntegerConverter(LogoResConstants.MUSTNUMBER))
+				// .withValidator(number -> number <= 1, "Person must be born in the 20th
+				// century")
+				.bind(ReResourceitem::getLevelnr, ReResourceitem::setLevelnr);
 
 		binder.forField(prefix).bind(ReResourceitem::getPrefixstr, ReResourceitem::setPrefixstr);
 
@@ -149,14 +153,13 @@ public class ResourceItemForm extends Panel {
 		resourceItemCaseCombo.setHeight("30px");
 		ownerProductCombo.setWidth("100%");
 		ownerProductCombo.setHeight("30px");
-		
+
 		resourceItemCaseCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		ownerProductCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
-		
+
 		resourceItemCaseCombo.setEmptySelectionAllowed(false);
 		ownerProductCombo.setEmptySelectionAllowed(false);
-		
-		
+
 		resourceItemCaseCombo.setItems(ResourceCase.NORESTRICTION, ResourceCase.LOWERCASE, ResourceCase.UPPERCASE,
 				ResourceCase.TITLECASE, ResourceCase.SENTENCECASE);
 
@@ -170,15 +173,14 @@ public class ResourceItemForm extends Panel {
 
 		save.setClickShortcut(KeyCode.ENTER);
 
-
 		Label label = new Label("New Resource Item Form");
 		HorizontalLayout labelLayout = new HorizontalLayout();
 		labelLayout.setWidth("100%");
 		labelLayout.addStyleName("card-hoverableGreen");
-		
+
 		labelLayout.addComponent(label);
 		labelLayout.setComponentAlignment(label, Alignment.TOP_CENTER);
-		
+
 		FormLayout col01 = new FormLayout();
 		col01.setSizeFull();
 		col01.setSpacing(true);
@@ -191,7 +193,7 @@ public class ResourceItemForm extends Panel {
 		col01.addComponent(prefix);
 		col01.addComponent(info);
 		col01.addComponent(description);
-		
+
 		FormLayout col11 = new FormLayout();
 		col11.setSizeFull();
 		col11.setSpacing(true);
@@ -200,16 +202,12 @@ public class ResourceItemForm extends Panel {
 		col11.setHeight("100%");
 		col11.addComponent(resourceItemCaseCombo);
 		col11.addComponent(ownerProductCombo);
-		
-		//gridLayout.addComponent(labelLayout, 0, 0, 3, 0);
+
 		gridLayout.addComponent(col01, 0, 1, 1, 1);
 		gridLayout.addComponent(col11, 2, 1, 3, 1);
-		
-		Label hSep0 = createSeperator();
-		//gridLayout.addComponent(hSep0, 0, 6, 3, 6);
 
 		gridLayout.addComponent(buttonLayout, 3, 7);
-		
+
 		Label hSep1 = createSeperator();
 		gridLayout.addComponent(hSep1, 0, 8, 3, 8);
 
@@ -221,12 +219,12 @@ public class ResourceItemForm extends Panel {
 			description.removeStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 			description.addStyleName("v-textareaForm");
 		});
-		
+
 		mouseEvents.addMouseOutListener(() -> {
 			description.removeStyleName("v-textareaForm");
 			description.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		});
-		
+
 		setContent(gridLayout);
 		UI.getCurrent().setErrorHandler(new DefaultErrorHandler() {
 			private static final long serialVersionUID = 1L;
@@ -256,19 +254,19 @@ public class ResourceItemForm extends Panel {
 	public Button getSaveButton() {
 		return save;
 	}
-	
+
 	public Button getSaveAndNewButton() {
 		return saveAndNew;
 	}
-	
+
 	public Button getCancelButton() {
 		return cancel;
 	}
-	
+
 	public Button getAddButton() {
 		return add;
 	}
-	
+
 	public TextField getOrdernr() {
 		return ordernr;
 	}
@@ -276,11 +274,11 @@ public class ResourceItemForm extends Panel {
 	public void setOrdernr(Integer value) {
 		ordernr.setValue(Integer.toString(value));
 	}
-	
+
 	public TextField getPrefix() {
 		return prefix;
 	}
-	
+
 	public TextField getTagnr() {
 		return tagnr;
 	}
@@ -292,27 +290,27 @@ public class ResourceItemForm extends Panel {
 	public TextField getInfo() {
 		return info;
 	}
-	
+
 	public TextField getLevelnr() {
 		return levelnr;
 	}
-	
+
 	public SpellChecComboBox<ResourceCase> getResourceItemCaseCombo() {
 		return resourceItemCaseCombo;
 	}
-	
+
 	public SpellChecComboBox<OwnerProduct> getOwnerProductCombo() {
 		return ownerProductCombo;
 	}
-	
+
 	public TextArea getDesc() {
 		return description;
 	}
-	
+
 	public ReResource getResource() {
 		return resource;
 	}
-	
+
 	public ReResourceitem getResourceItem() {
 		return resourceItem;
 	}
@@ -321,12 +319,12 @@ public class ResourceItemForm extends Panel {
 	public boolean equals(Object obj) {
 		return super.equals(obj);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();
-	}	
-	
+	}
+
 	public void generateTagNr(Integer resourceref) {
 		Integer max = reResourceitemRep.getMaxTagNr(resourceref);
 		if (max == null)
@@ -334,7 +332,7 @@ public class ResourceItemForm extends Panel {
 		else
 			setTagnr(++max);
 	}
-	
+
 	public void generateOrderNr(Integer resourceref) {
 		Integer max = reResourceitemRep.getMaxOrderNr(resourceref);
 		if (max == null)
@@ -342,22 +340,19 @@ public class ResourceItemForm extends Panel {
 		else
 			setOrdernr(++max);
 	}
-	
-	public void persist()
-	{
-		try 
-		{
+
+	public void persist() {
+		try {
 			resourceItem.setReTurkishtr(null);
-			reResourceitemRep.save(resourceItem);	
-			
+			reResourceitemRep.save(resourceItem);
+
 			ReTurkishtr reTurkishtr = new ReTurkishtr();
 			reTurkishtr.setResourceitemref(resourceItem.getId());
 			reTurkishtr.setResourcestr(getDesc().getValue());
-			
+
 			reTurkishtrRep.save(reTurkishtr);
 			resourceItem.setReTurkishtr(reTurkishtr);
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e.getMessage());
 		}
 	}

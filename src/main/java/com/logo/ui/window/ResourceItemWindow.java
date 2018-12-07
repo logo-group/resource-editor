@@ -6,10 +6,7 @@ import java.util.logging.Logger;
 import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReResourceitem;
-import com.logo.data.entity.ReUser;
-import com.logo.data.repository.ReResourceRep;
 import com.logo.data.repository.ReResourceitemRep;
-import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.ui.components.ButtonGenerator;
 import com.logo.ui.components.SpellChecComboBox;
 import com.logo.ui.components.SpellChecTextField;
@@ -23,7 +20,6 @@ import com.logo.util.enums.ResourceCase;
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.icons.VaadinIcons;
-import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
@@ -35,8 +31,6 @@ import com.vaadin.ui.TwinColSelect;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
-import eu.michaelvogt.vaadin.attribute.Attribute;
-
 public class ResourceItemWindow extends Window {
 
 	private static final long serialVersionUID = 1L;
@@ -46,11 +40,16 @@ public class ResourceItemWindow extends Window {
 	private ReResource resource = new ReResource();
 	private ReResourceitem resourceItem = new ReResourceitem();
 	private final Binder<ReResourceitem> binder = new Binder<>(ReResourceitem.class);
-	private final SpellChecTextField ordernr = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.ORDERNRSTR));
-	private final SpellChecTextField tagnr = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.TAGNRSTR));
-	private final SpellChecTextField levelnr = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRSTR));
-	private final SpellChecTextField prefix = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.PREFIXSTR));
-	private final SpellChecTextField info = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.INFOSTR));
+	private final SpellChecTextField ordernr = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.ORDERNRSTR));
+	private final SpellChecTextField tagnr = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.TAGNRSTR));
+	private final SpellChecTextField levelnr = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRSTR));
+	private final SpellChecTextField prefix = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.PREFIXSTR));
+	private final SpellChecTextField info = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.INFOSTR));
 
 	private final Button save = new ButtonGenerator(LogoResConstants.SAVESTR);
 	private final Button cancel = new ButtonGenerator(LogoResConstants.CANCELSTR);
@@ -63,29 +62,21 @@ public class ResourceItemWindow extends Window {
 	private final HorizontalLayout buttonLayout = new HorizontalLayout(saveAndNew, save, cancel);
 
 	private final transient ReResourceitemRep reResourceitemRep;
-	private final transient ReTurkishtrRep reTurkishtrRep;
 
-	private final transient ReResourceRep resRepo;
-	private final transient ReUser reUser;
 	private TabSheet tabsheet = new TabSheet();
 	private final Label formName = new Label();
-	private ResourceViewNew resView;
-	
+
 	public TabSheet getTabsheet() {
 		return tabsheet;
 	}
 
-	public ResourceItemWindow(ReResource resource,ResourceViewNew resView) {
+	public ResourceItemWindow(ReResource resource, ResourceViewNew resView) {
 		this.resource = resource;
-		this.resView = resView;
-		this.resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
-		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
 		this.binder.setBean(resourceItem);
 		this.reResourceitemRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
-		this.reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
-		
+
 		initialize();
-		
+
 		save.addClickListener(event -> {
 			persist();
 			close();
@@ -149,7 +140,7 @@ public class ResourceItemWindow extends Window {
 
 		generateOrderNr(resource.getId());
 		generateTagNr(resource.getId());
-		
+
 		resourceItem.setOrdernr(Integer.valueOf(ordernr.getValue()));
 		resourceItem.setTagnr(Integer.valueOf(tagnr.getValue()));
 		resourceItem.setLevelnr(0);
@@ -171,8 +162,6 @@ public class ResourceItemWindow extends Window {
 
 		info.setWidth("100%");
 		info.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
-
-		Attribute spellcheckAttr1 = new Attribute(LogoResConstants.SPELLCHECK, LogoResConstants.FALSESTR);
 
 		binder.forField(ordernr).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.ORDERNRNOTEMTYSTR))
 				.withConverter(new StrToIntegerConverter(LogoResConstants.MUSTNUMBER))
@@ -258,7 +247,7 @@ public class ResourceItemWindow extends Window {
 		else
 			setTagnr(++max);
 	}
-	
+
 	public void generateOrderNr(Integer resourceref) {
 		Integer max = reResourceitemRep.getMaxOrderNr(resourceref);
 		if (max == null)
@@ -274,7 +263,7 @@ public class ResourceItemWindow extends Window {
 	public void setOrdernr(Integer value) {
 		ordernr.setValue(Integer.toString(value));
 	}
-	
+
 	public void persist() {
 		try {
 			resourceItem.setResourceref(resource.getId());

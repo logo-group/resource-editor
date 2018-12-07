@@ -82,6 +82,7 @@ public class LangLayout extends HorizontalLayout implements ValueChangeListener 
 		langTxtField.setValue(Integer.toString(value));
 	}
 
+	@SuppressWarnings("unchecked")
 	public Switch createSwitch(String caption, String style, boolean initialState) {
 		Switch switchComponent = new Switch(caption, initialState);
 		switchComponent.addValueChangeListener(this);
@@ -91,21 +92,15 @@ public class LangLayout extends HorizontalLayout implements ValueChangeListener 
 		return switchComponent;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void valueChange(ValueChangeEvent event) {
-		if (event.getSource() instanceof Switch) {
-			/**
-			Notification.show(event.getComponent().getCaption() + ": " + event.getValue());
-			**/
-		}
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);

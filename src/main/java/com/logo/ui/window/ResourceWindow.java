@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.logo.LogoresMainUI;
@@ -13,12 +12,10 @@ import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReProjectVerisonRep;
 import com.logo.data.repository.ReResourceRep;
-import com.logo.data.repository.ReResourceitemRep;
 import com.logo.ui.components.ButtonGenerator;
 import com.logo.ui.components.SpellChecComboBox;
 import com.logo.ui.components.SpellChecTextArea;
 import com.logo.ui.components.SpellChecTextField;
-import com.logo.ui.form.NewResourceForm;
 import com.logo.ui.view.ResourceViewNew;
 import com.logo.util.LangHelper;
 import com.logo.util.LogoResConstants;
@@ -47,8 +44,6 @@ public class ResourceWindow extends Window {
 
 	private static final long serialVersionUID = 1L;
 
-	private static Logger logger = Logger.getLogger(NewResourceForm.class.getName());
-
 	private final Binder<ReResource> binder = new Binder<>(ReResource.class);
 	private final SpellChecTextField resourcenr = new SpellChecTextField(
 			LangHelper.getLocalizableMessage(LogoResConstants.RESNRSTR));
@@ -72,11 +67,10 @@ public class ResourceWindow extends Window {
 	private final transient ReUser reUser;
 	private TabSheet tabsheet = new TabSheet();
 	private final Label formName = new Label();
-		private final transient ReProjectVerisonRep reProjectVerisonRep;
+	private final transient ReProjectVerisonRep reProjectVerisonRep;
 	private List<ReProjectVersion> versionList;
 	private List<String> versionStringList;
-	private ResourceViewNew resView;
-	
+
 	public TabSheet getTabsheet() {
 		return tabsheet;
 	}
@@ -85,26 +79,25 @@ public class ResourceWindow extends Window {
 		this.resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
 		this.reProjectVerisonRep = LogoresMainUI.getMrepositorycontainer().getReProjectVerisonRep();
-		this.resView = resView;
 		versionList = reProjectVerisonRep.findAll();
 		versionStringList = versionList.stream().map(elem -> elem.getVersionnr()).collect(Collectors.toList());
 
-		
 		this.binder.setBean(resource);
 		tabsheet = new TabSheet();
 		tabsheet.setSizeFull();
 		tabsheet.setWidth("100%");
 		tabsheet.setHeight("100%");
-		
-		if(resource.getCreatedby() == 0)
+
+		if (resource.getCreatedby() == 0)
 			resource.setCreatedby(reUser.getId());
-		
+
 		resource.setModifiedby(reUser.getId());
-		
-		if(isNew)
+
+		if (isNew)
 			resource.setActive(ResourceState.ACTIVE);
 
-		//List<ReResourceitem> items = reResourceitemRep.findByresourcerefEquals(resource.getId());
+		// List<ReResourceitem> items =
+		// reResourceitemRep.findByresourcerefEquals(resource.getId());
 
 		VerticalLayout mainLayout = new VerticalLayout();
 		mainLayout.setSizeFull();
@@ -233,7 +226,7 @@ public class ResourceWindow extends Window {
 		cancel.addClickListener(event -> close());
 
 		save.addClickListener(event -> {
-			//resource.setReResourceitems(items);
+			// resource.setReResourceitems(items);
 			Set<ReProjectVersion> reProjectVersions = resource.getReProjectVersion();
 
 			Set<String> selectedSetVal = twinColl.getValue();
@@ -250,8 +243,7 @@ public class ResourceWindow extends Window {
 			resource.setReProjectVersion(reProjectVersions);
 			resRepo.save(resource);
 			close();
-			if (isNew)
-			{
+			if (isNew) {
 				String filter = resource.getResourcegroup().name() + "->" + Integer.toString(resource.getResourcenr());
 				resView.createResoucePage(filter, true);
 			}

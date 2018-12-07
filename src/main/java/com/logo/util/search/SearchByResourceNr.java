@@ -3,7 +3,6 @@ package com.logo.util.search;
 import org.apache.commons.lang.StringUtils;
 
 import com.logo.ui.components.SpellChecComboBox;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.TextField;
 
 public class SearchByResourceNr {
@@ -89,25 +88,25 @@ public class SearchByResourceNr {
 			scParam.setResNrBegin(Integer.parseInt(resNrBegin.getValue()));
 		if (StringUtils.isNotEmpty(resNrEnd.getValue()))
 			scParam.setResNrEnd(Integer.parseInt(resNrEnd.getValue()));
-		if (descComboText!=null && StringUtils.isNotEmpty(descComboText.getValue()))
+		if (descComboText != null && StringUtils.isNotEmpty(descComboText.getValue()))
 			scParam.setWord(descComboText.getValue());
 
-		if(descCombo != null)
+		if (descCombo != null)
 			scParam.setDescFlag(descCombo.getSelectedItem());
-		if(resourceCaseCombo != null)
+		if (resourceCaseCombo != null)
 			scParam.setResCaseFlag(resourceCaseCombo.getSelectedItem());
-		if(resourceGroupCombo != null)
+		if (resourceGroupCombo != null)
 			scParam.setResGrpFlag(resourceGroupCombo.getSelectedItem());
-		if(resourceStateCombo != null)
+		if (resourceStateCombo != null)
 			scParam.setResStateFlag(resourceStateCombo.getSelectedItem());
-		if(resourceTypeCombo != null)
+		if (resourceTypeCombo != null)
 			scParam.setResTypFlag(resourceTypeCombo.getSelectedItem());
 	}
 
 	public SearchParam getScParam() {
 		return scParam;
 	}
-	
+
 	public SearchByResourceNr() {
 		/**
 		 * */

@@ -2,20 +2,19 @@ package com.logo.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import com.google.api.translate.Language; 
-import com.google.api.translate.Translate;
 
+import com.google.api.translate.Language;
+import com.google.api.translate.Translate;
 
 public class TranslatorService {
 
-	public String translate2(String word) throws Exception{
+	public String translate2(String word) throws Exception {
 		String translatedText = Translate.execute(word, Language.FRENCH, Language.ENGLISH);
 		return translatedText;
 	}
@@ -25,7 +24,6 @@ public class TranslatorService {
 		String url = "https://translate.googleapis.com/translate_a/single?" + "client=gtx&" + "sl=" + langFrom + "&tl="
 				+ langTo + "&dt=t&q=" + URLEncoder.encode(word, "UTF-8");
 
-		
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestProperty("User-Agent", "Mozilla/5.0");

@@ -1,7 +1,5 @@
 package com.logo.ui.components;
 
-import java.util.logging.Logger;
-
 import org.vaadin.marcus.MouseEvents;
 
 import com.github.appreciated.material.MaterialTheme;
@@ -15,11 +13,9 @@ import com.vaadin.ui.VerticalLayout;
 public class CustomHorizontalStandardLayout extends VerticalLayout {
 
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger.getLogger(CustomHorizontalStandardLayout.class.getName());
 
 	private boolean isBlank = false;
 
-	private String word;
 	private String caption;
 	private String pStyle = "<p style=";
 	private String pBackgroundGreen = "background-color:white;color:green;font-size:15px;font-style:bold";
@@ -44,7 +40,6 @@ public class CustomHorizontalStandardLayout extends VerticalLayout {
 			pBackgroundColor = pBackgroundRed;
 			caption = pStyle.concat(pBackgroundColor).concat(">" + name + "</p>");
 		}
-		this.word = word;
 		this.reStandard = reStandard;
 
 		customLayoutUtil = new CustomLayoutUtil(itemId, name);
