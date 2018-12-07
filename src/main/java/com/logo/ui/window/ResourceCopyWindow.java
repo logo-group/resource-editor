@@ -20,6 +20,7 @@ import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReResourceitem;
 import com.logo.data.entity.ReRomanianro;
 import com.logo.data.entity.ReRussianru;
+import com.logo.data.entity.ReStandard;
 import com.logo.data.entity.ReTurkishtr;
 import com.logo.data.entity.ReTurkmentm;
 import com.logo.data.entity.ReUser;
@@ -38,6 +39,7 @@ import com.logo.data.repository.ReResourceRep;
 import com.logo.data.repository.ReResourceitemRep;
 import com.logo.data.repository.ReRomanianroRep;
 import com.logo.data.repository.ReRussianruRep;
+import com.logo.data.repository.ReStandardRep;
 import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.data.repository.ReTurkmentmRep;
 import com.logo.ui.components.ButtonGenerator;
@@ -123,6 +125,8 @@ public class ResourceCopyWindow extends Window {
 
 	private final transient ReArabicsaRep arabicsaRep;
 
+	private final transient ReStandardRep standardRep;
+
 	public ResourceCopyWindow(ReResource resource, ResourceViewNew resView) {
 		this.resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
 		this.resourceItempRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
@@ -142,6 +146,7 @@ public class ResourceCopyWindow extends Window {
 		this.turkmenRep = LogoresMainUI.getMrepositorycontainer().getReTurkmentmRep();
 		this.arabicegRep = LogoresMainUI.getMrepositorycontainer().getReArabicegRep();
 		this.arabicsaRep = LogoresMainUI.getMrepositorycontainer().getReArabicsaRep();
+		this.standardRep = LogoresMainUI.getMrepositorycontainer().getReStandardRep();
 
 		this.binder.setBean(resource);
 
@@ -260,6 +265,7 @@ public class ResourceCopyWindow extends Window {
 				resRepo.save(copiedResource);
 				for (ReResourceitem item : copiedResource.getReResourceitem()) {
 					persistItemLanguages(item);
+					persistStandard(item);
 				}
 			} catch (DataIntegrityViolationException e) {
 				Notification.show(LogoResConstants.UNIQUE_FIELD_NOTIFICATION, Type.ERROR_MESSAGE);
@@ -271,6 +277,13 @@ public class ResourceCopyWindow extends Window {
 			close();
 		});
 		setContent(mainLayout);
+	}
+
+	private void persistStandard(ReResourceitem item) {
+		if (item.getReStandard() != null) {
+			ReStandard standard = item.getReStandard().cloneStandard(item.getId());
+			standardRep.save(standard);
+		}
 	}
 
 	private void persistItemLanguages(ReResourceitem item) {

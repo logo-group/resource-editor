@@ -9,6 +9,7 @@ import com.logo.data.repository.ReArabicegRep;
 import com.logo.data.repository.ReArabicjoRep;
 import com.logo.data.repository.ReArabicsaRep;
 import com.logo.data.repository.ReAzerbaijaniazRep;
+import com.logo.data.repository.ReBulgarianbgRep;
 import com.logo.data.repository.ReEnglishusRep;
 import com.logo.data.repository.ReFrenchfrRep;
 import com.logo.data.repository.ReGeorgiangeRep;
@@ -93,6 +94,9 @@ public class LogoresMainUI extends UI {
 
 	@Autowired
 	private transient ReAzerbaijaniazRep reAzerbaijaniazRep;
+
+	@Autowired
+	private transient ReBulgarianbgRep reBulgarianbgRep;
 
 	@Autowired
 	private transient ReRussianruRep reRussianruRep;
@@ -211,6 +215,7 @@ public class LogoresMainUI extends UI {
 		mRepositoryContainer.setReGermandeRep(reGermandeRep);
 		mRepositoryContainer.setRePersianirRep(rePersianirRep);
 		mRepositoryContainer.setReAzerbaijaniazRep(reAzerbaijaniazRep);
+		mRepositoryContainer.setReBulgarianbgRep(reBulgarianbgRep);
 		mRepositoryContainer.setReRussianruRep(reRussianruRep);
 		mRepositoryContainer.setReRomanianroRep(reRomanianroRep);
 		mRepositoryContainer.setReGeorgiangeRep(reGeorgiangeRep);

@@ -29,6 +29,7 @@ import com.logo.data.repository.ReEnglishusRep;
 import com.logo.data.repository.ReFrenchfrRep;
 import com.logo.data.repository.ReGermandeRep;
 import com.logo.data.repository.RePersianirRep;
+import com.logo.data.repository.ReResourceitemRep;
 import com.logo.data.repository.ReRomanianroRep;
 import com.logo.data.repository.ReRussianruRep;
 import com.logo.data.repository.ReStandardRep;
@@ -59,6 +60,7 @@ public class CustomLayoutUtil implements Serializable {
 	private static final ReArabicegRep reArabicegRep;
 	private static final ReArabicsaRep reArabicsaRep;
 	private static final ReStandardRep reStandardRep;
+	private static final ReResourceitemRep reResourceItemRep;
 
 	static {
 		reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
@@ -76,6 +78,7 @@ public class CustomLayoutUtil implements Serializable {
 		reArabicegRep = LogoresMainUI.getMrepositorycontainer().getReArabicegRep();
 		reArabicsaRep = LogoresMainUI.getMrepositorycontainer().getReArabicsaRep();
 		reStandardRep = LogoresMainUI.getMrepositorycontainer().getReStandardRep();
+		reResourceItemRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
 	}
 
 	public CustomLayoutUtil(Integer itemId, String name) {
@@ -149,8 +152,8 @@ public class CustomLayoutUtil implements Serializable {
 		if (reStandard == null) {
 			return;
 		}
-		ReStandard standard = reStandard;
-		reStandardRep.save(standard);
+		reStandard.setResourceitemref(itemId);
+		reStandardRep.save(reStandard);
 	}
 
 	public void setLangTo() {

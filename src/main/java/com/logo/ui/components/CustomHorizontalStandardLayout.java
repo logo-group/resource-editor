@@ -32,11 +32,9 @@ public class CustomHorizontalStandardLayout extends VerticalLayout {
 		setHeight("70px");
 
 		if (!txtValue.equals("")) {
-			setBlank(false);
 			pBackgroundColor = pBackgroundGreen;
 			caption = pStyle.concat(pBackgroundColor).concat(">" + name + "</p>");
 		} else {
-			setBlank(true);
 			pBackgroundColor = pBackgroundRed;
 			caption = pStyle.concat(pBackgroundColor).concat(">" + name + "</p>");
 		}
@@ -78,10 +76,6 @@ public class CustomHorizontalStandardLayout extends VerticalLayout {
 			}
 		});
 
-		if (isBlank()) {
-			layoutObjects.txtArea.setVisible(false);
-		}
-
 	}
 
 	private void edit(CustomLayoutStandardObjects layoutObjects) {
@@ -93,13 +87,11 @@ public class CustomHorizontalStandardLayout extends VerticalLayout {
 		layoutObjects.txtArea.focus();
 		layoutObjects.txtArea.setSelection(0, 0);
 
-		if (!isBlank()) {
-			layoutObjects.buttonLayoyt.setWidth("160px");
-			layoutObjects.buttonLayoyt.addComponentsAndExpand(layoutObjects.saveButtonForEdit);
-			layoutObjects.buttonLayoyt.addComponentsAndExpand(layoutObjects.cancelButtonForEdit);
-			layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.cancelButtonForEdit, Alignment.BOTTOM_RIGHT);
-			layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.saveButtonForEdit, Alignment.BOTTOM_RIGHT);
-		}
+		layoutObjects.buttonLayoyt.setWidth("160px");
+		layoutObjects.buttonLayoyt.addComponentsAndExpand(layoutObjects.saveButtonForEdit);
+		layoutObjects.buttonLayoyt.addComponentsAndExpand(layoutObjects.cancelButtonForEdit);
+		layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.cancelButtonForEdit, Alignment.BOTTOM_RIGHT);
+		layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.saveButtonForEdit, Alignment.BOTTOM_RIGHT);
 
 		layoutObjects.binder.setBean(reStandard);
 		layoutObjects.binder.forField(layoutObjects.txtArea).bind(ReStandard::getResourceStr,
@@ -118,10 +110,9 @@ public class CustomHorizontalStandardLayout extends VerticalLayout {
 
 		if (!layoutObjects.txtArea.getValue().equals("")) {
 			customLayoutUtil.persistStandard(reStandard);
-			setBlank(false);
 		}
 
-		if (added && !isBlank()) {
+		if (added) {
 			setCaption(pStyle.concat(pBackgroundGreen).concat(">" + customLayoutUtil.getLang() + "</p>"));
 		}
 		addStyleName("");
@@ -137,11 +128,4 @@ public class CustomHorizontalStandardLayout extends VerticalLayout {
 		addStyleName("");
 	}
 
-	public final boolean isBlank() {
-		return isBlank;
-	}
-
-	public final void setBlank(boolean isBlank) {
-		this.isBlank = isBlank;
-	}
 }

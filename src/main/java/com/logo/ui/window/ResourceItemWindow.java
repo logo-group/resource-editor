@@ -267,6 +267,11 @@ public class ResourceItemWindow extends Window {
 	public void persist() {
 		try {
 			resourceItem.setResourceref(resource.getId());
+			resourceItem.setResourcetype(resource.getResourcetype().getTyp());
+			resourceItem.setVersion(resource.getVersion());
+			resourceItem.setRequested(resource.getRequested());
+			resourceItem.setActive(resource.getActive().getTyp());
+			resourceItem.setResourcecategory(resource.getResourcecategory());
 			reResourceitemRep.save(resourceItem);
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e.getMessage());

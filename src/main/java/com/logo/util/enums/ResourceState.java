@@ -19,4 +19,9 @@ public enum ResourceState {
 		}
 		return "";
 	}
+
+	public Integer getTyp() {
+		return typ;
+	}
+
 }

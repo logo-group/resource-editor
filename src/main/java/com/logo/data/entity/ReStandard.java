@@ -41,7 +41,10 @@ public class ReStandard implements Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID", insertable = false, updatable = false)
-	public ReResourceitem resourceitemref;
+	public ReResourceitem resourceItem;
+
+	@Column(name = "RESOURCEITEMREF")
+	private Integer resourceitemref;
 
 	@Column(name = "CREATEDBY")
 	private Integer createdby;
@@ -83,12 +86,20 @@ public class ReStandard implements Serializable {
 		this.resourceStr = resourceStr;
 	}
 
-	public ReResourceitem getReResourceitem() {
+	public ReResourceitem getResourceItem() {
+		return resourceItem;
+	}
+
+	public void setResourceItem(ReResourceitem resourceItem) {
+		this.resourceItem = resourceItem;
+	}
+
+	public Integer getResourceitemref() {
 		return resourceitemref;
 	}
 
-	public void setReResourceitem(ReResourceitem reResourceitem) {
-		this.resourceitemref = reResourceitem;
+	public void setResourceitemref(Integer resourceitemref) {
+		this.resourceitemref = resourceitemref;
 	}
 
 	public Integer getCreatedby() {
@@ -137,6 +148,15 @@ public class ReStandard implements Serializable {
 
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	public ReStandard cloneStandard(Integer itemId) {
+		ReStandard reStandard = new ReStandard();
+		reStandard.setResourceStr(resourceStr);
+		reStandard.setInfo(info);
+		reStandard.setVersion(version);
+		reStandard.setResourceitemref(itemId);
+		return reStandard;
 	}
 
 }
