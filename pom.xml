@@ -237,15 +237,31 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-maven-plugin</artifactId>
-				<version>8.1.2</version>
-				<executions>
-					<!-- <execution> <goals> <goal>clean</goal> <goal>resources</goal> <goal>update-theme</goal> 
-						<goal>update-widgetset</goal> <goal>compile-theme</goal> <goal>compile</goal> 
-						</goals> </execution> -->
-				</executions>
-			</plugin>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-maven-plugin</artifactId>
+                <version>8.2.0</version>
+                <dependencies>
+                    <!-- For Travis -->
+                    <dependency>
+                        <groupId>xml-apis</groupId>
+                        <artifactId>xml-apis</artifactId>
+                        <version>1.4.01</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <extraJvmArgs>-Xmx2G</extraJvmArgs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>update-theme</goal>
+                            <goal>update-widgetset</goal>
+                            <goal>compile</goal>
+                            <goal>compile-theme</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
