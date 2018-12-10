@@ -79,6 +79,12 @@ public class ResourceViewNew extends VerticalLayout implements View {
 	private PaginationItemLayout gridContentItem = null;
 	private Button filter = new Button(LangHelper.getLocalizableMessage(LogoResConstants.ADVANCESEARCHSTR));
 
+	private Button toolsButton;
+	private VerticalLayout submenuTools;
+	private Button documentsButton;
+	private VerticalLayout submenuDocuments;
+	private Button logoLabel;
+
 	@Autowired
 	public transient ReResourceRep resRepo;
 
@@ -153,12 +159,12 @@ public class ResourceViewNew extends VerticalLayout implements View {
 		transferButton.addStyleName(MaterialTheme.BUTTON_BORDERLESS + " " + LogoResConstants.STYLE_CUSTOM_WHITE);
 		transferButton.setIcon(VaadinIcons.TRUCK);
 
-		Button toolsButton = new Button(LangHelper.getLocalizableMessage(LogoResConstants.TOOLSSTR));
+		toolsButton = new Button(LangHelper.getLocalizableMessage(LogoResConstants.TOOLSSTR));
 		toolsButton.addStyleName(MaterialTheme.BUTTON_BORDERLESS + " " + MaterialTheme.BUTTON_ICON_ALIGN_RIGHT + " "
 				+ LogoResConstants.STYLE_CUSTOM_WHITE);
 		toolsButton.setIcon(VaadinIcons.ANGLE_DOWN);
 
-		Button documentsButton = new Button("Belgeler");
+		documentsButton = new Button("Belgeler");
 		documentsButton.addStyleName(MaterialTheme.BUTTON_BORDERLESS + " " + MaterialTheme.BUTTON_ICON_ALIGN_RIGHT + " "
 				+ LogoResConstants.STYLE_CUSTOM_WHITE);
 		documentsButton.setIcon(VaadinIcons.ANGLE_DOWN);
@@ -198,7 +204,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 		menuButtonLayout.addComponent(submenuTransfer);
 
 		menuButtonLayout.addComponent(toolsButton);
-		VerticalLayout submenuTools = new VerticalLayout();
+		submenuTools = new VerticalLayout();
 		submenuTools.setVisible(false);
 		submenuTools.addComponent(convertToNonLoc);
 		submenuTools.addComponent(copyResource);
@@ -206,7 +212,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 		menuButtonLayout.addComponent(submenuTools);
 
 		menuButtonLayout.addComponent(documentsButton);
-		VerticalLayout submenuDocuments = new VerticalLayout();
+		submenuDocuments = new VerticalLayout();
 		submenuDocuments.setVisible(false);
 		submenuDocuments.addComponent(usersManul);
 		submenuDocuments.addComponent(translatorManual);
@@ -220,32 +226,11 @@ public class ResourceViewNew extends VerticalLayout implements View {
 		menuButtonLayout.setComponentAlignment(toolsButton, Alignment.TOP_LEFT);
 		menuButtonLayout.setComponentAlignment(documentsButton, Alignment.TOP_LEFT);
 
-		transferButton.addClickListener(e -> {
-			contentLayout.removeAllComponents();
-			contentLayout.addComponent(transferView);
-			contentLayout.setExpandRatio(transferView, 4.0f);
-			close.click();
-		});
+		clickTransferButtonAction(transferButton, close);
 
-		toolsButton.addClickListener(e -> {
-			if (submenuTools.isVisible()) {
-				submenuTools.setVisible(false);
-				toolsButton.setIcon(VaadinIcons.ANGLE_DOWN);
-			} else {
-				submenuTools.setVisible(true);
-				toolsButton.setIcon(VaadinIcons.ANGLE_RIGHT);
-			}
-		});
+		clickToolsButtonAction(close);
 
-		documentsButton.addClickListener(e -> {
-			if (submenuDocuments.isVisible()) {
-				submenuDocuments.setVisible(false);
-				documentsButton.setIcon(VaadinIcons.ANGLE_DOWN);
-			} else {
-				submenuDocuments.setVisible(true);
-				documentsButton.setIcon(VaadinIcons.ANGLE_RIGHT);
-			}
-		});
+		clickDocumentsButtonAction(close);
 
 		menuPanel.setSizeFull();
 		menuPanel.setHeight("100%");
@@ -269,36 +254,13 @@ public class ResourceViewNew extends VerticalLayout implements View {
 				menuPanel.setVisible(true);
 		});
 
-		usersButton.addClickListener(e -> {
-			contentLayout.removeAllComponents();
-			contentLayout.addComponent(userView);
-			contentLayout.setExpandRatio(userView, 4.0f);
-			close.click();
-		});
+		clickUserButtonAction(usersButton, close);
 
-		reports.addClickListener(e -> {
-			contentLayout.removeAllComponents();
-			contentLayout.addComponent(messageView);
-			contentLayout.setExpandRatio(messageView, 4.0f);
-			close.click();
-		});
+		clickReportsButtonAction(reports, close);
 
-		home.addClickListener(e -> {
-			contentLayout.removeAllComponents();
-			contentLayout.addComponent(homeView);
-			contentLayout.setExpandRatio(homeView, 4.0f);
-			searchLayout.setVisible(false);
-			filter.setIcon(VaadinIcons.ANGLE_DOWN);
-			close.click();
-		});
+		clickHomeButtonAction(home, close);
 
-		allResources.addClickListener(e -> {
-			contentLayout.removeAllComponents();
-			gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_ALL, null, "", this, false);
-			contentLayout.addComponent(gridContentItem);
-			contentLayout.setExpandRatio(gridContentItem, 4.0f);
-			close.click();
-		});
+		clickAllResourcesButtonAction(allResources, close);
 
 		addNewResource.addClickListener(e -> homeView.getAddNewResource().click());
 
@@ -307,6 +269,8 @@ public class ResourceViewNew extends VerticalLayout implements View {
 	}
 
 	public void createResoucePageForAll() {
+		clearSessionAttributes();
+		getSession().setAttribute("pageForAllTab", "pageForAll");
 		contentLayout.removeAllComponents();
 		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_ALL, null, "", this, false);
 		contentLayout.addComponent(gridContentItem);
@@ -328,12 +292,16 @@ public class ResourceViewNew extends VerticalLayout implements View {
 	}
 
 	public void createMessageLayout() {
+		clearSessionAttributes();
+		getSession().setAttribute("messagesTab", "messages");
 		contentLayout.removeAllComponents();
 		contentLayout.addComponent(messageView);
 		contentLayout.setExpandRatio(messageView, 4.0f);
 	}
 
 	public void createHelpDocsLayout() {
+		clearSessionAttributes();
+		getSession().setAttribute("helpDocsTab", "helpdocs");
 		contentLayout.removeAllComponents();
 		contentLayout.addComponent(helpDocsView);
 		contentLayout.setExpandRatio(helpDocsView, 4.0f);
@@ -394,7 +362,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 		userLayout.addComponents(flagLayout, userButton);
 		userLayout.setSpacing(true);
 
-		Button logoLabel = new Button(LangHelper.getLocalizableMessage(LogoResConstants.LOGORESOURCEEDITOR));
+		logoLabel = new Button(LangHelper.getLocalizableMessage(LogoResConstants.LOGORESOURCEEDITOR));
 		logoLabel.addStyleName(MaterialTheme.BUTTON_BORDERLESS + " " + MaterialTheme.BUTTON_ROUND + " "
 				+ LogoResConstants.STYLE_CUSTOM_WHITE);
 
@@ -411,28 +379,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 			filter.setIcon(VaadinIcons.ANGLE_DOWN);
 		});
 
-		filter.addClickListener(e -> {
-
-			if (searchLayout.isVisible()) {
-				logoLabel.click();
-				srcLayout = new SearchLayout(this);
-				srcLayout.setSizeFull();
-				srcLayout.setHeight("100%");
-				srcLayout.setWidth("100%");
-				searchLayout.setVisible(false);
-				filter.setIcon(VaadinIcons.ANGLE_DOWN);
-			} else {
-				contentLayout.removeAllComponents();
-				srcLayout = new SearchLayout(this);
-				srcLayout.setSizeFull();
-				srcLayout.setHeight("100%");
-				srcLayout.setWidth("100%");
-				contentLayout.addComponent(srcLayout);
-				contentLayout.setExpandRatio(srcLayout, 4.0f);
-				searchLayout.setVisible(true);
-				filter.setIcon(VaadinIcons.ANGLE_UP);
-			}
-		});
+		clickFilterButtonAction();
 
 		HorizontalLayout scLayout = getSearchLayout();
 
@@ -566,6 +513,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 				}
 				if (selectedItem.getText().equals("Çıkış")) {
 					getUI().getPage().setLocation(getLogoutPath());
+					getSession().setAttribute("user", null);
 				}
 			}
 		};
@@ -594,6 +542,183 @@ public class ResourceViewNew extends VerticalLayout implements View {
 
 	public Panel getSearchLayoutForView() {
 		return this.searchLayout;
+	}
+
+	private void clickUserButtonAction(Button usersButton, Button close) {
+		usersButton.addClickListener(e -> {
+			clearSessionAttributes();
+			getSession().setAttribute("usersTab", "users");
+			doUserButtonAction();
+			close.click();
+		});
+	}
+
+	public void doUserButtonAction() {
+		contentLayout.removeAllComponents();
+		contentLayout.addComponent(userView);
+		contentLayout.setExpandRatio(userView, 4.0f);
+	}
+
+	private void clickReportsButtonAction(Button reports, Button close) {
+		reports.addClickListener(e -> {
+			clearSessionAttributes();
+			getSession().setAttribute("reportsTab", "reports");
+			doReportsButtonAction();
+			close.click();
+		});
+	}
+
+	public void doReportsButtonAction() {
+		contentLayout.removeAllComponents();
+		contentLayout.addComponent(messageView);
+		contentLayout.setExpandRatio(messageView, 4.0f);
+	}
+
+	private void clickHomeButtonAction(Button home, Button close) {
+		home.addClickListener(e -> {
+			clearSessionAttributes();
+			getSession().setAttribute("homeTab", "home");
+			doHomeButtonAction();
+			close.click();
+		});
+	}
+
+	public void doHomeButtonAction() {
+		contentLayout.removeAllComponents();
+		contentLayout.addComponent(homeView);
+		contentLayout.setExpandRatio(homeView, 4.0f);
+		searchLayout.setVisible(false);
+		filter.setIcon(VaadinIcons.ANGLE_DOWN);
+	}
+
+	private void clickAllResourcesButtonAction(Button allResources, Button close) {
+		allResources.addClickListener(e -> {
+			clearSessionAttributes();
+			getSession().setAttribute("allResourcesTab", "allResources");
+			doAllResourcesButtonAction();
+			close.click();
+		});
+	}
+
+	public void doAllResourcesButtonAction() {
+		contentLayout.removeAllComponents();
+		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_ALL, null, "", this, false);
+		contentLayout.addComponent(gridContentItem);
+		contentLayout.setExpandRatio(gridContentItem, 4.0f);
+	}
+
+	private void clickTransferButtonAction(Button transferButton, Button close) {
+		transferButton.addClickListener(e -> {
+			clearSessionAttributes();
+			getSession().setAttribute("transferTab", "transfers");
+			doTransferButtonAction();
+			close.click();
+		});
+	}
+
+	public void doTransferButtonAction() {
+		contentLayout.removeAllComponents();
+		contentLayout.addComponent(transferView);
+		contentLayout.setExpandRatio(transferView, 4.0f);
+	}
+
+	private void clickToolsButtonAction(Button close) {
+		toolsButton.addClickListener(e -> {
+			clearSessionAttributes();
+			getSession().setAttribute("toolsTab", "tools");
+			doToolsButtonAction();
+		});
+	}
+
+	public void doToolsButtonAction() {
+		if (submenuTools.isVisible()) {
+			submenuTools.setVisible(false);
+			toolsButton.setIcon(VaadinIcons.ANGLE_DOWN);
+		} else {
+			submenuTools.setVisible(true);
+			toolsButton.setIcon(VaadinIcons.ANGLE_RIGHT);
+		}
+	}
+
+	private void clickDocumentsButtonAction(Button close) {
+		documentsButton.addClickListener(e -> {
+			clearSessionAttributes();
+			getSession().setAttribute("documentsTab", "documents");
+			doDocumentsButtonAction();
+		});
+	}
+
+	public void doDocumentsButtonAction() {
+		if (submenuDocuments.isVisible()) {
+			submenuDocuments.setVisible(false);
+			documentsButton.setIcon(VaadinIcons.ANGLE_DOWN);
+		} else {
+			submenuDocuments.setVisible(true);
+			documentsButton.setIcon(VaadinIcons.ANGLE_RIGHT);
+		}
+	}
+
+	private void clickFilterButtonAction() {
+		filter.addClickListener(e -> {
+			clearSessionAttributes();
+			getSession().setAttribute("filtersTab", "filters");
+			doFilterButtonAction();
+		});
+	}
+
+	public void doFilterButtonAction() {
+		if (searchLayout.isVisible()) {
+			logoLabel.click();
+			srcLayout = new SearchLayout(this);
+			srcLayout.setSizeFull();
+			srcLayout.setHeight("100%");
+			srcLayout.setWidth("100%");
+			searchLayout.setVisible(false);
+			filter.setIcon(VaadinIcons.ANGLE_DOWN);
+		} else {
+			contentLayout.removeAllComponents();
+			srcLayout = new SearchLayout(this);
+			srcLayout.setSizeFull();
+			srcLayout.setHeight("100%");
+			srcLayout.setWidth("100%");
+			contentLayout.addComponent(srcLayout);
+			contentLayout.setExpandRatio(srcLayout, 4.0f);
+			searchLayout.setVisible(true);
+			filter.setIcon(VaadinIcons.ANGLE_UP);
+		}
+	}
+
+	private void clearSessionAttributes() {
+		if (getSession().getAttribute("usersTab") != null) {
+			getSession().setAttribute("usersTab", null);
+		}
+		if (getSession().getAttribute("reportsTab") != null) {
+			getSession().setAttribute("reportsTab", null);
+		}
+		if (getSession().getAttribute("homeTab") != null) {
+			getSession().setAttribute("homeTab", null);
+		}
+		if (getSession().getAttribute("allResourcesTab") != null) {
+			getSession().setAttribute("allResourcesTab", null);
+		}
+		if (getSession().getAttribute("transferTab") != null) {
+			getSession().setAttribute("transferTab", null);
+		}
+		if (getSession().getAttribute("toolsTab") != null) {
+			getSession().setAttribute("toolsTab", null);
+		}
+		if (getSession().getAttribute("documentsTab") != null) {
+			getSession().setAttribute("documentsTab", null);
+		}
+		if (getSession().getAttribute("filtersTab") != null) {
+			getSession().setAttribute("filtersTab", null);
+		}
+		if (getSession().getAttribute("pageForAllTab") != null) {
+			getSession().setAttribute("pageForAllTab", null);
+		}
+		if (getSession().getAttribute("helpDocsTab") != null) {
+			getSession().setAttribute("helpDocsTab", null);
+		}
 	}
 
 }

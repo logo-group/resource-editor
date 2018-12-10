@@ -179,12 +179,10 @@ public class LogoresMainUI extends UI {
 		springViewDisplay.setSizeFull();
 		root.addComponent(springViewDisplay);
 		root.setExpandRatio(springViewDisplay, 1.0f);
-
 		getNavigator().addView(LoginView.VIEW_NAME, LoginView.class);
-
 		getNavigator().addProvider(viewProvider);
 		initialize();
-		router("");
+		router(ResourceViewNew.VIEW_NAME);
 		new Responsive(this);
 	}
 
@@ -196,8 +194,9 @@ public class LogoresMainUI extends UI {
 			getNavigator().addView(ReMessageView.VIEW_NAME, ReMessageView.class);
 			getNavigator().addView(ReHelpDocsView.VIEW_NAME, ReHelpDocsView.class);
 			getNavigator().addView(TransferView.VIEW_NAME, TransferView.class);
-			if (route.equals("ResourceViewNew")) {
+			if (route.equals(ResourceViewNew.VIEW_NAME)) {
 				getNavigator().navigateTo(ResourceViewNew.VIEW_NAME);
+				loadSessionViews();
 			} else {
 				getNavigator().navigateTo(LoginView.VIEW_NAME);
 			}
@@ -233,6 +232,34 @@ public class LogoresMainUI extends UI {
 		mRepositoryContainer.setMessageProvider(ApplicationContextLocator.messageProvider());
 		mRepositoryContainer.setReProjectVerisonRep(reProjectVerisonRep);
 		mRepositoryContainer.setReStandardRep(reStandardRep);
+	}
+
+	private void loadSessionViews() {
+		getNavigator().addView(ResourceViewNew.VIEW_NAME, ResourceViewNew.class);
+		ResourceViewNew view = (ResourceViewNew) getNavigator().getCurrentView();
+		if (getSession().getAttribute("usersTab") != null) {
+			view.doUserButtonAction();
+		} else if (getSession().getAttribute("reportsTab") != null) {
+			view.doReportsButtonAction();
+		} else if (getSession().getAttribute("homeTab") != null) {
+			view.doHomeButtonAction();
+		} else if (getSession().getAttribute("allResourcesTab") != null) {
+			view.doAllResourcesButtonAction();
+		} else if (getSession().getAttribute("transferTab") != null) {
+			view.doTransferButtonAction();
+		} else if (getSession().getAttribute("toolsTab") != null) {
+			view.doToolsButtonAction();
+		} else if (getSession().getAttribute("documentsTab") != null) {
+			view.doDocumentsButtonAction();
+		} else if (getSession().getAttribute("filtersTab") != null) {
+			view.doFilterButtonAction();
+		} else if (getSession().getAttribute("pageForAllTab") != null) {
+			view.createResoucePageForAll();
+		} else if (getSession().getAttribute("messagesTab") != null) {
+			view.createMessageLayout();
+		} else if (getSession().getAttribute("helpDocsTab") != null) {
+			view.createHelpDocsLayout();
+		}
 	}
 
 	public static RepositoryContainer getMrepositorycontainer() {
