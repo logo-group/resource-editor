@@ -63,14 +63,14 @@ public class PopupTextFieldContent implements PopupView.Content {
 				.bind(ReResourceitem::getTagnr, ReResourceitem::setTagnr);
 		binder.forField(textField3).bind(ReResourceitem::getPrefixstr, ReResourceitem::setPrefixstr);
 
-		if (reResourceitem.getCreatedby() != null || reResourceitem.getCreatedby() != 0) {
+		if (reResourceitem.getCreatedby() != null && reResourceitem.getCreatedby() != 0) {
 			createdUser.setValue(getUserName(reResourceitem.getCreatedby()));
 			createdUser.setEnabled(false);
 		} else {
 			createdUser.setVisible(false);
 		}
 
-		if (reResourceitem.getModifiedby() != null || reResourceitem.getCreatedby() != 0) {
+		if (reResourceitem.getModifiedby() != null && reResourceitem.getCreatedby() != 0) {
 			modifiedUser.setValue(getUserName(reResourceitem.getModifiedby()));
 			modifiedUser.setEnabled(false);
 		} else {
