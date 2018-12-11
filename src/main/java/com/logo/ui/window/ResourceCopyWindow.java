@@ -73,7 +73,8 @@ public class ResourceCopyWindow extends Window {
 	private final SpellChecTextField tagEnd = new SpellChecTextField(
 			LangHelper.getLocalizableMessage(LogoResConstants.TAGNREND));
 
-	private final SwitchWithTextBox tagAll = new SwitchWithTextBox(LogoResConstants.TAGALL, 1);
+	private final SwitchWithTextBox tagAll = new SwitchWithTextBox(
+			LangHelper.getLocalizableMessage(LogoResConstants.TAGALL), 1);
 
 	private final SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(
 			LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
@@ -265,7 +266,8 @@ public class ResourceCopyWindow extends Window {
 					persistStandard(item);
 				}
 			} catch (DataIntegrityViolationException e) {
-				Notification.show(LogoResConstants.UNIQUE_FIELD_NOTIFICATION, Type.ERROR_MESSAGE);
+				Notification.show(LangHelper.getLocalizableMessage(LogoResConstants.UNIQUE_FIELD_NOTIFICATION),
+						Type.ERROR_MESSAGE);
 				return;
 			}
 			String filter = copiedResource.getResourcegroup().name() + "->"
@@ -352,20 +354,25 @@ public class ResourceCopyWindow extends Window {
 			Integer.valueOf(resourcenr.getValue());
 			if (!tagAll.getValue()) {
 				if ((tagStart.getValue().length() <= 0 || tagEnd.getValue().length() <= 0)) {
-					Notification.show(LogoResConstants.EMPTY_TAGFIELDS_NOTIFICIATION, Type.WARNING_MESSAGE);
+					Notification.show(LangHelper.getLocalizableMessage(LogoResConstants.EMPTY_TAGFIELDS_NOTIFICIATION),
+							Type.WARNING_MESSAGE);
 				} else if (Integer.valueOf(tagStart.getValue()) > Integer.valueOf(tagEnd.getValue())) {
-					Notification.show(LogoResConstants.INCONSISTENT_TAGFIELDS_NOTIFICIATION, Type.WARNING_MESSAGE);
+					Notification.show(
+							LangHelper.getLocalizableMessage(LogoResConstants.INCONSISTENT_TAGFIELDS_NOTIFICIATION),
+							Type.WARNING_MESSAGE);
 				} else {
 					result = false;
 				}
 			} else if (resourcenr.getValue().length() <= 0) {
-				Notification.show(LogoResConstants.EMPTY_RESOURCENUMBER_NOTIFICIATION, Type.WARNING_MESSAGE);
+				Notification.show(LangHelper.getLocalizableMessage(LogoResConstants.EMPTY_RESOURCENUMBER_NOTIFICIATION),
+						Type.WARNING_MESSAGE);
 			} else {
 				result = false;
 			}
 
 		} catch (NumberFormatException e) {
-			Notification.show(LogoResConstants.NUMERIC_FIELD_NOTIFICATION, Type.WARNING_MESSAGE);
+			Notification.show(LangHelper.getLocalizableMessage(LogoResConstants.NUMERIC_FIELD_NOTIFICATION),
+					Type.WARNING_MESSAGE);
 		}
 		return result;
 	}

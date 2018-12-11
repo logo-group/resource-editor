@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReResourceitem;
+import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReResourceitemRep;
 import com.logo.ui.components.ButtonGenerator;
 import com.logo.ui.components.SpellChecComboBox;
@@ -20,6 +21,7 @@ import com.logo.util.enums.ResourceCase;
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
@@ -39,6 +41,8 @@ public class ResourceItemWindow extends Window {
 
 	private ReResource resource = new ReResource();
 	private ReResourceitem resourceItem = new ReResourceitem();
+	private final transient ReUser reUser;
+
 	private final Binder<ReResourceitem> binder = new Binder<>(ReResourceitem.class);
 	private final SpellChecTextField ordernr = new SpellChecTextField(
 			LangHelper.getLocalizableMessage(LogoResConstants.ORDERNRSTR));
@@ -74,6 +78,7 @@ public class ResourceItemWindow extends Window {
 		this.resource = resource;
 		this.binder.setBean(resourceItem);
 		this.reResourceitemRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
+		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
 
 		initialize();
 
@@ -94,6 +99,13 @@ public class ResourceItemWindow extends Window {
 	public void initialize() {
 		this.resourceItem = new ReResourceitem();
 		this.binder.setBean(resourceItem);
+
+		if (resourceItem.getCreatedby() == null) {
+			resourceItem.setCreatedby(reUser.getId());
+		}
+
+		resourceItem.setModifiedby(reUser.getId());
+
 		tabsheet = new TabSheet();
 		tabsheet.setSizeFull();
 		tabsheet.setWidth("100%");

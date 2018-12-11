@@ -167,12 +167,17 @@ public class LogoResConstants {
 	public static final String STYLE_TEXTFIEL_FORM = "v-textfieldForm";
 	public static final String STYLE_TEXTFIEL_SEARCH = "v-textfieldSearch";
 
-	public static final String TAGALL = "Tüm Etiketleri Kopyala";
-	public static final String EMPTY_TAGFIELDS_NOTIFICIATION = "Lütfen etiket alanlarını doldurunuz!";
-	public static final String INCONSISTENT_TAGFIELDS_NOTIFICIATION = "Bitiş numarası başlangıç numarasında büyük olmalı!";
-	public static final String EMPTY_RESOURCENUMBER_NOTIFICIATION = "Lütfen kaynak numarasını doldurunuz!";
-	public static final String NUMERIC_FIELD_NOTIFICATION = "Lütfen numerik değer giriniz!";
-	public static final String UNIQUE_FIELD_NOTIFICATION = "Girdiğiniz kaynak numarası zaten kayıtlı!";
+	public static final String TAGALL = "caption.tagall";
+	public static final String EMPTY_TAGFIELDS_NOTIFICIATION = "notification.empty.tagfield";
+	public static final String INCONSISTENT_TAGFIELDS_NOTIFICIATION = "notification.inconsistent.tagfield";
+	public static final String EMPTY_RESOURCENUMBER_NOTIFICIATION = "notification.empty.resourcenumber";
+	public static final String NUMERIC_FIELD_NOTIFICATION = "notification.numeric.field";
+	public static final String UNIQUE_FIELD_NOTIFICATION = "notification.unique.field";
+	public static final String CREATED_USER_LABEL = "caption.createduser";
+	public static final String MODIFIED_USER_LABEL = "caption.modifieduser";
+	public static final String CREATED_TIME_LABEL = "caption.createdtime";
+	public static final String MODIFIED_TIME_LABEL = "caption.modifiedtime";
+	public static final String RESOURCE_INFORMATIONS = "caption.resource.informations";
 
 	private LogoResConstants() {
 	}

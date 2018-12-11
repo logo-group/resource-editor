@@ -1,5 +1,6 @@
 package com.logo.ui.window;
 
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +13,7 @@ import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReProjectVerisonRep;
 import com.logo.data.repository.ReResourceRep;
+import com.logo.data.repository.ReUserRep;
 import com.logo.ui.components.ButtonGenerator;
 import com.logo.ui.components.SpellChecComboBox;
 import com.logo.ui.components.SpellChecTextArea;
@@ -61,9 +63,11 @@ public class ResourceWindow extends Window {
 			LangHelper.getLocalizableMessage(LogoResConstants.RESCASESTR));
 	private final SpellChecComboBox<OwnerProduct> ownerProductCombo = new SpellChecComboBox<>(
 			LangHelper.getLocalizableMessage(LogoResConstants.OWNERPRODUCT));
+
 	private final HorizontalLayout buttonLayout = new HorizontalLayout(save, cancel);
 
 	private final transient ReResourceRep resRepo;
+	private final transient ReUserRep userRepo;
 	private final transient ReUser reUser;
 	private TabSheet tabsheet = new TabSheet();
 	private final Label formName = new Label();
@@ -77,6 +81,7 @@ public class ResourceWindow extends Window {
 
 	public ResourceWindow(ReResource resource, ResourceViewNew resView, boolean isNew) {
 		this.resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
+		this.userRepo = LogoresMainUI.getMrepositorycontainer().getReUserRep();
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
 		this.reProjectVerisonRep = LogoresMainUI.getMrepositorycontainer().getReProjectVerisonRep();
 		versionList = reProjectVerisonRep.findAll();
@@ -110,7 +115,7 @@ public class ResourceWindow extends Window {
 		setClosable(false);
 		setModal(true);
 		setWidth(50.0f, Unit.PERCENTAGE);
-		setHeight(60.0f, Unit.PERCENTAGE);
+		setHeight(70.0f, Unit.PERCENTAGE);
 		setResizable(false);
 		setResponsive(true);
 
@@ -194,7 +199,6 @@ public class ResourceWindow extends Window {
 		col01.addComponent(resourceCaseCombo);
 		col01.addComponent(resourceTypeCombo);
 		col01.addComponent(ownerProductCombo);
-
 		gridLayout.addComponent(col01, 0, 0, 1, 2);
 		gridLayout.addComponent(buttonLayout, 1, 6);
 		gridLayout.setComponentAlignment(buttonLayout, Alignment.BOTTOM_RIGHT);
@@ -221,8 +225,39 @@ public class ResourceWindow extends Window {
 				.setIcon(VaadinIcons.USER);
 		tabsheet.addTab(twinColl, LangHelper.getLocalizableMessage(LogoResConstants.RESVERSIONSTR))
 				.setIcon(VaadinIcons.TWIN_COL_SELECT);
-
 		mainLayout.addComponentsAndExpand(tabsheet);
+
+		if (!isNew) {
+			final SpellChecTextField createdUser = new SpellChecTextField(
+					LangHelper.getLocalizableMessage(LogoResConstants.CREATED_USER_LABEL));
+			final SpellChecTextField modifiedUser = new SpellChecTextField(
+					LangHelper.getLocalizableMessage(LogoResConstants.MODIFIED_USER_LABEL));
+			final SpellChecTextField createdTime = new SpellChecTextField(
+					LangHelper.getLocalizableMessage(LogoResConstants.CREATED_TIME_LABEL));
+			final SpellChecTextField modifiedTime = new SpellChecTextField(
+					LangHelper.getLocalizableMessage(LogoResConstants.MODIFIED_TIME_LABEL));
+			GridLayout resourceInfo = new GridLayout();
+			FormLayout infoColumn = new FormLayout();
+			infoColumn.setSizeFull();
+			infoColumn.setSpacing(true);
+			infoColumn.setMargin(true);
+			infoColumn.setWidth("100%");
+			infoColumn.setHeight("100%");
+			createdUser.setValue(getUserName(resource.getCreatedby()));
+			createdUser.setEnabled(false);
+			modifiedUser.setValue(getUserName(resource.getModifiedby()));
+			modifiedUser.setEnabled(false);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+			createdTime.setValue(resource.getCreatedon().format(formatter));
+			createdTime.setEnabled(false);
+			modifiedTime.setValue(resource.getModifiedon().format(formatter));
+			modifiedTime.setEnabled(false);
+			infoColumn.addComponents(createdUser, modifiedUser, createdTime, modifiedTime);
+			resourceInfo.addComponent(infoColumn);
+			tabsheet.addTab(resourceInfo, LangHelper.getLocalizableMessage(LogoResConstants.RESOURCE_INFORMATIONS))
+					.setIcon(VaadinIcons.INFO_CIRCLE);
+		}
+
 		cancel.addClickListener(event -> close());
 
 		save.addClickListener(event -> {
@@ -266,6 +301,10 @@ public class ResourceWindow extends Window {
 
 	public ReProjectVersion findByVersNr(List<ReProjectVersion> versionList, String versNr) {
 		return versionList.stream().filter(x -> x.getVersionnr().equalsIgnoreCase(versNr)).findFirst().orElse(null);
+	}
+
+	private String getUserName(int userId) {
+		return userRepo.findByid(userId).getUsername();
 	}
 
 }
