@@ -250,6 +250,9 @@ public class ResourceCopyWindow extends Window {
 
 			for (ReResourceitem resourceItem : resourceItemList) {
 				ReResourceitem copiedResourceItem = resourceItem.copyResourceItem(copiedResource);
+				if (copiedResourceItem.getCreatedby() == null) {
+					copiedResourceItem.setCreatedby(reUser.getId());
+				}
 				if (!tagAll.getValue()) {
 					if (copiedResourceItem.getTagnr() >= Integer.valueOf(tagStart.getValue())
 							&& copiedResourceItem.getTagnr() <= Integer.valueOf(tagEnd.getValue())) {

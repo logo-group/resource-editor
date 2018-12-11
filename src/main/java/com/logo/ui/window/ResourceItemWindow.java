@@ -100,7 +100,7 @@ public class ResourceItemWindow extends Window {
 		this.resourceItem = new ReResourceitem();
 		this.binder.setBean(resourceItem);
 
-		if (resourceItem.getCreatedby() == null) {
+		if (resourceItem.getCreatedby() == null || resourceItem.getCreatedby() == 0) {
 			resourceItem.setCreatedby(reUser.getId());
 		}
 
