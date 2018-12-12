@@ -107,6 +107,7 @@ public class LogoResConstants {
 	public static final String LEVELNRSTR = "caption.levelnr";
 	public static final String PREFIXSTR = "caption.prefix";
 	public static final String INFOSTR = "caption.info";
+	public static final String COUNT = "caption.count";
 	public static final String CLICKTOEDITSTR = "caption.clicktoedit";
 	public static final String NAMESTR = "caption.name";
 	public static final String SURNAMESTR = "caption.surname";

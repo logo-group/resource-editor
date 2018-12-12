@@ -17,7 +17,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 		@Index(name = "I_RESOURCEITEMS_ORDERNR_TAGNR", columnList = "RESOURCEREF,ORDERNR,TAGNR", unique = true),
 		@Index(name = "I_RESOURCEITEMS_TAGNR", columnList = "RESOURCEREF,TAGNR", unique = true) })
 @EntityListeners(AuditingEntityListener.class)
-public class ReResourceitem extends ReResourceitemBase implements Serializable {
+public class ReResourceitem extends ReResourceitemBase implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -239,6 +239,10 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable {
 		return copiedResourceItem;
 	}
 
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 	/**
 	 * @PostRemove protected void afterDelete() { ReTurkishtrRep reTurkishtrRep =
 	 *             LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();

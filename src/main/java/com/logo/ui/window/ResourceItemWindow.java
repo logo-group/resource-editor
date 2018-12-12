@@ -54,6 +54,8 @@ public class ResourceItemWindow extends Window {
 			LangHelper.getLocalizableMessage(LogoResConstants.PREFIXSTR));
 	private final SpellChecTextField info = new SpellChecTextField(
 			LangHelper.getLocalizableMessage(LogoResConstants.INFOSTR));
+	private final SpellChecTextField count = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.COUNT));
 
 	private final Button save = new ButtonGenerator(LogoResConstants.SAVESTR);
 	private final Button cancel = new ButtonGenerator(LogoResConstants.CANCELSTR);
@@ -84,12 +86,14 @@ public class ResourceItemWindow extends Window {
 
 		save.addClickListener(event -> {
 			persist();
+			persistCountItems();
 			close();
 			String filter = resource.getResourcegroup().name() + "->" + Integer.toString(resource.getResourcenr());
 			resView.createResoucePage(filter, true);
 		});
 		saveAndNew.addClickListener(event -> {
 			persist();
+			persistCountItems();
 			String filter = resource.getResourcegroup().name() + "->" + Integer.toString(resource.getResourcenr());
 			resView.createResoucePage(filter, true);
 			initialize();
@@ -122,7 +126,7 @@ public class ResourceItemWindow extends Window {
 		setClosable(false);
 		setModal(true);
 		setWidth(50.0f, Unit.PERCENTAGE);
-		setHeight(70.0f, Unit.PERCENTAGE);
+		setHeight(78.0f, Unit.PERCENTAGE);
 		setResizable(false);
 		setResponsive(true);
 
@@ -174,6 +178,10 @@ public class ResourceItemWindow extends Window {
 
 		info.setWidth("100%");
 		info.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
+
+		count.setWidth("100%");
+		count.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
+		count.setValue("1");
 
 		binder.forField(ordernr).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.ORDERNRNOTEMTYSTR))
 				.withConverter(new StrToIntegerConverter(LogoResConstants.MUSTNUMBER))
@@ -231,6 +239,7 @@ public class ResourceItemWindow extends Window {
 		col01.addComponent(info);
 		col01.addComponent(resourceItemCaseCombo);
 		col01.addComponent(ownerProductCombo);
+		col01.addComponent(count);
 
 		gridLayout.addComponent(col01, 0, 0, 1, 2);
 		gridLayout.addComponent(buttonLayout, 1, 6);
@@ -297,6 +306,23 @@ public class ResourceItemWindow extends Window {
 		hSep.setWidth("100%");
 		return hSep;
 
+	}
+
+	private void persistCountItems() {
+		try {
+			int countNumber = Integer.parseInt(count.getValue());
+			if (countNumber > 1) {
+				for (int i = 1; i < countNumber; i++) {
+					ReResourceitem item = (ReResourceitem) resourceItem.clone();
+					item.setId(null);
+					item.setTagnr(item.getTagnr() + i);
+					item.setOrdernr(item.getOrdernr() + i);
+					reResourceitemRep.save(item);
+				}
+			}
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -177,7 +177,7 @@ public class ResourceCopyWindow extends Window {
 		tagEnd.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		tagEnd.setEnabled(false);
 
-		tagAll.setHeight("100%");
+		tagAll.setHeight("22px");
 
 		resourceGroupCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		resourceGroupCombo.setItems(ResourceGroup.UN, ResourceGroup.HR, ResourceGroup.UNRP, ResourceGroup.HRRP,
