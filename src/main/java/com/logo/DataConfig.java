@@ -1,20 +1,3 @@
-/*
- * Copyright 2014-2019 Logo Business Solutions
- * (a.k.a. LOGO YAZILIM SAN. VE TIC. A.S)
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.logo;
 
 import java.util.Properties;
@@ -34,25 +17,12 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
-/**
- * This class is configuration class for data management. Database connection,
- * data source, entity and adapter beans are in this class. Looks up package
- * com.lbs.tedam.data.repository for repository operations and package
- * com.lbs.tedam.data.dao for DAO implementations.
- */
 @Configuration
 @EnableJpaRepositories(basePackages = { "com.logo.data.repository" })
 @ComponentScan(basePackages = { "com.logo.data.repository" })
 @PropertySource("classpath:application.properties")
 public class DataConfig {
 
-	/**
-	 * Creates a data source based on connection info given by parameter.
-	 *
-	 * @param connectionInfo Database connection info to create data source
-	 *                       instance.
-	 * @return New data source instance.
-	 */
 	@Bean
 	public DataSource dataSource(Environment env) {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -63,14 +33,6 @@ public class DataConfig {
 		return dataSource;
 	}
 
-	/**
-	 * Creates entity manager factory based on data source and adapter.
-	 *
-	 * @param dataSource           Data source instance to connect database.
-	 * @param adapter              JPA adapter.
-	 * @param additionalProperties Additional properties.
-	 * @return New LocalContainerEntityManagerFactoryBean instance.
-	 */
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter adapter,
 			Properties additionalProperties) {
@@ -82,11 +44,6 @@ public class DataConfig {
 		return emf;
 	}
 
-	/**
-	 * Creates additional properties.
-	 *
-	 * @return Singleton Properties instance.
-	 */
 	@Bean
 	@ConfigurationProperties
 	public Properties additionalProperties(Environment env) {
@@ -108,28 +65,14 @@ public class DataConfig {
 		return properties;
 	}
 
-	/**
-	 * Creates a JPA vendor adapter. Default is HibernateJpaVendorAdapter.
-	 *
-	 * @return New JpaVendorAdapter instance.
-	 */
 	@Bean
 	public JpaVendorAdapter adapter() {
 		JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 		return adapter;
 	}
 
-	/**
-	 * Creates a JpaTransactionManager instance based on given parameters.
-	 *
-	 * @param dataSource           Data source instance to connect database.
-	 * @param entityManagerFactory LocalContainerEntityManagerFactoryBean instance
-	 *                             for entity operations.
-	 * @return New JpaTransactionManager instance.
-	 */
 	@Bean
-	public JpaTransactionManager transactionManager(DataSource dataSource,
-			LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+	public JpaTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
 		JpaTransactionManager jtm = new JpaTransactionManager();
 		jtm.setEntityManagerFactory(entityManagerFactory.getObject());
 		return jtm;
