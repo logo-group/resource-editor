@@ -3,7 +3,6 @@ package com.logo.ui.form;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 import com.github.appreciated.material.MaterialTheme;
 import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReResource;
@@ -34,7 +33,6 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 
-
 public class ResourceForm extends Panel {
 
 	private static final long serialVersionUID = 1L;
@@ -43,44 +41,50 @@ public class ResourceForm extends Panel {
 
 	private ReResource resource;
 	private final Binder<ReResource> binder = new Binder<>(ReResource.class);
-	private final SpellChecTextField resourcenr = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.RESNRSTR));
-	private final SpellChecTextField description = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.DESCSTR));
+	private final SpellChecTextField resourcenr = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.RESNRSTR));
+	private final SpellChecTextField description = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.DESCSTR));
 	private final Button save = new ButtonGenerator(LogoResConstants.SAVESTR);
 	private final Button cancel = new ButtonGenerator(LogoResConstants.CANCELSTR);
 	private final Button edit = new ButtonGenerator(LogoResConstants.EDITSTR);
-	
-	private final SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
-	private final SpellChecComboBox<ResourceType> resourceTypeCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.RESTYPESTR));
-	private final SpellChecComboBox<ResourceCase> resourceCaseCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.RESCASESTR));
-	private final SpellChecComboBox<OwnerProduct> ownerProductCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.OWNERPRODUCT));
+
+	private final SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(
+			LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
+	private final SpellChecComboBox<ResourceType> resourceTypeCombo = new SpellChecComboBox<>(
+			LangHelper.getLocalizableMessage(LogoResConstants.RESTYPESTR));
+	private final SpellChecComboBox<ResourceCase> resourceCaseCombo = new SpellChecComboBox<>(
+			LangHelper.getLocalizableMessage(LogoResConstants.RESCASESTR));
+	private final SpellChecComboBox<OwnerProduct> ownerProductCombo = new SpellChecComboBox<>(
+			LangHelper.getLocalizableMessage(LogoResConstants.OWNERPRODUCT));
 	private final HorizontalLayout buttonLayout = new HorizontalLayout(save, cancel, edit);
 
 	private final transient ReResourceRep resRepo;
 	private final transient ReUser reUser;
-	
+
 	public ResourceForm(ReResource resource) {
 		this.resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
 		this.resource = resource;
 		binder.setBean(resource);
-		
+
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
 		resource.setActive(ResourceState.ACTIVE);
 		setWidth("100%");
 		setHeight("100%");
-		
-		if(resource.getCreatedby() == 0)
+
+		if (resource.getCreatedby() == 0)
 			resource.setCreatedby(reUser.getId());
-		
+
 		resource.setModifiedby(reUser.getId());
-		
+
 		addStyleName(MaterialTheme.CARD_HOVERABLE);
-		
-		GridLayout gridLayout = new GridLayout(2,7);
+
+		GridLayout gridLayout = new GridLayout(2, 7);
 		gridLayout.addStyleName(LogoResConstants.STYLE_GRID);
 		gridLayout.setWidth("100%");
 		gridLayout.setSpacing(true);
 		gridLayout.setMargin(true);
-		
+
 		resourcenr.setWidth("100%");
 		resourcenr.setHeight("30px");
 		resourcenr.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
@@ -88,16 +92,17 @@ public class ResourceForm extends Panel {
 		description.setWidth("250%");
 		description.setHeight("30px");
 		description.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
-		
+
 		save.setWidth("80px");
 		cancel.setWidth("80px");
 		edit.setWidth("80px");
 		edit.setVisible(false);
 		cancel.setVisible(false);
-		
+
 		binder.forField(resourcenr).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.RESNRNOTEMTYSTR))
 				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
-				//.withValidator(number -> number <= 0, "Person must be born in the 20th century")
+				// .withValidator(number -> number <= 0, "Person must be born in the 20th
+				// century")
 				.bind(ReResource::getResourcenr, ReResource::setResourcenr);
 
 		binder.forField(description).bind(ReResource::getDescription, ReResource::setDescription);
@@ -110,12 +115,11 @@ public class ResourceForm extends Panel {
 		resourceCaseCombo.setHeight("30px");
 		ownerProductCombo.setWidth("100%");
 		ownerProductCombo.setHeight("30px");
-		
+
 		resourceGroupCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		resourceTypeCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		resourceCaseCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		ownerProductCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
-		
 
 		resourceGroupCombo.setItems(ResourceGroup.UN, ResourceGroup.HR, ResourceGroup.UNRP, ResourceGroup.HRRP,
 				ResourceGroup.SS, ResourceGroup.HELP, ResourceGroup.MISC);
@@ -142,7 +146,7 @@ public class ResourceForm extends Panel {
 		save.setClickShortcut(KeyCode.ENTER);
 
 		resourcenr.setValue(generateResourceNr().toString());
-		
+
 		FormLayout col01 = new FormLayout();
 		col01.setSizeFull();
 		col01.setSpacing(true);
@@ -155,14 +159,9 @@ public class ResourceForm extends Panel {
 		col01.addComponent(resourceCaseCombo);
 		col01.addComponent(resourceTypeCombo);
 		col01.addComponent(ownerProductCombo);
-		
+
 		gridLayout.addComponent(col01, 0, 1, 0, 2);
-		
-		/**
-		Label hSep0 = createSeperator();
-		gridLayout.addComponent(hSep0, 0, 4, 1, 4);
-		**/
-		
+
 		gridLayout.addComponent(buttonLayout, 1, 5);
 		Label hSep1 = createSeperator();
 		gridLayout.addComponent(hSep1, 0, 6, 1, 6);
@@ -194,7 +193,7 @@ public class ResourceForm extends Panel {
 		return hSep;
 
 	}
-	
+
 	private Integer generateResourceNr() {
 		Integer resNr = 0;
 		Integer max = resRepo.getMaxResourceNr();
@@ -204,11 +203,11 @@ public class ResourceForm extends Panel {
 			resNr = ++max;
 		return resNr;
 	}
-	
+
 	public ReResource getResource() {
 		return resource;
 	}
-	
+
 	public Button getSaveButton() {
 		return save;
 	}
@@ -224,7 +223,7 @@ public class ResourceForm extends Panel {
 	public TextField getResourcenrField() {
 		return resourcenr;
 	}
-	 
+
 	public TextField getDescriptionField() {
 		return description;
 	}
@@ -232,7 +231,7 @@ public class ResourceForm extends Panel {
 	public SpellChecComboBox<ResourceGroup> getResourceGroupCombo() {
 		return resourceGroupCombo;
 	}
-	
+
 	public SpellChecComboBox<ResourceCase> getResourceCaseCombo() {
 		return resourceCaseCombo;
 	}
@@ -249,14 +248,13 @@ public class ResourceForm extends Panel {
 	public boolean equals(Object obj) {
 		return super.equals(obj);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();
-	}	
-	
-	public void persist()
-	{
+	}
+
+	public void persist() {
 		resRepo.save(resource);
 	}
 

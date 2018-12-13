@@ -42,7 +42,7 @@ public class ExportExcel implements Serializable {
 	private final transient String fileName;
 	private final transient boolean isTurkishWrite;
 	private final transient boolean isEnglishWrite;
-	
+
 	private final transient SearchParam sParam;
 
 	public ExportExcel(SearchParam sParam, String fileName, boolean isTurkishWrite, boolean isEnglishWrite) {
@@ -91,37 +91,38 @@ public class ExportExcel implements Serializable {
 		int colNum = 0;
 
 		Cell cell1 = row.createCell(colNum++);
-		cell1.setCellValue((String) item.reResource.getResourcegroup().name());
+		cell1.setCellValue(item.reResource.getResourcegroup().name());
 
 		Cell cell2 = row.createCell(colNum++);
-		cell2.setCellValue((String) item.reResource.getResourcetype().name());
+		cell2.setCellValue(item.reResource.getResourcetype().name());
 
 		Cell cell3 = row.createCell(colNum++);
-		cell3.setCellValue((Integer) item.reResource.getResourcenr());
+		cell3.setCellValue(item.reResource.getResourcenr());
 
 		Cell cell4 = row.createCell(colNum++);
-		cell4.setCellValue((Integer) item.getOrdernr());
+		cell4.setCellValue(item.getOrdernr());
 
 		Cell cell5 = row.createCell(colNum++);
-		cell5.setCellValue((Integer) item.getTagnr());
+		cell5.setCellValue(item.getTagnr());
 
-		if(isTurkishWrite){
+		if (isTurkishWrite) {
 			ReTurkishtr reTurkishtr = reTurkishtrRep.getresourceitemrefEquals(item.getId());
 			if (reTurkishtr != null) {
 				Cell cell6 = row.createCell(colNum++);
-				cell6.setCellValue((String) reTurkishtr.getResourcestr());
+				cell6.setCellValue(reTurkishtr.getResourcestr());
 			}
 		}
-		if(isEnglishWrite){
+		if (isEnglishWrite) {
 			ReEnglishus reEnglishus = reEnglishusRep.getresourceitemrefEquals(item.getId());
 			if (reEnglishus != null) {
 				Cell cell7 = row.createCell(colNum++);
-				cell7.setCellValue((String) reEnglishus.getResourcestr());
+				cell7.setCellValue(reEnglishus.getResourcestr());
 			}
 		}
 	}
 
-	private Page<com.logo.data.entity.ReResourceitemShort> searchByresourceParamAll(int page, int size, SearchParam sParam) {
+	private Page<com.logo.data.entity.ReResourceitemShort> searchByresourceParamAll(int page, int size,
+			SearchParam sParam) {
 		Pageable pageable = new PageRequest(page, size, null);
 		return reResourceitemShortRep.searchByParamAll(pageable, sParam);
 	}

@@ -14,7 +14,6 @@ import com.logo.util.TranslatorService;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.VerticalLayout;
 
-
 public class CustomHorizontalLayout extends VerticalLayout {
 	/**
 	 * 
@@ -68,20 +67,21 @@ public class CustomHorizontalLayout extends VerticalLayout {
 		layoutObjects.txtArea.setValue(txtValue);
 		if (txtValue.length() > 100)
 			layoutObjects.txtArea.setHeight("200%");
-		
+
 		layoutObjects.txtArea.setDescription(txtValue);
 		addComponentsAndExpand(layoutObjects.txtArea);
 		setComponentAlignment(layoutObjects.txtArea, Alignment.MIDDLE_LEFT);
-		
+
 		addComponent(layoutObjects.buttonLayoyt);
 		setComponentAlignment(layoutObjects.buttonLayoyt, Alignment.BOTTOM_RIGHT);
-		
+
 		MouseEvents mouseEvents = MouseEvents.enableFor(layoutObjects.txtArea);
 		MouseEvents mouseEvents2 = MouseEvents.enableFor(this);
 		mouseEvents.addMouseOverListener(() -> layoutObjects.txtArea.addStyleName("v-textarea2"));
 		mouseEvents.addMouseOutListener(() -> layoutObjects.txtArea.removeStyleName("v-textarea2"));
 
-		mouseEvents2.addMouseOverListener(() -> this.setDescription(LangHelper.getLocalizableMessage(LogoResConstants.CLICKTOEDITSTR)));
+		mouseEvents2.addMouseOverListener(
+				() -> this.setDescription(LangHelper.getLocalizableMessage(LogoResConstants.CLICKTOEDITSTR)));
 
 		addLayoutClickListener(event -> {
 			if (event.getChildComponent() == layoutObjects.txtArea) {
@@ -120,17 +120,16 @@ public class CustomHorizontalLayout extends VerticalLayout {
 		layoutObjects.txtArea.setSelection(0, 0);
 
 		layoutObjects.buttonLayoyt.removeComponent(layoutObjects.addButton);
-		if (addTranslateButton)
-		{
-			layoutObjects.buttonLayoyt.addComponent(layoutObjects.translateButton);			
+		if (addTranslateButton) {
+			layoutObjects.buttonLayoyt.addComponent(layoutObjects.translateButton);
 			layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.translateButton, Alignment.BOTTOM_RIGHT);
 		}
-		
+
 		layoutObjects.buttonLayoyt.addComponent(layoutObjects.saveButtonForAdd);
 		layoutObjects.buttonLayoyt.addComponent(layoutObjects.cancelButtonForAdd);
 		layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.saveButtonForAdd, Alignment.BOTTOM_RIGHT);
 		layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.cancelButtonForAdd, Alignment.BOTTOM_RIGHT);
-		
+
 		layoutObjects.binder.setBean(reLanguageTable);
 		layoutObjects.binder.forField(layoutObjects.txtArea).bind(ReLanguageTable::getResourcestr,
 				ReLanguageTable::setResourcestr);
@@ -150,22 +149,23 @@ public class CustomHorizontalLayout extends VerticalLayout {
 		layoutObjects.txtArea.setSelection(0, 0);
 
 		if (!isBlank()) {
-			if (addTranslateButton)
-			{
+			if (addTranslateButton) {
 				layoutObjects.buttonLayoyt.addComponent(layoutObjects.translateButton);
 				layoutObjects.buttonLayoyt.addComponentsAndExpand(layoutObjects.saveButtonForEdit);
 				layoutObjects.buttonLayoyt.addComponentsAndExpand(layoutObjects.cancelButtonForEdit);
 				layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.translateButton, Alignment.BOTTOM_RIGHT);
-				layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.cancelButtonForEdit, Alignment.BOTTOM_RIGHT);
-				layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.saveButtonForEdit, Alignment.BOTTOM_RIGHT);
-			}
-			else
-			{
+				layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.cancelButtonForEdit,
+						Alignment.BOTTOM_RIGHT);
+				layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.saveButtonForEdit,
+						Alignment.BOTTOM_RIGHT);
+			} else {
 				layoutObjects.buttonLayoyt.setWidth("160px");
 				layoutObjects.buttonLayoyt.addComponentsAndExpand(layoutObjects.saveButtonForEdit);
 				layoutObjects.buttonLayoyt.addComponentsAndExpand(layoutObjects.cancelButtonForEdit);
-				layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.cancelButtonForEdit, Alignment.BOTTOM_RIGHT);
-				layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.saveButtonForEdit, Alignment.BOTTOM_RIGHT);
+				layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.cancelButtonForEdit,
+						Alignment.BOTTOM_RIGHT);
+				layoutObjects.buttonLayoyt.setComponentAlignment(layoutObjects.saveButtonForEdit,
+						Alignment.BOTTOM_RIGHT);
 			}
 		}
 
@@ -235,7 +235,6 @@ public class CustomHorizontalLayout extends VerticalLayout {
 	private void translate(CustomLayoutObjects layoutObjects) {
 		TranslatorService translatorService = new TranslatorService();
 		try {
-			//String text = translatorService.translate(LogoResConstants.RE_TURKISHTR, customLayoutUtil.getLangTo(),word);
 			String text = translatorService.translate2(word);
 			layoutObjects.txtArea.setValue(text);
 			layoutObjects.txtArea.setReadOnly(false);

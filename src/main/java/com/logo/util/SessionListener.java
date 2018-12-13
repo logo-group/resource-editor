@@ -11,8 +11,7 @@ public class SessionListener implements HttpSessionListener {
 
 	@Override
 	public void sessionCreated(HttpSessionEvent event) {
-		final ServletContext servletContext = event.getSession()
-				.getServletContext();
+		final ServletContext servletContext = event.getSession().getServletContext();
 		final WebApplicationContext context = WebApplicationContextUtils
 				.getRequiredWebApplicationContext(servletContext);
 		ApplicationContextLocator.setApplicationContext(context);

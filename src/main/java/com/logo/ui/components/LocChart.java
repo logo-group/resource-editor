@@ -21,7 +21,7 @@ public class LocChart extends ChartJs {
 		List<String> labels = new ArrayList<>();
 		labels.add("Not Localized");
 		labels.add("Localized");
-		
+
 		DonutChartConfig config = new DonutChartConfig();
 		config.data().labelsAsList(labels).addDataset(new PieDataset().label("Dataset 1")).and();
 
@@ -35,13 +35,13 @@ public class LocChart extends ChartJs {
 
 		PieDataset lds = (PieDataset) config.data().getDatasets().get(0);
 		lds.backgroundColor(colors);
-		int notloc = total-Localized;
+		int notloc = total - Localized;
 		lds.addData(notloc).addData(Localized);
 
 		this.configure(config);
 		this.setWidth("150px");
 		this.setHeight("40px");
-		this.addStyleName(MaterialTheme.CARD_NO_PADDING); 
+		this.addStyleName(MaterialTheme.CARD_NO_PADDING);
 		this.setJsLoggingEnabled(false);
 	}
 }

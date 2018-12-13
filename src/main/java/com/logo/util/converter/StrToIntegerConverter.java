@@ -5,7 +5,7 @@ import java.util.Locale;
 
 import com.vaadin.data.converter.StringToIntegerConverter;
 
-public class StrToIntegerConverter extends StringToIntegerConverter{
+public class StrToIntegerConverter extends StringToIntegerConverter {
 
 	/**
 	 * 
@@ -18,10 +18,10 @@ public class StrToIntegerConverter extends StringToIntegerConverter{
 
 	@Override
 	protected java.text.NumberFormat getFormat(Locale locale) {
-        NumberFormat numberFormat = super.getFormat(locale);
-        numberFormat.setGroupingUsed(false);
-        numberFormat.setMinimumFractionDigits(0);
-        numberFormat.setMaximumFractionDigits(0);
-        return numberFormat;
-    }
+		NumberFormat numberFormat = super.getFormat(locale);
+		numberFormat.setGroupingUsed(false);
+		numberFormat.setMinimumFractionDigits(0);
+		numberFormat.setMaximumFractionDigits(0);
+		return numberFormat;
+	}
 }

@@ -25,50 +25,45 @@ public class Authentication implements Serializable {
 	public transient ReUserRep userRepo;
 
 	private transient List<ReUser> userList = null;
-	
+
 	public Authentication() {
-		if((userList == null) && (userRepo != null))
-		{
+		if ((userList == null) && (userRepo != null)) {
 			userList = userRepo.findAll();
 		}
 	}
-	
-	public Boolean authenticate(String username, String password){
+
+	public Boolean authenticate(String username, String password) {
 		return validUser(username, password);
 	}
-	
-	private boolean validUser(String username,String password)
-	{
+
+	private boolean validUser(String username, String password) {
 		boolean find = false;
-		if((userList == null) && (userRepo != null))
-		{
+		if ((userList == null) && (userRepo != null)) {
 			userList = userRepo.findAll();
-			if(userList == null)
+			if (userList == null)
 				return false;
 		}
-		Predicate<ReUser> p1 = e -> e.getUsername().equalsIgnoreCase(username) && e.getPassword().equalsIgnoreCase(password); 
+		Predicate<ReUser> p1 = e -> e.getUsername().equalsIgnoreCase(username)
+				&& e.getPassword().equalsIgnoreCase(password);
 		if (userList != null)
 			find = userList.stream().anyMatch(p1);
 
-		return find;	
+		return find;
 	}
 
-	public List<String> getUserList(String username)
-	{
+	public List<String> getUserList(String username) {
 		List<String> intList = null;
 		Predicate<ReUser> p1 = e -> e.getUsername().contains(username);
-		if((userList == null) && (userRepo != null))
-		{
+		if ((userList == null) && (userRepo != null)) {
 			userList = userRepo.findAll();
-			intList = userList.stream().filter(p1).map(elem -> elem.getUsername()).collect(Collectors.toList()); 
+			intList = userList.stream().filter(p1).map(elem -> elem.getUsername()).collect(Collectors.toList());
 		}
 		if (userList != null)
 			intList = userList.stream().filter(p1).map(elem -> elem.getUsername()).collect(Collectors.toList());
 		return intList;
 	}
-	
-	public ReUser getReUser(String username)
-	{
+
+	public ReUser getReUser(String username) {
 		return userList.stream().filter(x -> x.getUsername().equalsIgnoreCase(username)).findFirst().orElse(null);
 	}
 }

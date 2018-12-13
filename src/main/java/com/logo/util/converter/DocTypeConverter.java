@@ -5,6 +5,7 @@ import javax.persistence.AttributeConverter;
 import com.logo.util.enums.DocType;
 
 public class DocTypeConverter implements AttributeConverter<DocType, Integer> {
+
 	@Override
 	public Integer convertToDatabaseColumn(DocType docType) {
 		switch (docType) {

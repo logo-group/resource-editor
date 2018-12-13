@@ -1,6 +1,7 @@
 package com.logo.util.enums;
 
 public enum UserType {
+
 	ADMINISTRATOR(0), PROGRAMMER(1), INTERNALLOCALIZER(2), EXTERNALLOCALIZER(3);
 
 	private final Integer typ;
@@ -19,10 +20,10 @@ public enum UserType {
 		}
 		if (typ == 2) {
 			return "Internal Localizer";
-		}		
+		}
 		if (typ == 3) {
 			return "External Localizer";
-		}		
+		}
 		return "";
 	}
 }

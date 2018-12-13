@@ -5,6 +5,7 @@ import javax.persistence.AttributeConverter;
 import com.logo.util.enums.ResourceCase;
 
 public class ResourceCaseConverter implements AttributeConverter<ResourceCase, Integer> {
+
 	@Override
 	public Integer convertToDatabaseColumn(ResourceCase resourceCase) {
 		switch (resourceCase) {

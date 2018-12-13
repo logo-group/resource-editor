@@ -14,8 +14,6 @@ public class CustomHorizontalStandardLayout extends VerticalLayout {
 
 	private static final long serialVersionUID = 1L;
 
-	private boolean isBlank = false;
-
 	private String caption;
 	private String pStyle = "<p style=";
 	private String pBackgroundGreen = "background-color:white;color:green;font-size:15px;font-style:bold";

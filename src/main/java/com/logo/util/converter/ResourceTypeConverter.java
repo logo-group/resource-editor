@@ -5,6 +5,7 @@ import javax.persistence.AttributeConverter;
 import com.logo.util.enums.ResourceType;
 
 public class ResourceTypeConverter implements AttributeConverter<ResourceType, Integer> {
+
 	@Override
 	public Integer convertToDatabaseColumn(ResourceType resourceType) {
 		switch (resourceType) {

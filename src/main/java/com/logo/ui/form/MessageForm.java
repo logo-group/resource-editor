@@ -37,16 +37,17 @@ public class MessageForm extends VerticalLayout {
 	private final SpellChecTextField javaConstId = new SpellChecTextField("Java Constant ID");
 	private final SpellChecTextField module = new SpellChecTextField("Module");
 	private final SpellChecTextField resourceNumber = new SpellChecTextField("Resource Number");
-	private final SpellChecTextField tagNr = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.TAGNRSTR));
+	private final SpellChecTextField tagNr = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.TAGNRSTR));
 	private final SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>("Resource Group");
 	private final SpellChecComboBox<MessageType> messageTypeCombo = new SpellChecComboBox<>("Type");
-	
+
 	private final Button save = new ButtonGenerator(LogoResConstants.SAVESTR);
 	private final Button close = new ButtonGenerator(LogoResConstants.CLOSELSTR);
 	private final Button delete = new ButtonGenerator(LogoResConstants.DELETESTR);
 
 	private final Label formName = new Label();
-	
+
 	@Autowired
 	public transient ReMessageRep reMessageRepo;
 
@@ -70,7 +71,6 @@ public class MessageForm extends VerticalLayout {
 		userMainLayout.setWidth("100%");
 		userMainLayout.setHeight("100%");
 
-
 		javaConstId.setWidth("100%");
 		javaConstId.setHeight("30px");
 		module.setWidth("50%");
@@ -83,11 +83,12 @@ public class MessageForm extends VerticalLayout {
 		messageTypeCombo.setHeight("30px");
 		resourceGroupCombo.setWidth("50%");
 		resourceGroupCombo.setHeight("30px");
-		
+
 		save.setHeight("30px");
 		close.setHeight("30px");
-		close.addStyleName(MaterialTheme.BUTTON_ROUND + " "+ MaterialTheme.BUTTON_BORDERLESS + " " + LogoResConstants.STYLE_CUSTOM_WHITE);
-		
+		close.addStyleName(MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_BORDERLESS + " "
+				+ LogoResConstants.STYLE_CUSTOM_WHITE);
+
 		messageTypeCombo.setItems(MessageType.ERROR, MessageType.INFO, MessageType.WARN, MessageType.SELECTION);
 		resourceGroupCombo.setItems(ResourceGroup.UN, ResourceGroup.HR, ResourceGroup.UNRP, ResourceGroup.HRRP,
 				ResourceGroup.SS, ResourceGroup.HELP, ResourceGroup.MISC);
@@ -97,25 +98,19 @@ public class MessageForm extends VerticalLayout {
 
 		messageTypeCombo.setSelectedItem(MessageType.ERROR);
 		resourceGroupCombo.setSelectedItem(ResourceGroup.UN);
-		
-		binder.forField(javaConstId).asRequired("username can not be empty")
-				// .withValidator(number -> number <= 0, "Person must be born in
-				// the 20th century")
-				.bind(ReMessage::getConsId, ReMessage::setConsId);
 
-		binder.forField(module).asRequired("name can not be empty")
-				// .withValidator(number -> number <= 0, "Person must be born in
-				// the 20th century")
-				.bind(ReMessage::getModule, ReMessage::setModule);
-		binder.forField(tagNr).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(javaConstId).asRequired("username can not be empty").bind(ReMessage::getConsId,
+				ReMessage::setConsId);
+
+		binder.forField(module).asRequired("name can not be empty").bind(ReMessage::getModule, ReMessage::setModule);
+		binder.forField(tagNr)
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReMessage::getStrtag, ReMessage::setStrtag);
 		binder.bind(messageTypeCombo, ReMessage::getMtype, ReMessage::setMtype);
 		binder.bind(resourceGroupCombo, ReMessage::getResgroup, ReMessage::setResgroup);
 		binder.forField(resourceNumber).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.RESNRNOTEMTYSTR))
-		.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
-		//.withValidator(number -> number <= 0, "Person must be born in the 20th century")
-		.bind(ReMessage::getListid, ReMessage::setListid);
-
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+				.bind(ReMessage::getListid, ReMessage::setListid);
 
 		HorizontalLayout labelLayout = new HorizontalLayout();
 		labelLayout.setWidth("100%");
@@ -125,7 +120,7 @@ public class MessageForm extends VerticalLayout {
 		labelLayout.addComponent(close);
 		labelLayout.setComponentAlignment(formName, Alignment.TOP_LEFT);
 		labelLayout.setComponentAlignment(close, Alignment.TOP_RIGHT);
-		
+
 		delete.setVisible(false);
 		HorizontalLayout buttonLayout = new HorizontalLayout(save, delete);
 
@@ -135,7 +130,7 @@ public class MessageForm extends VerticalLayout {
 		resourceGroupCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		resourceNumber.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		tagNr.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
-		
+
 		FormLayout col01 = new FormLayout();
 		col01.setSizeFull();
 		col01.setSpacing(true);
@@ -148,13 +143,13 @@ public class MessageForm extends VerticalLayout {
 		col01.addComponent(resourceGroupCombo);
 		col01.addComponent(resourceNumber);
 		col01.addComponent(tagNr);
-		
-		userMainLayout.addComponent(col01, 0, 0,1,0);
+
+		userMainLayout.addComponent(col01, 0, 0, 1, 0);
 
 		save.addClickListener(e -> save());
 		close.addClickListener(e -> cancel());
 		delete.addClickListener(e -> delete());
-		
+
 		addComponent(labelLayout);
 		addComponentsAndExpand(userMainLayout);
 		addComponent(buttonLayout);
@@ -165,7 +160,7 @@ public class MessageForm extends VerticalLayout {
 	public void setReMessage(ReMessage reMessage) {
 		this.reMessage = reMessage;
 		delete.setVisible(false);
-		formName.setValue(reMessage.getConsId() + " " );
+		formName.setValue(reMessage.getConsId() + " ");
 		binder.setBean(reMessage);
 		if (reMessage.isPersisted())
 			delete.setVisible(true);
@@ -180,6 +175,7 @@ public class MessageForm extends VerticalLayout {
 					 */
 					private static final long serialVersionUID = 1L;
 
+					@Override
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {
 							reMessageRepo.delete(reMessage);
@@ -197,7 +193,7 @@ public class MessageForm extends VerticalLayout {
 	}
 
 	private void save() {
-		boolean isPersisted = reMessage.isPersisted(); 
+		boolean isPersisted = reMessage.isPersisted();
 		try {
 			reMessageRepo.save(reMessage);
 		} catch (Exception e) {
@@ -208,13 +204,13 @@ public class MessageForm extends VerticalLayout {
 			notification.setDelayMsec(50000);
 			notification.show(Page.getCurrent());
 		}
-		if(isPersisted)
+		if (isPersisted)
 			reMessageView.refreshGrid();
 		else
 			reMessageView.updateMessageListForCons("");
 		setVisible(false);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();

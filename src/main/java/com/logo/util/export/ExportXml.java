@@ -92,10 +92,6 @@ public class ExportXml implements Serializable {
 		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 		transformer.transform(source, result);
 
-		// Output to console for testing
-		// StreamResult consoleResult = new StreamResult(System.out);
-		// transformer.transform(source, consoleResult);
-
 		logger.log(Level.WARNING, "xml done");
 	}
 

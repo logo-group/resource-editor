@@ -101,9 +101,6 @@ public class ResourceWindow extends Window {
 		if (isNew)
 			resource.setActive(ResourceState.ACTIVE);
 
-		// List<ReResourceitem> items =
-		// reResourceitemRep.findByresourcerefEquals(resource.getId());
-
 		VerticalLayout mainLayout = new VerticalLayout();
 		mainLayout.setSizeFull();
 		mainLayout.setWidth("100%");
@@ -138,8 +135,6 @@ public class ResourceWindow extends Window {
 
 		binder.forField(resourcenr).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.RESNRNOTEMTYSTR))
 				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
-				// .withValidator(number -> number <= 0, "Person must be born in
-				// the 20th century")
 				.bind(ReResource::getResourcenr, ReResource::setResourcenr);
 
 		binder.forField(description).bind(ReResource::getDescription, ReResource::setDescription);
@@ -261,7 +256,6 @@ public class ResourceWindow extends Window {
 		cancel.addClickListener(event -> close());
 
 		save.addClickListener(event -> {
-			// resource.setReResourceitems(items);
 			Set<ReProjectVersion> reProjectVersions = resource.getReProjectVersion();
 
 			Set<String> selectedSetVal = twinColl.getValue();

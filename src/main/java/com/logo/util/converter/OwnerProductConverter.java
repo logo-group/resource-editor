@@ -5,6 +5,7 @@ import javax.persistence.AttributeConverter;
 import com.logo.util.enums.OwnerProduct;
 
 public class OwnerProductConverter implements AttributeConverter<OwnerProduct, Integer> {
+
 	@Override
 	public Integer convertToDatabaseColumn(OwnerProduct ownerProduct) {
 		switch (ownerProduct) {

@@ -12,7 +12,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-public class TransferLayout extends VerticalLayout{
+public class TransferLayout extends VerticalLayout {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,14 +27,14 @@ public class TransferLayout extends VerticalLayout{
 
 	private final TextField levelNr1 = createTextField(LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRSTR));
 	private final TextField levelNr2 = createTextField("");
-	
+
 	private final SwitchWithTextBox turkishTR = new SwitchWithTextBox(LogoResConstants.RE_TURKISHTR_NAME, 1);
 	private final SwitchWithTextBox englishUS = new SwitchWithTextBox(LogoResConstants.RE_ENGLISHUS_NAME, 0);
-	
+
 	private final Button exportExcelButton = new Button("Export excel");
 	private final Button exportXmlButton = new Button("Export xml");
 	private final Button exportTxtButton = new Button("Export txt");
-	
+
 	public TransferLayout() {
 		VerticalLayout mainLayout = new VerticalLayout();
 		mainLayout.setSizeFull();
@@ -54,7 +54,7 @@ public class TransferLayout extends VerticalLayout{
 		setComponentAlignment(mainLayout, Alignment.TOP_CENTER);
 
 		mainLayout.addComponent(filterLayout);
-		
+
 		turkishTR.setHeight("100%");
 		englishUS.setHeight("100%");
 
@@ -81,7 +81,7 @@ public class TransferLayout extends VerticalLayout{
 		exportTxtButton.setIcon(VaadinIcons.FILE_CODE);
 		exportTxtButton.addStyleName(
 				MaterialTheme.BUTTON_BORDER + " " + MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
-		
+
 		FormLayout col11 = new FormLayout();
 		col11.setSizeUndefined();
 		col11.setSpacing(true);
@@ -94,27 +94,27 @@ public class TransferLayout extends VerticalLayout{
 
 		filterLayout.addComponent(col01, 0, 0, 0, 0);
 		filterLayout.addComponent(col11, 1, 0, 1, 1);
-		
+
 		resourceNr1.setTabIndex(1);
 		resourceNr2.setTabIndex(2);
 
 		orderNr1.setTabIndex(3);
 		orderNr2.setTabIndex(4);
-		
+
 		tagNr1.setTabIndex(5);
 		tagNr2.setTabIndex(6);
-		
+
 		levelNr1.setTabIndex(7);
 		levelNr2.setTabIndex(8);
 		HorizontalLayout buttonLayout = new HorizontalLayout();
-		
+
 		buttonLayout.addComponent(exportExcelButton);
 		buttonLayout.addComponent(exportXmlButton);
 		buttonLayout.addComponent(exportTxtButton);
 		mainLayout.addComponent(buttonLayout);
 		mainLayout.setComponentAlignment(buttonLayout, Alignment.BOTTOM_RIGHT);
 	}
-	
+
 	TextField createTextField(String caption) {
 		TextField textField = new TextField(caption);
 		textField.setCaptionAsHtml(true);
@@ -127,15 +127,15 @@ public class TransferLayout extends VerticalLayout{
 	public Button getExporExceltButton() {
 		return exportExcelButton;
 	}
-	
+
 	public Button getExportXmlButton() {
 		return exportXmlButton;
 	}
-	
+
 	public Button getExportTxtButton() {
 		return exportTxtButton;
 	}
-	
+
 	public final TextField getResourceNr1() {
 		return resourceNr1;
 	}
@@ -175,12 +175,12 @@ public class TransferLayout extends VerticalLayout{
 	public final SwitchWithTextBox getEnglishUS() {
 		return englishUS;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();

@@ -42,25 +42,40 @@ import com.vaadin.ui.VerticalLayout;
 public class UserForm extends VerticalLayout {
 
 	private static final long serialVersionUID = 1L;
-	private SpellChecTextField username = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.USERNAME));
-	private SpellChecTextField name = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.NAMESTR));
-	private SpellChecTextField surname = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.SURNAMESTR));
-	private SpellChecTextField department = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.DEPARTMENTSTR));
-	private SpellChecTextField email = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.EMAILSTR));
-	private SpellChecTextField altEmail = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.ALTEMAILSTR));
+	private SpellChecTextField username = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.USERNAME));
+	private SpellChecTextField name = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.NAMESTR));
+	private SpellChecTextField surname = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.SURNAMESTR));
+	private SpellChecTextField department = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.DEPARTMENTSTR));
+	private SpellChecTextField email = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.EMAILSTR));
+	private SpellChecTextField altEmail = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.ALTEMAILSTR));
 	private PasswordField password = new PasswordField(LangHelper.getLocalizableMessage(LogoResConstants.PASS_WORDSTR));
-	private SpellChecTextField invalidLoginCount = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.INVALIDLOGINCOUNTSTR));
-	private SpellChecTextField nrOfPassRequests = new SpellChecTextField(LangHelper.getLocalizableMessage(LogoResConstants.REQPASSCOUNTSTR));
-	
-	private final SpellChecComboBox<UserLayoutType> userLayoutTypeCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.DEFAULTORIENTSTR));
-	private final SpellChecComboBox<UserType> userTypeCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.GENERALACCESRIGHTDSTR));
-	private final SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
+	private SpellChecTextField invalidLoginCount = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.INVALIDLOGINCOUNTSTR));
+	private SpellChecTextField nrOfPassRequests = new SpellChecTextField(
+			LangHelper.getLocalizableMessage(LogoResConstants.REQPASSCOUNTSTR));
+
+	private final SpellChecComboBox<UserLayoutType> userLayoutTypeCombo = new SpellChecComboBox<>(
+			LangHelper.getLocalizableMessage(LogoResConstants.DEFAULTORIENTSTR));
+	private final SpellChecComboBox<UserType> userTypeCombo = new SpellChecComboBox<>(
+			LangHelper.getLocalizableMessage(LogoResConstants.GENERALACCESRIGHTDSTR));
+	private final SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(
+			LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
 	private final SpellChecComboBox<UserLanguage> languageCombo = new SpellChecComboBox<>("Default Language");
-	private SwitchWithTextBox displayedSwitch = new SwitchWithTextBox (LangHelper.getLocalizableMessage(LogoResConstants.DISPLAYEDSTR), 0);
-	private SwitchWithTextBox enabledSwitch = new SwitchWithTextBox (LangHelper.getLocalizableMessage(LogoResConstants.ENABLEDSTR), 0);
-	private SwitchWithTextBox selectedSwitch = new SwitchWithTextBox (LangHelper.getLocalizableMessage(LogoResConstants.SELECTEDSTR), 0);
-	private SwitchWithTextBox temppasswordSwitch = new SwitchWithTextBox (LangHelper.getLocalizableMessage(LogoResConstants.TEMPPASS_WORD), 0);
-	
+	private SwitchWithTextBox displayedSwitch = new SwitchWithTextBox(
+			LangHelper.getLocalizableMessage(LogoResConstants.DISPLAYEDSTR), 0);
+	private SwitchWithTextBox enabledSwitch = new SwitchWithTextBox(
+			LangHelper.getLocalizableMessage(LogoResConstants.ENABLEDSTR), 0);
+	private SwitchWithTextBox selectedSwitch = new SwitchWithTextBox(
+			LangHelper.getLocalizableMessage(LogoResConstants.SELECTEDSTR), 0);
+	private SwitchWithTextBox temppasswordSwitch = new SwitchWithTextBox(
+			LangHelper.getLocalizableMessage(LogoResConstants.TEMPPASS_WORD), 0);
+
 	private final Button save = new ButtonGenerator(LogoResConstants.SAVESTR);
 	private final Button close = new ButtonGenerator(LogoResConstants.CLOSELSTR);
 	private final Button delete = new ButtonGenerator(LogoResConstants.DELETESTR);
@@ -69,17 +84,17 @@ public class UserForm extends VerticalLayout {
 	private TabSheet tabsheet = new TabSheet();
 	private VerticalLayout settings = new VerticalLayout();
 	private GridLayout userDetalLayout = new GridLayout(2, 6);
-	private HorizontalLayout switchLayout = new HorizontalLayout(); 
+	private HorizontalLayout switchLayout = new HorizontalLayout();
 	private boolean isPreferences = false;
-	
+
 	public Button getSaveButton() {
 		return save;
 	}
-	
+
 	public Button getCloseButton() {
 		return close;
 	}
-	
+
 	public TabSheet getTabsheet() {
 		return tabsheet;
 	}
@@ -112,14 +127,14 @@ public class UserForm extends VerticalLayout {
 		tabsheet = new TabSheet();
 		this.userRepo = (ReUserRep) VaadinSession.getCurrent().getAttribute("userrepo");
 		isPreferences = false;
-		initialize(); 
+		initialize();
 	}
 
 	public UserForm() {
 		tabsheet = new TabSheet();
 		this.userRepo = (ReUserRep) VaadinSession.getCurrent().getAttribute("userrepo");
 		isPreferences = true;
-		initialize(); 
+		initialize();
 	}
 
 	public void initialize() {
@@ -139,7 +154,7 @@ public class UserForm extends VerticalLayout {
 		switchLayout.setMargin(true);
 		switchLayout.setWidth("100%");
 		switchLayout.setHeight("100%");
-		
+
 		userDetalLayout.setSpacing(true);
 		userDetalLayout.setMargin(true);
 		userDetalLayout.setWidth("100%");
@@ -168,75 +183,77 @@ public class UserForm extends VerticalLayout {
 
 		invalidLoginCount.setWidth("100%");
 		invalidLoginCount.setHeight("30px");
-		
+
 		nrOfPassRequests.setWidth("100%");
 		nrOfPassRequests.setHeight("30px");
-		
+
 		userLayoutTypeCombo.setWidth("100%");
 		userLayoutTypeCombo.setHeight("30px");
-		
+
 		userTypeCombo.setWidth("100%");
 		userTypeCombo.setHeight("30px");
-		
+
 		resourceGroupCombo.setWidth("100%");
 		resourceGroupCombo.setHeight("30px");
-		
+
 		languageCombo.setWidth("100%");
 		languageCombo.setHeight("30px");
-		
-		 
-		
+
 		save.setHeight("30px");
 		close.setHeight("30px");
-		close.addStyleName(MaterialTheme.BUTTON_ROUND + " "+ MaterialTheme.BUTTON_BORDERLESS + " " + LogoResConstants.STYLE_CUSTOM_WHITE);
-		
+		close.addStyleName(MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_BORDERLESS + " "
+				+ LogoResConstants.STYLE_CUSTOM_WHITE);
+
 		userLayoutTypeCombo.setItems(UserLayoutType.V, UserLayoutType.H);
-		userTypeCombo.setItems(UserType.ADMINISTRATOR, UserType.PROGRAMMER, UserType.INTERNALLOCALIZER, UserType.EXTERNALLOCALIZER);
+		userTypeCombo.setItems(UserType.ADMINISTRATOR, UserType.PROGRAMMER, UserType.INTERNALLOCALIZER,
+				UserType.EXTERNALLOCALIZER);
 		resourceGroupCombo.setItems(ResourceGroup.UN, ResourceGroup.HR, ResourceGroup.UNRP, ResourceGroup.HRRP,
 				ResourceGroup.SS, ResourceGroup.HELP, ResourceGroup.MISC);
 		languageCombo.setItems(UserLanguage.TRTR, UserLanguage.ENUS, UserLanguage.DEDE, UserLanguage.FAIR,
 				UserLanguage.AZAZ, UserLanguage.RURU, UserLanguage.BGBG, UserLanguage.RORO, UserLanguage.KAGE,
 				UserLanguage.ARJO, UserLanguage.FRFR, UserLanguage.SQKV, UserLanguage.TKTM, UserLanguage.AREG,
-				UserLanguage.ARSA);		
-		
+				UserLanguage.ARSA);
+
 		binder.forField(username).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.USERNAMENOTEMTYSTR))
-				// .withValidator(number -> number <= 0, "Person must be born in
-				// the 20th century")
 				.bind(ReUser::getUsername, ReUser::setUsername);
 
 		binder.forField(name).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.NAMENOTEMTYSTR))
-				// .withValidator(number -> number <= 0, "Person must be born in
-				// the 20th century")
 				.bind(ReUser::getName, ReUser::setName);
 
 		binder.forField(surname).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.SURNAMENOTEMTYSTR))
-				// .withValidator(number -> number <= 0, "Person must be born in
-				// the 20th century")
 				.bind(ReUser::getSurname, ReUser::setSurname);
 
 		binder.forField(department).bind(ReUser::getDepartment, ReUser::setDepartment);
 		binder.forField(password).bind(ReUser::getPassword, ReUser::setPassword);
 		binder.forField(email).bind(ReUser::getEmail, ReUser::setEmail);
 		binder.forField(altEmail).bind(ReUser::getAltemail, ReUser::setAltemail);
-		binder.forField(invalidLoginCount).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER))).bind(ReUser::getInvalidlogincount, ReUser::setInvalidlogincount);
-		binder.forField(nrOfPassRequests).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER))).bind(ReUser::getPasswordrequest, ReUser::setPasswordrequest);
-		
+		binder.forField(invalidLoginCount)
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+				.bind(ReUser::getInvalidlogincount, ReUser::setInvalidlogincount);
+		binder.forField(nrOfPassRequests)
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+				.bind(ReUser::getPasswordrequest, ReUser::setPasswordrequest);
+
 		binder.bind(userLayoutTypeCombo, ReUser::getDefaultorientation, ReUser::setDefaultorientation);
 		binder.bind(userTypeCombo, ReUser::getGeneralaccessrights, ReUser::setGeneralaccessrights);
 		binder.bind(resourceGroupCombo, ReUser::getDefaultresourcegroup, ReUser::setDefaultresourcegroup);
-		binder.bind(languageCombo,ReUser::getDefaultlanguage, ReUser::setDefaultlanguage);
-		
-		binder.forField(displayedSwitch.getSwcTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.bind(languageCombo, ReUser::getDefaultlanguage, ReUser::setDefaultlanguage);
+
+		binder.forField(displayedSwitch.getSwcTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getDisplayed, ReUser::setDisplayed);
 
-		binder.forField(enabledSwitch.getSwcTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
-		.bind(ReUser::getEnabled, ReUser::setEnabled);
-		
-		binder.forField(selectedSwitch.getSwcTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
-		.bind(ReUser::getSelected, ReUser::setSelected);
+		binder.forField(enabledSwitch.getSwcTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+				.bind(ReUser::getEnabled, ReUser::setEnabled);
 
-		binder.forField(temppasswordSwitch.getSwcTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
-		.bind(ReUser::getTemppassword, ReUser::setTemppassword);
+		binder.forField(selectedSwitch.getSwcTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+				.bind(ReUser::getSelected, ReUser::setSelected);
+
+		binder.forField(temppasswordSwitch.getSwcTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+				.bind(ReUser::getTemppassword, ReUser::setTemppassword);
 
 		HorizontalLayout labelLayout = new HorizontalLayout();
 		labelLayout.setWidth("100%");
@@ -246,7 +263,7 @@ public class UserForm extends VerticalLayout {
 		labelLayout.addComponent(close);
 		labelLayout.setComponentAlignment(formName, Alignment.TOP_LEFT);
 		labelLayout.setComponentAlignment(close, Alignment.TOP_RIGHT);
-		
+
 		delete.setVisible(false);
 		HorizontalLayout buttonLayout = new HorizontalLayout(save, delete);
 
@@ -257,37 +274,37 @@ public class UserForm extends VerticalLayout {
 		userMainLayout.addComponent(email, 0, 2);
 		userMainLayout.addComponent(altEmail, 1, 2);
 		userMainLayout.addComponent(department, 0, 3);
-		
+
 		userLayoutTypeCombo.setEmptySelectionAllowed(false);
 		userTypeCombo.setEmptySelectionAllowed(false);
 		resourceGroupCombo.setEmptySelectionAllowed(false);
 		languageCombo.setEmptySelectionAllowed(false);
-		
+
 		userDetalLayout.addComponent(userLayoutTypeCombo, 0, 0);
-		
+
 		if (!isPreferences)
-			userDetalLayout.addComponent(userTypeCombo,1,0);
+			userDetalLayout.addComponent(userTypeCombo, 1, 0);
 		if (!isPreferences)
 			userDetalLayout.addComponent(resourceGroupCombo, 0, 1);
-		
+
 		if (!isPreferences)
-			userDetalLayout.addComponent(languageCombo,1,1);
+			userDetalLayout.addComponent(languageCombo, 1, 1);
 		else
-			userDetalLayout.addComponent(languageCombo,0,1);
-		
+			userDetalLayout.addComponent(languageCombo, 0, 1);
+
 		if (!isPreferences)
 			userDetalLayout.addComponent(invalidLoginCount, 0, 2);
 		if (!isPreferences)
 			userDetalLayout.addComponent(nrOfPassRequests, 1, 2);
-		
+
 		if (!isPreferences)
-			userDetalLayout.addComponent(switchLayout,0,3,1,3);
-		
+			userDetalLayout.addComponent(switchLayout, 0, 3, 1, 3);
+
 		switchLayout.addComponent(displayedSwitch);
 		switchLayout.addComponent(enabledSwitch);
 		switchLayout.addComponent(selectedSwitch);
 		switchLayout.addComponent(temppasswordSwitch);
-		
+
 		turkey = new LangLayout(LogoResConstants.RE_TURKISHTR_NAME, 0);
 		unitedStates = new LangLayout(LogoResConstants.RE_ENGLISHUS_NAME, 0);
 		germany = new LangLayout(LogoResConstants.RE_GERMANDE_NAME, 0);
@@ -304,49 +321,64 @@ public class UserForm extends VerticalLayout {
 		egypt = new LangLayout(LogoResConstants.RE_ARABICEG_NAME, 0);
 		saudiArabia = new LangLayout(LogoResConstants.RE_ARABICSA_NAME, 0);
 
-		binder.forField(turkey.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(turkey.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getTrtraccessrights, ReUser::setTrtraccessrights);
 
-		binder.forField(unitedStates.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(unitedStates.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getEnusaccessrights, ReUser::setEnusaccessrights);
 
-		binder.forField(germany.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(germany.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getDedeaccessrights, ReUser::setDedeaccessrights);
 
-		binder.forField(iran.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(iran.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getFairaccessrights, ReUser::setFairaccessrights);
 
-		binder.forField(azerbaijan.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(azerbaijan.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getAzazaccessrights, ReUser::setAzazaccessrights);
 
-		binder.forField(russia.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(russia.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getRuruaccessrights, ReUser::setRuruaccessrights);
 
-		binder.forField(bulgaria.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(bulgaria.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getBgbgaccessrights, ReUser::setBgbgaccessrights);
 
-		binder.forField(romania.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(romania.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getRoroaccessrights, ReUser::setRoroaccessrights);
 
-		binder.forField(georgia.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(georgia.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getKageaccessrights, ReUser::setKageaccessrights);
 
-		binder.forField(jordan.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(jordan.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getArjoaccessrights, ReUser::setArjoaccessrights);
 
-		binder.forField(france.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(france.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getFrfraccessrights, ReUser::setFrfraccessrights);
 
-		binder.forField(kosovo.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(kosovo.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getSqkvaccessrights, ReUser::setSqkvaccessrights);
 
-		binder.forField(turkmenistan.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(turkmenistan.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getTktmaccessrights, ReUser::setTktmaccessrights);
 
-		binder.forField(egypt.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(egypt.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getAregaccessrights, ReUser::setAregaccessrights);
 
-		binder.forField(saudiArabia.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(saudiArabia.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getArsaaccessrights, ReUser::setArsaaccessrights);
 
 		settings.addComponent(turkey);
@@ -365,8 +397,10 @@ public class UserForm extends VerticalLayout {
 		settings.addComponent(egypt);
 		settings.addComponent(saudiArabia);
 
-		tabsheet.addTab(userMainLayout, LangHelper.getLocalizableMessage(LogoResConstants.GENERALINFOSTR)).setIcon(VaadinIcons.USER);
-		tabsheet.addTab(userDetalLayout, LangHelper.getLocalizableMessage(LogoResConstants.SETTINGSSTR)).setIcon(VaadinIcons.WRENCH);
+		tabsheet.addTab(userMainLayout, LangHelper.getLocalizableMessage(LogoResConstants.GENERALINFOSTR))
+				.setIcon(VaadinIcons.USER);
+		tabsheet.addTab(userDetalLayout, LangHelper.getLocalizableMessage(LogoResConstants.SETTINGSSTR))
+				.setIcon(VaadinIcons.WRENCH);
 		if (!isPreferences)
 			tabsheet.addTab(settings, LangHelper.getLocalizableMessage(LogoResConstants.LANGAUTHSSTR))
 					.setIcon(VaadinIcons.GLOBE);
@@ -374,21 +408,20 @@ public class UserForm extends VerticalLayout {
 		save.addClickListener(e -> save());
 		close.addClickListener(e -> cancel());
 		delete.addClickListener(e -> delete());
-		
+
 		addComponent(labelLayout);
 		addComponentsAndExpand(tabsheet);
 		addComponent(buttonLayout);
 		setComponentAlignment(buttonLayout, Alignment.BOTTOM_RIGHT);
 		addStyleName(MaterialTheme.LAYOUT_CARD);
 	}
-	
+
 	public void setUser(ReUser user) {
 		this.user = user;
 		delete.setVisible(false);
 		formName.setValue(user.getName() + " " + user.getSurname());
 		binder.setBean(user);
-		if(!isPreferences)
-		{
+		if (!isPreferences) {
 			if (user.isPersisted())
 				delete.setVisible(true);
 		}
@@ -417,7 +450,7 @@ public class UserForm extends VerticalLayout {
 		switchLayout.removeComponent(enabledSwitch);
 		switchLayout.removeComponent(selectedSwitch);
 		switchLayout.removeComponent(temppasswordSwitch);
-		
+
 		turkey = new LangLayout(LogoResConstants.RE_TURKISHTR_NAME, user.getTrtraccessrights());
 		unitedStates = new LangLayout(LogoResConstants.RE_ENGLISHUS_NAME, user.getEnusaccessrights());
 		germany = new LangLayout(LogoResConstants.RE_GERMANDE_NAME, user.getDedeaccessrights());
@@ -434,10 +467,14 @@ public class UserForm extends VerticalLayout {
 		egypt = new LangLayout(LogoResConstants.RE_ARABICEG_NAME, user.getAregaccessrights());
 		saudiArabia = new LangLayout(LogoResConstants.RE_ARABICSA_NAME, user.getArsaaccessrights());
 
-		displayedSwitch = new SwitchWithTextBox (LangHelper.getLocalizableMessage(LogoResConstants.DISPLAYEDSTR), user.getDisplayed());
-		enabledSwitch = new SwitchWithTextBox (LangHelper.getLocalizableMessage(LogoResConstants.ENABLEDSTR), user.getEnabled());
-		selectedSwitch = new SwitchWithTextBox (LangHelper.getLocalizableMessage(LogoResConstants.SELECTEDSTR), user.getSelected());
-		temppasswordSwitch = new SwitchWithTextBox (LangHelper.getLocalizableMessage(LogoResConstants.TEMPPASS_WORD), user.getTemppassword());
+		displayedSwitch = new SwitchWithTextBox(LangHelper.getLocalizableMessage(LogoResConstants.DISPLAYEDSTR),
+				user.getDisplayed());
+		enabledSwitch = new SwitchWithTextBox(LangHelper.getLocalizableMessage(LogoResConstants.ENABLEDSTR),
+				user.getEnabled());
+		selectedSwitch = new SwitchWithTextBox(LangHelper.getLocalizableMessage(LogoResConstants.SELECTEDSTR),
+				user.getSelected());
+		temppasswordSwitch = new SwitchWithTextBox(LangHelper.getLocalizableMessage(LogoResConstants.TEMPPASS_WORD),
+				user.getTemppassword());
 
 		setvalueChange(turkey);
 		setvalueChange(unitedStates);
@@ -455,49 +492,64 @@ public class UserForm extends VerticalLayout {
 		setvalueChange(egypt);
 		setvalueChange(saudiArabia);
 
-		binder.forField(turkey.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(turkey.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getTrtraccessrights, ReUser::setTrtraccessrights);
 
-		binder.forField(unitedStates.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(unitedStates.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getEnusaccessrights, ReUser::setEnusaccessrights);
 
-		binder.forField(germany.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(germany.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getDedeaccessrights, ReUser::setDedeaccessrights);
 
-		binder.forField(iran.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(iran.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getFairaccessrights, ReUser::setFairaccessrights);
 
-		binder.forField(azerbaijan.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(azerbaijan.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getAzazaccessrights, ReUser::setAzazaccessrights);
 
-		binder.forField(russia.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(russia.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getRuruaccessrights, ReUser::setRuruaccessrights);
 
-		binder.forField(bulgaria.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(bulgaria.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getBgbgaccessrights, ReUser::setBgbgaccessrights);
 
-		binder.forField(romania.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(romania.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getRoroaccessrights, ReUser::setRoroaccessrights);
 
-		binder.forField(georgia.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(georgia.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getKageaccessrights, ReUser::setKageaccessrights);
 
-		binder.forField(jordan.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(jordan.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getArjoaccessrights, ReUser::setArjoaccessrights);
 
-		binder.forField(france.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(france.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getFrfraccessrights, ReUser::setFrfraccessrights);
 
-		binder.forField(kosovo.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(kosovo.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getSqkvaccessrights, ReUser::setSqkvaccessrights);
 
-		binder.forField(turkmenistan.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(turkmenistan.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getTktmaccessrights, ReUser::setTktmaccessrights);
 
-		binder.forField(egypt.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(egypt.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getAregaccessrights, ReUser::setAregaccessrights);
 
-		binder.forField(saudiArabia.getLangTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+		binder.forField(saudiArabia.getLangTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
 				.bind(ReUser::getArsaaccessrights, ReUser::setArsaaccessrights);
 
 		settings.addComponent(turkey);
@@ -515,16 +567,20 @@ public class UserForm extends VerticalLayout {
 		settings.addComponent(turkmenistan);
 		settings.addComponent(egypt);
 		settings.addComponent(saudiArabia);
-		
-		binder.forField(displayedSwitch.getSwcTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
-		.bind(ReUser::getDisplayed, ReUser::setDisplayed);
-		binder.forField(enabledSwitch.getSwcTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
-		.bind(ReUser::getEnabled, ReUser::setEnabled);
-		binder.forField(selectedSwitch.getSwcTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
-		.bind(ReUser::getSelected, ReUser::setSelected);
-		binder.forField(temppasswordSwitch.getSwcTxtField()).withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
-		.bind(ReUser::getTemppassword, ReUser::setTemppassword);
-		
+
+		binder.forField(displayedSwitch.getSwcTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+				.bind(ReUser::getDisplayed, ReUser::setDisplayed);
+		binder.forField(enabledSwitch.getSwcTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+				.bind(ReUser::getEnabled, ReUser::setEnabled);
+		binder.forField(selectedSwitch.getSwcTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+				.bind(ReUser::getSelected, ReUser::setSelected);
+		binder.forField(temppasswordSwitch.getSwcTxtField())
+				.withConverter(new StrToIntegerConverter(LangHelper.getLocalizableMessage(LogoResConstants.MUSTNUMBER)))
+				.bind(ReUser::getTemppassword, ReUser::setTemppassword);
+
 		switchLayout.addComponent(displayedSwitch);
 		switchLayout.addComponent(enabledSwitch);
 		switchLayout.addComponent(selectedSwitch);
@@ -539,6 +595,7 @@ public class UserForm extends VerticalLayout {
 			 */
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public void valueChange(ValueChangeEvent event) {
 				Boolean value = (Boolean) event.getValue();
 				langLayout.setChecked(value, langLayout.getSWrite().getValue(), langLayout.getSDelete().getValue());
@@ -551,6 +608,7 @@ public class UserForm extends VerticalLayout {
 			 */
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public void valueChange(ValueChangeEvent event) {
 				Boolean value = (Boolean) event.getValue();
 				langLayout.setChecked(langLayout.getSRead().getValue(), value, langLayout.getSDelete().getValue());
@@ -563,6 +621,7 @@ public class UserForm extends VerticalLayout {
 			 */
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public void valueChange(ValueChangeEvent event) {
 				Boolean value = (Boolean) event.getValue();
 				langLayout.setChecked(langLayout.getSRead().getValue(), langLayout.getSWrite().getValue(), value);
@@ -578,6 +637,7 @@ public class UserForm extends VerticalLayout {
 					 */
 					private static final long serialVersionUID = 1L;
 
+					@Override
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {
 							userRepo.delete(user);
@@ -596,7 +656,7 @@ public class UserForm extends VerticalLayout {
 	}
 
 	private void save() {
-		boolean isPersisted = user.isPersisted(); 
+		boolean isPersisted = user.isPersisted();
 		try {
 			userRepo.save(user);
 		} catch (Exception e) {
@@ -607,16 +667,15 @@ public class UserForm extends VerticalLayout {
 			notification.setDelayMsec(50000);
 			notification.show(Page.getCurrent());
 		}
-		if (!isPreferences)
-		{
-			if(isPersisted)
+		if (!isPreferences) {
+			if (isPersisted)
 				userView.refreshGrid();
 			else
 				userView.updateUserList("");
 		}
 		setVisible(false);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();

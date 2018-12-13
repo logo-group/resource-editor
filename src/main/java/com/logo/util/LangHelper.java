@@ -16,7 +16,7 @@ public class LangHelper {
 
 	public static String getLocalizableMessage(String name) {
 		Locale appLocale = LogoresMainUI.getMrepositorycontainer().getAppLocale();
-		if(appLocale == null)
+		if (appLocale == null)
 			appLocale = new Locale("tr-TR");
 		MessageFormat mf = messageProvider.resolveCode(name, appLocale);
 		if (mf == null)
@@ -24,5 +24,5 @@ public class LangHelper {
 		else
 			return mf.toPattern();
 	}
-	
+
 }

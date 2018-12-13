@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpSession;
+
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinSession;
@@ -16,11 +17,11 @@ public class UISessionState {
 	private VaadinSession vaadinSession;
 
 	private boolean replaceSession = true;
-	
+
 	public UISessionState() {
 		/* */
 	}
-	
+
 	public boolean staleSessionCheck(VaadinSession inSession, VaadinRequest request) {
 		if (!vaadinSession.equals(inSession)) {
 			logger.log(Level.INFO, "Stale session detected, invalidating HTTPSession and reloading!");

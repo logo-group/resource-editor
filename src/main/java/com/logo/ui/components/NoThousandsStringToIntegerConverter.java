@@ -5,9 +5,8 @@ import java.util.Locale;
 
 import com.vaadin.data.converter.StringToIntegerConverter;
 
-public class NoThousandsStringToIntegerConverter  extends StringToIntegerConverter
-{
-    /**
+public class NoThousandsStringToIntegerConverter extends StringToIntegerConverter {
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -17,10 +16,9 @@ public class NoThousandsStringToIntegerConverter  extends StringToIntegerConvert
 	}
 
 	@Override
-    protected NumberFormat getFormat( Locale locale )
-    {
-        NumberFormat format = super.getFormat( locale );
-        format.setGroupingUsed( false );
-        return format;
-    }
+	protected NumberFormat getFormat(Locale locale) {
+		NumberFormat format = super.getFormat(locale);
+		format.setGroupingUsed(false);
+		return format;
+	}
 }

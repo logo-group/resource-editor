@@ -108,7 +108,5 @@ public class SearchByResourceNr {
 	}
 
 	public SearchByResourceNr() {
-		/**
-		 * */
 	}
 }

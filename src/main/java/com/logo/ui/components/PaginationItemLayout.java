@@ -90,10 +90,8 @@ public class PaginationItemLayout extends ResponsiveLayout {
 		this.add = add;
 		this.sParam = sParam;
 		setWidth("100%");
-		// setHeight("95%");
 
 		setScrollable(true);
-		// withSpacing();
 		withFullSize();
 
 		content = generatePanelLayout();
@@ -104,7 +102,6 @@ public class PaginationItemLayout extends ResponsiveLayout {
 		}
 
 		addComponent(content);
-		// setExpandRatio(content, 12.0f);
 		getUI();
 		UI.getCurrent().addClickListener(e -> {
 			if ((!(e.getRelativeX() >= x && e.getRelativeX() < (x + width) && e.getRelativeY() >= y
@@ -113,16 +110,6 @@ public class PaginationItemLayout extends ResponsiveLayout {
 			}
 		});
 
-		/**
-		 * DataSource ds = LogoresMainUI.getMrepositorycontainer().getDataSource(); try
-		 * { String query = "select createdon,resourcenr from re_resources "; Connection
-		 * con = ds.getConnection(); ResultSet rs =
-		 * con.createStatement().executeQuery(query); while (rs.next()) { int coffeeName
-		 * = rs.getInt("resourcenr"); Date createdon = rs.getDate("createdon");
-		 * System.out.println(coffeeName + "\t" + createdon); }
-		 * 
-		 * } catch (SQLException e1) { e1.printStackTrace(); }
-		 **/
 	}
 
 	private Pagination createPagination(long total, int page, int limit, long count) {
@@ -154,9 +141,7 @@ public class PaginationItemLayout extends ResponsiveLayout {
 			final Panel panel = createPanel(newList);
 			final Pagination pagination = createPagination(total, page, limit, totalCount);
 			pagination.addPageChangeListener(new PaginationChangeListener() {
-				/**
-				 * 
-				 */
+
 				private static final long serialVersionUID = 1L;
 
 				@Override

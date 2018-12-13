@@ -187,8 +187,6 @@ public class SearchByAll {
 	}
 
 	public SearchByAll() {
-		/**
-		 * */
 	}
 
 }

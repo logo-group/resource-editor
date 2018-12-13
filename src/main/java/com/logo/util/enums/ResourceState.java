@@ -1,6 +1,7 @@
 package com.logo.util.enums;
 
 public enum ResourceState {
+
 	ACTIVE(1), INACTIVE(0);
 
 	private final Integer typ;

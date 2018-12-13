@@ -5,6 +5,7 @@ import javax.persistence.AttributeConverter;
 import com.logo.util.enums.UserType;
 
 public class UserTypeConverter implements AttributeConverter<UserType, Integer> {
+
 	@Override
 	public Integer convertToDatabaseColumn(UserType userType) {
 		switch (userType) {

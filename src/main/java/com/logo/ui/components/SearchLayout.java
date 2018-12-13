@@ -67,7 +67,7 @@ public class SearchLayout extends Panel {
 	private static final List<String> duringByList = Arrays.asList("Minutes", "Hours", "Days", "Weeks", "Months",
 			"Years");
 
-	private Panel  contentLayout = new Panel();
+	private Panel contentLayout = new Panel();
 	private VerticalLayout contentForResNr = new VerticalLayout();
 	private VerticalLayout contentForAll = new VerticalLayout();
 	private VerticalLayout contentForModified = new VerticalLayout();
@@ -89,21 +89,19 @@ public class SearchLayout extends Panel {
 	}
 
 	public SearchLayout(ResourceViewNew resView) {
-		
+
 		setSizeFull();
 		setWidth("100%");
 		setHeight("100%");
 		this.resView = resView;
-		
+
 		ResponsiveLayout mainLayout = new ResponsiveLayout();
 		mainLayout.setContainerType(ContainerType.FLUID);
 		setContent(mainLayout);
 
-		
 		ResponsiveRow rootRow = mainLayout.addRow().withDefaultRules(12, 12, 12, 12);
 		rootRow.setSizeFull();
 		rootRow.setWidth("100%");
-		
 
 		addStyleName("in-slide-fade");
 		VerticalLayout buttonLayout = new VerticalLayout();
@@ -111,17 +109,12 @@ public class SearchLayout extends Panel {
 		buttonLayout.setWidth("100%");
 		buttonLayout.setHeight("100%");
 
-		//contentLayout.setSizeFull();
 		contentLayout.setWidth("100%");
 		createContents();
-
-		//buttonLayout.addStyleName(LogoResConstants.STYLE_CARD_BLACK);
-		//contentLayout.addStyleName(LogoResConstants.STYLE_CARD_BLACK);
-		
 		VerticalLayout btn = createButtonLayout();
 		buttonLayout.addComponentsAndExpand(btn);
 		contentLayout.setContent(contentForResNr);
-		
+
 		rootRow.addColumn().withDisplayRules(12, 12, 3, 3).withComponent(buttonLayout);
 		rootRow.addColumn().withDisplayRules(12, 12, 9, 9).withComponent(contentLayout);
 
@@ -158,25 +151,20 @@ public class SearchLayout extends Panel {
 		vert.addComponentsAndExpand(btn10);
 		vert.addComponentsAndExpand(btn11);
 
-		
 		btn1.addClickListener(e -> {
-			//contentLayout.removeAllComponents();
 			contentLayout.setContent(contentForResNr);
 		});
 
 		btn2.addClickListener(e -> {
-			//contentLayout.removeAllComponents();
 			contentLayout.setContent(contentForAll);
 		});
 		btn3.addClickListener(e -> {
-			//contentLayout.removeAllComponents();
 			contentLayout.setContent(contentForModified);
 		});
 		btn4.addClickListener(e -> {
-			//contentLayout.removeAllComponents();
 			contentLayout.setContent(contentForModifiedResMe);
 		});
-		
+
 		btn9.addClickListener(e -> {
 			contentForHelpDocs();
 		});
@@ -189,13 +177,9 @@ public class SearchLayout extends Panel {
 	}
 
 	private Button createMenuButton(String caption) {
-		/**
-		 * #fab331-orange #006940-green String cap = "<b style=
-		 * text-align:justify;color:#fab331;text-decoration:none;text-decoration-color:#fab331>
-		 * " + caption + "</b>";
-		 **/
 		Button btn = new Button(caption);
-		btn.addStyleName(MaterialTheme.BUTTON_BORDERLESS+ " "+ MaterialTheme.BUTTON_ROUND+ " "+ MaterialTheme.BUTTON_LARGE+ " " + LogoResConstants.STYLE_CUSTOM_ORANGE);
+		btn.addStyleName(MaterialTheme.BUTTON_BORDERLESS + " " + MaterialTheme.BUTTON_ROUND + " "
+				+ MaterialTheme.BUTTON_LARGE + " " + LogoResConstants.STYLE_CUSTOM_ORANGE);
 		btn.setSizeFull();
 		btn.setWidth("100%");
 		return btn;
@@ -275,8 +259,8 @@ public class SearchLayout extends Panel {
 		TextField resourceNr2 = createTextField("");
 
 		Button searchButton = new Button(LangHelper.getLocalizableMessage(LogoResConstants.SEARCHSTR));
-		//searchButton.setWidth("100%");
-		//searchButton.setSizeFull();
+		// searchButton.setWidth("100%");
+		// searchButton.setSizeFull();
 
 		searchButton.setIcon(VaadinIcons.SEARCH);
 		searchButton.addStyleName(
@@ -287,9 +271,12 @@ public class SearchLayout extends Panel {
 
 		SpellChecComboBox<String> resourceGroupCombo = createComboBox(LogoResConstants.RESGRPSTR, resourceGroupList,
 				resourceGroupList.get(0));
-		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList, null);
-		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList, null);
-		SpellChecComboBox<String> resourceStateCombo = createComboBox(LogoResConstants.RESSTATESTR, resourceStateList, null);
+		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList,
+				null);
+		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
+				null);
+		SpellChecComboBox<String> resourceStateCombo = createComboBox(LogoResConstants.RESSTATESTR, resourceStateList,
+				null);
 
 		Label hSep0 = createSeperator();
 
@@ -412,9 +399,12 @@ public class SearchLayout extends Panel {
 
 		SpellChecComboBox<String> resourceGroupCombo = createComboBox(LogoResConstants.RESGRPSTR, resourceGroupList,
 				resourceGroupList.get(0));
-		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList, null);
-		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList, null);
-		SpellChecComboBox<String> resourceStateCombo = createComboBox(LogoResConstants.RESSTATESTR, resourceStateList, null);
+		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList,
+				null);
+		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
+				null);
+		SpellChecComboBox<String> resourceStateCombo = createComboBox(LogoResConstants.RESSTATESTR, resourceStateList,
+				null);
 
 		searchGrid.addComponent(createSeperator(), 0, 0, 4, 0);
 
@@ -447,7 +437,6 @@ public class SearchLayout extends Panel {
 		colRight.setComponentAlignment(resourceNr2, Alignment.TOP_LEFT);
 		colRight.setComponentAlignment(descComboText, Alignment.TOP_RIGHT);
 
-		
 		searchGrid.addComponent(colLeft, 0, 1, 1, 1);
 		searchGrid.addComponent(colRight, 2, 1, 3, 1);
 
@@ -462,19 +451,21 @@ public class SearchLayout extends Panel {
 		TextField levelNr1 = createTextField(LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRSTR));
 		TextField levelNr2 = createTextField("");
 
-		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList, null);
+		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
+				null);
 		SpellChecComboBox<String> prefixCombo = createComboBox(LogoResConstants.PREFIXSTR, descList, descList.get(3));
 		SpellChecComboBox<String> infoCombo = createComboBox(LogoResConstants.INFOSTR, descList, descList.get(3));
 
 		TextField prefixComboText = createTextField("");
 		TextField infoComboText = createTextField("");
 
-		SpellChecComboBox<String> descComboTR = createComboBox(LogoResConstants.RE_TURKISHTR_NAME, descList, descList.get(3));
+		SpellChecComboBox<String> descComboTR = createComboBox(LogoResConstants.RE_TURKISHTR_NAME, descList,
+				descList.get(3));
 		TextField comboTextTR = createTextField("");
 
-		SpellChecComboBox<String> descComboEN = createComboBox(LogoResConstants.RE_ENGLISHUS_NAME, descList, descList.get(3));
+		SpellChecComboBox<String> descComboEN = createComboBox(LogoResConstants.RE_ENGLISHUS_NAME, descList,
+				descList.get(3));
 		TextField comboTextEN = createTextField("");
-
 
 		colLeft.addComponent(createSeperator());
 		colLeft.addComponent(orderNr1);
@@ -623,8 +614,6 @@ public class SearchLayout extends Panel {
 		TextField resourceNr2 = createTextField("");
 
 		Button searchButton = new Button(LangHelper.getLocalizableMessage(LogoResConstants.SEARCHSTR));
-		//searchButton.setWidth("100%");
-		//searchButton.setSizeFull();
 
 		searchButton.setIcon(VaadinIcons.SEARCH);
 		searchButton.addStyleName(
@@ -635,10 +624,12 @@ public class SearchLayout extends Panel {
 
 		SpellChecComboBox<String> resourceGroupCombo = createComboBox(LogoResConstants.RESGRPSTR, resourceGroupList,
 				resourceGroupList.get(0));
-		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList, null);
-		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList, null);
-		SpellChecComboBox<String> resourceStateCombo = createComboBox(LogoResConstants.RESSTATESTR, resourceStateList, null);
-
+		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList,
+				null);
+		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
+				null);
+		SpellChecComboBox<String> resourceStateCombo = createComboBox(LogoResConstants.RESSTATESTR, resourceStateList,
+				null);
 
 		FormLayout colLeft = new FormLayout();
 		colLeft.setSizeUndefined();
@@ -684,17 +675,20 @@ public class SearchLayout extends Panel {
 		TextField levelNr1 = createTextField(LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRSTR));
 		TextField levelNr2 = createTextField("");
 
-		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList, null);
+		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
+				null);
 		SpellChecComboBox<String> prefixCombo = createComboBox(LogoResConstants.PREFIXSTR, descList, descList.get(3));
 		SpellChecComboBox<String> infoCombo = createComboBox(LogoResConstants.INFOSTR, descList, descList.get(3));
 
 		TextField prefixComboText = createTextField("");
 		TextField infoComboText = createTextField("");
 
-		SpellChecComboBox<String> descComboTR = createComboBox(LogoResConstants.RE_TURKISHTR_NAME, descList, descList.get(3));
+		SpellChecComboBox<String> descComboTR = createComboBox(LogoResConstants.RE_TURKISHTR_NAME, descList,
+				descList.get(3));
 		TextField comboTextTR = createTextField("");
 
-		SpellChecComboBox<String> descComboEN = createComboBox(LogoResConstants.RE_ENGLISHUS_NAME, descList, descList.get(3));
+		SpellChecComboBox<String> descComboEN = createComboBox(LogoResConstants.RE_ENGLISHUS_NAME, descList,
+				descList.get(3));
 		TextField comboTextEN = createTextField("");
 
 		colLeft.addComponent(createSeperator());
@@ -741,10 +735,10 @@ public class SearchLayout extends Panel {
 		colRight.setComponentAlignment(comboTextTR, Alignment.TOP_LEFT);
 		colRight.setComponentAlignment(comboTextEN, Alignment.TOP_LEFT);
 
-
 		SpellChecComboBox<String> langCombo = createComboBox(LogoResConstants.SELECTLANG, langList, langList.get(0));
 
-		TextField createdDuring = createTextField(LangHelper.getLocalizableMessage(LogoResConstants.CREATEDBYDURINGSTR));
+		TextField createdDuring = createTextField(
+				LangHelper.getLocalizableMessage(LogoResConstants.CREATEDBYDURINGSTR));
 		SpellChecComboBox<String> duringByCombo = createComboBox("", duringByList, null);
 		SpellChecComboBox<String> userByCombo = createComboBox("by", userList, null);
 
@@ -870,10 +864,12 @@ public class SearchLayout extends Panel {
 
 		SpellChecComboBox<String> resourceGroupCombo = createComboBox(LogoResConstants.RESGRPSTR, resourceGroupList,
 				resourceGroupList.get(0));
-		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList, null);
-		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList, null);
-		SpellChecComboBox<String> resourceStateCombo = createComboBox(LogoResConstants.RESSTATESTR, resourceStateList, null);
-
+		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList,
+				null);
+		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
+				null);
+		SpellChecComboBox<String> resourceStateCombo = createComboBox(LogoResConstants.RESSTATESTR, resourceStateList,
+				null);
 
 		FormLayout colLeft = new FormLayout();
 		colLeft.setSizeUndefined();
@@ -919,17 +915,20 @@ public class SearchLayout extends Panel {
 		TextField levelNr1 = createTextField(LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRSTR));
 		TextField levelNr2 = createTextField("");
 
-		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList, null);
+		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
+				null);
 		SpellChecComboBox<String> prefixCombo = createComboBox(LogoResConstants.PREFIXSTR, descList, descList.get(3));
 		SpellChecComboBox<String> infoCombo = createComboBox(LogoResConstants.INFOSTR, descList, descList.get(3));
 
 		TextField prefixComboText = createTextField("");
 		TextField infoComboText = createTextField("");
 
-		SpellChecComboBox<String> descComboTR = createComboBox(LogoResConstants.RE_TURKISHTR_NAME, descList, descList.get(3));
+		SpellChecComboBox<String> descComboTR = createComboBox(LogoResConstants.RE_TURKISHTR_NAME, descList,
+				descList.get(3));
 		TextField comboTextTR = createTextField("");
 
-		SpellChecComboBox<String> descComboEN = createComboBox(LogoResConstants.RE_ENGLISHUS_NAME, descList, descList.get(3));
+		SpellChecComboBox<String> descComboEN = createComboBox(LogoResConstants.RE_ENGLISHUS_NAME, descList,
+				descList.get(3));
 		TextField comboTextEN = createTextField("");
 
 		colLeft.addComponent(createSeperator());
@@ -976,10 +975,10 @@ public class SearchLayout extends Panel {
 		colRight.setComponentAlignment(comboTextTR, Alignment.TOP_LEFT);
 		colRight.setComponentAlignment(comboTextEN, Alignment.TOP_LEFT);
 
-
 		SpellChecComboBox<String> langCombo = createComboBox(LogoResConstants.SELECTLANG, langList, langList.get(0));
 
-		TextField createdDuring = createTextField(LangHelper.getLocalizableMessage(LogoResConstants.CREATEDBYDURINGSTR));
+		TextField createdDuring = createTextField(
+				LangHelper.getLocalizableMessage(LogoResConstants.CREATEDBYDURINGSTR));
 		SpellChecComboBox<String> duringByCombo = createComboBox("", duringByList, null);
 
 		TextField modifiedDuring = createTextField(LangHelper.getLocalizableMessage(LogoResConstants.MODBYDURINGSTR));
@@ -1052,16 +1051,14 @@ public class SearchLayout extends Panel {
 		mainLayout.setComponentAlignment(searchButton, Alignment.BOTTOM_RIGHT);
 		content.addComponents(mainLayout);
 	}
-	
-	private void contentForMessage()
-	{
+
+	private void contentForMessage() {
 		resView.getFilter().setIcon(VaadinIcons.ANGLE_DOWN);
 		resView.createMessageLayout();
 		resView.getSearchLayoutForView().setVisible(false);
 	}
 
-	private void contentForHelpDocs()
-	{
+	private void contentForHelpDocs() {
 		resView.getFilter().setIcon(VaadinIcons.ANGLE_DOWN);
 		resView.createHelpDocsLayout();
 		resView.getSearchLayoutForView().setVisible(false);
@@ -1083,11 +1080,6 @@ public class SearchLayout extends Panel {
 	}
 
 	TextField createTextField(String caption) {
-		/**
-		 * String cap = "<b style=text-align:left;margin-right:" + 0 +
-		 * "px;color:#fab331;text-decoration:none;text-decoration-color:#fab331>"
-		 * + caption + "</b>";
-		 **/
 		TextField textField = new TextField(caption);
 		textField.setCaptionAsHtml(true);
 		textField.addStyleName(MaterialTheme.TEXTFIELD_FLOATING);
@@ -1097,18 +1089,13 @@ public class SearchLayout extends Panel {
 	}
 
 	DateField createDateField(String caption) {
-		/**
-		 * String cap = "<b style=text-align:left;margin-right:" + 0 +
-		 * "px;color:#fab331;text-decoration:none;text-decoration-color:#fab331>"
-		 * + caption + "</b>";
-		 **/
 		DateField dateField = new DateField(caption);
 		dateField.setCaptionAsHtml(true);
 		dateField.addStyleName(MaterialTheme.TEXTFIELD_FLOATING);
 		dateField.setValue(LocalDate.now());
 		dateField.setDateFormat("dd-MM-yyyy");
 		Locale trlocale = Locale.forLanguageTag(LogoresMainUI.getMrepositorycontainer().getAppLocale().getLanguage());
-		dateField.setLocale(trlocale); 
+		dateField.setLocale(trlocale);
 		dateField.setHeight("25px");
 		dateField.setWidth("100%");
 		dateField.addValueChangeListener(

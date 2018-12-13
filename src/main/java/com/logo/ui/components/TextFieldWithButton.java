@@ -23,7 +23,7 @@ public class TextFieldWithButton extends HorizontalLayout {
 		setWidth("100%");
 		setSpacing(false);
 		setCaption(caption);
-		
+
 		textField = new TextField();
 		textField.setPlaceholder(LangHelper.getLocalizableMessage(LogoResConstants.SEARCHSTR));
 		textField.addStyleName(ValoTheme.TEXTFIELD_SMALL);
@@ -52,7 +52,7 @@ public class TextFieldWithButton extends HorizontalLayout {
 	public int hashCode() {
 		return super.hashCode();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);

@@ -1,6 +1,7 @@
 package com.logo.util.enums;
 
 public enum MessageType {
+
 	ERROR(1), INFO(2), WARN(3), SELECTION(4);
 
 	private final Integer typ;
@@ -19,10 +20,10 @@ public enum MessageType {
 		}
 		if (typ == 3) {
 			return "Warn";
-		}		
+		}
 		if (typ == 4) {
 			return "Selection";
-		}		
+		}
 		return "";
 	}
 }

@@ -45,7 +45,7 @@ public class ReMessageView extends VerticalLayout implements View {
 	private Grid<ReMessage> messageGrid = new Grid<>(ReMessage.class);
 
 	private MessageForm messageForm = new MessageForm(this);
-	
+
 	public ReMessageView() {
 		removeAllComponents();
 		init();
@@ -60,17 +60,17 @@ public class ReMessageView extends VerticalLayout implements View {
 		setWidth("100%");
 		setHeight("100%");
 		addStyleName(MaterialTheme.LAYOUT_CARD);
-		
+
 		this.setDescription(LangHelper.getLocalizableMessage(LogoResConstants.CLICKTOEDITSTR));
 		messageForm.setVisible(false);
-		
+
 		messageGrid.setColumns("mtype", "consId", "module");
-		
+
 		HeaderRow row = messageGrid.appendHeaderRow();
 		row.join("consId").setHtml("<b>consId</b>");
-		
+
 		HorizontalLayout header = new HorizontalLayout();
-		
+
 		HorizontalLayout grid = new HorizontalLayout();
 		grid.addStyleName(MaterialTheme.CARD_HOVERABLE);
 
@@ -78,34 +78,31 @@ public class ReMessageView extends VerticalLayout implements View {
 		messageGrid.setHeight("100%");
 		grid.setWidth("100%");
 		grid.setHeight("100%");
-		
+
 		Button backButton = new Button("Home");
 		backButton.setIcon(VaadinIcons.ARROW_BACKWARD);
-		backButton.addStyleName(MaterialTheme.BUTTON_BORDER+ " "+ MaterialTheme.BUTTON_ROUND+" "+ MaterialTheme.BUTTON_BORDERLESS_COLORED);
+		backButton.addStyleName(MaterialTheme.BUTTON_BORDER + " " + MaterialTheme.BUTTON_ROUND + " "
+				+ MaterialTheme.BUTTON_BORDERLESS_COLORED);
 
 		Button addNewMsg = new Button("Add New Message");
 		addNewMsg.setIcon(VaadinIcons.PLUS);
 		addNewMsg.addStyleName(MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
 
 		backButton.addClickListener(e -> getUI().getNavigator().navigateTo(ResourceViewNew.VIEW_NAME));
-		
+
 		header.addComponent(addNewMsg);
-		
 
 		addNewMsg.addClickListener(e -> {
 			messageForm.setVisible(true);
 			messageForm.setReMessage(new ReMessage());
 		});
 
-		
 		addComponent(header);
 		grid.addComponentsAndExpand(messageGrid);
 		grid.addComponentsAndExpand(messageForm);
 		addComponentsAndExpand(grid);
 		addGridFilters();
 		updateMessageListForCons("");
-		
-		//messageGrid.setStyleGenerator(item -> (item.getEnabled() == 1) ? null : "dead");
 
 		messageGrid.setSelectionMode(SelectionMode.SINGLE);
 
@@ -135,11 +132,11 @@ public class ReMessageView extends VerticalLayout implements View {
 		List<ReMessage> message = reMessageRep.findByModuleLikeIgnoreCase(likeFilter);
 		messageGrid.setItems(message);
 	}
-	
+
 	public void refreshGrid() {
-		messageGrid.clearSortOrder();	
+		messageGrid.clearSortOrder();
 	}
-	
+
 	private void addGridFilters() {
 		if (messageGrid.getHeaderRowCount() > 1) {
 			HeaderRow filterRow1 = messageGrid.getHeaderRow(1);
@@ -164,7 +161,6 @@ public class ReMessageView extends VerticalLayout implements View {
 
 		searcField1.getTextField().addValueChangeListener(event -> {
 			Notification.show(event.getValue());
-			//updateUserList(event.getValue());
 		});
 
 		return searcField1;
@@ -194,7 +190,7 @@ public class ReMessageView extends VerticalLayout implements View {
 	public void enter(ViewChangeEvent event) {
 		this.reMessageRep = LogoresMainUI.getMrepositorycontainer().getReMessageRep();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);

@@ -39,7 +39,7 @@ public class ExportTxt implements Serializable {
 	private final transient String fileName;
 	private final transient boolean isTurkishWrite;
 	private final transient boolean isEnglishWrite;
-	
+
 	private final transient SearchParam sParam;
 
 	public ExportTxt(SearchParam sParam, String fileName, boolean isTurkishWrite, boolean isEnglishWrite) {
@@ -86,31 +86,32 @@ public class ExportTxt implements Serializable {
 
 		sb.append(item.reResource.getResourcegroup().name().toString());
 		sb.append(",");
-		sb.append((String) item.reResource.getResourcetype().name());
+		sb.append(item.reResource.getResourcetype().name());
 		sb.append(",");
 		sb.append((Integer) item.reResource.getResourcenr());
 		sb.append(",");
-		sb.append((Integer) item.getOrdernr());
+		sb.append(item.getOrdernr());
 		sb.append(",");
-		sb.append((Integer) item.getTagnr());
+		sb.append(item.getTagnr());
 		sb.append(",");
-		if(isTurkishWrite){
+		if (isTurkishWrite) {
 			ReTurkishtr reTurkishtr = reTurkishtrRep.getresourceitemrefEquals(item.getId());
 			if (reTurkishtr != null) {
-				sb.append((String) reTurkishtr.getResourcestr());
+				sb.append(reTurkishtr.getResourcestr());
 			}
 		}
-		if(isEnglishWrite){
+		if (isEnglishWrite) {
 			ReEnglishus reEnglishus = reEnglishusRep.getresourceitemrefEquals(item.getId());
 			if (reEnglishus != null) {
 				sb.append(",");
-				sb.append((String) reEnglishus.getResourcestr());
+				sb.append(reEnglishus.getResourcestr());
 			}
 		}
 		ps.println(sb.toString());
 	}
 
-	private Page<com.logo.data.entity.ReResourceitemShort> searchByresourceParamAll(int page, int size, SearchParam sParam) {
+	private Page<com.logo.data.entity.ReResourceitemShort> searchByresourceParamAll(int page, int size,
+			SearchParam sParam) {
 		Pageable pageable = new PageRequest(page, size, null);
 		return reResourceitemShortRep.searchByParamAll(pageable, sParam);
 	}

@@ -73,11 +73,11 @@ public class SearchLayoutBoard extends Panel {
 			"Years");
 
 	private static final Set<String> DESCLIST_IGNORE = new HashSet<>();
-	
+
 	private static transient ReUserRep userRepo;
 	private static List<String> userList;
 	private ResourceViewNew resView;
-	
+
 	static {
 		DESCLIST_IGNORE.add(descList.get(0));
 		DESCLIST_IGNORE.add(descList.get(1));
@@ -87,7 +87,7 @@ public class SearchLayoutBoard extends Panel {
 		userRepo = (ReUserRep) VaadinSession.getCurrent().getAttribute("userrepo");
 		userList = userRepo.findAllByUserName();
 	}
-	
+
 	public SearchLayoutBoard(ResourceViewNew resView) {
 		initialize();
 		this.resView = resView;
@@ -150,16 +150,15 @@ public class SearchLayoutBoard extends Panel {
 		searchResponsiveRow.addColumn().withDisplayRules(12, 6, 6, 6).withComponent(searchMemberView3);
 		searchMemberView3.addClickListener(event -> prepareSearch(
 				LangHelper.getLocalizableMessage(LogoResConstants.SEARCHBYMODSTR), LogoResConstants.SEARCHBY_MODIFIED));
-		
 
 		SearchMemberView searchMemberView4 = new SearchMemberView("/imgSearch/004-find.png",
 				LangHelper.getLocalizableMessage(LogoResConstants.SEARCHBYMODMESTR));
 		searchMemberView4.setStyleName(LogoResConstants.STYLE_CARD_HOVER_LIGHT);
 		searchResponsiveRow.addColumn().withDisplayRules(12, 6, 6, 6).withComponent(searchMemberView4);
-		searchMemberView4.addClickListener(event -> prepareSearch(
-				LangHelper.getLocalizableMessage(LogoResConstants.SEARCHBYMODMESTR), LogoResConstants.SEARCHBY_MODIFIED_ME));
+		searchMemberView4.addClickListener(
+				event -> prepareSearch(LangHelper.getLocalizableMessage(LogoResConstants.SEARCHBYMODMESTR),
+						LogoResConstants.SEARCHBY_MODIFIED_ME));
 
-		
 		SearchMemberView searchMemberView5 = new SearchMemberView("/imgSearch/005-analysis.png",
 				LangHelper.getLocalizableMessage(LogoResConstants.SEARCHBYMENUSTR));
 		searchMemberView5.setStyleName(LogoResConstants.STYLE_CARD_HOVER_LIGHT);
@@ -201,13 +200,13 @@ public class SearchLayoutBoard extends Panel {
 		ResponsiveLayout mainLayout = new ResponsiveLayout();
 		mainLayout.setSizeUndefined();
 		mainLayout.setWidth("100%");
-		
+
 		setContent(mainLayout);
 		mainLayout.setContainerType(ContainerType.FLUID);
 
 		ResponsiveRow rootResponsiveRowButton = mainLayout.addRow();
 		rootResponsiveRowButton.withDefaultRules(12, 12, 6, 6);
-		
+
 		rootResponsiveRowButton.setSpacing(true);
 		rootResponsiveRowButton.setMargin(false);
 
@@ -234,7 +233,6 @@ public class SearchLayoutBoard extends Panel {
 		rootResponsiveRow.setWidth("100%");
 		rootResponsiveRow.addStyleName("example");
 
-		
 		switch (searchType) {
 		case LogoResConstants.SEARCHBY_RESNR:
 			contentForResNr(rootResponsiveRow);
@@ -244,10 +242,10 @@ public class SearchLayoutBoard extends Panel {
 			break;
 		case LogoResConstants.SEARCHBY_MODIFIED:
 			contentForModifiedRes(rootResponsiveRow);
-			break;			
+			break;
 		case LogoResConstants.SEARCHBY_MODIFIED_ME:
 			contentForModifiedResMe(rootResponsiveRow);
-			break;			
+			break;
 		default:
 			break;
 		}
@@ -295,7 +293,7 @@ public class SearchLayoutBoard extends Panel {
 				.withComponent(new SearchLayoutView(new Component[] { matchCase, new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
 				.withComponent(new SearchLayoutView(new Component[] { searchButton }));
-		
+
 		searchButton.addClickListener(e -> {
 			SearchByResourceNr searchByResourceNr = new SearchByResourceNr.Builder().setResNrBegin(resourceNr1)
 					.setResNrEnd(resourceNr2).setDescCombo(descCombo).setDescComboText(descComboText)
@@ -306,7 +304,6 @@ public class SearchLayoutBoard extends Panel {
 			resView.createResoucePageForParam(searchByResourceNr.getScParam(), false);
 			resView.getSearchLayoutForView().setVisible(false);
 		});
-
 
 	}
 
@@ -341,7 +338,8 @@ public class SearchLayoutBoard extends Panel {
 		TextField levelNr1 = createTextField(LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRSTR));
 		TextField levelNr2 = createTextField("");
 
-		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList, null);
+		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
+				null);
 		SpellChecComboBox<String> prefixCombo = createComboBox(LogoResConstants.PREFIXSTR, descList, descList.get(3));
 		SpellChecComboBox<String> infoCombo = createComboBox(LogoResConstants.INFOSTR, descList, descList.get(3));
 
@@ -359,7 +357,7 @@ public class SearchLayoutBoard extends Panel {
 		Label line1 = createSeperator();
 		Label line2 = createSeperator();
 		Label line3 = createSeperator();
-		
+
 		descCombo
 				.addValueChangeListener(event -> descComboText.setVisible(!DESCLIST_IGNORE.contains(event.getValue())));
 		prefixCombo.addValueChangeListener(
@@ -378,8 +376,8 @@ public class SearchLayoutBoard extends Panel {
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
 				.withComponent(new SearchLayoutView(new Component[] { descCombo, descComboText }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
-				.withComponent(new SearchLayoutView(new Component[] { resourceCaseCombo,  resourceStateCombo}));
-		
+				.withComponent(new SearchLayoutView(new Component[] { resourceCaseCombo, resourceStateCombo }));
+
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
 				.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
@@ -396,12 +394,12 @@ public class SearchLayoutBoard extends Panel {
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
 				.withComponent(new SearchLayoutView(new Component[] { infoCombo, infoComboText }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
-				.withComponent(new SearchLayoutView(new Component[] { resourceItemCaseCombo, new Label("")}));
-		
+				.withComponent(new SearchLayoutView(new Component[] { resourceItemCaseCombo, new Label("") }));
+
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
-		.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
+				.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
-		.withComponent(new SearchLayoutView(new Component[] { line2 }));
+				.withComponent(new SearchLayoutView(new Component[] { line2 }));
 
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
 				.withComponent(new SearchLayoutView(new Component[] { descComboTR, comboTextTR }));
@@ -417,7 +415,7 @@ public class SearchLayoutBoard extends Panel {
 				.withComponent(new SearchLayoutView(new Component[] { matchCase, new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
 				.withComponent(new SearchLayoutView(new Component[] { searchButton }));
-		
+
 		searchButton.addClickListener(e -> {
 			SearchByResourceNr searchByResourceNr = new SearchByResourceNr.Builder().setResNrBegin(resourceNr1)
 					.setResNrEnd(resourceNr2).setDescCombo(descCombo).setDescComboText(descComboText)
@@ -468,7 +466,8 @@ public class SearchLayoutBoard extends Panel {
 		TextField levelNr1 = createTextField(LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRSTR));
 		TextField levelNr2 = createTextField("");
 
-		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList, null);
+		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
+				null);
 		SpellChecComboBox<String> prefixCombo = createComboBox(LogoResConstants.PREFIXSTR, descList, descList.get(3));
 		SpellChecComboBox<String> infoCombo = createComboBox(LogoResConstants.INFOSTR, descList, descList.get(3));
 
@@ -482,7 +481,7 @@ public class SearchLayoutBoard extends Panel {
 		SpellChecComboBox<String> descComboEN = createComboBox(LogoResConstants.RE_ENGLISHUS_NAME, descList,
 				descList.get(3));
 		TextField comboTextEN = createTextField("");
-		
+
 		SpellChecComboBox<String> langCombo = createComboBox("Language", langList, langList.get(0));
 
 		TextField createdDuring = createTextField("Created during the last");
@@ -495,13 +494,12 @@ public class SearchLayoutBoard extends Panel {
 
 		DateField modDate1 = createDateField("Modification Date");
 		DateField modDate2 = createDateField("");
-		
 
 		Label line1 = createSeperator();
 		Label line2 = createSeperator();
 		Label line3 = createSeperator();
 		Label line4 = createSeperator();
-		
+
 		descCombo
 				.addValueChangeListener(event -> descComboText.setVisible(!DESCLIST_IGNORE.contains(event.getValue())));
 		prefixCombo.addValueChangeListener(
@@ -520,8 +518,8 @@ public class SearchLayoutBoard extends Panel {
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
 				.withComponent(new SearchLayoutView(new Component[] { descCombo, descComboText }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
-				.withComponent(new SearchLayoutView(new Component[] { resourceCaseCombo,  resourceStateCombo}));
-		
+				.withComponent(new SearchLayoutView(new Component[] { resourceCaseCombo, resourceStateCombo }));
+
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
 				.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
@@ -538,12 +536,12 @@ public class SearchLayoutBoard extends Panel {
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
 				.withComponent(new SearchLayoutView(new Component[] { infoCombo, infoComboText }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
-				.withComponent(new SearchLayoutView(new Component[] { resourceItemCaseCombo, new Label("")}));
+				.withComponent(new SearchLayoutView(new Component[] { resourceItemCaseCombo, new Label("") }));
 
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
-		.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
+				.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
-		.withComponent(new SearchLayoutView(new Component[] { line2 }));
+				.withComponent(new SearchLayoutView(new Component[] { line2 }));
 
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
 				.withComponent(new SearchLayoutView(new Component[] { descComboTR, comboTextTR }));
@@ -554,29 +552,28 @@ public class SearchLayoutBoard extends Panel {
 				.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
 				.withComponent(new SearchLayoutView(new Component[] { line3 }));
-		
-		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12).withComponent(
-				new SearchLayoutView(new Component[] { langCombo, new Label("")}));
-		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12).withComponent(
-				new SearchLayoutView(new Component[] { createdDuring, duringByCombo, userByCombo }));
+
+		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
+				.withComponent(new SearchLayoutView(new Component[] { langCombo, new Label("") }));
+		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
+				.withComponent(new SearchLayoutView(new Component[] { createdDuring, duringByCombo, userByCombo }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12).withComponent(
 				new SearchLayoutView(new Component[] { modifiedDuring, duringByComboMod, userByComboMod }));
-		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12).withComponent(
-				new SearchLayoutView(new Component[] { modDate1, modDate2}));
+		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
+				.withComponent(new SearchLayoutView(new Component[] { modDate1, modDate2 }));
 
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
-		.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
+				.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
-		.withComponent(new SearchLayoutView(new Component[] { line4 }));
+				.withComponent(new SearchLayoutView(new Component[] { line4 }));
 
-		
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
 				.withComponent(new SearchLayoutView(new Component[] { matchCase, new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
 				.withComponent(new SearchLayoutView(new Component[] { searchButton }));
-		
+
 	}
-	
+
 	private void contentForModifiedResMe(ResponsiveRow rootResponsiveRow) {
 
 		TextField resourceNr1 = createTextField(LangHelper.getLocalizableMessage(LogoResConstants.RESNRSTR));
@@ -609,7 +606,8 @@ public class SearchLayoutBoard extends Panel {
 		TextField levelNr1 = createTextField(LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRSTR));
 		TextField levelNr2 = createTextField("");
 
-		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList, null);
+		SpellChecComboBox<String> resourceItemCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
+				null);
 		SpellChecComboBox<String> prefixCombo = createComboBox(LogoResConstants.PREFIXSTR, descList, descList.get(3));
 		SpellChecComboBox<String> infoCombo = createComboBox(LogoResConstants.INFOSTR, descList, descList.get(3));
 
@@ -623,7 +621,7 @@ public class SearchLayoutBoard extends Panel {
 		SpellChecComboBox<String> descComboEN = createComboBox(LogoResConstants.RE_ENGLISHUS_NAME, descList,
 				descList.get(3));
 		TextField comboTextEN = createTextField("");
-		
+
 		SpellChecComboBox<String> langCombo = createComboBox("Language", langList, langList.get(0));
 
 		TextField createdDuring = createTextField("Created by me during the last");
@@ -634,13 +632,12 @@ public class SearchLayoutBoard extends Panel {
 
 		DateField modDate1 = createDateField("Modification Date");
 		DateField modDate2 = createDateField("");
-		
 
 		Label line1 = createSeperator();
 		Label line2 = createSeperator();
 		Label line3 = createSeperator();
 		Label line4 = createSeperator();
-		
+
 		descCombo
 				.addValueChangeListener(event -> descComboText.setVisible(!DESCLIST_IGNORE.contains(event.getValue())));
 		prefixCombo.addValueChangeListener(
@@ -659,8 +656,8 @@ public class SearchLayoutBoard extends Panel {
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
 				.withComponent(new SearchLayoutView(new Component[] { descCombo, descComboText }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
-				.withComponent(new SearchLayoutView(new Component[] { resourceCaseCombo,  resourceStateCombo}));
-		
+				.withComponent(new SearchLayoutView(new Component[] { resourceCaseCombo, resourceStateCombo }));
+
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
 				.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
@@ -677,12 +674,12 @@ public class SearchLayoutBoard extends Panel {
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
 				.withComponent(new SearchLayoutView(new Component[] { infoCombo, infoComboText }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
-				.withComponent(new SearchLayoutView(new Component[] { resourceItemCaseCombo, new Label("")}));
+				.withComponent(new SearchLayoutView(new Component[] { resourceItemCaseCombo, new Label("") }));
 
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
-		.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
+				.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
-		.withComponent(new SearchLayoutView(new Component[] { line2 }));
+				.withComponent(new SearchLayoutView(new Component[] { line2 }));
 
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 6, 6)
 				.withComponent(new SearchLayoutView(new Component[] { descComboTR, comboTextTR }));
@@ -693,29 +690,28 @@ public class SearchLayoutBoard extends Panel {
 				.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
 				.withComponent(new SearchLayoutView(new Component[] { line3 }));
-		
-		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12).withComponent(
-				new SearchLayoutView(new Component[] { langCombo, new Label("")}));
-		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12).withComponent(
-				new SearchLayoutView(new Component[] { createdDuring, duringByCombo }));
-		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12).withComponent(
-				new SearchLayoutView(new Component[] { modifiedDuring, duringByComboMod}));
-		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12).withComponent(
-				new SearchLayoutView(new Component[] { modDate1, modDate2}));
 
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
-		.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
+				.withComponent(new SearchLayoutView(new Component[] { langCombo, new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
-		.withComponent(new SearchLayoutView(new Component[] { line4 }));
+				.withComponent(new SearchLayoutView(new Component[] { createdDuring, duringByCombo }));
+		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
+				.withComponent(new SearchLayoutView(new Component[] { modifiedDuring, duringByComboMod }));
+		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
+				.withComponent(new SearchLayoutView(new Component[] { modDate1, modDate2 }));
 
-		
+		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
+				.withComponent(new SearchLayoutView(new Component[] { new Label("") }));
+		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
+				.withComponent(new SearchLayoutView(new Component[] { line4 }));
+
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
 				.withComponent(new SearchLayoutView(new Component[] { matchCase, new Label("") }));
 		rootResponsiveRow.addColumn().withDisplayRules(12, 12, 12, 12)
 				.withComponent(new SearchLayoutView(new Component[] { searchButton }));
-		
+
 	}
-	
+
 	TextField createTextField(String caption) {
 		String cap = "";
 		if ("".contains(caption)) {
@@ -759,20 +755,20 @@ public class SearchLayoutBoard extends Panel {
 
 		return combo;
 	}
-	
+
 	DateField createDateField(String caption) {
 		/**
 		 * String cap = "<b style=text-align:left;margin-right:" + 0 +
-		 * "px;color:#fab331;text-decoration:none;text-decoration-color:#fab331>"
-		 * + caption + "</b>";
+		 * "px;color:#fab331;text-decoration:none;text-decoration-color:#fab331>" +
+		 * caption + "</b>";
 		 **/
 		DateField dateField = new DateField(caption);
 		dateField.setCaptionAsHtml(true);
-		//dateField.addStyleName(MaterialTheme.TEXTFIELD_FLOATING);
+		// dateField.addStyleName(MaterialTheme.TEXTFIELD_FLOATING);
 		dateField.setValue(LocalDate.now());
 		dateField.setDateFormat("dd-MM-yyyy");
 		Locale trlocale = Locale.forLanguageTag(LogoresMainUI.getMrepositorycontainer().getAppLocale().getLanguage());
-		dateField.setLocale(trlocale); 
+		dateField.setLocale(trlocale);
 		dateField.setWidth("100%");
 		dateField.setHeight("25px");
 		dateField.addValueChangeListener(
@@ -801,11 +797,11 @@ public class SearchLayoutBoard extends Panel {
 			ResponsiveRow responsiveRow = new ResponsiveRow();
 			responsiveRow.setWidth("100%");
 			responsiveRow.setHeight("100%");
-			
+
 			HorizontalLayout h1 = new HorizontalLayout();
 			h1.setWidth("100%");
 			h1.setHeight("100%");
-			//h1.addStyleName(MaterialTheme.CARD_5);
+			// h1.addStyleName(MaterialTheme.CARD_5);
 			for (int i = 0; i < comp.length; i++) {
 				if (comp[i] instanceof SwitchWithTextBox)
 					h1.addComponent(comp[i]);

@@ -19,7 +19,7 @@ public class ResourceItemPanel extends Panel {
 
 	private final transient ReUser reUser;
 	VerticalLayout panelContent = new VerticalLayout();
-	
+
 	public ResourceItemPanel() {
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
 		ReResource resource = new ReResource();
@@ -30,22 +30,14 @@ public class ResourceItemPanel extends Panel {
 
 		setWidth("100%");
 		setHeight("100%");
-		
+
 		panelContent.setWidth("100%");
 
 		setContent(panelContent);
-		
+
 		ReResourceitem reResourceitem = new ReResourceitem();
 		reResourceitem.setOrdernr(1);
 		reResourceitem.setTagnr(1);
-
-		/**
-		String panelCaption = "<p style="
-				+ "background-color:white;border-style:solid;border-color:green;border-width:2px;padding:4px;font-style:bold;text-align:center;"
-				+ "color:green" + ">Resource Item List</p>";
-		setCaption(panelCaption);
-		setCaptionAsHtml(true);
-		**/
 	}
 
 	public void addItem(ReResource reResource, ReResourceitem reResourceitem) {
@@ -60,7 +52,7 @@ public class ResourceItemPanel extends Panel {
 	public boolean equals(Object obj) {
 		return super.equals(obj);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();

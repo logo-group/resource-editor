@@ -2,20 +2,6 @@ package com.logo.util;
 
 public class QueryConstants {
 
-//	public static final String SEARCHQUERY1 = " select * from RE_RESOURCEITEMS where RESOURCEREF in"
-//			+ " (select ID from RE_RESOURCES where (RESOURCENR between :resourcenr1 and :resourcenr2) and (RESOURCEGROUP in :resourcegroup)"
-//			+ " and (RESOURCETYPE in :resourcetype) and (RESOURCECASE in :resourcecase) and (ACTIVE in :active)  )"
-//			+ " ORDER BY RESOURCEREF ASC, ORDERNR ASC \n-- #pageable\n";
-
-//	public static final String SEARCHCOUNT1 = " select count(*) from RE_RESOURCEITEMS where RESOURCEREF in"
-//			+ " (select ID from RE_RESOURCES where (RESOURCENR between :resourcenr1 and :resourcenr2) and (RESOURCEGROUP in :resourcegroup)"
-//			+ " and (RESOURCETYPE in :resourcetype) and (RESOURCECASE in :resourcecase) and (ACTIVE in :actives) )";
-
-//	public static final String SEARCHQUERY2 = " select rr.* from RE_RESOURCEITEMS rr CROSS APPLY dbo.RE_RESOURCESFUNC(rr.ID,rr.RESOURCEREF,:resourcenr1,:resourcenr2,3,-1,-1,-1,-1,'')"
-//			+ " ORDER BY rr.RESOURCEREF ASC, rr.ORDERNR ASC \n-- #pageable\n";
-
-//	public static final String SEARCHCOUNT2 = " select count(*) from RE_RESOURCEITEMS rr CROSS APPLY dbo.RE_RESOURCESFUNC(rr.ID,rr.RESOURCEREF,?1,?2,3,-1,-1,-1,-1,'')";
-
 	public static final String SEARCHBYPARAM = " select rr.* from RE_RESOURCEITEMS rr CROSS APPLY dbo.RE_RESOURCESFUNC(rr.ID,rr.RESOURCEREF,"
 			+ ":#{#searchParam.resNrBegin},:#{#searchParam.resNrEnd},:#{#searchParam.descFlag},:#{#searchParam.resGrpFlag},"
 			+ ":#{#searchParam.resTypFlag},:#{#searchParam.resCaseFlag},:#{#searchParam.resStateFlag},:#{#searchParam.word})"

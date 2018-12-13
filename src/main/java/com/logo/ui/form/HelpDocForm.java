@@ -39,13 +39,13 @@ public class HelpDocForm extends VerticalLayout {
 	private final SpellChecComboBox<DocType> docTypeCombo = new SpellChecComboBox<>("Type");
 	private final TextArea txtArea = new TextArea("Body");
 	private final Attribute spellcheckAttr = new Attribute("spellcheck", "false");
-	
+
 	private final Button save = new ButtonGenerator(LogoResConstants.SAVESTR);
 	private final Button close = new ButtonGenerator(LogoResConstants.CLOSELSTR);
 	private final Button delete = new ButtonGenerator(LogoResConstants.DELETESTR);
 
 	private final Label formName = new Label();
-	
+
 	@Autowired
 	public transient ReHelpDocsRep reHelpDocsRep;
 
@@ -76,36 +76,33 @@ public class HelpDocForm extends VerticalLayout {
 		txtArea.setSizeFull();
 		txtArea.setWidth("100%");
 		txtArea.setHeight("500px");
-		
+
 		save.setHeight("30px");
 		close.setHeight("30px");
-		close.addStyleName(MaterialTheme.BUTTON_ROUND + " "+ MaterialTheme.BUTTON_BORDERLESS + " " + LogoResConstants.STYLE_CUSTOM_WHITE);
-		
-		docTypeCombo.setItems(DocType.LOCALIZABLEHELP, DocType.NONLOCALIZABLEHELP, DocType.REUSABLEHELP, DocType.LOCALIZABLEJAVA);
+		close.addStyleName(MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_BORDERLESS + " "
+				+ LogoResConstants.STYLE_CUSTOM_WHITE);
+
+		docTypeCombo.setItems(DocType.LOCALIZABLEHELP, DocType.NONLOCALIZABLEHELP, DocType.REUSABLEHELP,
+				DocType.LOCALIZABLEJAVA);
 
 		docTypeCombo.setEmptySelectionAllowed(false);
 
 		docTypeCombo.setSelectedItem(DocType.LOCALIZABLEHELP);
-		
-		binder.forField(helpDocName).asRequired("username can not be empty")
-				// .withValidator(number -> number <= 0, "Person must be born in
-				// the 20th century")
-				.bind(ReHelpDocs::getDocname, ReHelpDocs::setDocname);
 
-		binder.forField(title).asRequired("name can not be empty")
-				// .withValidator(number -> number <= 0, "Person must be born in
-				// the 20th century")
-				.bind(ReHelpDocs::getDoctitle, ReHelpDocs::setDoctitle);
+		binder.forField(helpDocName).asRequired("username can not be empty").bind(ReHelpDocs::getDocname,
+				ReHelpDocs::setDocname);
+
+		binder.forField(title).asRequired("name can not be empty").bind(ReHelpDocs::getDoctitle,
+				ReHelpDocs::setDoctitle);
 		binder.bind(docTypeCombo, ReHelpDocs::getDoctype, ReHelpDocs::setDoctype);
-		
+
 		RichTextArea rText = new RichTextArea();
 		rText.setSizeFull();
 		rText.setWidth("100%");
 		rText.setHeight("100%");
-		
-		binder.bind(txtArea,ReHelpDocs::getDocbody, ReHelpDocs::setDocbody);
-		
-		
+
+		binder.bind(txtArea, ReHelpDocs::getDocbody, ReHelpDocs::setDocbody);
+
 		HorizontalLayout labelLayout = new HorizontalLayout();
 		labelLayout.setWidth("100%");
 		labelLayout.addStyleName("card-hoverable-material-default-primary-color");
@@ -114,14 +111,14 @@ public class HelpDocForm extends VerticalLayout {
 		labelLayout.addComponent(close);
 		labelLayout.setComponentAlignment(formName, Alignment.TOP_LEFT);
 		labelLayout.setComponentAlignment(close, Alignment.TOP_RIGHT);
-		
+
 		delete.setVisible(false);
 		HorizontalLayout buttonLayout = new HorizontalLayout(save, delete);
 
 		helpDocName.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		title.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		docTypeCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
-		
+
 		addComponent(labelLayout);
 		FormLayout col01 = new FormLayout();
 		col01.setSizeFull();
@@ -137,22 +134,20 @@ public class HelpDocForm extends VerticalLayout {
 		col02.setWidth("100%");
 		col02.setHeight("100%");
 
-		
 		col01.addComponent(helpDocName);
 		col01.addComponent(title);
 		col01.addComponent(docTypeCombo);
-		
+
 		addComponentsAndExpand(col01);
-		col02.addComponent(txtArea);	
+		col02.addComponent(txtArea);
 		addComponentsAndExpand(col02);
 		setExpandRatio(col01, 1.0f);
 		setExpandRatio(col02, 4.0f);
-		
+
 		save.addClickListener(e -> save());
 		close.addClickListener(e -> cancel());
 		delete.addClickListener(e -> delete());
-		
-		
+
 		addComponents(buttonLayout);
 		setComponentAlignment(buttonLayout, Alignment.BOTTOM_RIGHT);
 		addStyleName(MaterialTheme.CARD_1);
@@ -161,7 +156,7 @@ public class HelpDocForm extends VerticalLayout {
 	public void setReHelpDoc(ReHelpDocs reHelpDocs) {
 		this.reHelpDocs = reHelpDocs;
 		delete.setVisible(false);
-		formName.setValue(reHelpDocs.getDocname() + " " );
+		formName.setValue(reHelpDocs.getDocname() + " ");
 		binder.setBean(reHelpDocs);
 		if (reHelpDocs.isPersisted())
 			delete.setVisible(true);
@@ -176,6 +171,7 @@ public class HelpDocForm extends VerticalLayout {
 					 */
 					private static final long serialVersionUID = 1L;
 
+					@Override
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {
 							reHelpDocsRep.delete(reHelpDocs);
@@ -193,7 +189,7 @@ public class HelpDocForm extends VerticalLayout {
 	}
 
 	private void save() {
-		boolean isPersisted = reHelpDocs.isPersisted(); 
+		boolean isPersisted = reHelpDocs.isPersisted();
 		try {
 			reHelpDocsRep.save(reHelpDocs);
 		} catch (Exception e) {
@@ -204,13 +200,13 @@ public class HelpDocForm extends VerticalLayout {
 			notification.setDelayMsec(50000);
 			notification.show(Page.getCurrent());
 		}
-		if(isPersisted)
+		if (isPersisted)
 			reHelpDocsView.refreshGrid();
 		else
 			reHelpDocsView.updateHelpListForDocName("");
 		setVisible(false);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();

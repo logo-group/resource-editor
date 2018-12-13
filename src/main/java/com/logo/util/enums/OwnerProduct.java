@@ -1,6 +1,7 @@
 package com.logo.util.enums;
 
 public enum OwnerProduct {
+
 	INFRASTRUCTURE(-1), APPLICATION(0);
 
 	private final Integer typ;

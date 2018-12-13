@@ -5,6 +5,7 @@ import javax.persistence.AttributeConverter;
 import com.logo.util.enums.MessageType;
 
 public class MessageTypeConverter implements AttributeConverter<MessageType, Integer> {
+
 	@Override
 	public Integer convertToDatabaseColumn(MessageType messageType) {
 		switch (messageType) {

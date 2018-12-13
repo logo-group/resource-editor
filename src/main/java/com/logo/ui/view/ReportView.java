@@ -215,11 +215,8 @@ public class ReportView extends Panel {
 		innerForm.addComponent(resHedLayout);
 		innerForm.addComponent(col01);
 
-		// form.setContent(innerForm);
-
 		header.removeAllComponents();
 		header.addComponent(innerForm);
-		// header.setComponentAlignment(form, Alignment.MIDDLE_CENTER);
 
 		resHedLayout.addLayoutClickListener(e -> {
 			String filter = resource.getResourcegroup().name() + "->" + Integer.toString(resource.getResourcenr());

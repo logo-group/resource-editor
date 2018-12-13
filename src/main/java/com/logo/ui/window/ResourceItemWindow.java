@@ -185,20 +185,14 @@ public class ResourceItemWindow extends Window {
 
 		binder.forField(ordernr).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.ORDERNRNOTEMTYSTR))
 				.withConverter(new StrToIntegerConverter(LogoResConstants.MUSTNUMBER))
-				// .withValidator(number -> number <= 1, "Person must be born in
-				// the 20th century")
 				.bind(ReResourceitem::getOrdernr, ReResourceitem::setOrdernr);
 
 		binder.forField(tagnr).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.TAGNRNOTEMTYSTR))
 				.withConverter(new StrToIntegerConverter(LogoResConstants.MUSTNUMBER))
-				// .withValidator(number -> number <= 1, "Person must be born in
-				// the 20th century")
 				.bind(ReResourceitem::getTagnr, ReResourceitem::setTagnr);
 
 		binder.forField(levelnr).asRequired(LangHelper.getLocalizableMessage(LogoResConstants.LEVELNRNOTEMTYSTR))
 				.withConverter(new StrToIntegerConverter(LogoResConstants.MUSTNUMBER))
-				// .withValidator(number -> number <= 1, "Person must be born in
-				// the 20th century")
 				.bind(ReResourceitem::getLevelnr, ReResourceitem::setLevelnr);
 
 		binder.forField(prefix).bind(ReResourceitem::getPrefixstr, ReResourceitem::setPrefixstr);

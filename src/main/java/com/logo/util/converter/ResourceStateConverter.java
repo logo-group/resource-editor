@@ -5,6 +5,7 @@ import javax.persistence.AttributeConverter;
 import com.logo.util.enums.ResourceState;
 
 public class ResourceStateConverter implements AttributeConverter<ResourceState, Integer> {
+
 	@Override
 	public Integer convertToDatabaseColumn(ResourceState resourceState) {
 		switch (resourceState) {

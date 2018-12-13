@@ -104,9 +104,6 @@ public class ReHelpDocsView extends VerticalLayout implements View {
 		addGridFilters();
 		updateHelpListForDocName("");
 
-		// messageGrid.setStyleGenerator(item -> (item.getEnabled() == 1) ? null :
-		// "dead");
-
 		helpdocsGrid.setSelectionMode(SelectionMode.SINGLE);
 
 		helpdocsGrid.addSelectionListener(new SelectionListener<ReHelpDocs>() {
@@ -153,7 +150,6 @@ public class ReHelpDocsView extends VerticalLayout implements View {
 			} else if ("doctitle".equals(column.getId())) {
 				headerCell.setComponent(createFilterTextFieldForTitle());
 			} else if ("doctype".equals(column.getId())) {
-				// headerCell.setComponent(createFilterTextFieldForModule());
 			}
 		}
 	}

@@ -11,7 +11,7 @@ import com.vaadin.ui.TextArea;
 import eu.michaelvogt.vaadin.attribute.Attribute;
 
 public class CustomLayoutObjects {
-	
+
 	Button saveButtonForEdit = new ButtonGenerator(LogoResConstants.SAVESTR);
 	Button cancelButtonForEdit = new ButtonGenerator(LogoResConstants.CANCELSTR);
 
@@ -19,9 +19,9 @@ public class CustomLayoutObjects {
 	Button cancelButtonForAdd = new ButtonGenerator(LogoResConstants.CANCELSTR);
 
 	Button translateButton = new ButtonGenerator(LogoResConstants.TRANSLATESTR);
-	
+
 	Button addButton = new ButtonGenerator(LogoResConstants.ADDSTR);
-	
+
 	TextArea txtArea = new TextArea();
 	Binder<ReLanguageTable> binder = new Binder<>(ReLanguageTable.class);
 	Attribute spellcheckAttr = new Attribute("spellcheck", "false");
@@ -35,7 +35,7 @@ public class CustomLayoutObjects {
 		buttonLayoyt.setWidth("240px");
 		buttonLayoyt.setSpacing(false);
 		buttonLayoyt.setMargin(false);
-		
+
 		saveButtonForEdit.setWidth("80px");
 		cancelButtonForEdit.setWidth("80px");
 		saveButtonForAdd.setWidth("80px");
