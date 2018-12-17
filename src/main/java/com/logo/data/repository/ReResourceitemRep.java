@@ -22,9 +22,6 @@ public interface ReResourceitemRep extends JpaRepository<ReResourceitem, Long> {
 
 	ReResourceitem findByid(Integer id);
 
-	@Query(value = "select ri from ReResourceitem ri where resourceref = :resourceref and tagnr > -1000000")
-	List<ReResourceitem> findByresourcerefEquals(@Param("resourceref") Integer resourceref);
-
 	@Query(value = "select max(TAGNR) from RE_RESOURCEITEMS with(nolock) where RESOURCEREF = :resourceref", nativeQuery = true)
 	Integer getMaxTagNr(@Param("resourceref") Integer resourceref);
 

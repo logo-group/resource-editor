@@ -4,29 +4,6 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logo.data.repository.ReAlbaniankvRep;
-import com.logo.data.repository.ReArabicegRep;
-import com.logo.data.repository.ReArabicjoRep;
-import com.logo.data.repository.ReArabicsaRep;
-import com.logo.data.repository.ReAzerbaijaniazRep;
-import com.logo.data.repository.ReBulgarianbgRep;
-import com.logo.data.repository.ReEnglishusRep;
-import com.logo.data.repository.ReFrenchfrRep;
-import com.logo.data.repository.ReGeorgiangeRep;
-import com.logo.data.repository.ReGermandeRep;
-import com.logo.data.repository.ReHelpDocsRep;
-import com.logo.data.repository.ReMessageRep;
-import com.logo.data.repository.RePersianirRep;
-import com.logo.data.repository.ReProjectVerisonRep;
-import com.logo.data.repository.ReResourceRep;
-import com.logo.data.repository.ReResourceitemRep;
-import com.logo.data.repository.ReResourceitemShortRep;
-import com.logo.data.repository.ReRomanianroRep;
-import com.logo.data.repository.ReRussianruRep;
-import com.logo.data.repository.ReStandardRep;
-import com.logo.data.repository.ReTurkishtrRep;
-import com.logo.data.repository.ReTurkmentmRep;
-import com.logo.data.repository.ReUserRep;
 import com.logo.ui.view.LoginView;
 import com.logo.ui.view.ReHelpDocsView;
 import com.logo.ui.view.ReMessageView;
@@ -67,75 +44,6 @@ public class LogoresMainUI extends UI {
 
 	@Autowired
 	private transient UISessionState sessionState;
-
-	@Autowired
-	private transient ReUserRep reUserRep;
-
-	@Autowired
-	private transient ReResourceRep resRepo;
-
-	@Autowired
-	private transient ReResourceitemRep reResourceitemRep;
-
-	@Autowired
-	private transient ReResourceitemShortRep reResourceitemShortRep;
-
-	@Autowired
-	private transient ReTurkishtrRep reTurkishtrRep;
-
-	@Autowired
-	private transient ReEnglishusRep reEnglishusRep;
-
-	@Autowired
-	private transient ReGermandeRep reGermandeRep;
-
-	@Autowired
-	private transient RePersianirRep rePersianirRep;
-
-	@Autowired
-	private transient ReAzerbaijaniazRep reAzerbaijaniazRep;
-
-	@Autowired
-	private transient ReBulgarianbgRep reBulgarianbgRep;
-
-	@Autowired
-	private transient ReRussianruRep reRussianruRep;
-
-	@Autowired
-	private transient ReMessageRep reMessageRep;
-
-	@Autowired
-	private transient ReHelpDocsRep reHelpDocsRep;
-
-	@Autowired
-	private transient ReRomanianroRep reRomanianroRep;
-
-	@Autowired
-	private transient ReGeorgiangeRep reGeorgiangeRep;
-
-	@Autowired
-	private transient ReArabicjoRep reArabicjoRep;
-
-	@Autowired
-	private transient ReFrenchfrRep reFrenchfrRep;
-
-	@Autowired
-	private transient ReAlbaniankvRep reAlbaniankvRep;
-
-	@Autowired
-	private transient ReTurkmentmRep reTurkmentmRep;
-
-	@Autowired
-	private transient ReArabicegRep reArabicegRep;
-
-	@Autowired
-	private transient ReArabicsaRep reArabicsaRep;
-
-	@Autowired
-	private transient ReStandardRep reStandardRep;
-
-	@Autowired
-	private transient ReProjectVerisonRep reProjectVerisonRep;
 
 	private static final RepositoryContainer mRepositoryContainer = new RepositoryContainer();
 

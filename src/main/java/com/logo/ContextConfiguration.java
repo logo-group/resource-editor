@@ -40,8 +40,4 @@ public class ContextConfiguration {
 	public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
-
-	public static DataSource getDataSource() {
-		return dataSource;
-	}
 }

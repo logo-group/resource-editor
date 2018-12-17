@@ -29,9 +29,6 @@ public interface ReResourceRep extends JpaRepository<ReResource, Long> {
 	@Query(value = "select max(RESOURCENR) from RE_RESOURCES with(nolock)", nativeQuery = true)
 	Integer getMaxResourceNr();
 
-	@Query(value = "select TOP 3 * from RE_RESOURCES with(nolock) order by CREATEDON desc,MODIFIEDON desc", nativeQuery = true)
-	List<ReResource> getByresourceTop3();
-
 	@Query(value = QueryConstants.RESGROUPCOUNTQUERY, nativeQuery = true)
 	<T> List<T> getResGroupCount();
 
