@@ -18,6 +18,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,6 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReResourceitemShort;
 import com.logo.data.entity.ReTurkishtr;
 import com.logo.data.repository.ReResourceitemShortRep;
@@ -42,8 +42,11 @@ public class ExportXml implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(ExportXml.class.getName());
 
-	private final transient ReResourceitemShortRep reResourceitemShortRep;
-	private final transient ReTurkishtrRep reTurkishtrRep;
+	@Autowired
+	private ReResourceitemShortRep reResourceitemShortRep;
+
+	@Autowired
+	private ReTurkishtrRep reTurkishtrRep;
 	private final transient String fileName;
 
 	private final transient SearchParam sParam;
@@ -52,8 +55,6 @@ public class ExportXml implements Serializable {
 	private static Element firstTaggedList = null;
 
 	public ExportXml(SearchParam sParam, String fileName) {
-		this.reResourceitemShortRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemShortRep();
-		this.reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
 		this.sParam = sParam;
 		this.fileName = fileName;
 	}

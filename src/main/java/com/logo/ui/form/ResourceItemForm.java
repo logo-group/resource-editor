@@ -3,10 +3,10 @@ package com.logo.ui.form;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.marcus.MouseEvents;
 
 import com.github.appreciated.material.MaterialTheme;
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReResourceitem;
 import com.logo.data.entity.ReTurkishtr;
@@ -39,7 +39,7 @@ public class ResourceItemForm extends Panel {
 
 	private static final long serialVersionUID = 1L;
 
-	private static Logger logger = Logger.getLogger(NewResourceForm.class.getName());
+	private static Logger logger = Logger.getLogger(ResourceItemForm.class.getName());
 
 	private ReResource resource = new ReResource();
 	private ReResourceitem resourceItem = new ReResourceitem();
@@ -62,12 +62,13 @@ public class ResourceItemForm extends Panel {
 			LangHelper.getLocalizableMessage(LogoResConstants.OWNERPRODUCT));
 	private final HorizontalLayout buttonLayout = new HorizontalLayout(saveAndNew, save, cancel, add);
 
-	private final transient ReResourceitemRep reResourceitemRep;
-	private final transient ReTurkishtrRep reTurkishtrRep;
+	@Autowired
+	private ReResourceitemRep reResourceitemRep;
+
+	@Autowired
+	private ReTurkishtrRep reTurkishtrRep;
 
 	public ResourceItemForm(ReResource resource) {
-		this.reResourceitemRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
-		this.reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
 		this.resource = resource;
 		setWidth("100%");
 		setHeight("100%");

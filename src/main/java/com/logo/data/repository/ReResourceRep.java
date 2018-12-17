@@ -2,6 +2,7 @@ package com.logo.data.repository;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,6 +13,7 @@ import com.logo.data.entity.ReResource;
 import com.logo.util.QueryConstants;
 
 @Component
+@Scope("prototype")
 @Transactional(readOnly = true)
 public interface ReResourceRep extends JpaRepository<ReResource, Long> {
 

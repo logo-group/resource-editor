@@ -17,12 +17,13 @@ import com.jarektoro.responsivelayout.ResponsiveColumn.ColumnComponentAlignment;
 import com.jarektoro.responsivelayout.ResponsiveLayout;
 import com.jarektoro.responsivelayout.ResponsiveRow;
 import com.logo.LogoresMainUI;
-import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReUser;
+import com.logo.data.repository.ReProjectVerisonRep;
 import com.logo.data.repository.ReResourceRep;
+import com.logo.data.repository.ReResourceitemRep;
+import com.logo.data.repository.ReUserRep;
 import com.logo.ui.components.PaginationItemLayout;
 import com.logo.ui.components.SearchLayout;
-import com.logo.ui.window.ResourceWindow;
 import com.logo.ui.window.UserWindow;
 import com.logo.util.LangHelper;
 import com.logo.util.LogoResConstants;
@@ -63,30 +64,42 @@ public class ResourceViewNew extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1342110846527246562L;
 	public static final String VIEW_NAME = "ResourceViewNew";
 
+	@Autowired
+	private ReMessageView messageView;
+
+	@Autowired
+	private ReHelpDocsView helpDocsView;
+
+	@Autowired
+	private HomeView homeView;
+
+	@Autowired
+	public transient ReResourceRep resRepo;
+
+	@Autowired
+	private ReResourceitemRep reResourceitemRep;
+
+	@Autowired
+	private ReProjectVerisonRep reProjectVerisonRep;
+
+	@Autowired
+	private ReUserRep userRepo;
+
 	private HorizontalLayout rootLayout = new HorizontalLayout();
 	private VerticalLayout contentLayout = new VerticalLayout();
 	private VerticalLayout menuLayout = new VerticalLayout();
 	private Panel menuPanel = new Panel();
-
 	private Panel searchLayout = new Panel();
-
 	private UserView userView = new UserView();
-	private ReMessageView messageView = new ReMessageView();
-	private ReHelpDocsView helpDocsView = new ReHelpDocsView();
-	private HomeView homeView = new HomeView(this);
 	private TransferView transferView = new TransferView();
 	private SearchLayout srcLayout = new SearchLayout(this);
 	private PaginationItemLayout gridContentItem = null;
 	private Button filter = new Button(LangHelper.getLocalizableMessage(LogoResConstants.ADVANCESEARCHSTR));
-
 	private Button toolsButton;
 	private VerticalLayout submenuTools;
 	private Button documentsButton;
 	private VerticalLayout submenuDocuments;
 	private Button logoLabel;
-
-	@Autowired
-	public transient ReResourceRep resRepo;
 
 	@PostConstruct
 	void init() {
@@ -106,13 +119,6 @@ public class ResourceViewNew extends VerticalLayout implements View {
 		rootLayout.addComponent(contentLayout);
 		rootLayout.setExpandRatio(contentLayout, 4.0f);
 		contentLayout.addComponentsAndExpand(homeView);
-
-		homeView.getAddNewResource().addClickListener(e -> {
-
-			ReResource reResource = new ReResource();
-			final ResourceWindow window = new ResourceWindow(reResource, this, true);
-			UI.getCurrent().addWindow(window);
-		});
 
 	}
 
@@ -262,8 +268,6 @@ public class ResourceViewNew extends VerticalLayout implements View {
 
 		clickAllResourcesButtonAction(allResources, close);
 
-		addNewResource.addClickListener(e -> homeView.getAddNewResource().click());
-
 		MouseEvents mouseEvents = MouseEvents.enableFor(menuLayout);
 		mouseEvents.addMouseOutListener(() -> close.click());
 	}
@@ -272,21 +276,24 @@ public class ResourceViewNew extends VerticalLayout implements View {
 		clearSessionAttributes();
 		getSession().setAttribute("pageForAllTab", "pageForAll");
 		contentLayout.removeAllComponents();
-		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_ALL, null, "", this, false);
+		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_ALL, null, "", this, false, resRepo,
+				reResourceitemRep, reProjectVerisonRep, userRepo);
 		contentLayout.addComponent(gridContentItem);
 		contentLayout.setExpandRatio(gridContentItem, 4.0f);
 	}
 
 	public void createResoucePage(String resNr, boolean add) {
 		contentLayout.removeAllComponents();
-		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_RESOURCENR, null, resNr, this, add);
+		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_RESOURCENR, null, resNr, this, add, resRepo,
+				reResourceitemRep, reProjectVerisonRep, userRepo);
 		contentLayout.addComponent(gridContentItem);
 		contentLayout.setExpandRatio(gridContentItem, 4.0f);
 	}
 
 	public void createResoucePageForParam(SearchParam sParam, boolean add) {
 		contentLayout.removeAllComponents();
-		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_RESOURCEITEM, sParam, "", this, add);
+		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_RESOURCEITEM, sParam, "", this, add, resRepo,
+				reResourceitemRep, reProjectVerisonRep, userRepo);
 		contentLayout.addComponent(gridContentItem);
 		contentLayout.setExpandRatio(gridContentItem, 4.0f);
 	}
@@ -309,7 +316,8 @@ public class ResourceViewNew extends VerticalLayout implements View {
 
 	public void createResoucePageForParamAll(SearchParam sParam, boolean add) {
 		contentLayout.removeAllComponents();
-		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_RESOURCEITEMALL, sParam, "", this, add);
+		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_RESOURCEITEMALL, sParam, "", this, add,
+				resRepo, reResourceitemRep, reProjectVerisonRep, userRepo);
 		contentLayout.addComponent(gridContentItem);
 		contentLayout.setExpandRatio(gridContentItem, 4.0f);
 	}
@@ -458,8 +466,6 @@ public class ResourceViewNew extends VerticalLayout implements View {
 			searchField.setValue("");
 		});
 
-		addNewResource.addClickListener(e -> homeView.getAddNewResource().click());
-
 		searchButton.setVisible(false);
 		schLayout.addComponent(searchField);
 		schLayout.addComponent(addNewResource);
@@ -602,7 +608,8 @@ public class ResourceViewNew extends VerticalLayout implements View {
 
 	public void doAllResourcesButtonAction() {
 		contentLayout.removeAllComponents();
-		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_ALL, null, "", this, false);
+		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_ALL, null, "", this, false, resRepo,
+				reResourceitemRep, reProjectVerisonRep, userRepo);
 		contentLayout.addComponent(gridContentItem);
 		contentLayout.setExpandRatio(gridContentItem, 4.0f);
 	}

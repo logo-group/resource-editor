@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReProjectVersion;
 import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReUser;
@@ -66,12 +65,10 @@ public class ResourceWindow extends Window {
 
 	private final HorizontalLayout buttonLayout = new HorizontalLayout(save, cancel);
 
-	private final transient ReResourceRep resRepo;
-	private final transient ReUserRep userRepo;
+	private ReUserRep userRepo;
 	private final transient ReUser reUser;
 	private TabSheet tabsheet = new TabSheet();
 	private final Label formName = new Label();
-	private final transient ReProjectVerisonRep reProjectVerisonRep;
 	private List<ReProjectVersion> versionList;
 	private List<String> versionStringList;
 
@@ -79,11 +76,10 @@ public class ResourceWindow extends Window {
 		return tabsheet;
 	}
 
-	public ResourceWindow(ReResource resource, ResourceViewNew resView, boolean isNew) {
-		this.resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
-		this.userRepo = LogoresMainUI.getMrepositorycontainer().getReUserRep();
+	public ResourceWindow(ReResource resource, ResourceViewNew resView, boolean isNew,
+			ReProjectVerisonRep reProjectVerisonRep, ReResourceRep resRepo, ReUserRep userRepo) {
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
-		this.reProjectVerisonRep = LogoresMainUI.getMrepositorycontainer().getReProjectVerisonRep();
+		this.userRepo = userRepo;
 		versionList = reProjectVerisonRep.findAll();
 		versionStringList = versionList.stream().map(elem -> elem.getVersionnr()).collect(Collectors.toList());
 

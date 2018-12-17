@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.github.appreciated.material.MaterialTheme;
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReHelpDocs;
 import com.logo.data.repository.ReHelpDocsRep;
 import com.logo.ui.components.ButtonGenerator;
@@ -47,7 +46,7 @@ public class HelpDocForm extends VerticalLayout {
 	private final Label formName = new Label();
 
 	@Autowired
-	public transient ReHelpDocsRep reHelpDocsRep;
+	private ReHelpDocsRep reHelpDocsRep;
 
 	private ReHelpDocs reHelpDocs;
 	private ReHelpDocsView reHelpDocsView;
@@ -55,7 +54,6 @@ public class HelpDocForm extends VerticalLayout {
 
 	public HelpDocForm(ReHelpDocsView reHelpDocsView) {
 		this.reHelpDocsView = reHelpDocsView;
-		this.reHelpDocsRep = LogoresMainUI.getMrepositorycontainer().getReHelpDocsRep();
 
 		setSizeFull();
 		setSpacing(true);

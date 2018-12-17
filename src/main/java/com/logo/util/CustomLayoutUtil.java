@@ -2,7 +2,10 @@ package com.logo.util;
 
 import java.io.Serializable;
 
-import com.logo.LogoresMainUI;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.logo.data.entity.ReAlbaniankv;
 import com.logo.data.entity.ReArabiceg;
 import com.logo.data.entity.ReArabicjo;
@@ -29,13 +32,14 @@ import com.logo.data.repository.ReEnglishusRep;
 import com.logo.data.repository.ReFrenchfrRep;
 import com.logo.data.repository.ReGermandeRep;
 import com.logo.data.repository.RePersianirRep;
-import com.logo.data.repository.ReResourceitemRep;
 import com.logo.data.repository.ReRomanianroRep;
 import com.logo.data.repository.ReRussianruRep;
 import com.logo.data.repository.ReStandardRep;
 import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.data.repository.ReTurkmentmRep;
 
+@Component
+@Scope("prototype")
 public class CustomLayoutUtil implements Serializable {
 
 	/**
@@ -45,46 +49,58 @@ public class CustomLayoutUtil implements Serializable {
 	private String langTo;
 	private String lang;
 	private Integer itemId;
-	private static final ReTurkishtrRep reTurkishtrRep;
-	private static final ReEnglishusRep reEnglishusRep;
-	private static final ReGermandeRep reGermandeRep;
-	private static final RePersianirRep rePersianirRep;
-	private static final ReAzerbaijaniazRep reAzerbaijaniazRep;
-	private static final ReBulgarianbgRep reBulgarianbgRep;
-	private static final ReRussianruRep reRussianruRep;
-	private static final ReRomanianroRep reRomanianroRep;
-	private static final ReArabicjoRep reArabicjoRep;
-	private static final ReFrenchfrRep reFrenchfrRep;
-	private static final ReAlbaniankvRep reAlbaniankvRep;
-	private static final ReTurkmentmRep reTurkmentmRep;
-	private static final ReArabicegRep reArabicegRep;
-	private static final ReArabicsaRep reArabicsaRep;
-	private static final ReStandardRep reStandardRep;
-	private static final ReResourceitemRep reResourceItemRep;
 
-	static {
-		reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
-		reEnglishusRep = LogoresMainUI.getMrepositorycontainer().getReEnglishusRep();
-		reGermandeRep = LogoresMainUI.getMrepositorycontainer().getReGermandeRep();
-		rePersianirRep = LogoresMainUI.getMrepositorycontainer().getRePersianirRep();
-		reAzerbaijaniazRep = LogoresMainUI.getMrepositorycontainer().getReAzerbaijaniazRep();
-		reBulgarianbgRep = LogoresMainUI.getMrepositorycontainer().getReBulgarianbgRep();
-		reRussianruRep = LogoresMainUI.getMrepositorycontainer().getReRussianruRep();
-		reRomanianroRep = LogoresMainUI.getMrepositorycontainer().getReRomanianroRep();
-		reArabicjoRep = LogoresMainUI.getMrepositorycontainer().getReArabicjoRep();
-		reFrenchfrRep = LogoresMainUI.getMrepositorycontainer().getReFrenchfrRep();
-		reAlbaniankvRep = LogoresMainUI.getMrepositorycontainer().getReAlbaniankvRep();
-		reTurkmentmRep = LogoresMainUI.getMrepositorycontainer().getReTurkmentmRep();
-		reArabicegRep = LogoresMainUI.getMrepositorycontainer().getReArabicegRep();
-		reArabicsaRep = LogoresMainUI.getMrepositorycontainer().getReArabicsaRep();
-		reStandardRep = LogoresMainUI.getMrepositorycontainer().getReStandardRep();
-		reResourceItemRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
+	@Autowired
+	private ReTurkishtrRep reTurkishtrRep;
+
+	@Autowired
+	private ReEnglishusRep reEnglishusRep;
+
+	@Autowired
+	private ReGermandeRep reGermandeRep;
+
+	@Autowired
+	private RePersianirRep rePersianirRep;
+
+	@Autowired
+	private ReAzerbaijaniazRep reAzerbaijaniazRep;
+
+	@Autowired
+	private ReBulgarianbgRep reBulgarianbgRep;
+
+	@Autowired
+	private ReRussianruRep reRussianruRep;
+
+	@Autowired
+	private ReRomanianroRep reRomanianroRep;
+
+	@Autowired
+	private ReArabicjoRep reArabicjoRep;
+
+	@Autowired
+	private ReFrenchfrRep reFrenchfrRep;
+
+	@Autowired
+	private ReAlbaniankvRep reAlbaniankvRep;
+
+	@Autowired
+	private ReTurkmentmRep reTurkmentmRep;
+
+	@Autowired
+	private ReArabicegRep reArabicegRep;
+
+	@Autowired
+	private ReArabicsaRep reArabicsaRep;
+
+	@Autowired
+	private ReStandardRep reStandardRep;
+
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
 	}
 
-	public CustomLayoutUtil(Integer itemId, String name) {
-
-		this.itemId = itemId;
-		this.lang = name;
+	public void setLang(String lang) {
+		this.lang = lang;
 	}
 
 	public void persist(ReLanguageTable table) {

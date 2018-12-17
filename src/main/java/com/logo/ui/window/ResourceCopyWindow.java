@@ -2,9 +2,11 @@ package com.logo.ui.window;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Component;
 
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReAlbaniankv;
 import com.logo.data.entity.ReArabiceg;
 import com.logo.data.entity.ReArabicjo;
@@ -62,6 +64,8 @@ import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
+@Component
+@Scope("prototype")
 public class ResourceCopyWindow extends Window {
 
 	private static final long serialVersionUID = 1L;
@@ -89,61 +93,62 @@ public class ResourceCopyWindow extends Window {
 
 	private final Label formName = new Label();
 
-	private final transient ReResourceRep resRepo;
+	@Autowired
+	private ReResourceRep resRepo;
 
-	private final transient ReUser reUser;
+	private ReUser reUser;
 
-	private final transient ReTurkishtrRep turkishRep;
+	@Autowired
+	private ReTurkishtrRep turkishRep;
 
-	private final transient ReEnglishusRep englishRep;
+	@Autowired
+	private ReEnglishusRep englishRep;
 
-	private final transient ReGermandeRep germanRep;
+	@Autowired
+	private ReGermandeRep germanRep;
 
-	private final transient RePersianirRep persianRep;
+	@Autowired
+	private RePersianirRep persianRep;
 
-	private final transient ReAzerbaijaniazRep azerbaijaniRep;
+	@Autowired
+	private ReAzerbaijaniazRep azerbaijaniRep;
 
-	private final transient ReBulgarianbgRep bulgarianRep;
+	@Autowired
+	private ReBulgarianbgRep bulgarianRep;
 
-	private final transient ReRussianruRep russianRep;
+	@Autowired
+	private ReRussianruRep russianRep;
 
-	private final transient ReRomanianroRep romanianRep;
+	@Autowired
+	private ReRomanianroRep romanianRep;
 
-	private final transient ReGeorgiangeRep georgianRep;
+	@Autowired
+	private ReGeorgiangeRep georgianRep;
 
-	private final transient ReArabicjoRep arabicjoRep;
+	@Autowired
+	private ReArabicjoRep arabicjoRep;
 
-	private final transient ReFrenchfrRep frenchRep;
+	@Autowired
+	private ReFrenchfrRep frenchRep;
 
-	private final transient ReAlbaniankvRep albanianRep;
+	@Autowired
+	private ReAlbaniankvRep albanianRep;
 
-	private final transient ReTurkmentmRep turkmenRep;
+	@Autowired
+	private ReTurkmentmRep turkmenRep;
 
-	private final transient ReArabicegRep arabicegRep;
+	@Autowired
+	private ReArabicegRep arabicegRep;
 
-	private final transient ReArabicsaRep arabicsaRep;
+	@Autowired
+	private ReArabicsaRep arabicsaRep;
 
-	private final transient ReStandardRep standardRep;
+	@Autowired
+	private ReStandardRep standardRep;
 
+	@Autowired
 	public ResourceCopyWindow(ReResource resource, ResourceViewNew resView) {
-		this.resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
-		this.turkishRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
-		this.englishRep = LogoresMainUI.getMrepositorycontainer().getReEnglishusRep();
-		this.germanRep = LogoresMainUI.getMrepositorycontainer().getReGermandeRep();
-		this.persianRep = LogoresMainUI.getMrepositorycontainer().getRePersianirRep();
-		this.azerbaijaniRep = LogoresMainUI.getMrepositorycontainer().getReAzerbaijaniazRep();
-		this.bulgarianRep = LogoresMainUI.getMrepositorycontainer().getReBulgarianbgRep();
-		this.russianRep = LogoresMainUI.getMrepositorycontainer().getReRussianruRep();
-		this.romanianRep = LogoresMainUI.getMrepositorycontainer().getReRomanianroRep();
-		this.georgianRep = LogoresMainUI.getMrepositorycontainer().getReGeorgiangeRep();
-		this.arabicjoRep = LogoresMainUI.getMrepositorycontainer().getReArabicjoRep();
-		this.frenchRep = LogoresMainUI.getMrepositorycontainer().getReFrenchfrRep();
-		this.albanianRep = LogoresMainUI.getMrepositorycontainer().getReAlbaniankvRep();
-		this.turkmenRep = LogoresMainUI.getMrepositorycontainer().getReTurkmentmRep();
-		this.arabicegRep = LogoresMainUI.getMrepositorycontainer().getReArabicegRep();
-		this.arabicsaRep = LogoresMainUI.getMrepositorycontainer().getReArabicsaRep();
-		this.standardRep = LogoresMainUI.getMrepositorycontainer().getReStandardRep();
 
 		this.binder.setBean(resource);
 

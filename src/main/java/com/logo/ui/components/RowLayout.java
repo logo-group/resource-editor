@@ -1,7 +1,7 @@
 package com.logo.ui.components;
 
 import com.github.appreciated.material.MaterialTheme;
-import com.logo.LogoresMainUI;
+import com.logo.LogoresApplication;
 import com.logo.data.entity.ReAlbaniankv;
 import com.logo.data.entity.ReArabiceg;
 import com.logo.data.entity.ReArabicjo;
@@ -23,7 +23,9 @@ import com.logo.data.entity.ReTurkmentm;
 import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReResourceRep;
 import com.logo.data.repository.ReResourceitemRep;
+import com.logo.data.repository.ReUserRep;
 import com.logo.ui.view.ResourceViewNew;
+import com.logo.util.CustomLayoutUtil;
 import com.logo.util.LogoResConstants;
 import com.logo.util.enums.ResourceType;
 import com.vaadin.icons.VaadinIcons;
@@ -51,11 +53,10 @@ public class RowLayout extends VerticalLayout {
 
 	private transient ReResource reResource;
 
-	private transient ReResourceRep reResourceRep;
-
 	private transient ReResourceitem reResourceitem;
 
-	private transient ReResourceitemRep reResourceitemRep;
+	private ReResourceitemRep reResourceitemRep;
+	private ReUserRep reUserRep;
 
 	ReEnglishus reEnglishus = null;
 
@@ -121,11 +122,12 @@ public class RowLayout extends VerticalLayout {
 	private ReUser reUser;
 
 	public RowLayout(ReResource reResource, ReResourceitem reResourceitem, boolean focus, boolean vertical,
-			ResourceViewNew resView, boolean isSingleForm, ReUser user) {
+			ResourceViewNew resView, boolean isSingleForm, ReUser user, ReResourceRep reResourceRep,
+			ReResourceitemRep reResourceitemRep, ReUserRep reUserRep) {
 		this.reResource = reResource;
 		this.reResourceitem = reResourceitem;
-		this.reResourceitemRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
-		this.reResourceRep = LogoresMainUI.getMrepositorycontainer().getResRepo();
+		this.reResourceitemRep = reResourceitemRep;
+		this.reUserRep = reUserRep;
 		this.focus = focus;
 		this.resView = resView;
 		this.isSingleForm = isSingleForm;
@@ -243,7 +245,8 @@ public class RowLayout extends VerticalLayout {
 			}
 
 			CustomHorizontalLayout layoutTRTR = new CustomHorizontalLayout(reResourceitem.getId(), dummyTurkish, valTR,
-					valTR, LogoResConstants.RE_TURKISHTR_NAME, false);
+					valTR, LogoResConstants.RE_TURKISHTR_NAME, false,
+					LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 
 			tabSheet.addComponent(layoutTRTR);
 
@@ -289,7 +292,8 @@ public class RowLayout extends VerticalLayout {
 			close.setDescription("Tüm dilleri gizle");
 
 			layoutENUS = new CustomHorizontalLayout(reResourceitem.getId(), reEnglishus, valTR, valEN,
-					LogoResConstants.RE_ENGLISHUS_NAME, true);
+					LogoResConstants.RE_ENGLISHUS_NAME, true,
+					LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 			tabSheet.addComponent(layoutENUS);
 
 			layoutTRTR.addStyleName("csstag_1");
@@ -298,31 +302,44 @@ public class RowLayout extends VerticalLayout {
 			open.addClickListener(e -> {
 
 				layoutFAIR = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valIR,
-						LogoResConstants.RE_PERSIANIR_NAME, false);
+						LogoResConstants.RE_PERSIANIR_NAME, false,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutDEDE = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valGE,
-						LogoResConstants.RE_GERMANDE_NAME, true);
+						LogoResConstants.RE_GERMANDE_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutAZAZ = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valAZ,
-						LogoResConstants.RE_AZERBAIJANIAZ_NAME, true);
+						LogoResConstants.RE_AZERBAIJANIAZ_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutBGBG = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valBG,
-						LogoResConstants.RE_BULGARIANBG_NAME, true);
+						LogoResConstants.RE_BULGARIANBG_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutRURU = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valRU,
-						LogoResConstants.RE_RUSSIANRU_NAME, true);
+						LogoResConstants.RE_RUSSIANRU_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutRORO = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valRO,
-						LogoResConstants.RE_ROMANIANRO_NAME, true);
+						LogoResConstants.RE_ROMANIANRO_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutKAGE = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valKA,
-						LogoResConstants.RE_GEORGIANGE_NAME, true);
+						LogoResConstants.RE_GEORGIANGE_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutARJO = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valJO,
-						LogoResConstants.RE_ARABICJO_NAME, true);
+						LogoResConstants.RE_ARABICJO_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutFRFR = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valFR,
-						LogoResConstants.RE_FRENCHFR_NAME, true);
+						LogoResConstants.RE_FRENCHFR_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutSQKV = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valSQ,
-						LogoResConstants.RE_ALBANIANKV_NAME, true);
+						LogoResConstants.RE_ALBANIANKV_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutTKTM = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valTK,
-						LogoResConstants.RE_TURKMENTM_NAME, true);
+						LogoResConstants.RE_TURKMENTM_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutAREG = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valEG,
-						LogoResConstants.RE_ARABICEG_NAME, true);
+						LogoResConstants.RE_ARABICEG_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 				layoutARSA = new CustomHorizontalLayout(reResourceitem.getId(), null, valTR, valSA,
-						LogoResConstants.RE_ARABICSA_NAME, true);
+						LogoResConstants.RE_ARABICSA_NAME, true,
+						LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 
 				addLangLayout(tabSheet, layoutFAIR, LogoResConstants.RE_PERSIANIR_NAME);
 				addLangLayout(tabSheet, layoutDEDE, LogoResConstants.RE_GERMANDE_NAME);
@@ -404,7 +421,8 @@ public class RowLayout extends VerticalLayout {
 			}
 
 			CustomHorizontalStandardLayout standard = new CustomHorizontalStandardLayout(reResourceitem.getId(),
-					dummyStandard, valStandard, valStandard, LogoResConstants.RE_STANDARD_NAME);
+					dummyStandard, valStandard, valStandard, LogoResConstants.RE_STANDARD_NAME,
+					LogoresApplication.getBeanFactory().createBean(CustomLayoutUtil.class));
 
 			tabSheet.addComponent(standard);
 
@@ -526,7 +544,7 @@ public class RowLayout extends VerticalLayout {
 		resDetFormLayout.setSizeFull();
 		resDetFormLayout.setWidth("100%");
 
-		PopupTextFieldContent mypopContent = new PopupTextFieldContent(reResourceitem, reResourceitemRep);
+		PopupTextFieldContent mypopContent = new PopupTextFieldContent(reResourceitem, reResourceitemRep, reUserRep);
 
 		final PopupView pop = new PopupView(mypopContent);
 		pop.setHideOnMouseOut(false);

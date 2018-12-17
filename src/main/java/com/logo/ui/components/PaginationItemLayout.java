@@ -17,7 +17,7 @@ import com.github.appreciated.material.MaterialTheme;
 import com.jarektoro.responsivelayout.ResponsiveColumn.ColumnComponentAlignment;
 import com.jarektoro.responsivelayout.ResponsiveLayout;
 import com.jarektoro.responsivelayout.ResponsiveRow;
-import com.logo.LogoresMainUI;
+import com.logo.LogoresApplication;
 import com.logo.data.entity.ReProjectVersion;
 import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReResourceitem;
@@ -25,6 +25,7 @@ import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReProjectVerisonRep;
 import com.logo.data.repository.ReResourceRep;
 import com.logo.data.repository.ReResourceitemRep;
+import com.logo.data.repository.ReUserRep;
 import com.logo.ui.view.ResourceViewNew;
 import com.logo.ui.window.ResourceCopyWindow;
 import com.logo.ui.window.ResourceItemWindow;
@@ -67,10 +68,10 @@ public class PaginationItemLayout extends ResponsiveLayout {
 	private int height = 500;
 
 	VerticalLayout layoutPPP = new VerticalLayout();
-	private final transient ReResourceRep resRepo;
-
-	private final transient ReResourceitemRep reResourceitemRep;
-	private final transient ReProjectVerisonRep reProjectVerisonRep;
+	private ReResourceRep resRepo;
+	private ReResourceitemRep reResourceitemRep;
+	private ReProjectVerisonRep reProjectVerisonRep;
+	private ReUserRep userRepo;
 	private final transient ReUser reUser;
 	private ResourceViewNew resView;
 	private VerticalLayout content;
@@ -79,12 +80,14 @@ public class PaginationItemLayout extends ResponsiveLayout {
 	private List<ReProjectVersion> versionList;
 
 	public PaginationItemLayout(int searchBy, SearchParam sParam, String searchFilter, ResourceViewNew view,
-			boolean add) {
-		this.resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
+			boolean add, ReResourceRep resRepo, ReResourceitemRep reResourceitemRep,
+			ReProjectVerisonRep reProjectVerisonRep, ReUserRep userRepo) {
+		this.resRepo = resRepo;
+		this.reResourceitemRep = reResourceitemRep;
+		this.reProjectVerisonRep = reProjectVerisonRep;
+		this.userRepo = userRepo;
 		this.searchBy = searchBy;
 		this.searchFilter = searchFilter;
-		this.reResourceitemRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
-		this.reProjectVerisonRep = LogoresMainUI.getMrepositorycontainer().getReProjectVerisonRep();
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
 		this.resView = view;
 		this.add = add;
@@ -268,17 +271,19 @@ public class PaginationItemLayout extends ResponsiveLayout {
 			addItem.addSeparator();
 
 			edit.addClickListener(e -> {
-				final ResourceWindow window = new ResourceWindow(reResource, resView, false);
+				final ResourceWindow window = new ResourceWindow(reResource, resView, false, reProjectVerisonRep,
+						resRepo, userRepo);
 				UI.getCurrent().addWindow(window);
 			});
 
 			copy.addClickListener(e -> {
-				final ResourceCopyWindow window = new ResourceCopyWindow(reResource, resView);
+				final ResourceCopyWindow window = LogoresApplication.getBeanFactory().getBean(ResourceCopyWindow.class,
+						reResource, LogoresApplication.getBeanFactory().getBean(ResourceViewNew.class));
 				UI.getCurrent().addWindow(window);
 			});
 
 			addNewResourceItem.addClickListener(e -> {
-				final ResourceItemWindow window2 = new ResourceItemWindow(reResource, resView);
+				final ResourceItemWindow window2 = new ResourceItemWindow(reResource, resView, reResourceitemRep);
 				UI.getCurrent().addWindow(window2);
 			});
 
@@ -344,9 +349,11 @@ public class PaginationItemLayout extends ResponsiveLayout {
 	private void createRow(VerticalLayout gridLayout, ReResourceitem reResourceitem) {
 		boolean isVertical = reUser.getDefaultorientation() == UserLayoutType.V;
 		if (add)
-			gridLayout.addComponent(new RowLayout(null, reResourceitem, false, isVertical, resView, true, reUser));
+			gridLayout.addComponent(new RowLayout(null, reResourceitem, false, isVertical, resView, true, reUser,
+					resRepo, reResourceitemRep, userRepo));
 		else
-			gridLayout.addComponent(new RowLayout(null, reResourceitem, false, isVertical, resView, false, reUser));
+			gridLayout.addComponent(new RowLayout(null, reResourceitem, false, isVertical, resView, false, reUser,
+					resRepo, reResourceitemRep, userRepo));
 	}
 
 	public Page<com.logo.data.entity.ReResourceitem> searchByresourcereTR(int page, int size, String nameFilter) {

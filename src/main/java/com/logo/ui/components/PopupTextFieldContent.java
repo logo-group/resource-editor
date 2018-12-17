@@ -2,7 +2,6 @@ package com.logo.ui.components;
 
 import java.time.format.DateTimeFormatter;
 
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReResourceitem;
 import com.logo.data.repository.ReResourceitemRep;
 import com.logo.data.repository.ReUserRep;
@@ -40,15 +39,16 @@ public class PopupTextFieldContent implements PopupView.Content {
 	GridLayout resourceInfo = new GridLayout();
 	private transient ReResourceitemRep reResourceitemRep;
 	private transient ReResourceitem reResourceitem;
-	private transient ReUserRep userRepo;
+
+	private ReUserRep userRepo;
 
 	private final Button btSave = new ButtonGenerator(LogoResConstants.SAVESTR);
 	private final Button btCancel = new ButtonGenerator(LogoResConstants.CANCELSTR);
 
-	PopupTextFieldContent(ReResourceitem reResourceitem, ReResourceitemRep reResourceitemRep) {
+	PopupTextFieldContent(ReResourceitem reResourceitem, ReResourceitemRep reResourceitemRep, ReUserRep userRepo) {
 		this.reResourceitemRep = reResourceitemRep;
 		this.reResourceitem = reResourceitem;
-		this.userRepo = LogoresMainUI.getMrepositorycontainer().getReUserRep();
+		this.userRepo = userRepo;
 
 		Binder<ReResourceitem> binder = new Binder<>(ReResourceitem.class);
 		binder.setBean(this.reResourceitem);

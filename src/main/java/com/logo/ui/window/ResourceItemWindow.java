@@ -3,7 +3,6 @@ package com.logo.ui.window;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReResourceitem;
 import com.logo.data.entity.ReUser;
@@ -11,7 +10,6 @@ import com.logo.data.repository.ReResourceitemRep;
 import com.logo.ui.components.ButtonGenerator;
 import com.logo.ui.components.SpellChecComboBox;
 import com.logo.ui.components.SpellChecTextField;
-import com.logo.ui.form.NewResourceForm;
 import com.logo.ui.view.ResourceViewNew;
 import com.logo.util.LangHelper;
 import com.logo.util.LogoResConstants;
@@ -37,7 +35,7 @@ public class ResourceItemWindow extends Window {
 
 	private static final long serialVersionUID = 1L;
 
-	private static Logger logger = Logger.getLogger(NewResourceForm.class.getName());
+	private static Logger logger = Logger.getLogger(ResourceItemWindow.class.getName());
 
 	private ReResource resource = new ReResource();
 	private ReResourceitem resourceItem = new ReResourceitem();
@@ -67,7 +65,7 @@ public class ResourceItemWindow extends Window {
 			LangHelper.getLocalizableMessage(LogoResConstants.OWNERPRODUCT));
 	private final HorizontalLayout buttonLayout = new HorizontalLayout(saveAndNew, save, cancel);
 
-	private final transient ReResourceitemRep reResourceitemRep;
+	private ReResourceitemRep reResourceitemRep;
 
 	private TabSheet tabsheet = new TabSheet();
 	private final Label formName = new Label();
@@ -76,10 +74,10 @@ public class ResourceItemWindow extends Window {
 		return tabsheet;
 	}
 
-	public ResourceItemWindow(ReResource resource, ResourceViewNew resView) {
+	public ResourceItemWindow(ReResource resource, ResourceViewNew resView, ReResourceitemRep reResourceitemRep) {
 		this.resource = resource;
+		this.reResourceitemRep = reResourceitemRep;
 		this.binder.setBean(resourceItem);
-		this.reResourceitemRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemRep();
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
 
 		initialize();

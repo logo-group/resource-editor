@@ -23,7 +23,8 @@ public class CustomHorizontalStandardLayout extends VerticalLayout {
 	private transient ReStandard reStandard;
 
 	public CustomHorizontalStandardLayout(Integer itemId, ReStandard reStandard, String word, String txtValue,
-			String name) {
+			String name, CustomLayoutUtil customLayoutUtil) {
+		this.customLayoutUtil = customLayoutUtil;
 		setSpacing(true);
 		setMargin(true);
 		setSizeFull();
@@ -38,7 +39,8 @@ public class CustomHorizontalStandardLayout extends VerticalLayout {
 		}
 		this.reStandard = reStandard;
 
-		customLayoutUtil = new CustomLayoutUtil(itemId, name);
+		customLayoutUtil.setItemId(itemId);
+		customLayoutUtil.setLang(name);
 
 		setCaption(caption);
 		setCaptionAsHtml(true);

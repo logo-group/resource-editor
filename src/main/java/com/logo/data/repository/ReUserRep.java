@@ -2,6 +2,7 @@ package com.logo.data.repository;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.logo.data.entity.ReUser;
 
 @Component
+@Scope("prototype")
 public interface ReUserRep extends JpaRepository<ReUser, Long> {
 
 	List<ReUser> findByusernameLikeIgnoreCase(String nameFilter);

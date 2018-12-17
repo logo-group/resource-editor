@@ -1,5 +1,6 @@
 package com.logo.data.repository;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,7 @@ import com.logo.util.QueryConstants;
 import com.logo.util.search.SearchParam;
 
 @Component
+@Scope("prototype")
 @Transactional(readOnly = true)
 public interface ReResourceitemShortRep extends JpaRepository<ReResourceitemShort, Long> {
 

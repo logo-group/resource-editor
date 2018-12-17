@@ -3,6 +3,9 @@ package com.logo.ui.panel;
 import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReResourceitem;
 import com.logo.data.entity.ReUser;
+import com.logo.data.repository.ReResourceRep;
+import com.logo.data.repository.ReResourceitemRep;
+import com.logo.data.repository.ReUserRep;
 import com.logo.ui.components.RowLayout;
 import com.logo.util.enums.OwnerProduct;
 import com.logo.util.enums.ResourceCase;
@@ -18,10 +21,16 @@ public class ResourceItemPanel extends Panel {
 	private static final long serialVersionUID = 1L;
 
 	private final transient ReUser reUser;
+	private ReResourceRep reResourceRep;
+	private ReResourceitemRep reResourceitemRep;
+	private ReUserRep userRepo;
 	VerticalLayout panelContent = new VerticalLayout();
 
-	public ResourceItemPanel() {
+	public ResourceItemPanel(ReResourceRep reResourceRep, ReResourceitemRep reResourceitemRep, ReUserRep userRepo) {
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
+		this.reResourceRep = reResourceRep;
+		this.reResourceitemRep = reResourceitemRep;
+		this.userRepo = userRepo;
 		ReResource resource = new ReResource();
 		resource.setResourcegroup(ResourceGroup.UN);
 		resource.setResourcetype(ResourceType.LOCALIZABLE);
@@ -44,7 +53,8 @@ public class ResourceItemPanel extends Panel {
 		boolean isVertical = reUser.getDefaultorientation() == UserLayoutType.V;
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setWidth("100%");
-		vLayout.addComponent(new RowLayout(reResource, reResourceitem, true, isVertical, null, true, reUser));
+		vLayout.addComponent(new RowLayout(reResource, reResourceitem, true, isVertical, null, true, reUser,
+				reResourceRep, reResourceitemRep, userRepo));
 		panelContent.addComponent(vLayout);
 	}
 

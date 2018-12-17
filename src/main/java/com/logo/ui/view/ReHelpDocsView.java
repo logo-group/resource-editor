@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.appreciated.material.MaterialTheme;
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReHelpDocs;
 import com.logo.data.repository.ReHelpDocsRep;
 import com.logo.ui.components.TextFieldWithButton;
@@ -19,7 +18,6 @@ import com.vaadin.event.selection.SelectionEvent;
 import com.vaadin.event.selection.SelectionListener;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Button;
@@ -39,21 +37,21 @@ public class ReHelpDocsView extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 	public static final String VIEW_NAME = "ReHelpDocsView";
 
-	@Autowired(required = true)
-	public transient ReHelpDocsRep reHelpDocsRep;
+	public ReHelpDocsRep reHelpDocsRep;
 
 	private Grid<ReHelpDocs> helpdocsGrid = new Grid<>(ReHelpDocs.class);
 
 	private HelpDocForm helpDocForm = new HelpDocForm(this);
 
-	public ReHelpDocsView() {
+	@Autowired
+	public ReHelpDocsView(ReHelpDocsRep reHelpDocsRep) {
+		this.reHelpDocsRep = reHelpDocsRep;
 		removeAllComponents();
 		init();
 	}
 
 	@PostConstruct
 	void init() {
-		this.reHelpDocsRep = LogoresMainUI.getMrepositorycontainer().getReHelpDocsRep();
 		setSizeFull();
 		setSpacing(true);
 		setMargin(true);
@@ -174,11 +172,6 @@ public class ReHelpDocsView extends VerticalLayout implements View {
 			updateMessageListForDocTitle(event.getValue());
 		});
 		return searcField2;
-	}
-
-	@Override
-	public void enter(ViewChangeEvent event) {
-		this.reHelpDocsRep = LogoresMainUI.getMrepositorycontainer().getReHelpDocsRep();
 	}
 
 	@Override

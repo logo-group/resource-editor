@@ -30,11 +30,13 @@ public class CustomHorizontalLayout extends VerticalLayout {
 	private String pBackgroundGreen = "background-color:white;color:green;font-size:15px;font-style:bold";
 	private String pBackgroundRed = "background-color:white;color:red;border-color:red;font-size:15px;font-style:bold;font-style:italic";
 	private String pBackgroundColor = "";
+
 	private CustomLayoutUtil customLayoutUtil;
 	private transient ReLanguageTable reLanguageTable;
 
 	public CustomHorizontalLayout(Integer itemId, ReLanguageTable reLanguageTable, String word, String txtValue,
-			String name, boolean addTranslateButton) {
+			String name, boolean addTranslateButton, CustomLayoutUtil customLayoutUtil) {
+		this.customLayoutUtil = customLayoutUtil;
 		setSpacing(true);
 		setMargin(true);
 		setSizeFull();
@@ -52,7 +54,8 @@ public class CustomHorizontalLayout extends VerticalLayout {
 		this.word = word;
 		this.reLanguageTable = reLanguageTable;
 
-		customLayoutUtil = new CustomLayoutUtil(itemId, name);
+		customLayoutUtil.setItemId(itemId);
+		customLayoutUtil.setLang(name);
 		setAddTranslateButton(addTranslateButton);
 		customLayoutUtil.setLangTo();
 

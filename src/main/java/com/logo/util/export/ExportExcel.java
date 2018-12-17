@@ -13,11 +13,11 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReEnglishus;
 import com.logo.data.entity.ReResourceitemShort;
 import com.logo.data.entity.ReTurkishtr;
@@ -36,19 +36,21 @@ public class ExportExcel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(ExportExcel.class.getName());
 
-	private final transient ReResourceitemShortRep reResourceitemShortRep;
-	private final transient ReTurkishtrRep reTurkishtrRep;
-	private final transient ReEnglishusRep reEnglishusRep;
-	private final transient String fileName;
-	private final transient boolean isTurkishWrite;
-	private final transient boolean isEnglishWrite;
+	@Autowired
+	private ReResourceitemShortRep reResourceitemShortRep;
 
-	private final transient SearchParam sParam;
+	@Autowired
+	private ReTurkishtrRep reTurkishtrRep;
+
+	@Autowired
+	private ReEnglishusRep reEnglishusRep;
+	private String fileName;
+	private boolean isTurkishWrite;
+	private boolean isEnglishWrite;
+
+	private SearchParam sParam;
 
 	public ExportExcel(SearchParam sParam, String fileName, boolean isTurkishWrite, boolean isEnglishWrite) {
-		this.reResourceitemShortRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemShortRep();
-		this.reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
-		this.reEnglishusRep = LogoresMainUI.getMrepositorycontainer().getReEnglishusRep();
 		this.sParam = sParam;
 		this.fileName = fileName;
 		this.isTurkishWrite = isTurkishWrite;

@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.appreciated.material.MaterialTheme;
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReMessage;
 import com.logo.data.repository.ReMessageRep;
 import com.logo.ui.components.TextFieldWithButton;
@@ -19,7 +18,6 @@ import com.vaadin.event.selection.SelectionEvent;
 import com.vaadin.event.selection.SelectionListener;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Button;
@@ -39,21 +37,21 @@ public class ReMessageView extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 	public static final String VIEW_NAME = "ReMessageView";
 
-	@Autowired(required = true)
-	public transient ReMessageRep reMessageRep;
+	private ReMessageRep reMessageRep;
 
 	private Grid<ReMessage> messageGrid = new Grid<>(ReMessage.class);
 
 	private MessageForm messageForm = new MessageForm(this);
 
-	public ReMessageView() {
+	@Autowired
+	public ReMessageView(ReMessageRep reMessageRep) {
+		this.reMessageRep = reMessageRep;
 		removeAllComponents();
 		init();
 	}
 
 	@PostConstruct
 	void init() {
-		this.reMessageRep = LogoresMainUI.getMrepositorycontainer().getReMessageRep();
 		setSizeFull();
 		setSpacing(true);
 		setMargin(true);
@@ -184,11 +182,6 @@ public class ReMessageView extends VerticalLayout implements View {
 			updateMessageListForCons(event.getValue());
 		});
 		return searcField2;
-	}
-
-	@Override
-	public void enter(ViewChangeEvent event) {
-		this.reMessageRep = LogoresMainUI.getMrepositorycontainer().getReMessageRep();
 	}
 
 	@Override

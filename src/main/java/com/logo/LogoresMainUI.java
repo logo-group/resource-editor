@@ -206,32 +206,7 @@ public class LogoresMainUI extends UI {
 	}
 
 	private void initialize() {
-		mRepositoryContainer.setResRepo(resRepo);
-		mRepositoryContainer.setReUserRep(reUserRep);
-		mRepositoryContainer.setReResourceitemRep(reResourceitemRep);
-		mRepositoryContainer.setReTurkishtrRep(reTurkishtrRep);
-		mRepositoryContainer.setReEnglishusRep(reEnglishusRep);
-		mRepositoryContainer.setReGermandeRep(reGermandeRep);
-		mRepositoryContainer.setRePersianirRep(rePersianirRep);
-		mRepositoryContainer.setReAzerbaijaniazRep(reAzerbaijaniazRep);
-		mRepositoryContainer.setReBulgarianbgRep(reBulgarianbgRep);
-		mRepositoryContainer.setReRussianruRep(reRussianruRep);
-		mRepositoryContainer.setReRomanianroRep(reRomanianroRep);
-		mRepositoryContainer.setReGeorgiangeRep(reGeorgiangeRep);
-		mRepositoryContainer.setReArabicjoRep(reArabicjoRep);
-		mRepositoryContainer.setReFrenchfrRep(reFrenchfrRep);
-		mRepositoryContainer.setReAlbaniankvRep(reAlbaniankvRep);
-		mRepositoryContainer.setReTurkmentmRep(reTurkmentmRep);
-		mRepositoryContainer.setReArabicegRep(reArabicegRep);
-		mRepositoryContainer.setReArabicsaRep(reArabicsaRep);
-
-		mRepositoryContainer.setReResourceitemShortRep(reResourceitemShortRep);
-
-		mRepositoryContainer.setReMessageRep(reMessageRep);
-		mRepositoryContainer.setReHelpDocsRep(reHelpDocsRep);
 		mRepositoryContainer.setMessageProvider(ApplicationContextLocator.messageProvider());
-		mRepositoryContainer.setReProjectVerisonRep(reProjectVerisonRep);
-		mRepositoryContainer.setReStandardRep(reStandardRep);
 	}
 
 	private void loadSessionViews() {

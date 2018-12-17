@@ -10,11 +10,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReEnglishus;
 import com.logo.data.entity.ReResourceitemShort;
 import com.logo.data.entity.ReTurkishtr;
@@ -33,9 +33,14 @@ public class ExportTxt implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(ExportTxt.class.getName());
 
-	private final transient ReResourceitemShortRep reResourceitemShortRep;
-	private final transient ReTurkishtrRep reTurkishtrRep;
-	private final transient ReEnglishusRep reEnglishusRep;
+	@Autowired
+	private ReResourceitemShortRep reResourceitemShortRep;
+
+	@Autowired
+	private ReTurkishtrRep reTurkishtrRep;
+
+	@Autowired
+	private ReEnglishusRep reEnglishusRep;
 	private final transient String fileName;
 	private final transient boolean isTurkishWrite;
 	private final transient boolean isEnglishWrite;
@@ -43,9 +48,6 @@ public class ExportTxt implements Serializable {
 	private final transient SearchParam sParam;
 
 	public ExportTxt(SearchParam sParam, String fileName, boolean isTurkishWrite, boolean isEnglishWrite) {
-		this.reResourceitemShortRep = LogoresMainUI.getMrepositorycontainer().getReResourceitemShortRep();
-		this.reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
-		this.reEnglishusRep = LogoresMainUI.getMrepositorycontainer().getReEnglishusRep();
 		this.sParam = sParam;
 		this.fileName = fileName;
 		this.isTurkishWrite = isTurkishWrite;

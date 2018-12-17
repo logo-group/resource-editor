@@ -3,8 +3,9 @@ package com.logo.ui.form;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.github.appreciated.material.MaterialTheme;
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReResourceRep;
@@ -37,7 +38,7 @@ public class ResourceForm extends Panel {
 
 	private static final long serialVersionUID = 1L;
 
-	private static Logger logger = Logger.getLogger(NewResourceForm.class.getName());
+	private static Logger logger = Logger.getLogger(ResourceForm.class.getName());
 
 	private ReResource resource;
 	private final Binder<ReResource> binder = new Binder<>(ReResource.class);
@@ -59,11 +60,11 @@ public class ResourceForm extends Panel {
 			LangHelper.getLocalizableMessage(LogoResConstants.OWNERPRODUCT));
 	private final HorizontalLayout buttonLayout = new HorizontalLayout(save, cancel, edit);
 
-	private final transient ReResourceRep resRepo;
+	@Autowired
+	private ReResourceRep resRepo;
 	private final transient ReUser reUser;
 
 	public ResourceForm(ReResource resource) {
-		this.resRepo = LogoresMainUI.getMrepositorycontainer().getResRepo();
 		this.resource = resource;
 		binder.setBean(resource);
 

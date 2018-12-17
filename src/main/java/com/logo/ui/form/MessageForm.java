@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.github.appreciated.material.MaterialTheme;
-import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReMessage;
 import com.logo.data.repository.ReMessageRep;
 import com.logo.ui.components.ButtonGenerator;
@@ -49,7 +48,7 @@ public class MessageForm extends VerticalLayout {
 	private final Label formName = new Label();
 
 	@Autowired
-	public transient ReMessageRep reMessageRepo;
+	public ReMessageRep reMessageRepo;
 
 	private ReMessage reMessage;
 	private ReMessageView reMessageView;
@@ -57,7 +56,6 @@ public class MessageForm extends VerticalLayout {
 
 	public MessageForm(ReMessageView reMessageView) {
 		this.reMessageView = reMessageView;
-		this.reMessageRepo = LogoresMainUI.getMrepositorycontainer().getReMessageRep();
 
 		GridLayout userMainLayout = new GridLayout(2, 6);
 
