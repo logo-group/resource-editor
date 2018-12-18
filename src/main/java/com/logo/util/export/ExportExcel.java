@@ -13,7 +13,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,9 +24,7 @@ import com.logo.data.repository.ReEnglishusRep;
 import com.logo.data.repository.ReResourceitemShortRep;
 import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.util.search.SearchParam;
-import com.vaadin.spring.annotation.UIScope;
 
-@UIScope
 public class ExportExcel implements Serializable {
 
 	/**
@@ -36,13 +33,8 @@ public class ExportExcel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(ExportExcel.class.getName());
 
-	@Autowired
 	private ReResourceitemShortRep reResourceitemShortRep;
-
-	@Autowired
 	private ReTurkishtrRep reTurkishtrRep;
-
-	@Autowired
 	private ReEnglishusRep reEnglishusRep;
 	private String fileName;
 	private boolean isTurkishWrite;
@@ -50,11 +42,16 @@ public class ExportExcel implements Serializable {
 
 	private SearchParam sParam;
 
-	public ExportExcel(SearchParam sParam, String fileName, boolean isTurkishWrite, boolean isEnglishWrite) {
+	public ExportExcel(SearchParam sParam, String fileName, boolean isTurkishWrite, boolean isEnglishWrite,
+			ReResourceitemShortRep reResourceitemShortRep, ReTurkishtrRep reTurkishtrRep,
+			ReEnglishusRep reEnglishusRep) {
 		this.sParam = sParam;
 		this.fileName = fileName;
 		this.isTurkishWrite = isTurkishWrite;
 		this.isEnglishWrite = isEnglishWrite;
+		this.reResourceitemShortRep = reResourceitemShortRep;
+		this.reTurkishtrRep = reTurkishtrRep;
+		this.reEnglishusRep = reEnglishusRep;
 	}
 
 	public void export() throws IOException {

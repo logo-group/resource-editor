@@ -18,10 +18,6 @@ public class UISessionState {
 
 	private boolean replaceSession = true;
 
-	public UISessionState() {
-		/* */
-	}
-
 	public boolean staleSessionCheck(VaadinSession inSession, VaadinRequest request) {
 		if (!vaadinSession.equals(inSession)) {
 			logger.log(Level.INFO, "Stale session detected, invalidating HTTPSession and reloading!");
@@ -36,10 +32,6 @@ public class UISessionState {
 
 	public void setVaadinSession(VaadinSession vaadinSession) {
 		this.vaadinSession = vaadinSession;
-	}
-
-	public VaadinSession getVaadinSession() {
-		return vaadinSession;
 	}
 
 	public boolean isReplaceSession() {

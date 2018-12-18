@@ -10,6 +10,11 @@ import javax.annotation.PostConstruct;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.logo.data.repository.ReEnglishusRep;
+import com.logo.data.repository.ReResourceitemShortRep;
+import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.ui.components.TransferLayout;
 import com.logo.util.LogoResConstants;
 import com.logo.util.export.ExportExcel;
@@ -49,7 +54,16 @@ public class TransferView extends VerticalLayout implements View {
 	String fileName;
 	Link downloadLink = new Link();
 
-	public TransferView() {
+	private ReResourceitemShortRep reResourceitemShortRep;
+	private ReTurkishtrRep reTurkishtrRep;
+	private ReEnglishusRep reEnglishusRep;
+
+	@Autowired
+	public TransferView(ReResourceitemShortRep reResourceitemShortRep, ReTurkishtrRep reTurkishtrRep,
+			ReEnglishusRep reEnglishusRep) {
+		this.reResourceitemShortRep = reResourceitemShortRep;
+		this.reTurkishtrRep = reTurkishtrRep;
+		this.reEnglishusRep = reEnglishusRep;
 		removeAllComponents();
 		init();
 	}
@@ -182,7 +196,8 @@ public class TransferView extends VerticalLayout implements View {
 			searchByAll.generateSearchParam();
 
 			ExportExcel excelWrite = new ExportExcel(searchByResourceNr.getScParam(), fileName,
-					transferLayout.getTurkishTR().getValue(), transferLayout.getEnglishUS().getValue());
+					transferLayout.getTurkishTR().getValue(), transferLayout.getEnglishUS().getValue(),
+					reResourceitemShortRep, reTurkishtrRep, reEnglishusRep);
 			excelWrite.export();
 		}
 	}
@@ -232,7 +247,8 @@ public class TransferView extends VerticalLayout implements View {
 					.setComboTextEN(null).build();
 			searchByAll.generateSearchParam();
 
-			ExportXml xmlWrite = new ExportXml(searchByResourceNr.getScParam(), fileName);
+			ExportXml xmlWrite = new ExportXml(searchByResourceNr.getScParam(), fileName, reResourceitemShortRep,
+					reTurkishtrRep);
 			xmlWrite.export();
 		}
 	}
@@ -283,7 +299,8 @@ public class TransferView extends VerticalLayout implements View {
 			searchByAll.generateSearchParam();
 
 			ExportTxt exportTxt = new ExportTxt(searchByResourceNr.getScParam(), fileName,
-					transferLayout.getTurkishTR().getValue(), transferLayout.getEnglishUS().getValue());
+					transferLayout.getTurkishTR().getValue(), transferLayout.getEnglishUS().getValue(),
+					reResourceitemShortRep, reTurkishtrRep, reEnglishusRep);
 			exportTxt.export();
 		}
 	}

@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,9 +21,7 @@ import com.logo.data.repository.ReEnglishusRep;
 import com.logo.data.repository.ReResourceitemShortRep;
 import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.util.search.SearchParam;
-import com.vaadin.spring.annotation.UIScope;
 
-@UIScope
 public class ExportTxt implements Serializable {
 
 	/**
@@ -33,13 +30,8 @@ public class ExportTxt implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(ExportTxt.class.getName());
 
-	@Autowired
 	private ReResourceitemShortRep reResourceitemShortRep;
-
-	@Autowired
 	private ReTurkishtrRep reTurkishtrRep;
-
-	@Autowired
 	private ReEnglishusRep reEnglishusRep;
 	private final transient String fileName;
 	private final transient boolean isTurkishWrite;
@@ -47,11 +39,16 @@ public class ExportTxt implements Serializable {
 
 	private final transient SearchParam sParam;
 
-	public ExportTxt(SearchParam sParam, String fileName, boolean isTurkishWrite, boolean isEnglishWrite) {
+	public ExportTxt(SearchParam sParam, String fileName, boolean isTurkishWrite, boolean isEnglishWrite,
+			ReResourceitemShortRep reResourceitemShortRep, ReTurkishtrRep reTurkishtrRep,
+			ReEnglishusRep reEnglishusRep) {
 		this.sParam = sParam;
 		this.fileName = fileName;
 		this.isTurkishWrite = isTurkishWrite;
 		this.isEnglishWrite = isEnglishWrite;
+		this.reResourceitemShortRep = reResourceitemShortRep;
+		this.reTurkishtrRep = reTurkishtrRep;
+		this.reEnglishusRep = reEnglishusRep;
 	}
 
 	public void export() throws IOException {

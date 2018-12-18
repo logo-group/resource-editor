@@ -61,27 +61,6 @@ public class ApplicationContextLocator {
 		return ApplicationContextLocator.applicationContext;
 	}
 
-	public static void setWebFlowConfiguration(Collection<URL> webFlowConfiguration) {
-		ApplicationContextLocator.webFlowConfiguration = webFlowConfiguration;
-		synchronized (monitor) {
-			monitor.notifyAll();
-		}
-	}
-
-	public static Collection<URL> getWebFlowConfiguration() {
-		try {
-			synchronized (monitor) {
-				while (ApplicationContextLocator.webFlowConfiguration == null) {
-					monitor.wait();
-				}
-			}
-		} catch (InterruptedException e) {
-			logger.log(Level.WARNING, "Interrupted!", e);
-			Thread.currentThread().interrupt();
-		}
-		return ApplicationContextLocator.webFlowConfiguration;
-	}
-
 	@SuppressWarnings("unchecked")
 	public static <T extends Object> T getBean(String beanId) {
 		return (T) getApplicationContext().getBean(beanId);

@@ -18,7 +18,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,9 +30,7 @@ import com.logo.data.entity.ReTurkishtr;
 import com.logo.data.repository.ReResourceitemShortRep;
 import com.logo.data.repository.ReTurkishtrRep;
 import com.logo.util.search.SearchParam;
-import com.vaadin.spring.annotation.UIScope;
 
-@UIScope
 public class ExportXml implements Serializable {
 
 	/**
@@ -42,10 +39,7 @@ public class ExportXml implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(ExportXml.class.getName());
 
-	@Autowired
 	private ReResourceitemShortRep reResourceitemShortRep;
-
-	@Autowired
 	private ReTurkishtrRep reTurkishtrRep;
 	private final transient String fileName;
 
@@ -54,9 +48,12 @@ public class ExportXml implements Serializable {
 	private static int prevRef = 0;
 	private static Element firstTaggedList = null;
 
-	public ExportXml(SearchParam sParam, String fileName) {
+	public ExportXml(SearchParam sParam, String fileName, ReResourceitemShortRep reResourceitemShortRep,
+			ReTurkishtrRep reTurkishtrRep) {
 		this.sParam = sParam;
 		this.fileName = fileName;
+		this.reResourceitemShortRep = reResourceitemShortRep;
+		this.reTurkishtrRep = reTurkishtrRep;
 	}
 
 	public void export() throws IOException, TransformerException, ParserConfigurationException {

@@ -88,12 +88,14 @@ public class ResourceViewNew extends VerticalLayout implements View {
 	@Autowired
 	private UserView userView;
 
+	@Autowired
+	private TransferView transferView;
+
 	private HorizontalLayout rootLayout = new HorizontalLayout();
 	private VerticalLayout contentLayout = new VerticalLayout();
 	private VerticalLayout menuLayout = new VerticalLayout();
 	private Panel menuPanel = new Panel();
 	private Panel searchLayout = new Panel();
-	private TransferView transferView = new TransferView();
 	private SearchLayout srcLayout = new SearchLayout(this);
 	private PaginationItemLayout gridContentItem = null;
 	private Button filter = new Button(LangHelper.getLocalizableMessage(LogoResConstants.ADVANCESEARCHSTR));
