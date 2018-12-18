@@ -1,6 +1,7 @@
 package com.logo.ui.window;
 
 import com.logo.data.entity.ReUser;
+import com.logo.data.repository.ReUserRep;
 import com.logo.ui.form.UserForm;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Window;
@@ -12,9 +13,9 @@ public class UserWindow extends Window {
 	private final transient ReUser reUser;
 	private final transient UserForm userForm;
 
-	public UserWindow() {
+	public UserWindow(ReUserRep userRepo) {
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
-		this.userForm = new UserForm();
+		this.userForm = new UserForm(userRepo);
 		userForm.setUser(reUser);
 		initialize();
 	}

@@ -41,11 +41,12 @@ public class ReHelpDocsView extends VerticalLayout implements View {
 
 	private Grid<ReHelpDocs> helpdocsGrid = new Grid<>(ReHelpDocs.class);
 
-	private HelpDocForm helpDocForm = new HelpDocForm(this);
+	private HelpDocForm helpDocForm;
 
 	@Autowired
 	public ReHelpDocsView(ReHelpDocsRep reHelpDocsRep) {
 		this.reHelpDocsRep = reHelpDocsRep;
+		this.helpDocForm = new HelpDocForm(this, reHelpDocsRep);
 		removeAllComponents();
 		init();
 	}

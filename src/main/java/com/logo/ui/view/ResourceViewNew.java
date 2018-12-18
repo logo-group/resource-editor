@@ -85,12 +85,14 @@ public class ResourceViewNew extends VerticalLayout implements View {
 	@Autowired
 	private ReUserRep userRepo;
 
+	@Autowired
+	private UserView userView;
+
 	private HorizontalLayout rootLayout = new HorizontalLayout();
 	private VerticalLayout contentLayout = new VerticalLayout();
 	private VerticalLayout menuLayout = new VerticalLayout();
 	private Panel menuPanel = new Panel();
 	private Panel searchLayout = new Panel();
-	private UserView userView = new UserView();
 	private TransferView transferView = new TransferView();
 	private SearchLayout srcLayout = new SearchLayout(this);
 	private PaginationItemLayout gridContentItem = null;
@@ -512,7 +514,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
 				if (selectedItem.getText().equals("Ayarlar")) {
-					final UserWindow window = new UserWindow();
+					final UserWindow window = new UserWindow(userRepo);
 					UI.getCurrent().addWindow(window);
 
 					Notification.show("Clicked " + selectedItem.getText());

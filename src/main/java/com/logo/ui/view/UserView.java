@@ -39,38 +39,39 @@ public class UserView extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 	public static final String VIEW_NAME = "UserView";
 
-	@Autowired(required = true)
-	public transient ReUserRep userRepo;
+	public ReUserRep userRepo;
 
 	private Grid<ReUser> userGrid = new Grid<>(ReUser.class);
 
-	private UserForm userForm = new UserForm(this);
+	private UserForm userForm;
 
-	public UserView() {
+	@Autowired
+	public UserView(ReUserRep userRepo) {
+		this.userRepo = userRepo;
 		removeAllComponents();
 		init();
 	}
 
 	@PostConstruct
 	void init() {
-		this.userRepo = (ReUserRep) VaadinSession.getCurrent().getAttribute("userrepo");
+		userForm = new UserForm(this, userRepo);
 		setSizeFull();
 		setSpacing(true);
 		setMargin(true);
 		setWidth("100%");
 		setHeight("100%");
 		addStyleName(MaterialTheme.LAYOUT_CARD);
-		
+
 		this.setDescription(LangHelper.getLocalizableMessage(LogoResConstants.CLICKTOEDITSTR));
 		userForm.setVisible(false);
-		
+
 		userGrid.setColumns("id", "username", "email", "department");
-		
+
 		HeaderRow row = userGrid.appendHeaderRow();
 		row.join("username").setHtml("<b>Full name</b>");
-		
+
 		HorizontalLayout header = new HorizontalLayout();
-		
+
 		HorizontalLayout grid = new HorizontalLayout();
 		grid.addStyleName(MaterialTheme.CARD_HOVERABLE);
 
@@ -78,26 +79,25 @@ public class UserView extends VerticalLayout implements View {
 		userGrid.setHeight("100%");
 		grid.setWidth("100%");
 		grid.setHeight("100%");
-		
 
 		Button addNewUser = new Button(LangHelper.getLocalizableMessage(LogoResConstants.ADDNEWUSERSTR));
 		addNewUser.setIcon(VaadinIcons.PLUS);
 		addNewUser.addStyleName(MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
-		
+
 		header.addComponent(addNewUser);
-		
+
 		addNewUser.addClickListener(e -> {
 			userForm.setVisible(true);
 			userForm.setUser(new ReUser());
 		});
-		
+
 		addComponent(header);
 		grid.addComponentsAndExpand(userGrid);
 		grid.addComponentsAndExpand(userForm);
 		addComponentsAndExpand(grid);
 		addGridFilters();
 		updateUserList("");
-		
+
 		userGrid.setStyleGenerator(item -> (item.getEnabled() == 1) ? null : "dead");
 
 		userGrid.setSelectionMode(SelectionMode.SINGLE);
@@ -127,9 +127,9 @@ public class UserView extends VerticalLayout implements View {
 	}
 
 	public void refreshGrid() {
-		userGrid.clearSortOrder();	
+		userGrid.clearSortOrder();
 	}
-	
+
 	private void addGridFilters() {
 		if (userGrid.getHeaderRowCount() > 1) {
 			HeaderRow filterRow1 = userGrid.getHeaderRow(1);
@@ -152,7 +152,7 @@ public class UserView extends VerticalLayout implements View {
 
 		searcField1.getTextField().addValueChangeListener(event -> {
 			Notification.show(event.getValue());
-			if(event.getValue() != null && !event.getValue().isEmpty())
+			if (event.getValue() != null && !event.getValue().isEmpty())
 				updateUserListForId(Integer.valueOf(event.getValue()));
 			else
 				updateUserList("");
@@ -177,7 +177,7 @@ public class UserView extends VerticalLayout implements View {
 	public void enter(ViewChangeEvent event) {
 		this.userRepo = (ReUserRep) VaadinSession.getCurrent().getAttribute("userrepo");
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);

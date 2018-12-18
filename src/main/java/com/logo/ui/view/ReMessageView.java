@@ -41,11 +41,12 @@ public class ReMessageView extends VerticalLayout implements View {
 
 	private Grid<ReMessage> messageGrid = new Grid<>(ReMessage.class);
 
-	private MessageForm messageForm = new MessageForm(this);
+	private MessageForm messageForm;
 
 	@Autowired
 	public ReMessageView(ReMessageRep reMessageRep) {
 		this.reMessageRep = reMessageRep;
+		this.messageForm = new MessageForm(this, reMessageRep);
 		removeAllComponents();
 		init();
 	}

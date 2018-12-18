@@ -1,6 +1,5 @@
 package com.logo.ui.form;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.github.appreciated.material.MaterialTheme;
@@ -24,7 +23,6 @@ import com.vaadin.data.HasValue.ValueChangeEvent;
 import com.vaadin.data.HasValue.ValueChangeListener;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.Page;
-import com.vaadin.server.VaadinSession;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
@@ -99,8 +97,7 @@ public class UserForm extends VerticalLayout {
 		return tabsheet;
 	}
 
-	@Autowired
-	public transient ReUserRep userRepo;
+	public ReUserRep userRepo;
 
 	private ReUser user;
 	private UserView userView;
@@ -122,17 +119,17 @@ public class UserForm extends VerticalLayout {
 	private LangLayout egypt;
 	private LangLayout saudiArabia;
 
-	public UserForm(UserView userView) {
+	public UserForm(UserView userView, ReUserRep userRepo) {
 		this.userView = userView;
 		tabsheet = new TabSheet();
-		this.userRepo = (ReUserRep) VaadinSession.getCurrent().getAttribute("userrepo");
+		this.userRepo = userRepo;
 		isPreferences = false;
 		initialize();
 	}
 
-	public UserForm() {
+	public UserForm(ReUserRep userRepo) {
 		tabsheet = new TabSheet();
-		this.userRepo = (ReUserRep) VaadinSession.getCurrent().getAttribute("userrepo");
+		this.userRepo = userRepo;
 		isPreferences = true;
 		initialize();
 	}

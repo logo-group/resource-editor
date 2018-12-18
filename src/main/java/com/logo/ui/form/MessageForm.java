@@ -1,6 +1,5 @@
 package com.logo.ui.form;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.github.appreciated.material.MaterialTheme;
@@ -47,16 +46,14 @@ public class MessageForm extends VerticalLayout {
 
 	private final Label formName = new Label();
 
-	@Autowired
 	public ReMessageRep reMessageRepo;
-
 	private ReMessage reMessage;
 	private ReMessageView reMessageView;
 	private Binder<ReMessage> binder = new Binder<>(ReMessage.class);
 
-	public MessageForm(ReMessageView reMessageView) {
+	public MessageForm(ReMessageView reMessageView, ReMessageRep reMessageRepo) {
 		this.reMessageView = reMessageView;
-
+		this.reMessageRepo = reMessageRepo;
 		GridLayout userMainLayout = new GridLayout(2, 6);
 
 		setSpacing(true);

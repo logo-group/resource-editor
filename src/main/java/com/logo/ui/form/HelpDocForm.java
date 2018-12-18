@@ -1,6 +1,5 @@
 package com.logo.ui.form;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.github.appreciated.material.MaterialTheme;
@@ -44,16 +43,14 @@ public class HelpDocForm extends VerticalLayout {
 	private final Button delete = new ButtonGenerator(LogoResConstants.DELETESTR);
 
 	private final Label formName = new Label();
-
-	@Autowired
 	private ReHelpDocsRep reHelpDocsRep;
-
 	private ReHelpDocs reHelpDocs;
 	private ReHelpDocsView reHelpDocsView;
 	private Binder<ReHelpDocs> binder = new Binder<>(ReHelpDocs.class);
 
-	public HelpDocForm(ReHelpDocsView reHelpDocsView) {
+	public HelpDocForm(ReHelpDocsView reHelpDocsView, ReHelpDocsRep reHelpDocsRep) {
 		this.reHelpDocsView = reHelpDocsView;
+		this.reHelpDocsRep = reHelpDocsRep;
 
 		setSizeFull();
 		setSpacing(true);
