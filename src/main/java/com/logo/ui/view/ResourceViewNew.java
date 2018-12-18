@@ -17,6 +17,7 @@ import com.jarektoro.responsivelayout.ResponsiveColumn.ColumnComponentAlignment;
 import com.jarektoro.responsivelayout.ResponsiveLayout;
 import com.jarektoro.responsivelayout.ResponsiveRow;
 import com.logo.LogoresMainUI;
+import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReProjectVerisonRep;
 import com.logo.data.repository.ReResourceRep;
@@ -24,6 +25,7 @@ import com.logo.data.repository.ReResourceitemRep;
 import com.logo.data.repository.ReUserRep;
 import com.logo.ui.components.PaginationItemLayout;
 import com.logo.ui.components.SearchLayout;
+import com.logo.ui.window.ResourceWindow;
 import com.logo.ui.window.UserWindow;
 import com.logo.util.LangHelper;
 import com.logo.util.LogoResConstants;
@@ -152,10 +154,6 @@ public class ResourceViewNew extends VerticalLayout implements View {
 		Button home = new Button(LangHelper.getLocalizableMessage(LogoResConstants.HOMESTR));
 		home.addStyleName(MaterialTheme.BUTTON_BORDERLESS + " " + LogoResConstants.STYLE_CUSTOM_WHITE);
 		home.setIcon(VaadinIcons.HOME);
-
-		Button addNewResource = new Button(LangHelper.getLocalizableMessage(LogoResConstants.ADDNEWRESOURCESTR));
-		addNewResource.setIcon(VaadinIcons.PLUS);
-		addNewResource.addStyleName(MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
 
 		Button allResources = new Button(LangHelper.getLocalizableMessage(LogoResConstants.ALLRESOURCESSTR));
 		allResources.addStyleName(MaterialTheme.BUTTON_BORDERLESS + " " + LogoResConstants.STYLE_CUSTOM_WHITE);
@@ -454,6 +452,12 @@ public class ResourceViewNew extends VerticalLayout implements View {
 		addNewResource.setIcon(VaadinIcons.PLUS);
 		addNewResource.addStyleName(
 				MaterialTheme.BUTTON_BORDER + " " + MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
+		addNewResource.addClickListener(e -> {
+			ReResource reResource = new ReResource();
+			final ResourceWindow window = new ResourceWindow(reResource, this, true, reProjectVerisonRep, resRepo,
+					userRepo);
+			UI.getCurrent().addWindow(window);
+		});
 
 		AutocompleteExtension<String> resNrExtension = new AutocompleteExtension<>(searchField);
 

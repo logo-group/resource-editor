@@ -246,10 +246,6 @@ public class PaginationItemLayout extends ResponsiveLayout {
 			header.setStyleName("card-hoverable-material-light-primary-color");
 			header.setWidth("100%");
 
-			Button addNewResource = new Button(LangHelper.getLocalizableMessage(LogoResConstants.ADDNEWRESOURCESTR));
-			addNewResource.setIcon(VaadinIcons.PLUS);
-			addNewResource.addStyleName(MaterialTheme.BUTTON_CUSTOM);
-
 			Label text1 = new Label(reResource.getResourcegroup().name());
 			Label text2 = new Label(Integer.toString(reResource.getResourcenr()));
 
