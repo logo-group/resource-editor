@@ -13,11 +13,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import com.github.appreciated.material.MaterialTheme;
 import com.jarektoro.responsivelayout.ResponsiveColumn.ColumnComponentAlignment;
 import com.jarektoro.responsivelayout.ResponsiveLayout;
 import com.jarektoro.responsivelayout.ResponsiveRow;
 import com.logo.LogoresApplication;
+import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReProjectVersion;
 import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReResourceitem;
@@ -30,8 +30,10 @@ import com.logo.ui.view.ResourceViewNew;
 import com.logo.ui.window.ResourceCopyWindow;
 import com.logo.ui.window.ResourceItemWindow;
 import com.logo.ui.window.ResourceWindow;
+import com.logo.util.ConfirmationListener;
 import com.logo.util.LangHelper;
 import com.logo.util.LogoResConstants;
+import com.logo.util.ResourceEditorDialog;
 import com.logo.util.enums.UserLayoutType;
 import com.logo.util.search.SearchParam;
 import com.vaadin.addon.pagination.Pagination;
@@ -45,6 +47,7 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.MenuBar;
+import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
@@ -251,9 +254,6 @@ public class PaginationItemLayout extends ResponsiveLayout {
 
 			Button edit = new ButtonGenerator(LogoResConstants.EDITSTR);
 			Button delete = new ButtonGenerator(LogoResConstants.DELETESTR);
-			Button copy = new ButtonGenerator(LogoResConstants.COPYSTR);
-			copy.setIcon(VaadinIcons.COPY);
-			copy.addStyleName(MaterialTheme.BUTTON_LINK);
 			Button addNewResourceItem = new ButtonGenerator(LogoResConstants.ADDSTR);
 			addNewResourceItem.setDescription(LangHelper.getLocalizableMessage(LogoResConstants.ADDNEWRESOURCEITMSTR));
 
@@ -262,9 +262,13 @@ public class PaginationItemLayout extends ResponsiveLayout {
 			headerMenuButton.addStyleName(MENUBAR_SMALL);
 			headerMenuButton.addStyleName("no-indicator");
 			MenuItem addItem = headerMenuButton.addItem("", VaadinIcons.ELLIPSIS_DOTS_V, null);
+			addItem.addItem(LangHelper.getLocalizableMessage(LogoResConstants.COPYSTR), VaadinIcons.COPY,
+					copyClick(reResource));
+			addItem.addItem(LangHelper.getLocalizableMessage(LogoResConstants.REORDERSTR), VaadinIcons.BULLETS,
+					reOrderClick(reResource));
+			addItem.addSeparator();
 			addItem.addItem("Export resource", null);
 			addItem.addItem("Import resource", null);
-			addItem.addSeparator();
 
 			edit.addClickListener(e -> {
 				final ResourceWindow window = new ResourceWindow(reResource, resView, false, reProjectVerisonRep,
@@ -272,17 +276,10 @@ public class PaginationItemLayout extends ResponsiveLayout {
 				UI.getCurrent().addWindow(window);
 			});
 
-			copy.addClickListener(e -> {
-				final ResourceCopyWindow window = LogoresApplication.getBeanFactory().getBean(ResourceCopyWindow.class,
-						reResource, LogoresApplication.getBeanFactory().getBean(ResourceViewNew.class));
-				UI.getCurrent().addWindow(window);
-			});
-
 			addNewResourceItem.addClickListener(e -> {
 				final ResourceItemWindow window2 = new ResourceItemWindow(reResource, resView, reResourceitemRep);
 				UI.getCurrent().addWindow(window2);
 			});
-
 			delete.addClickListener(e -> delete(reResource));
 
 			HorizontalLayout buttonLayout = new HorizontalLayout();
@@ -291,7 +288,7 @@ public class PaginationItemLayout extends ResponsiveLayout {
 			int[] countArr = getCountForChart(reResource.getResourcenr(), reResource.getResourcegroup().name());
 			LocChart chart = new LocChart(countArr[0], countArr[1]);
 
-			buttonLayout.addComponents(edit, delete, addNewResourceItem, copy, headerMenuButton);
+			buttonLayout.addComponents(edit, delete, addNewResourceItem, headerMenuButton);
 			textLayout.addComponents(text1, text2, chart);
 
 			header.addColumn().withDisplayRules(12, 10, 6, 6).withComponent(textLayout)
@@ -387,6 +384,60 @@ public class PaginationItemLayout extends ResponsiveLayout {
 			countArr[1] = (int) countObj[2];
 		}
 		return countArr;
+	}
+
+	private void reOrderItems(ReResource resource) {
+		List<ReResourceitem> itemList = resource.getReResourceitem();
+		for (int i = 0; i < itemList.size(); i++) {
+			ReResourceitem item = itemList.get(i);
+			item.setOrdernr(i + 1);
+		}
+		resRepo.save(resource);
+		refreshLayout();
+	}
+
+	private void refreshLayout() {
+		VerticalLayout refreshedContent = generatePanelLayout();
+		this.replaceComponent(content, refreshedContent);
+		content = refreshedContent;
+	}
+
+	private Command reOrderClick(ReResource resource) {
+		Command reOrderClickCommand = new Command() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void menuSelected(MenuItem selectedItem) {
+				ResourceEditorDialog.confirm(LogoresMainUI.getCurrent(), new ConfirmationListener() {
+
+					@Override
+					public void onConfirm() {
+						reOrderItems(resource);
+					}
+
+					@Override
+					public void onCancel() {
+					}
+				}, LangHelper.getLocalizableMessage(LogoResConstants.REORDER_NOTIFICATION),
+						LangHelper.getLocalizableMessage(LogoResConstants.DIALOG_OK),
+						LangHelper.getLocalizableMessage(LogoResConstants.DIALOG_CANCEL));
+			}
+		};
+		return reOrderClickCommand;
+	}
+
+	private Command copyClick(ReResource resource) {
+		Command copyClickCommand = new Command() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void menuSelected(MenuItem selectedItem) {
+				final ResourceCopyWindow window = LogoresApplication.getBeanFactory().getBean(ResourceCopyWindow.class,
+						resource, LogoresApplication.getBeanFactory().getBean(ResourceViewNew.class));
+				UI.getCurrent().addWindow(window);
+			}
+		};
+		return copyClickCommand;
 	}
 
 	@Override

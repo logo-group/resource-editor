@@ -56,6 +56,7 @@ public class LogoResConstants {
 	public static final String DELETESTR = "button.delete";
 	public static final String EDITSTR = "button.edit";
 	public static final String COPYSTR = "button.copy";
+	public static final String REORDERSTR = "button.reorder";
 	public static final String ADDSTR = "button.add";
 	public static final String ADDNEWUSERSTR = "button.addnewuser";
 	public static final String ADDNEWSTR = "button.new";
@@ -179,6 +180,10 @@ public class LogoResConstants {
 	public static final String CREATED_TIME_LABEL = "caption.createdtime";
 	public static final String MODIFIED_TIME_LABEL = "caption.modifiedtime";
 	public static final String RESOURCE_INFORMATIONS = "caption.resource.informations";
+
+	public static final String REORDER_NOTIFICATION = "caption.dialog.reorderall";
+	public static final String DIALOG_OK = "caption.dialog.ok";
+	public static final String DIALOG_CANCEL = "caption.dialog.cancel";
 
 	private LogoResConstants() {
 	}
