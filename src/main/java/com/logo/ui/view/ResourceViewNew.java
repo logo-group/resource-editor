@@ -40,7 +40,7 @@ import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.ui.Transport;
 import com.vaadin.spring.annotation.SpringView;
-import com.vaadin.spring.annotation.UIScope;
+import com.vaadin.spring.annotation.VaadinSessionScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Embedded;
@@ -58,7 +58,7 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import eu.maxschuster.vaadin.famfamflags.FamFamFlags;
 
-@UIScope
+@VaadinSessionScope
 @SpringView(name = ResourceViewNew.VIEW_NAME)
 @Push(transport = Transport.WEBSOCKET_XHR)
 public class ResourceViewNew extends VerticalLayout implements View {
