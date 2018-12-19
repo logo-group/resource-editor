@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -180,26 +181,26 @@
 			<version>0.1.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.vaadin</groupId>
-		    <artifactId>vaadin-push</artifactId>
-		    <version>8.1.4</version>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-push</artifactId>
+			<version>8.1.4</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.vaadin.spring.addons</groupId>
-		    <artifactId>vaadin-spring-addon-i18n</artifactId>
-		    <version>2.0.0.RELEASE</version>
+			<groupId>org.vaadin.spring.addons</groupId>
+			<artifactId>vaadin-spring-addon-i18n</artifactId>
+			<version>2.0.0.RELEASE</version>
 		</dependency>
 
 		<dependency>
-		    <groupId>com.systemsplanet.plugin</groupId>
-		    <artifactId>google-api-translate-java-maven-plugin</artifactId>
-		    <version>1.5</version>
-		</dependency>	
+			<groupId>com.systemsplanet.plugin</groupId>
+			<artifactId>google-api-translate-java-maven-plugin</artifactId>
+			<version>1.5</version>
+		</dependency>
 
 		<dependency>
-		    <groupId>com.vaadin</groupId>
-		    <artifactId>vaadin-charts-flow</artifactId>
-		    <version>6.0.0</version>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-charts-flow</artifactId>
+			<version>6.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin.addon.responsive</groupId>
@@ -207,9 +208,9 @@
 			<version>1.0.0.alpha4</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.vaadin.addon</groupId>
-		    <artifactId>confirmdialog</artifactId>
-		    <version>2.1.1</version>
+			<groupId>org.vaadin.addon</groupId>
+			<artifactId>confirmdialog</artifactId>
+			<version>3.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -219,7 +220,7 @@
 		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
-			 <version>3.2.0</version>
+			<version>3.2.0</version>
 		</dependency>
 	</dependencies>
 
@@ -237,31 +238,31 @@
 	<build>
 		<plugins>
 			<plugin>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-maven-plugin</artifactId>
-                <version>8.2.0</version>
-                <dependencies>
-                    <!-- For Travis -->
-                    <dependency>
-                        <groupId>xml-apis</groupId>
-                        <artifactId>xml-apis</artifactId>
-                        <version>1.4.01</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <extraJvmArgs>-Xmx2G</extraJvmArgs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>update-theme</goal>
-                            <goal>update-widgetset</goal>
-                            <goal>compile</goal>
-                            <goal>compile-theme</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-maven-plugin</artifactId>
+				<version>8.2.0</version>
+				<dependencies>
+					<!-- For Travis -->
+					<dependency>
+						<groupId>xml-apis</groupId>
+						<artifactId>xml-apis</artifactId>
+						<version>1.4.01</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<extraJvmArgs>-Xmx2G</extraJvmArgs>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>update-theme</goal>
+							<goal>update-widgetset</goal>
+							<goal>compile</goal>
+							<goal>compile-theme</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
