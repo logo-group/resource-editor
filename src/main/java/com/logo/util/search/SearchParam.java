@@ -1,12 +1,18 @@
 package com.logo.util.search;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.logo.data.entity.ReResourceGroup;
+import com.logo.data.repository.ReResourceGroupRep;
 import com.logo.util.enums.ResourceCase;
-import com.logo.util.enums.ResourceGroup;
 import com.logo.util.enums.ResourceState;
 import com.logo.util.enums.ResourceType;
 
@@ -45,9 +51,7 @@ public class SearchParam implements Serializable {
 			"Contains", "Does not contain", "Begin with", "Does not begin with", "End with", "Does not end with",
 			"Is equal to", "Is not equal to");
 
-	private static final List<String> resourceGroupList = Arrays.asList(ResourceGroup.UN.toString(),
-			ResourceGroup.HR.toString(), ResourceGroup.UNRP.toString(), ResourceGroup.HRRP.toString(),
-			ResourceGroup.SS.toString(), ResourceGroup.HELP.toString(), ResourceGroup.MISC.toString());
+	private static List<String> resourceGroupList = new ArrayList<>();;
 
 	private static final List<String> resourceTypeList = Arrays.asList(ResourceType.LOCALIZABLE.toString(),
 			ResourceType.NONLOCALIZABLE.toString());
@@ -59,9 +63,17 @@ public class SearchParam implements Serializable {
 	private static final List<String> resourceStateList = Arrays.asList(ResourceState.ACTIVE.toString(),
 			ResourceState.INACTIVE.toString());
 
+	@Autowired
+	private ReResourceGroupRep resourceGroupRep;
+
+	@PostConstruct
+	private void init() {
+		for (ReResourceGroup group : resourceGroupRep.findAll()) {
+			resourceGroupList.add(group.getName());
+		}
+	}
+
 	public SearchParam() {
-		/**
-		 * */
 	}
 
 	public final void setResNrBegin(int resNrBegin) {

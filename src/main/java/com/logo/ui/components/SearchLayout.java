@@ -1,6 +1,7 @@
 package com.logo.ui.components;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -8,17 +9,22 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.github.appreciated.material.MaterialTheme;
 import com.jarektoro.responsivelayout.ResponsiveLayout;
 import com.jarektoro.responsivelayout.ResponsiveLayout.ContainerType;
 import com.jarektoro.responsivelayout.ResponsiveRow;
 import com.logo.LogoresMainUI;
+import com.logo.data.entity.ReResourceGroup;
+import com.logo.data.repository.ReResourceGroupRep;
 import com.logo.data.repository.ReUserRep;
 import com.logo.ui.view.ResourceViewNew;
 import com.logo.util.LangHelper;
 import com.logo.util.LogoResConstants;
 import com.logo.util.enums.ResourceCase;
-import com.logo.util.enums.ResourceGroup;
 import com.logo.util.enums.ResourceState;
 import com.logo.util.enums.ResourceType;
 import com.logo.util.search.SearchByAll;
@@ -48,9 +54,7 @@ public class SearchLayout extends Panel {
 			"Contains", "Does not contain", "Begin with", "Does not begin with", "End with", "Does not end with",
 			"Is equal to", "Is not equal to");
 
-	private static final List<String> resourceGroupList = Arrays.asList(ResourceGroup.UN.toString(),
-			ResourceGroup.HR.toString(), ResourceGroup.UNRP.toString(), ResourceGroup.HRRP.toString(),
-			ResourceGroup.SS.toString(), ResourceGroup.HELP.toString(), ResourceGroup.MISC.toString());
+	private static final List<String> resourceGroupList = new ArrayList<>();
 
 	private static final List<String> resourceTypeList = Arrays.asList(ResourceType.LOCALIZABLE.toString(),
 			ResourceType.NONLOCALIZABLE.toString());
@@ -67,6 +71,9 @@ public class SearchLayout extends Panel {
 	private static final List<String> duringByList = Arrays.asList("Minutes", "Hours", "Days", "Weeks", "Months",
 			"Years");
 
+	private SpellChecComboBox<String> resourceGroupCombo = new SpellChecComboBox<>(
+			LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
+
 	private Panel contentLayout = new Panel();
 	private VerticalLayout contentForResNr = new VerticalLayout();
 	private VerticalLayout contentForAll = new VerticalLayout();
@@ -76,6 +83,9 @@ public class SearchLayout extends Panel {
 	private static transient ReUserRep userRepo;
 	private static List<String> userList;
 	private ResourceViewNew resView;
+
+	@Autowired
+	private ReResourceGroupRep resourceGroupRep;
 
 	private static final Set<String> DESCLIST_IGNORE = new HashSet<>();
 	static {
@@ -88,8 +98,15 @@ public class SearchLayout extends Panel {
 		userList = userRepo.findAllByUserName();
 	}
 
-	public SearchLayout(ResourceViewNew resView) {
+	@PostConstruct
+	private void init() {
+		for (ReResourceGroup group : resourceGroupRep.findAll()) {
+			resourceGroupList.add(group.getName());
+		}
+		resourceGroupCombo = createComboBox(LogoResConstants.RESGRPSTR, resourceGroupList, resourceGroupList.get(0));
+	}
 
+	public SearchLayout(ResourceViewNew resView) {
 		setSizeFull();
 		setWidth("100%");
 		setHeight("100%");
@@ -269,8 +286,6 @@ public class SearchLayout extends Panel {
 		SpellChecComboBox<String> descCombo = createComboBox(LogoResConstants.DESCSTR, descList, descList.get(3));
 		TextField descComboText = createTextField("");
 
-		SpellChecComboBox<String> resourceGroupCombo = createComboBox(LogoResConstants.RESGRPSTR, resourceGroupList,
-				resourceGroupList.get(0));
 		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList,
 				null);
 		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
@@ -397,8 +412,6 @@ public class SearchLayout extends Panel {
 		SpellChecComboBox<String> descCombo = createComboBox(LogoResConstants.DESCSTR, descList, descList.get(3));
 		TextField descComboText = createTextField("");
 
-		SpellChecComboBox<String> resourceGroupCombo = createComboBox(LogoResConstants.RESGRPSTR, resourceGroupList,
-				resourceGroupList.get(0));
 		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList,
 				null);
 		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
@@ -622,8 +635,6 @@ public class SearchLayout extends Panel {
 		SpellChecComboBox<String> descCombo = createComboBox(LogoResConstants.DESCSTR, descList, descList.get(3));
 		TextField descComboText = createTextField("");
 
-		SpellChecComboBox<String> resourceGroupCombo = createComboBox(LogoResConstants.RESGRPSTR, resourceGroupList,
-				resourceGroupList.get(0));
 		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList,
 				null);
 		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
@@ -862,8 +873,6 @@ public class SearchLayout extends Panel {
 		SpellChecComboBox<String> descCombo = createComboBox(LogoResConstants.DESCSTR, descList, descList.get(3));
 		TextField descComboText = createTextField("");
 
-		SpellChecComboBox<String> resourceGroupCombo = createComboBox(LogoResConstants.RESGRPSTR, resourceGroupList,
-				resourceGroupList.get(0));
 		SpellChecComboBox<String> resourceTypeCombo = createComboBox(LogoResConstants.RESTYPESTR, resourceTypeList,
 				null);
 		SpellChecComboBox<String> resourceCaseCombo = createComboBox(LogoResConstants.RESCASESTR, resourceCaseList,
