@@ -22,7 +22,7 @@ public class Authentication implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	public transient ReUserRep userRepo;
+	public ReUserRep userRepo;
 
 	private transient List<ReUser> userList = null;
 

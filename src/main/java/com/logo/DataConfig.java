@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -23,7 +24,10 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @PropertySource("classpath:application.properties")
 public class DataConfig {
 
+	public static final String SCOPE = "singleton";
+
 	@Bean
+	@Scope(DataConfig.SCOPE)
 	public DataSource dataSource(Environment env) {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(env.getProperty("spring.datasource.driverClassName"));
@@ -34,6 +38,7 @@ public class DataConfig {
 	}
 
 	@Bean
+	@Scope(DataConfig.SCOPE)
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter adapter,
 			Properties additionalProperties) {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
@@ -46,6 +51,7 @@ public class DataConfig {
 
 	@Bean
 	@ConfigurationProperties
+	@Scope(DataConfig.SCOPE)
 	public Properties additionalProperties(Environment env) {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
@@ -67,12 +73,14 @@ public class DataConfig {
 	}
 
 	@Bean
+	@Scope(DataConfig.SCOPE)
 	public JpaVendorAdapter adapter() {
 		JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 		return adapter;
 	}
 
 	@Bean
+	@Scope(DataConfig.SCOPE)
 	public JpaTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
 		JpaTransactionManager jtm = new JpaTransactionManager();
 		jtm.setEntityManagerFactory(entityManagerFactory.getObject());
