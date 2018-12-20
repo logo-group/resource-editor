@@ -16,8 +16,6 @@ import com.logo.util.enums.MessageType;
 import com.logo.util.enums.ResourceGroup;
 import com.vaadin.data.Binder;
 import com.vaadin.server.Page;
-import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
@@ -27,8 +25,6 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 
-@SpringComponent
-@UIScope
 public class MessageForm extends VerticalLayout {
 
 	private static final long serialVersionUID = 1L;

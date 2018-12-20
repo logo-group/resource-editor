@@ -11,6 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 
 import com.logo.data.repository.ReEnglishusRep;
 import com.logo.data.repository.ReResourceitemShortRep;
@@ -30,7 +31,6 @@ import com.vaadin.server.FileResource;
 import com.vaadin.server.Resource;
 import com.vaadin.server.VaadinService;
 import com.vaadin.spring.annotation.SpringView;
-import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.ProgressBar;
@@ -38,7 +38,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 @Push
-@UIScope
+@Scope("prototype")
 @SpringView(name = TransferView.VIEW_NAME)
 public class TransferView extends VerticalLayout implements View {
 

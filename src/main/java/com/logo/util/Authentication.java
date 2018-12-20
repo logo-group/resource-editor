@@ -6,14 +6,14 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 
 import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReUserRep;
 import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.UIScope;
 
 @SpringComponent
-@UIScope
+@Scope("prototype")
 public class Authentication implements Serializable {
 
 	/**

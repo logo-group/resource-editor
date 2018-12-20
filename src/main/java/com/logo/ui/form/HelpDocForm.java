@@ -13,8 +13,6 @@ import com.logo.util.LogoResConstants;
 import com.logo.util.enums.DocType;
 import com.vaadin.data.Binder;
 import com.vaadin.server.Page;
-import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
@@ -27,8 +25,6 @@ import com.vaadin.ui.VerticalLayout;
 
 import eu.michaelvogt.vaadin.attribute.Attribute;
 
-@SpringComponent
-@UIScope
 public class HelpDocForm extends VerticalLayout {
 
 	private static final long serialVersionUID = 1L;
