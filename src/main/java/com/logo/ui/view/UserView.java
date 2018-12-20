@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.appreciated.material.MaterialTheme;
 import com.logo.data.entity.ReUser;
+import com.logo.data.repository.ReResourceGroupRep;
 import com.logo.data.repository.ReUserRep;
 import com.logo.ui.components.TextFieldWithButton;
 import com.logo.ui.form.UserForm;
@@ -39,20 +40,23 @@ public class UserView extends VerticalLayout implements View {
 
 	public ReUserRep userRepo;
 
+	private ReResourceGroupRep resourceGroupRepo;
+
 	private Grid<ReUser> userGrid = new Grid<>(ReUser.class);
 
 	private UserForm userForm;
 
 	@Autowired
-	public UserView(ReUserRep userRepo) {
+	public UserView(ReUserRep userRepo, ReResourceGroupRep resourceGroupRepo) {
 		this.userRepo = userRepo;
+		this.resourceGroupRepo = resourceGroupRepo;
 		removeAllComponents();
 		init();
 	}
 
 	@PostConstruct
 	void init() {
-		userForm = new UserForm(this, userRepo);
+		userForm = new UserForm(this, userRepo, resourceGroupRepo);
 		setSizeFull();
 		setSpacing(true);
 		setMargin(true);

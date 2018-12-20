@@ -12,8 +12,6 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +20,7 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -39,7 +38,6 @@ import com.logo.util.converter.ResourceStateConverter;
 import com.logo.util.converter.ResourceTypeConverter;
 import com.logo.util.enums.OwnerProduct;
 import com.logo.util.enums.ResourceCase;
-import com.logo.util.enums.ResourceGroup;
 import com.logo.util.enums.ResourceState;
 import com.logo.util.enums.ResourceType;
 
@@ -63,9 +61,9 @@ public class ReResource implements Serializable {
 	@Column(name = "DESCRIPTION", columnDefinition = "nvarchar(128)")
 	private String description;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "RESOURCEGROUP", columnDefinition = "nvarchar(10)")
-	private ResourceGroup resourcegroup;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RESOURCEGROUP")
+	private ReResourceGroup resourcegroup;
 
 	@Convert(converter = ResourceTypeConverter.class)
 	@Column(name = "RESOURCETYPE")
@@ -134,16 +132,16 @@ public class ReResource implements Serializable {
 		this.description = description;
 	}
 
-	public final ResourceGroup getResourcegroup() {
+	public final ResourceType getResourcetype() {
+		return resourcetype;
+	}
+
+	public ReResourceGroup getResourcegroup() {
 		return resourcegroup;
 	}
 
-	public final void setResourcegroup(ResourceGroup resourcegroup) {
+	public void setResourcegroup(ReResourceGroup resourcegroup) {
 		this.resourcegroup = resourcegroup;
-	}
-
-	public final ResourceType getResourcetype() {
-		return resourcetype;
 	}
 
 	public final void setResourcetype(ResourceType resourcetype) {

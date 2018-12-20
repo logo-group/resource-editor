@@ -4,7 +4,9 @@ import org.vaadin.dialogs.ConfirmDialog;
 
 import com.github.appreciated.material.MaterialTheme;
 import com.logo.data.entity.ReMessage;
+import com.logo.data.entity.ReResourceGroup;
 import com.logo.data.repository.ReMessageRep;
+import com.logo.data.repository.ReResourceGroupRep;
 import com.logo.ui.components.ButtonGenerator;
 import com.logo.ui.components.SpellChecComboBox;
 import com.logo.ui.components.SpellChecTextField;
@@ -13,7 +15,6 @@ import com.logo.util.LangHelper;
 import com.logo.util.LogoResConstants;
 import com.logo.util.converter.StrToIntegerConverter;
 import com.logo.util.enums.MessageType;
-import com.logo.util.enums.ResourceGroup;
 import com.vaadin.data.Binder;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Alignment;
@@ -33,7 +34,7 @@ public class MessageForm extends VerticalLayout {
 	private final SpellChecTextField resourceNumber = new SpellChecTextField("Resource Number");
 	private final SpellChecTextField tagNr = new SpellChecTextField(
 			LangHelper.getLocalizableMessage(LogoResConstants.TAGNRSTR));
-	private final SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>("Resource Group");
+	private final SpellChecComboBox<ReResourceGroup> resourceGroupCombo = new SpellChecComboBox<>("Resource Group");
 	private final SpellChecComboBox<MessageType> messageTypeCombo = new SpellChecComboBox<>("Type");
 
 	private final Button save = new ButtonGenerator(LogoResConstants.SAVESTR);
@@ -43,13 +44,15 @@ public class MessageForm extends VerticalLayout {
 	private final Label formName = new Label();
 
 	public ReMessageRep reMessageRepo;
+	private ReResourceGroupRep resourceGroupRepo;
 	private ReMessage reMessage;
 	private ReMessageView reMessageView;
 	private Binder<ReMessage> binder = new Binder<>(ReMessage.class);
 
-	public MessageForm(ReMessageView reMessageView, ReMessageRep reMessageRepo) {
+	public MessageForm(ReMessageView reMessageView, ReMessageRep reMessageRepo, ReResourceGroupRep resourceGroupRepo) {
 		this.reMessageView = reMessageView;
 		this.reMessageRepo = reMessageRepo;
+		this.resourceGroupRepo = resourceGroupRepo;
 		GridLayout userMainLayout = new GridLayout(2, 6);
 
 		setSpacing(true);
@@ -81,14 +84,13 @@ public class MessageForm extends VerticalLayout {
 				+ LogoResConstants.STYLE_CUSTOM_WHITE);
 
 		messageTypeCombo.setItems(MessageType.ERROR, MessageType.INFO, MessageType.WARN, MessageType.SELECTION);
-		resourceGroupCombo.setItems(ResourceGroup.UN, ResourceGroup.HR, ResourceGroup.UNRP, ResourceGroup.HRRP,
-				ResourceGroup.SS, ResourceGroup.HELP, ResourceGroup.MISC);
+		resourceGroupCombo.setItems(resourceGroupRepo.findAll());
 
 		messageTypeCombo.setEmptySelectionAllowed(false);
 		resourceGroupCombo.setEmptySelectionAllowed(false);
 
 		messageTypeCombo.setSelectedItem(MessageType.ERROR);
-		resourceGroupCombo.setSelectedItem(ResourceGroup.UN);
+		resourceGroupCombo.setSelectedItem(resourceGroupRepo.findOne("UN"));
 
 		binder.forField(javaConstId).asRequired("username can not be empty").bind(ReMessage::getConsId,
 				ReMessage::setConsId);

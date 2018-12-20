@@ -3,7 +3,9 @@ package com.logo.ui.form;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.github.appreciated.material.MaterialTheme;
+import com.logo.data.entity.ReResourceGroup;
 import com.logo.data.entity.ReUser;
+import com.logo.data.repository.ReResourceGroupRep;
 import com.logo.data.repository.ReUserRep;
 import com.logo.ui.components.ButtonGenerator;
 import com.logo.ui.components.LangLayout;
@@ -14,7 +16,6 @@ import com.logo.ui.view.UserView;
 import com.logo.util.LangHelper;
 import com.logo.util.LogoResConstants;
 import com.logo.util.converter.StrToIntegerConverter;
-import com.logo.util.enums.ResourceGroup;
 import com.logo.util.enums.UserLanguage;
 import com.logo.util.enums.UserLayoutType;
 import com.logo.util.enums.UserType;
@@ -58,7 +59,7 @@ public class UserForm extends VerticalLayout {
 			LangHelper.getLocalizableMessage(LogoResConstants.DEFAULTORIENTSTR));
 	private final SpellChecComboBox<UserType> userTypeCombo = new SpellChecComboBox<>(
 			LangHelper.getLocalizableMessage(LogoResConstants.GENERALACCESRIGHTDSTR));
-	private final SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(
+	private final SpellChecComboBox<ReResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(
 			LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
 	private final SpellChecComboBox<UserLanguage> languageCombo = new SpellChecComboBox<>("Default Language");
 	private SwitchWithTextBox displayedSwitch = new SwitchWithTextBox(
@@ -95,6 +96,8 @@ public class UserForm extends VerticalLayout {
 
 	public ReUserRep userRepo;
 
+	private ReResourceGroupRep resourceGroupRepo;
+
 	private ReUser user;
 	private UserView userView;
 	private Binder<ReUser> binder = new Binder<>(ReUser.class);
@@ -115,10 +118,11 @@ public class UserForm extends VerticalLayout {
 	private LangLayout egypt;
 	private LangLayout saudiArabia;
 
-	public UserForm(UserView userView, ReUserRep userRepo) {
+	public UserForm(UserView userView, ReUserRep userRepo, ReResourceGroupRep resourceGroupRepo) {
 		this.userView = userView;
 		tabsheet = new TabSheet();
 		this.userRepo = userRepo;
+		this.resourceGroupRepo = resourceGroupRepo;
 		isPreferences = false;
 		initialize();
 	}
@@ -200,8 +204,7 @@ public class UserForm extends VerticalLayout {
 		userLayoutTypeCombo.setItems(UserLayoutType.V, UserLayoutType.H);
 		userTypeCombo.setItems(UserType.ADMINISTRATOR, UserType.PROGRAMMER, UserType.INTERNALLOCALIZER,
 				UserType.EXTERNALLOCALIZER);
-		resourceGroupCombo.setItems(ResourceGroup.UN, ResourceGroup.HR, ResourceGroup.UNRP, ResourceGroup.HRRP,
-				ResourceGroup.SS, ResourceGroup.HELP, ResourceGroup.MISC);
+		resourceGroupCombo.setItems(resourceGroupRepo.findAll());
 		languageCombo.setItems(UserLanguage.TRTR, UserLanguage.ENUS, UserLanguage.DEDE, UserLanguage.FAIR,
 				UserLanguage.AZAZ, UserLanguage.RURU, UserLanguage.BGBG, UserLanguage.RORO, UserLanguage.KAGE,
 				UserLanguage.ARJO, UserLanguage.FRFR, UserLanguage.SQKV, UserLanguage.TKTM, UserLanguage.AREG,

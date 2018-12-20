@@ -9,8 +9,10 @@ import java.util.stream.Collectors;
 
 import com.logo.data.entity.ReProjectVersion;
 import com.logo.data.entity.ReResource;
+import com.logo.data.entity.ReResourceGroup;
 import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReProjectVerisonRep;
+import com.logo.data.repository.ReResourceGroupRep;
 import com.logo.data.repository.ReResourceRep;
 import com.logo.data.repository.ReUserRep;
 import com.logo.ui.components.ButtonGenerator;
@@ -23,7 +25,6 @@ import com.logo.util.LogoResConstants;
 import com.logo.util.converter.StrToIntegerConverter;
 import com.logo.util.enums.OwnerProduct;
 import com.logo.util.enums.ResourceCase;
-import com.logo.util.enums.ResourceGroup;
 import com.logo.util.enums.ResourceState;
 import com.logo.util.enums.ResourceType;
 import com.vaadin.data.Binder;
@@ -54,7 +55,7 @@ public class ResourceWindow extends Window {
 	private final Button cancel = new ButtonGenerator(LogoResConstants.CANCELSTR);
 	private final Button edit = new ButtonGenerator(LogoResConstants.EDITSTR);
 
-	private final SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(
+	private final SpellChecComboBox<ReResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(
 			LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
 	private final SpellChecComboBox<ResourceType> resourceTypeCombo = new SpellChecComboBox<>(
 			LangHelper.getLocalizableMessage(LogoResConstants.RESTYPESTR));
@@ -66,6 +67,7 @@ public class ResourceWindow extends Window {
 	private final HorizontalLayout buttonLayout = new HorizontalLayout(save, cancel);
 
 	private ReUserRep userRepo;
+	private ReResourceGroupRep resourceGroupRepo;
 	private final transient ReUser reUser;
 	private TabSheet tabsheet = new TabSheet();
 	private final Label formName = new Label();
@@ -77,9 +79,11 @@ public class ResourceWindow extends Window {
 	}
 
 	public ResourceWindow(ReResource resource, ResourceViewNew resView, boolean isNew,
-			ReProjectVerisonRep reProjectVerisonRep, ReResourceRep resRepo, ReUserRep userRepo) {
+			ReProjectVerisonRep reProjectVerisonRep, ReResourceRep resRepo, ReUserRep userRepo,
+			ReResourceGroupRep resourceGroupRepo) {
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
 		this.userRepo = userRepo;
+		this.resourceGroupRepo = resourceGroupRepo;
 		versionList = reProjectVerisonRep.findAll();
 		versionStringList = versionList.stream().map(elem -> elem.getVersionnr()).collect(Collectors.toList());
 
@@ -140,8 +144,7 @@ public class ResourceWindow extends Window {
 		resourceCaseCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		ownerProductCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 
-		resourceGroupCombo.setItems(ResourceGroup.UN, ResourceGroup.HR, ResourceGroup.UNRP, ResourceGroup.HRRP,
-				ResourceGroup.SS, ResourceGroup.HELP, ResourceGroup.MISC);
+		resourceGroupCombo.setItems(resourceGroupRepo.findAll());
 		resourceTypeCombo.setItems(ResourceType.LOCALIZABLE, ResourceType.NONLOCALIZABLE);
 		resourceCaseCombo.setItems(ResourceCase.NORESTRICTION, ResourceCase.LOWERCASE, ResourceCase.UPPERCASE,
 				ResourceCase.TITLECASE, ResourceCase.SENTENCECASE);
@@ -157,14 +160,14 @@ public class ResourceWindow extends Window {
 		binder.bind(resourceCaseCombo, ReResource::getResourcecase, ReResource::setResourcecase);
 		binder.bind(ownerProductCombo, ReResource::getOwnerproduct, ReResource::setOwnerproduct);
 
-		resourceGroupCombo.setSelectedItem(ResourceGroup.UN);
+		resourceGroupCombo.setSelectedItem(resourceGroupRepo.findOne("UN"));
 		resourceTypeCombo.setSelectedItem(ResourceType.LOCALIZABLE);
 		resourceCaseCombo.setSelectedItem(ResourceCase.NORESTRICTION);
 		ownerProductCombo.setSelectedItem(OwnerProduct.INFRASTRUCTURE);
 
 		save.setClickShortcut(KeyCode.ENTER);
 
-		formName.setValue(resource.getResourcegroup().name() + "-" + resource.getResourcenr());
+		formName.setValue(resource.getResourcegroup().getName() + "-" + resource.getResourcenr());
 
 		HorizontalLayout labelLayout = new HorizontalLayout();
 		labelLayout.setWidth("100%");
@@ -269,7 +272,8 @@ public class ResourceWindow extends Window {
 			resRepo.save(resource);
 			close();
 			if (isNew) {
-				String filter = resource.getResourcegroup().name() + "->" + Integer.toString(resource.getResourcenr());
+				String filter = resource.getResourcegroup().getID() + "->"
+						+ Integer.toString(resource.getResourcenr());
 				resView.createResoucePage(filter, true);
 			}
 		});

@@ -20,6 +20,7 @@ import com.logo.LogoresMainUI;
 import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReProjectVerisonRep;
+import com.logo.data.repository.ReResourceGroupRep;
 import com.logo.data.repository.ReResourceRep;
 import com.logo.data.repository.ReResourceitemRep;
 import com.logo.data.repository.ReUserRep;
@@ -86,6 +87,9 @@ public class ResourceViewNew extends VerticalLayout implements View {
 
 	@Autowired
 	private ReUserRep userRepo;
+
+	@Autowired
+	private ReResourceGroupRep resourceGroupRepo;
 
 	@Autowired
 	private UserView userView;
@@ -279,7 +283,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 		getSession().setAttribute("pageForAllTab", "pageForAll");
 		contentLayout.removeAllComponents();
 		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_ALL, null, "", this, false, resRepo,
-				reResourceitemRep, reProjectVerisonRep, userRepo);
+				reResourceitemRep, reProjectVerisonRep, userRepo, resourceGroupRepo);
 		contentLayout.addComponent(gridContentItem);
 		contentLayout.setExpandRatio(gridContentItem, 4.0f);
 	}
@@ -287,7 +291,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 	public void createResoucePage(String resNr, boolean add) {
 		contentLayout.removeAllComponents();
 		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_RESOURCENR, null, resNr, this, add, resRepo,
-				reResourceitemRep, reProjectVerisonRep, userRepo);
+				reResourceitemRep, reProjectVerisonRep, userRepo, resourceGroupRepo);
 		contentLayout.addComponent(gridContentItem);
 		contentLayout.setExpandRatio(gridContentItem, 4.0f);
 	}
@@ -295,7 +299,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 	public void createResoucePageForParam(SearchParam sParam, boolean add) {
 		contentLayout.removeAllComponents();
 		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_RESOURCEITEM, sParam, "", this, add, resRepo,
-				reResourceitemRep, reProjectVerisonRep, userRepo);
+				reResourceitemRep, reProjectVerisonRep, userRepo, resourceGroupRepo);
 		contentLayout.addComponent(gridContentItem);
 		contentLayout.setExpandRatio(gridContentItem, 4.0f);
 	}
@@ -319,7 +323,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 	public void createResoucePageForParamAll(SearchParam sParam, boolean add) {
 		contentLayout.removeAllComponents();
 		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_RESOURCEITEMALL, sParam, "", this, add,
-				resRepo, reResourceitemRep, reProjectVerisonRep, userRepo);
+				resRepo, reResourceitemRep, reProjectVerisonRep, userRepo, resourceGroupRepo);
 		contentLayout.addComponent(gridContentItem);
 		contentLayout.setExpandRatio(gridContentItem, 4.0f);
 	}
@@ -455,7 +459,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 		addNewResource.addClickListener(e -> {
 			ReResource reResource = new ReResource();
 			final ResourceWindow window = new ResourceWindow(reResource, this, true, reProjectVerisonRep, resRepo,
-					userRepo);
+					userRepo, resourceGroupRepo);
 			UI.getCurrent().addWindow(window);
 		});
 
@@ -617,7 +621,7 @@ public class ResourceViewNew extends VerticalLayout implements View {
 	public void doAllResourcesButtonAction() {
 		contentLayout.removeAllComponents();
 		gridContentItem = new PaginationItemLayout(LogoResConstants.SEARCH_ALL, null, "", this, false, resRepo,
-				reResourceitemRep, reProjectVerisonRep, userRepo);
+				reResourceitemRep, reProjectVerisonRep, userRepo, resourceGroupRepo);
 		contentLayout.addComponent(gridContentItem);
 		contentLayout.setExpandRatio(gridContentItem, 4.0f);
 	}

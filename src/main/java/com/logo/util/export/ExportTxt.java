@@ -83,7 +83,7 @@ public class ExportTxt implements Serializable {
 	private void printLine(PrintStream ps, ReResourceitemShort item, AtomicInteger counter) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(item.reResource.getResourcegroup().name().toString());
+		sb.append(item.reResource.getResourcegroup().getName().toString());
 		sb.append(",");
 		sb.append(item.reResource.getResourcetype().name());
 		sb.append(",");

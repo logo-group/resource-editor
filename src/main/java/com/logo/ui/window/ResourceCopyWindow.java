@@ -2,6 +2,8 @@ package com.logo.ui.window;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,6 +21,7 @@ import com.logo.data.entity.ReGeorgiange;
 import com.logo.data.entity.ReGermande;
 import com.logo.data.entity.RePersianir;
 import com.logo.data.entity.ReResource;
+import com.logo.data.entity.ReResourceGroup;
 import com.logo.data.entity.ReResourceitem;
 import com.logo.data.entity.ReRomanianro;
 import com.logo.data.entity.ReRussianru;
@@ -37,6 +40,7 @@ import com.logo.data.repository.ReFrenchfrRep;
 import com.logo.data.repository.ReGeorgiangeRep;
 import com.logo.data.repository.ReGermandeRep;
 import com.logo.data.repository.RePersianirRep;
+import com.logo.data.repository.ReResourceGroupRep;
 import com.logo.data.repository.ReResourceRep;
 import com.logo.data.repository.ReRomanianroRep;
 import com.logo.data.repository.ReRussianruRep;
@@ -50,7 +54,6 @@ import com.logo.ui.components.SwitchWithTextBox;
 import com.logo.ui.view.ResourceViewNew;
 import com.logo.util.LangHelper;
 import com.logo.util.LogoResConstants;
-import com.logo.util.enums.ResourceGroup;
 import com.vaadin.data.Binder;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Alignment;
@@ -80,9 +83,7 @@ public class ResourceCopyWindow extends Window {
 	private final SwitchWithTextBox tagAll = new SwitchWithTextBox(
 			LangHelper.getLocalizableMessage(LogoResConstants.TAGALL), 1);
 
-	private final SpellChecComboBox<ResourceGroup> resourceGroupCombo = new SpellChecComboBox<>(
-			LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
-
+	private SpellChecComboBox<ReResourceGroup> resourceGroupCombo;
 	private final SpellChecTextField resourcenr = new SpellChecTextField(
 			LangHelper.getLocalizableMessage(LogoResConstants.RESNRSTR));
 
@@ -147,9 +148,17 @@ public class ResourceCopyWindow extends Window {
 	private ReStandardRep standardRep;
 
 	@Autowired
+	private ReResourceGroupRep resourceGroupRep;
+
+	@PostConstruct
+	void init() {
+		resourceGroupCombo.setItems(resourceGroupRep.findAll());
+		resourceGroupCombo.setSelectedItem(resourceGroupRep.findOne("UN"));
+	}
+
+	@Autowired
 	public ResourceCopyWindow(ReResource resource, ResourceViewNew resView) {
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
-
 		this.binder.setBean(resource);
 
 		VerticalLayout mainLayout = new VerticalLayout();
@@ -174,6 +183,10 @@ public class ResourceCopyWindow extends Window {
 		gridLayout.setWidth("100%");
 		gridLayout.setHeight("100%");
 
+		resourceGroupCombo = new SpellChecComboBox<>(LangHelper.getLocalizableMessage(LogoResConstants.RESGRPSTR));
+		resourceGroupCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
+		resourceGroupCombo.setEmptySelectionAllowed(false);
+
 		tagStart.setWidth("100%");
 		tagStart.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 		tagStart.setEnabled(false);
@@ -184,16 +197,10 @@ public class ResourceCopyWindow extends Window {
 
 		tagAll.setHeight("22px");
 
-		resourceGroupCombo.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
-		resourceGroupCombo.setItems(ResourceGroup.UN, ResourceGroup.HR, ResourceGroup.UNRP, ResourceGroup.HRRP,
-				ResourceGroup.SS, ResourceGroup.HELP, ResourceGroup.MISC);
-		resourceGroupCombo.setEmptySelectionAllowed(false);
-		resourceGroupCombo.setSelectedItem(ResourceGroup.UN);
-
 		resourcenr.setWidth("100%");
 		resourcenr.addStyleName(LogoResConstants.STYLE_TEXTFIEL_FORM);
 
-		formName.setValue("Copy: " + resource.getResourcegroup().name() + "-" + resource.getResourcenr());
+		formName.setValue("Copy: " + resource.getResourcegroup().getName() + "-" + resource.getResourcenr());
 
 		HorizontalLayout labelLayout = new HorizontalLayout();
 		labelLayout.setWidth("100%");
@@ -278,7 +285,7 @@ public class ResourceCopyWindow extends Window {
 						Type.ERROR_MESSAGE);
 				return;
 			}
-			String filter = copiedResource.getResourcegroup().name() + "->"
+			String filter = copiedResource.getResourcegroup().getID() + "->"
 					+ Integer.toString(copiedResource.getResourcenr());
 			resView.createResoucePage(filter, true);
 			close();

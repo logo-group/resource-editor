@@ -86,13 +86,13 @@ public class ResourceItemWindow extends Window {
 			persist();
 			persistCountItems();
 			close();
-			String filter = resource.getResourcegroup().name() + "->" + Integer.toString(resource.getResourcenr());
+			String filter = resource.getResourcegroup().getID() + "->" + Integer.toString(resource.getResourcenr());
 			resView.createResoucePage(filter, true);
 		});
 		saveAndNew.addClickListener(event -> {
 			persist();
 			persistCountItems();
-			String filter = resource.getResourcegroup().name() + "->" + Integer.toString(resource.getResourcenr());
+			String filter = resource.getResourcegroup().getID() + "->" + Integer.toString(resource.getResourcenr());
 			resView.createResoucePage(filter, true);
 			initialize();
 		});
@@ -138,7 +138,7 @@ public class ResourceItemWindow extends Window {
 		save.setWidth("80px");
 		cancel.setWidth("80px");
 		save.setClickShortcut(KeyCode.ENTER);
-		formName.setValue(resource.getResourcegroup().name() + "-" + resource.getResourcenr());
+		formName.setValue(resource.getResourcegroup().getName() + "-" + resource.getResourcenr());
 
 		HorizontalLayout labelLayout = new HorizontalLayout();
 		labelLayout.setWidth("100%");

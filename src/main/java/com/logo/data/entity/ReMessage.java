@@ -7,12 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -22,7 +23,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.logo.util.converter.MessageTypeConverter;
 import com.logo.util.converter.ResourceStateConverter;
 import com.logo.util.enums.MessageType;
-import com.logo.util.enums.ResourceGroup;
 import com.logo.util.enums.ResourceState;
 
 @Entity
@@ -77,9 +77,9 @@ public class ReMessage implements Serializable {
 	@Column(name = "MTYPE", nullable = false)
 	private MessageType mtype = MessageType.ERROR;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "RESGROUP", columnDefinition = "nvarchar(10)", nullable = false)
-	private ResourceGroup resgroup = ResourceGroup.UN;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RESGROUP", nullable = false)
+	private ReResourceGroup resgroup;
 
 	@Column(name = "STRTAG", nullable = false)
 	private int strtag = 0;
@@ -188,11 +188,11 @@ public class ReMessage implements Serializable {
 		this.mtype = mtype;
 	}
 
-	public final ResourceGroup getResgroup() {
-		return this.resgroup;
+	public ReResourceGroup getResgroup() {
+		return resgroup;
 	}
 
-	public final void setResgroup(ResourceGroup resgroup) {
+	public void setResgroup(ReResourceGroup resgroup) {
 		this.resgroup = resgroup;
 	}
 

@@ -565,7 +565,7 @@ public class RowLayout extends VerticalLayout {
 				MaterialTheme.BUTTON_BORDER + " " + MaterialTheme.BUTTON_ROUND + " " + MaterialTheme.BUTTON_CUSTOM);
 
 		resourceLink.addClickListener(event -> {
-			String filter = reResource.getResourcegroup().name() + "->" + Integer.toString(reResource.getResourcenr());
+			String filter = reResource.getResourcegroup().getID() + "->" + Integer.toString(reResource.getResourcenr());
 			resView.createResoucePage(filter, true);
 		});
 

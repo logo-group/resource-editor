@@ -23,6 +23,7 @@ import com.logo.data.entity.ReResource;
 import com.logo.data.entity.ReResourceitem;
 import com.logo.data.entity.ReUser;
 import com.logo.data.repository.ReProjectVerisonRep;
+import com.logo.data.repository.ReResourceGroupRep;
 import com.logo.data.repository.ReResourceRep;
 import com.logo.data.repository.ReResourceitemRep;
 import com.logo.data.repository.ReUserRep;
@@ -72,6 +73,7 @@ public class PaginationItemLayout extends ResponsiveLayout {
 
 	VerticalLayout layoutPPP = new VerticalLayout();
 	private ReResourceRep resRepo;
+	private ReResourceGroupRep resourceGroupRepo;
 	private ReResourceitemRep reResourceitemRep;
 	private ReProjectVerisonRep reProjectVerisonRep;
 	private ReUserRep userRepo;
@@ -84,10 +86,11 @@ public class PaginationItemLayout extends ResponsiveLayout {
 
 	public PaginationItemLayout(int searchBy, SearchParam sParam, String searchFilter, ResourceViewNew view,
 			boolean add, ReResourceRep resRepo, ReResourceitemRep reResourceitemRep,
-			ReProjectVerisonRep reProjectVerisonRep, ReUserRep userRepo) {
+			ReProjectVerisonRep reProjectVerisonRep, ReUserRep userRepo, ReResourceGroupRep resourceGroupRepo) {
 		this.resRepo = resRepo;
 		this.reResourceitemRep = reResourceitemRep;
 		this.reProjectVerisonRep = reProjectVerisonRep;
+		this.resourceGroupRepo = resourceGroupRepo;
 		this.userRepo = userRepo;
 		this.searchBy = searchBy;
 		this.searchFilter = searchFilter;
@@ -249,7 +252,7 @@ public class PaginationItemLayout extends ResponsiveLayout {
 			header.setStyleName("card-hoverable-material-light-primary-color");
 			header.setWidth("100%");
 
-			Label text1 = new Label(reResource.getResourcegroup().name());
+			Label text1 = new Label(reResource.getResourcegroup().getName());
 			Label text2 = new Label(Integer.toString(reResource.getResourcenr()));
 
 			Button edit = new ButtonGenerator(LogoResConstants.EDITSTR);
@@ -272,7 +275,7 @@ public class PaginationItemLayout extends ResponsiveLayout {
 
 			edit.addClickListener(e -> {
 				final ResourceWindow window = new ResourceWindow(reResource, resView, false, reProjectVerisonRep,
-						resRepo, userRepo);
+						resRepo, userRepo, resourceGroupRepo);
 				UI.getCurrent().addWindow(window);
 			});
 
@@ -285,7 +288,7 @@ public class PaginationItemLayout extends ResponsiveLayout {
 			HorizontalLayout buttonLayout = new HorizontalLayout();
 			HorizontalLayout textLayout = new HorizontalLayout();
 
-			int[] countArr = getCountForChart(reResource.getResourcenr(), reResource.getResourcegroup().name());
+			int[] countArr = getCountForChart(reResource.getResourcenr(), reResource.getResourcegroup().getName());
 			LocChart chart = new LocChart(countArr[0], countArr[1]);
 
 			buttonLayout.addComponents(edit, delete, addNewResourceItem, headerMenuButton);

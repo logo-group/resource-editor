@@ -9,10 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -24,7 +27,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.logo.util.converter.UserTypeConverter;
-import com.logo.util.enums.ResourceGroup;
 import com.logo.util.enums.UserLanguage;
 import com.logo.util.enums.UserLayoutType;
 import com.logo.util.enums.UserType;
@@ -85,9 +87,9 @@ public class ReUser implements Serializable {
 	@Column(name = "DEFAULTORIENTATION", columnDefinition = "nvarchar(8)")
 	private UserLayoutType defaultorientation = UserLayoutType.V;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "DEFAULTRESOURCEGROUP", columnDefinition = "nvarchar(8)")
-	private ResourceGroup defaultresourcegroup = ResourceGroup.UN;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DEFAULTRESOURCEGROUP")
+	private ReResourceGroup defaultresourcegroup;
 
 	@Column(name = "DEPARTMENT", columnDefinition = "nvarchar(60)")
 	private String department = "";
@@ -303,11 +305,11 @@ public class ReUser implements Serializable {
 		this.defaultorientation = defaultorientation;
 	}
 
-	public ResourceGroup getDefaultresourcegroup() {
-		return this.defaultresourcegroup;
+	public ReResourceGroup getDefaultresourcegroup() {
+		return defaultresourcegroup;
 	}
 
-	public void setDefaultresourcegroup(ResourceGroup defaultresourcegroup) {
+	public void setDefaultresourcegroup(ReResourceGroup defaultresourcegroup) {
 		this.defaultresourcegroup = defaultresourcegroup;
 	}
 

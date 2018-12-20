@@ -108,7 +108,7 @@ public class ExportXml implements Serializable {
 		Element taggedList = doc.createElement("TaggedList");
 
 		Attr resourceGroup = doc.createAttribute("ResourceGroup");
-		resourceGroup.setValue(item.reResource.getResourcegroup().name());
+		resourceGroup.setValue(item.reResource.getResourcegroup().getName());
 		taggedList.setAttributeNode(resourceGroup);
 
 		Attr resourceType = doc.createAttribute("ResourceType");

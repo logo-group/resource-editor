@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.github.appreciated.material.MaterialTheme;
 import com.logo.data.entity.ReMessage;
 import com.logo.data.repository.ReMessageRep;
+import com.logo.data.repository.ReResourceGroupRep;
 import com.logo.ui.components.TextFieldWithButton;
 import com.logo.ui.form.MessageForm;
 import com.logo.util.LangHelper;
@@ -41,10 +42,13 @@ public class ReMessageView extends VerticalLayout implements View {
 
 	private MessageForm messageForm;
 
+	private ReResourceGroupRep resourceGroupRep;
+
 	@Autowired
-	public ReMessageView(ReMessageRep reMessageRep) {
+	public ReMessageView(ReMessageRep reMessageRep, ReResourceGroupRep resourceGroupRep) {
 		this.reMessageRep = reMessageRep;
-		this.messageForm = new MessageForm(this, reMessageRep);
+		this.resourceGroupRep = resourceGroupRep;
+		this.messageForm = new MessageForm(this, reMessageRep, resourceGroupRep);
 		removeAllComponents();
 		init();
 	}

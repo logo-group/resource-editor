@@ -90,7 +90,7 @@ public class ExportExcel implements Serializable {
 		int colNum = 0;
 
 		Cell cell1 = row.createCell(colNum++);
-		cell1.setCellValue(item.reResource.getResourcegroup().name());
+		cell1.setCellValue(item.reResource.getResourcegroup().getName());
 
 		Cell cell2 = row.createCell(colNum++);
 		cell2.setCellValue(item.reResource.getResourcetype().name());
