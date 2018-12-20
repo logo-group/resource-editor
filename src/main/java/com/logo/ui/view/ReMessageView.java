@@ -6,7 +6,6 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 
 import com.github.appreciated.material.MaterialTheme;
 import com.logo.data.entity.ReMessage;
@@ -30,7 +29,6 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.HeaderCell;
 import com.vaadin.ui.components.grid.HeaderRow;
 
-@Scope("prototype")
 @SpringView(name = ReMessageView.VIEW_NAME)
 public class ReMessageView extends VerticalLayout implements View {
 

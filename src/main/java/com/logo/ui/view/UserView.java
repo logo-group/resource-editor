@@ -6,7 +6,6 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 
 import com.github.appreciated.material.MaterialTheme;
 import com.logo.data.entity.ReUser;
@@ -32,7 +31,6 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.HeaderCell;
 import com.vaadin.ui.components.grid.HeaderRow;
 
-@Scope("prototype")
 @SpringView(name = UserView.VIEW_NAME)
 public class UserView extends VerticalLayout implements View {
 

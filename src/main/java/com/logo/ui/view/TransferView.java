@@ -11,7 +11,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 
 import com.logo.data.repository.ReEnglishusRep;
 import com.logo.data.repository.ReResourceitemShortRep;
@@ -38,7 +37,6 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 @Push
-@Scope("prototype")
 @SpringView(name = TransferView.VIEW_NAME)
 public class TransferView extends VerticalLayout implements View {
 
