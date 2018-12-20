@@ -49,6 +49,7 @@ public class DataConfig {
 	public Properties additionalProperties(Environment env) {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
+		properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
 		properties.setProperty("hibernate.current_session_context_class", "thread");
 		properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
 		properties.setProperty("hibernate.connection.provider_class",
