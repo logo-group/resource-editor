@@ -598,7 +598,6 @@ public class RowLayout extends VerticalLayout {
 			}
 
 			resDetFormLayout.addComponentsAndExpand(resourceLink, pop);
-			// resDetFormLayout.setExpandRatio(lbl, 1.0f);
 			resDetFormLayout.setExpandRatio(resourceLink, 2.0f);
 			resDetFormLayout.setExpandRatio(pop, 1.0f);
 		}

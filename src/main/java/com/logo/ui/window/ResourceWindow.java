@@ -272,8 +272,7 @@ public class ResourceWindow extends Window {
 			resRepo.save(resource);
 			close();
 			if (isNew) {
-				String filter = resource.getResourcegroup().getID() + "->"
-						+ Integer.toString(resource.getResourcenr());
+				String filter = resource.getResourcegroup().getID() + "->" + Integer.toString(resource.getResourcenr());
 				resView.createResoucePage(filter, true);
 			}
 		});

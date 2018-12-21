@@ -300,8 +300,6 @@ public class PaginationItemLayout extends ResponsiveLayout {
 			header.addColumn().withDisplayRules(12, 10, 6, 6).withComponent(buttonLayout)
 					.setAlignment(ColumnComponentAlignment.RIGHT);
 			;
-
-			// header.setDefaultComponentAlignment(Alignment.TOP_LEFT);
 		}
 	}
 

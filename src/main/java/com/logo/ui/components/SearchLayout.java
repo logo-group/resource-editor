@@ -276,8 +276,6 @@ public class SearchLayout extends Panel {
 		TextField resourceNr2 = createTextField("");
 
 		Button searchButton = new Button(LangHelper.getLocalizableMessage(LogoResConstants.SEARCHSTR));
-		// searchButton.setWidth("100%");
-		// searchButton.setSizeFull();
 
 		searchButton.setIcon(VaadinIcons.SEARCH);
 		searchButton.addStyleName(
