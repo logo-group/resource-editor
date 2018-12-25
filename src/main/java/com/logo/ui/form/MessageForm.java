@@ -44,7 +44,6 @@ public class MessageForm extends VerticalLayout {
 	private final Label formName = new Label();
 
 	public ReMessageRep reMessageRepo;
-	private ReResourceGroupRep resourceGroupRepo;
 	private ReMessage reMessage;
 	private ReMessageView reMessageView;
 	private Binder<ReMessage> binder = new Binder<>(ReMessage.class);
@@ -52,7 +51,6 @@ public class MessageForm extends VerticalLayout {
 	public MessageForm(ReMessageView reMessageView, ReMessageRep reMessageRepo, ReResourceGroupRep resourceGroupRepo) {
 		this.reMessageView = reMessageView;
 		this.reMessageRepo = reMessageRepo;
-		this.resourceGroupRepo = resourceGroupRepo;
 		GridLayout userMainLayout = new GridLayout(2, 6);
 
 		setSpacing(true);

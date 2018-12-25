@@ -67,7 +67,6 @@ public class ResourceWindow extends Window {
 	private final HorizontalLayout buttonLayout = new HorizontalLayout(save, cancel);
 
 	private ReUserRep userRepo;
-	private ReResourceGroupRep resourceGroupRepo;
 	private final transient ReUser reUser;
 	private TabSheet tabsheet = new TabSheet();
 	private final Label formName = new Label();
@@ -83,7 +82,6 @@ public class ResourceWindow extends Window {
 			ReResourceGroupRep resourceGroupRepo) {
 		this.reUser = (ReUser) VaadinSession.getCurrent().getAttribute("user");
 		this.userRepo = userRepo;
-		this.resourceGroupRepo = resourceGroupRepo;
 		versionList = reProjectVerisonRep.findAll();
 		versionStringList = versionList.stream().map(elem -> elem.getVersionnr()).collect(Collectors.toList());
 
